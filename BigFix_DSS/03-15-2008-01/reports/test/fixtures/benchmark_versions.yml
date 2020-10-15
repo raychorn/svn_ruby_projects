@@ -1,0 +1,10 @@
+one:
+  id: 1
+  benchmark_id: 1
+  version: 1
+  publish_time: 2006-08-25
+two:
+  id: 2
+  benchmark_id: 2
+  version: 2
+  publish_time: 2006-10-15

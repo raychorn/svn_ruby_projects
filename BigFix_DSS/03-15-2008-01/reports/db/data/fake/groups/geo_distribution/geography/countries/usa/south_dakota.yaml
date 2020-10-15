@@ -1,0 +1,34 @@
+south_dakota:
+  title: South Dakota
+  subgroups:
+  - south_dakota_aberdeen
+  - south_dakota_brookings
+  - south_dakota_rapid_city
+  - south_dakota_sioux_falls
+  - south_dakota_watertown
+
+south_dakota_aberdeen:
+  title: Aberdeen
+  type: city
+  population: 24129
+
+south_dakota_brookings:
+  title: Brookings
+  type: city
+  population: 18633
+
+south_dakota_rapid_city:
+  title: Rapid City
+  type: city
+  population: 61663
+
+south_dakota_sioux_falls:
+  title: Sioux Falls
+  type: city
+  population: 136579
+
+south_dakota_watertown:
+  title: Watertown
+  type: city
+  population: 20216
+

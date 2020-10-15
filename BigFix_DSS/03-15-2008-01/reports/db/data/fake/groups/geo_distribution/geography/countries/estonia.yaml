@@ -1,0 +1,15 @@
+estonia:
+  title: Estonia
+  subgroups:
+  - ee_tallinn
+  - ee_tartu
+
+ee_tallinn:
+  title: Tallinn
+  type: city
+  population: 396010
+
+ee_tartu:
+  title: Tartu
+  type: city
+  population: 101483

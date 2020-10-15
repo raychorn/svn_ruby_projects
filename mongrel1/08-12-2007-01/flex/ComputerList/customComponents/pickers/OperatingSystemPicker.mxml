@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" title="Pick an Operating System" showCloseButton="true" close="handleClose(event)" borderAlpha="1">
+	<mx:Script><![CDATA[
+		import mx.managers.PopUpManager;
+		import mx.controls.Alert;
+
+		private function handleClose(event:Event):void {
+			PopUpManager.removePopUp(this);
+		}
+
+		private function submit(event:Event):void {
+
+		}
+
+		private function moveDefault(event:Event):void {
+		}
+		private function filter(event:Event):void {
+		}
+
+	]]></mx:Script>
+	<mx:RemoteObject id="remoteService" destination="OperatingSystem" showBusyCursor="true" fault="Alert.show(event.fault.faultString, 'Error');">
+		<mx:method name="find_all" result="moveDefault(event)"/>
+		<mx:method name="find_all_by_name" result="filter(event)">
+			<mx:arguments>
+				<arg1>{searchInput.text}</arg1>
+			</mx:arguments>
+		</mx:method>
+	</mx:RemoteObject>
+	<mx:TextInput id="searchInput"/>
+
+	<mx:ControlBar horizontalAlign="right">
+		<mx:Button label="Submit" click="submit(event)"/>
+		<mx:Button label="Cancel" click="handleClose(event)"/>
+	</mx:ControlBar>
+</mx:TitleWindow>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="remoteService.getSubjects.send()" explicitMinWidth="650" width="100%">
+	<mx:Script source="DataOptions_as.as"/>
+
+	<mx:Metadata>
+		[Event(name='change', type='flash.events.Event')]
+	</mx:Metadata>
+
+	<mx:RemoteObject id="remoteService" destination="ComputerList" showBusyCursor="true" fault="Alert.show(event.fault.faultString, 'Error');">
+		<mx:method name="getSubjects" result="subjectChanged()"/>
+		<mx:method name="getFilterLibrary" result="refreshFilters()">
+			<mx:arguments>
+				<arg1>{subject.selectedItem.id}</arg1>
+			</mx:arguments>
+		</mx:method>
+	</mx:RemoteObject>
+
+	<mx:FormHeading label="Choose a Subject"/>
+	<mx:ComboBox id="subject" dataProvider="{remoteService.getSubjects.lastResult}" labelField="name" change="subjectChanged()"/>
+
+
+	<mx:FormHeading label="Add Filters"/>
+	<mx:VBox id="filterContainer" width="100%"/>
+
+	<mx:FormHeading label="Grouping Options"/>
+	<mx:HBox verticalAlign="middle" width="100%">
+		<mx:HBox verticalAlign="middle" buttonMode="true" click="toggleGroupingOption(event)">
+			<mx:RadioButton name="radioButton" groupName="groupingStyle" value="distinct_distinct"/>
+			<mx:Box borderStyle="solid">
+				<mx:Text selectable="false" id="textGroupingOptionDistinctDistinct"/>
+			</mx:Box>
+		</mx:HBox>
+		<mx:HBox verticalAlign="middle" buttonMode="true" click="toggleGroupingOption(event)">
+			<mx:RadioButton name="radioButton" groupName="groupingStyle" value="distinct_agg"/>
+			<mx:Box borderStyle="solid">
+				<mx:Text selectable="false" id="textGroupingOptionDistinctAggregate"/>
+			</mx:Box>
+		</mx:HBox>
+		<mx:HBox verticalAlign="middle" buttonMode="true" click="toggleGroupingOption(event)">
+			<mx:RadioButton name="radioButton" groupName="groupingStyle" value="agg_distinct"/>
+			<mx:Box borderStyle="solid">
+				<mx:Text selectable="false" id="textGroupingOptionAggregateDistinct"/>
+			</mx:Box>
+		</mx:HBox>
+	</mx:HBox>
+</mx:Form>

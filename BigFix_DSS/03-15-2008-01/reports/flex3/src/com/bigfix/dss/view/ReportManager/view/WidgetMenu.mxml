@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" height="100%" 
+	mouseDown="onMouseDown(event)" mouseUp="onMouseUp(event)">
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.view.ReportManager.events.DeleteReportElementEvent;
+			import com.bigfix.dss.view.ReportManager.events.EditReportElementEvent;
+			import com.bigfix.dss.view.ReportManager.events.ResizeReportElementEvent;
+			import mx.utils.ObjectUtil;
+			import com.bigfix.dss.view.general.Alert.AlertPopUp;
+			import mx.events.ListEvent;
+			import com.bigfix.dss.view.ReportManager.events.IgnoreMouseUpEvent;
+
+			[Event(name="ignoreMouseUp", type="com.bigfix.dss.view.ReportManager.events.IgnoreMouseUpEvent")]
+			[Event(name="resizeReportElement", type="com.bigfix.dss.view.ReportManager.events.ResizeReportElementEvent")]
+			[Event(name="editReportElement", type="com.bigfix.dss.view.ReportManager.events.EditReportElementEvent")]
+			[Event(name="deleteReportElement", type="com.bigfix.dss.view.ReportManager.events.DeleteReportElementEvent")]
+
+			[Bindable]
+			private var _menu:Array = [ 
+				{id: "btn_choose", label: "Choose...", callback: null},
+				{id: "btn_resize", label: "Resize Mode", callback: onResizeMenuSelection},
+				{id: "btn_change", label: "Edit Content", callback: onEditMenuSelection},
+				{id: "btn_delete", label: "Delete Content", callback: onDeleteMenuSelection}
+			];
+			
+			private function onMouseDown(event:MouseEvent):void {
+				this.parent.dispatchEvent(new IgnoreMouseUpEvent(IgnoreMouseUpEvent.TYPE_IGNORE_MOUSE_UP, this));
+			}
+			
+			private function onMouseUp(event:MouseEvent):void {
+				event.stopImmediatePropagation();
+			}
+			
+			private function onResizeMenuSelection(widget:DisplayObjectContainer):void {
+				this.parent.dispatchEvent(new ResizeReportElementEvent(ResizeReportElementEvent.TYPE_RESIZE_REPORT_ELEMENT));
+			}
+			
+			private function onEditMenuSelection(widget:DisplayObjectContainer):void {
+	//			this.parent.dispatchEvent(new EditReportElementEvent(EditReportElementEvent.TYPE_EDIT_REPORT_ELEMENT));
+			}
+			
+			private function onDeleteMenuSelection(widget:DisplayObjectContainer):void {
+	//			this.parent.dispatchEvent(new DeleteReportElementEvent(DeleteReportElementEvent.TYPE_DELETE_REPORT_ELEMENT));
+			}
+			
+			private function onChangeComboBoxMenu(event:ListEvent):void {
+				var item:Object = this.cmbo_menu.selectedItem;
+				var callback:Function;
+				try { callback = item["callback"]; } catch (err:Error) { }
+				if ( (callback != null) && (callback is Function) ) {
+					try { this.cmbo_menu.selectedIndex = 0; callback(this); } 
+						catch (err:Error) { AlertPopUp.error(err.toString(), "Error in " + ObjectUtil.getClassInfo(this).name); }
+				}
+			}
+		]]>
+	</mx:Script>
+	<mx:HBox width="100%" horizontalAlign="left">
+		<mx:ComboBox x="0" y="0" id="cmbo_menu" width="100%" dataProvider="{this._menu}" change="onChangeComboBoxMenu(event)" toolTip="Choose an action to perform on the selected report element."/>
+	</mx:HBox>
+</mx:Canvas>

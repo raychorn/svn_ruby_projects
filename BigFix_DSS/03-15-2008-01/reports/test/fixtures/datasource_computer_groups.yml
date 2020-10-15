@@ -1,0 +1,10 @@
+one:
+  id: 1
+  datasource_computer_group_id: 5521
+  datasource_id: 1
+  name: Windows Machines
+two:
+  id: 2
+  datasource_computer_group_id: 1234
+  datasource_id: 1
+  name: West Wing

@@ -1,0 +1,45 @@
+japan:
+  title: Japan
+  subgroups:
+  - jp_tokyo
+  - jp_yokohama
+  - jp_osaka
+  - jp_nagoya
+  - jp_sapporo
+  - jp_kobe
+  - jp_kyoto
+
+jp_tokyo:
+  title: Tokyo
+  type: city
+  population: 8535792
+
+jp_yokohama:
+  title: Yokohama
+  type: city
+  population: 3602758
+
+jp_osaka:
+  title: Osaka
+  type: city
+  population: 2635420
+
+jp_nagoya:
+  title: Nagoya
+  type: city
+  population: 2223148
+
+jp_sapporo:
+  title: Sapporo
+  type: city
+  population: 1888953
+
+jp_kobe:
+  title: Kobe
+  type: city
+  population: 1528687
+
+jp_kyoto:
+  title: Kyoto
+  type: city
+  population: 1472511

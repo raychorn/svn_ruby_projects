@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:Script><![CDATA[
+		public function getHour24():int{
+			var hour:int=int(selectHour.value);
+			switch(selectMeridiem.value){
+				case "AM":
+					break;
+				case "PM":
+					hour += 12;
+					break;
+				default:
+					throw new Error("Bad Time Selection");
+			}
+			return hour;
+		}
+		public function getHour():int{
+			var hour:int=int(selectHour.value);
+			return hour;
+		}
+		public function getMinute():int{
+			return int(selectMinute.value);
+		}
+		public function getMeridiem():String{
+			return String(selectMeridiem.value);
+			return
+		}
+	
+	
+	]]></mx:Script>
+	<mx:ComboBox id="selectHour" dataProvider="[1,2,3,4,5,6,7,8,9,10,11,12]"></mx:ComboBox>
+	<mx:Text text=":"/>
+	<mx:ComboBox id="selectMinute" dataProvider="[00,15,30,45]"></mx:ComboBox>
+	<mx:ComboBox id="selectMeridiem" dataProvider="[AM,PM]"></mx:ComboBox>
+</mx:HBox>

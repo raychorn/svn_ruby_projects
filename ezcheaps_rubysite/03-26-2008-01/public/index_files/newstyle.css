@@ -1,0 +1,760 @@
+/*--------------------------------------------
+EzCheapSites.Com Internet Solutions, Inc. presents...
+our website, v.10.5 (Fall Remix). 
+---------------------------------------------*/
+
+.high {
+  background-color: #C2DEF2;
+  padding: 1px;
+}
+
+.subnavleft {
+  float: right;
+  display: inline;
+}
+/*--------------------------------------------
+Base Styles
+---------------------------------------------*/
+/* Workaround for horizontal scrollbar caused by #navWrap... not a good solution */
+html {
+  overflow-x: hidden;
+}
+body {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, Sans-serif;
+  font-size: small;
+  background: white;
+  height: 100%;
+  }* html body {
+  font-size: x-small; /* IE5 */
+  f\ont-size: small; /*Other IE*/
+  }
+a {
+  color: red;
+  text-decoration: underline;
+  }
+a:hover {
+  color: red;
+  text-decoration: none;
+  }
+.fullspan {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+  width: 741px;
+  }
+/*--------------------------------------------
+Headers
+---------------------------------------------*/
+#mainWithSidebar h2,
+#mainWithSidebar h3,
+#mainNoSidebar h2,
+#mainNoSidebar h3 {
+  font-family: Arial, Helvetica, sans-serif;  
+  }
+#middle h1 {
+  color: black;
+  font-size: 180%;
+  }
+h1#mainhead {
+  font-weight: normal;
+  font-family: "Lucida Grande", "Trebuchet MS", Arial, sans-serif;
+  font-size: 240%;
+  letter-spacing: -.5px;
+  color: black;
+  border-bottom: 1px solid #dFdFdF;
+  padding-bottom: 10px;
+  padding-top: 0px;
+  margin: 12px 0px 15px 0px;
+  }
+h1#pageHeader {
+  font-weight: normal;
+  font-family: "Lucida Grande", "Trebuchet MS", Arial, Helvetica, Sans-serif;
+  font-size: 200%;
+  color: #2F2F2F;
+  padding: 12px 10px 6px 0px;
+  margin: 0px;
+  width: 100%;
+  text-align: left;
+  border-bottom: 1px solid #CFCFCF;
+}
+#mainWithSidebar h2,
+#mainNoSidebar h2 {
+  font-size: 180%;
+  color: #0B7FBF;
+  letter-spacing: -1px;
+  line-height: 25px;
+  padding-top: 10px;
+  margin-bottom: 10px;
+  }
+#mainWithSidebar h3,
+#mainNoSidebar h3 {
+  font-size: 1.2em;
+  color: #424242;
+  }
+/*
+#mainWithSidebar ul,
+#mainNoSidebar ul {
+  list-style-type: none;
+  margin: 5px 0 30px 10px;
+  padding:0;
+  }
+#mainWithSidebar li,
+#mainNoSidebar li {
+  background: transparent url(/images/remix/bullet.gif) no-repeat left;
+  padding-left: 17px;
+  margin-bottom: 3px;
+  }
+*/
+#mainWithSidebar li,
+#mainNoSidebar li {
+  margin-bottom: .6em;
+  background-position: 0 5px;
+  }
+#mainNoSidebar,
+#mainWithSidebar p {
+  font-family: Arial, "Lucida Grande", Helvetica, sans-serif;
+  line-height: 20px;
+  font-size: 90%;
+  }
+/*--------------------------------------------
+Main Content Area Styles (w/ sidebar w/o sidebar)
+---------------------------------------------*/
+#mainWithSidebar {
+  padding: 0;
+  margin: 0;
+  width: 480px;
+  float: left;
+  display: inline;
+  text-align: left;
+  }
+#mainNoSidebar {
+  padding-top: 5px;
+  margin: 0;
+  float: left;
+  display: inline;
+  text-align: left;
+  }
+/*--------------------------------------------
+Page Layout Styles
+---------------------------------------------*/
+div#container {
+  padding: 0;
+  margin: auto;
+  text-align: left;
+  width: 760px;
+  }
+div#middle {
+  background-color: #FFF;
+  width: 760px;
+  float: left;
+  display: inline;
+  padding: 0;
+  margin: 0;
+  }
+/*--------------------------------------------
+The Header
+---------------------------------------------*/
+#headerWrap {
+  width: 100%;
+  background: #000000 url(/images/08/spring/springheader-bg.png) repeat-x top left;
+  margin: 0;
+  padding: 0;
+  }
+#headerContainer {
+  background: transparent;
+  height: 70px;
+  width: 760px;
+  margin: 0px auto;
+  padding: 0;
+  }
+#logoBox {
+  width: 150px;
+  background: transparent;
+  height: 68px;
+  float: left;
+  }
+#logoBox a {
+  float: left;
+  display: block;
+  width: 450px;
+  height: 68px;
+  background: url(/images/08/spring/springheader-logo.png) bottom left no-repeat;
+  }
+#tagline {
+  width: 130px;
+  float: left;
+  background: transparent;
+  height: 59px;
+  padding:0;
+  margin-left: 60px;
+  }
+#tagline p {
+  font-size: 85%;
+  color: #fff;
+  padding: 0;
+  margin-top: 100px;
+  line-height: 12px;
+  margin-top: 3px;
+  float: left;
+  margin-left: 15px;
+  text-align: left;
+  width: 0px;
+  }
+#numberBox {
+  float: right;
+  clear: right;
+  display: inline;
+  width: 375px;
+  margin: 0px 0 0 0;
+  padding: 0;
+  text-align: right;
+  color: #AFAFAF;
+  padding-right: 7px;
+  }
+#numberBox a {
+  border: 0;
+  color: white;
+  font-size: 110%;
+  }
+#numberBox ul {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  }
+#numberBox li {
+  float: right;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  }
+#numberBox P {
+  font-family: Arial, Helvetica, Sans-serif;
+  padding: 0;
+  margin: 0;
+}
+#linkBox {
+  background: transparent;
+  width: 400px;
+  font-family: arial, helvetica, sans-serif;
+  list-style-type: none;
+  font-size: 85%;
+  float: right;
+  margin-top: 10px;
+  margin-right: 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #F65F10;
+  }
+#linkBox ul {
+  display: inline;
+  list-style-type: none;
+  padding: 0;
+  }
+#linkBox li {
+  float: right;
+  margin: 8px 0 0 0px;
+  padding: 0px 1px 0 1px;
+  background: url(/images/miami/linkbox2.gif) no-repeat left;
+  }
+#linkBox a {
+  text-decoration: none;
+  display: block;
+  color: white;
+  padding: 0 5px;
+  margin: 0;
+  }
+#linkBox a:hover {
+  background: transparent;
+  text-decoration: underline;
+  }
+/*--------------------------------------------
+Main Nav
+---------------------------------------------*/
+#navWrap {
+  width: 100%;
+  float: left;
+  display: inline;
+  background: #030303 url(index_files/springnavbg.png) repeat-x top left;
+  border-top: 0;
+  border-bottom: 0;
+  }
+#topNav {
+  width: 759px;
+  margin: auto;
+  }
+#mainNav {
+  float: left;
+  font-weight: normal;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: #171717;
+  }
+#mainNav li {
+  float: left;
+  margin: 0;
+  padding: 0;
+  border: 0px;
+  font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
+  font-size: 100%;
+  }
+#mainNav a {
+  float: left;
+  background: #000000;
+  display: block;
+  text-decoration: none;
+  margin: 0px 3px 0px 0px;
+  padding: 9px 16px 9px 16px;
+  color: #FFF;
+  border: 0;
+  border-bottom: 0px;
+  border-top: 1px solid #4C636F;
+  border-right: 1px solid #3B484F;
+  border-left: 1px solid #3B484F;
+  }
+#mainNav .first-tab a {
+  border-left: 0px;
+}
+#mainNav a:hover {
+  color: #FFF; 
+  padding: 9px 16px 9px 16px;
+  text-decoration: underline;
+  border-bottom: 1px; 
+  border-top: 1px solid #4F859F;
+  border-right: 1px solid #4F859F;
+  border-left: 1px solid #4F859F;
+  background: #1F1F1F;
+  }
+#mainNav .order {
+  float: left;
+  padding-left: 20px;
+  }
+#mainNav .order a { 
+  padding: 9px 16px 9px 16px;
+  background: red;
+  font-size: 110%;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-top: 1px solid #FFAFB2;
+  border-right: 1px solid #FF9F9F;
+  border-left: 1px solid #FF9F9F;
+  border-bottom: 0px;
+  }
+#mainNav .order a:hover {
+  text-decoration: underline;
+  border-top: 1px solid #FFCFCF;
+  }
+#mainNav .active a {
+  background: #FFF url(/images/disco/active-bg.gif) repeat-x top left;
+  color: black;
+  font-weight: bold;
+  }
+#mainNav .active a:hover {
+  text-decoration: underline;
+  }
+/* -----Subar Starts Here-------*/
+#subLevelNavOuter {
+  width: 100%;
+  height: 44px;
+  float: left;
+  background: white url(/images/disco/subnav-bg.gif) no-repeat center;
+  font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  }
+#subLevelNavOuterHome {
+  background: #fff;
+  height: 10px;
+  float: left;
+  width: 100%;
+  }
+#subWrap { 
+  width: 730px;
+  background: transparent;
+  margin: auto;
+  padding: 8px 0 0 0;
+  }
+#subLevelNav ul {
+  background: transparent;
+  width: 760px;
+  color: black;
+  list-style: none;
+  margin-left: 20px;
+  display: inline;
+  }
+#subLevelNav li {
+  float: left;
+  margin:0;
+  padding: 0;
+  font-size: 90%;
+  }
+#subLevelNav a {
+  float: none;
+  display: block;
+  color: black;
+  text-decoration: none;
+  margin: 0;
+  padding: 9px 28px 8px 0px;
+  }
+#subLevelNav a:hover {
+  text-decoration: underline;
+  background: transparent;
+  }
+#subLevelNav .textonly {
+  float: left;
+  display: block;
+  color: black;
+  margin: 0;
+  padding: 8px 13px;
+  }
+#subLevelNav .textonly a {
+  float: none;
+  display: inline;
+  font-weight: bold;
+  text-decoration: underline;
+  padding: 1px;
+  margin: 0;
+  }
+#subLevelNav .textonly a:hover {
+  text-decoration: none;
+  background: #E5FFCF;
+  }
+#subLevelNav .subhome {
+  font-size: 85%;
+  font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  color: #5F5F5F;
+  padding-top: 10px;
+  margin-right: -10px;
+  text-decoration: none;
+  background: transparent;
+  }
+.first-tab {
+  border-left: 1px solid #DB4747;
+  }
+/*--------------------------------------------
+Table Grid Styles
+---------------------------------------------*/
+#grid div, #grid td {
+  font-family: Arial;
+  }
+#grid {
+  padding: 0;
+  margin:0;
+  }
+#grid th {
+  background: url(/images/black/gridth.gif) repeat-x;
+  text-align: center;
+  color: white;
+  padding-top: .2em;
+  padding-bottom: .2em;
+  white-space: nowrap;
+  border-bottom: 1px solid #CFA981;
+  }
+#grid td {
+  text-align: center;
+  color: black;
+  border-bottom: 1px solid #CFCFCF;
+  }
+#grid .term {
+  color: black;
+  background-color: #DFDFDF;
+  margin-left: 5px;
+  font-weight: bold;
+  text-align: left;
+  }
+#grid .alt {
+  }
+#grid .highlight {
+  background-color: #00A4FF;
+  margin: 2px;
+  font-weight: bold;
+  color: #FFF;
+  }
+#grid .spacer td {
+  background-color: #FFF;
+  height: 2em;
+  }
+#grid .fullspan {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+  width: 741px;
+  }
+ul#legalindex {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 2em;
+  padding: .1em .5em 0 2em;
+  text-indent: -2em;
+  }
+#legalindex li {
+  padding-bottom: .8em;
+  }
+.featureName {
+background: #EFE0D1;
+}
+/*--------------------------------------------
+The Page Footer
+---------------------------------------------*/
+div#footer {
+  float: left;
+  display: inline;
+  width: 100%;
+  clear: both;
+  font-family: Verdana, "Lucida Grande", Helvetica, sans-serif;
+  background: #414141;
+  color: white;
+  font-weight: normal;
+  font-size: 85%;
+  line-height: 1.4em;
+  text-align: center;
+  margin-top: 5px;
+  padding: 5px;
+  }
+#footerContent {
+  background: #414141;
+  text-align: left;
+  clear: both;
+  font-size: 82%;
+  color: #AFAFAF;
+  padding-bottom: 5px;
+  }
+
+/*--------------------------------------------
+Misc. Styles
+---------------------------------------------*/
+.redbold {
+  color: #D23A00;
+  font-weight: bold;
+  }
+.legal {
+  font-size: 70%;
+  color: #999;
+  text-transform: uppercase;
+  text-align: justify;
+  }
+.caption {
+  font-size: x-small;
+  font-weight: bold;
+  text-align: center;
+  }
+#grid .featureNote {
+  color: black;
+  font-family: Verdana, "Lucida Grande", Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: .9em;
+  line-height: 1.3em;
+  margin-bottom: 10px;
+  padding: 5px;
+  text-align: center;
+  background-color: #DFDFDF;
+
+  }
+div#centered {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  }
+.floatLeft {
+  float: left;
+  }
+.floatRight {
+  float: right;
+  }
+.clearBoth {
+  clear: both;
+  }
+blockquote {
+  margin: .7em 1.5em 2.5em 2em;
+  }
+P.textImageBox {
+  display: inline;
+}
+
+.rightImage {
+  margin: 5px 0 5px 10px;
+  float: right;
+}
+
+#prefooter {
+  font-family: Arial, Helvetica, Sans-serif;
+  width: 750px;
+  font-size: 100%;
+  padding-top:40px;
+  float: left;
+  text-align: center;
+  margin:0;
+}
+#prefooter a {color: gray;}
+/*--------------------------------------------
+Plan Table
+--------------------------------------------*/
+#planTable {
+  margin-top: 25px;
+  clear: both;
+  float: left;
+  width:100%;
+}
+#planTable h3 {
+  font-size: 160%;
+  margin-bottom: 15px;
+  color: black;
+} 
+#planTable th {
+  background: url(/images/black/tableth.gif) repeat-x top left;
+  border-bottom: 1px solid #BFAE9B;
+  padding: 2px 0 2px 0;
+}
+#planTable td {
+  border-bottom: 1px solid #BFBFBF;
+  padding: 2px;}
+
+
+.niceList ul {
+  list-style-type: none;
+  margin: 5px 0 30px 10px;
+  padding:0;
+  }
+.niceList li {
+  background: transparent url(/images/remix/bullet.gif) no-repeat left;
+  padding-left: 17px;
+  margin-bottom: 3px;
+  }
+h3#planIntro {
+  font-size: 160%;
+  margin-bottom: 15px;
+  color: black;
+  text-align: center;
+} 
+
+
+/*--------------------------------------------
+Plan Table v. 2.0 "All Plans Comparison"
+--------------------------------------------*/
+DIV#allplans {
+  text-align: center;
+}
+
+#allplans TABLE {
+  width: 100%;
+  border-spacing: 2px;
+  padding: 2px;
+  border: 1px solid #DFDFDF;
+}
+
+#allplans TD {
+  background: #EEE;
+  border-bottom: 1px solid #DFDFDF;
+}
+
+#allplans TR {
+  border-bottom: 1px solid #000;
+}
+
+#allplans .term {
+  font-weight: bold;
+  text-align: left;
+  padding: 5px;
+}
+
+#allplans TH {
+  background: #CCFF99;
+  color: #0A6795;
+  border: none;
+}
+
+#allplans .superHeader TD {
+  background: white;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 130%;
+  padding: 5px;
+}
+
+#allplans TR.superHeader {
+  border-bottom: none;
+}
+
+#allplans .superHeader TD.shared {
+  background: #FFBF4F;
+}
+
+#allplans .superHeader TD.multisite {
+  background: #29B8DF;
+}
+
+#allplans th,
+#allplans .superHeader td {
+  border: none;
+}
+
+#banner {
+  float: left;
+  margin-top: 15px;
+  margin-bottom: 0;
+  }
+
+
+/*************** Special Message Banner Styles! *****************/
+
+#message {
+  background: #E7F7CB;
+  letter-spacing: 0px;
+  border: 0;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 0px;
+  height: 78px;
+  color: black;
+  }
+#messagetxt  {
+  letter-spacing: 0px;
+  font-weight: bold;
+  width: 280px;
+  float: right;
+  padding: 0;
+  margin-right: 0px;
+  margin-top: 0px;
+  }
+#messagetxt  .special {
+  letter-spacing: -0px;
+  float: left;
+  font-size: 110%;
+  line-height: 6px;
+  color: black;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 0px;
+  }
+#messagetxt  .link a {
+  float: left;
+  font-weight: bold;
+  font-size: 90%;
+  letter-spacing: -1px;
+  color: #1578AF;
+  margin: 0;
+  margin-left: 40px;
+  margin-top: -25px;
+  }
+#messagetxt .special2 {
+  clear: both;
+  float: left;
+  font-size: 90%;
+  font-weight: bold;
+  color: black;
+  padding: 0;
+  margin: 0;
+  margin-left: 0px;
+  padding-right: 5px;
+  }
+#morebar .morebox {
+  width: 310px;
+  float: left;
+  }

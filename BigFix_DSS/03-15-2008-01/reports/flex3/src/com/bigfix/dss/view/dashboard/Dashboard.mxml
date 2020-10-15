@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Grid xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:dashboard="com.bigfix.dss.view.dashboard.*" width="100%" height="100%" creationComplete="init()">
+	<mx:Script><![CDATA[
+		import flash.events.MouseEvent;
+		import mx.managers.DragManager;
+		import mx.binding.utils.ChangeWatcher;
+		import mx.core.DragSource;
+		import mx.core.Application;
+		import mx.utils.ObjectUtil
+		import mx.containers.GridRow;
+		import mx.containers.GridItem;
+		import mx.events.DragEvent;
+		import mx.events.FlexEvent;
+		import mx.events.PropertyChangeEvent;
+
+		import com.bigfix.dss.vo.DashboardVO;
+		import com.bigfix.dss.vo.WidgetVO;
+		import com.bigfix.dss.vo.DashboardWidgetVO;
+		import com.bigfix.dss.vo.DashboardLayoutVO;
+		import com.bigfix.dss.view.dashboard.GridItemCanvas;
+		import com.bigfix.dss.view.dashboard.WidgetInstance;
+		import com.bigfix.dss.command.AddWidgetToDashboardCommand;
+		import com.bigfix.dss.command.MoveWidgetInDashboardCommand;
+		import com.bigfix.dss.command.RemoveWidgetFromDashboardCommand;
+		import com.bigfix.dss.event.WidgetRemoveEvent;
+		import com.bigfix.dss.event.LibraryWidgetRemoveEvent;
+		import com.bigfix.dss.event.LibraryWidgetEditEvent;
+
+		override public function set label(value:String):void {
+			dashboardData.name = value;
+			super.label=value;
+		}
+		
+		private var _dashboardData:DashboardVO;
+		public function set dashboardData(value:DashboardVO):void {
+			super.label = value.name;
+			_dashboardData = value;
+			_dashboardData.parent = this;
+			populateGrid();
+		}
+		public function get dashboardData():DashboardVO {
+			return _dashboardData;
+		}
+
+		private function init():void {
+			//ChangeWatcher.watch(this, 'dashboardData', populateGrid);
+			this.addEventListener(WidgetRemoveEvent.EVENT_WIDGET_REMOVE, widgetRemoved, true);
+			Application.application.addEventListener(LibraryWidgetRemoveEvent.EVENT_LIB_WIDGET_REMOVE, libWidgetRemoved);
+			Application.application.addEventListener(LibraryWidgetEditEvent.EVENT_LIB_WIDGET_EDIT, libWidgetEdited);
+		}
+		
+		private function libWidgetRemoved(event:LibraryWidgetRemoveEvent):void {
+			this.getChildren().forEach(function (gridRow:GridRow, index:int, array:Array):void{
+				gridRow.getChildren().forEach(function (gridItem:GridItem, index:int, array:Array):void{
+					var gridItemCanvas:GridItemCanvas = GridItemCanvas(gridItem.getChildByName('GridItemCanvas'))
+					var currentWidgetInstance:WidgetInstance = WidgetInstance(gridItemCanvas.getChildByName('widgetInstance'));
+					if(currentWidgetInstance && currentWidgetInstance.widgetData.id == event.widget_id){
+						
+						//dashboardData's dashboard_widgets will be out of sync but this is ok because
+						//it's only used to populate the grid on first load
+						delete myWidgetInstances[gridItemCanvas.position];
+						gridItemCanvas.removeChild(currentWidgetInstance);
+					}
+				})
+			})
+		}
+		
+		private function libWidgetEdited(event:LibraryWidgetEditEvent):void {
+			this.getChildren().forEach(function (gridRow:GridRow, index:int, array:Array):void{
+				gridRow.getChildren().forEach(function (gridItem:GridItem, index:int, array:Array):void{
+					var gridItemCanvas:GridItemCanvas = GridItemCanvas(gridItem.getChildByName('GridItemCanvas'))
+					var currentWidgetInstance:WidgetInstance = WidgetInstance(gridItemCanvas.getChildByName('widgetInstance'));
+					if(currentWidgetInstance && currentWidgetInstance.widgetData.id == event.widget.id){
+						//dashboardData's dashboard_widgets will be out of sync but this is ok because
+						//it's only used to populate the grid on first load		
+						gridItemCanvas.removeChild(currentWidgetInstance);
+						var widgetInstance:WidgetInstance = new WidgetInstance();
+						widgetInstance.name = "widgetInstance";
+						widgetInstance.widgetData = event.widget;
+						myWidgetInstances[gridItemCanvas.position]=widgetInstance;
+						gridItemCanvas.addChild(widgetInstance);
+						attachDragListeners(widgetInstance);
+					}
+				})
+			})
+		}
+		
+		private function widgetRemoved(event:WidgetRemoveEvent):void {
+			event.stopPropagation();
+			var removeCommand:RemoveWidgetFromDashboardCommand = new RemoveWidgetFromDashboardCommand();
+			removeCommand.dashboardID = this.dashboardData.id;
+			removeCommand.position = getGridItemPositionOfWidget(event.widget);
+			removeCommand.execute(null);
+			removeCommand.resultHandler = function(data:Object):void {
+				delete myWidgetInstances[GridItemCanvas(event.widget.parent.parent).position];
+			  	event.widget.parent.parent.removeChild(event.widget.parent);
+			}
+		}
+
+		// drag and drop functions
+		private function attachDragListeners(obj:*):void {
+			obj.addEventListener(MouseEvent.MOUSE_DOWN, startWidgetInstanceDrag);
+		}
+
+		private function attachDropListeners(obj:*):void {
+			obj.addEventListener(DragEvent.DRAG_ENTER, handleDragEnter);
+			obj.addEventListener(DragEvent.DRAG_DROP, handleDragDrop);
+			obj.addEventListener(DragEvent.DRAG_EXIT, handleDragExit);
+		}
+
+		private function startWidgetInstanceDrag(event:MouseEvent):void {
+		  if (!event.target.hasEventListener(MouseEvent.MOUSE_DOWN)) {
+			var ds:DragSource = new DragSource();
+			ds.addData(event.currentTarget, 'WidgetInstance');
+			DragManager.doDrag(WidgetInstance(event.currentTarget), ds, event);
+			}
+		}
+
+		private function handleDragEnter(event:DragEvent):void {
+			var gridItemCanvas:GridItemCanvas = GridItemCanvas(event.currentTarget.getChildByName('GridItemCanvas'));
+			if (event.dragSource.hasFormat('WidgetInstance')) { // handle moving instances around
+				// don't drop on ourselves!
+				if (gridItemCanvas.numChildren > 0) {
+					if (event.dragSource.dataForFormat('WidgetInstance') == gridItemCanvas.getChildAt(0)) { return; }
+				}
+				DragManager.acceptDragDrop(GridItem(event.currentTarget));
+				DragManager.showFeedback(DragManager.LINK);
+				gridItemCanvas.currentState = 'swap';
+			} else if (event.dragSource.hasFormat('WidgetTemplate')) { // handle adding a template into dashboard
+				DragManager.acceptDragDrop(GridItem(event.currentTarget));
+				DragManager.showFeedback(DragManager.COPY);
+				gridItemCanvas.currentState = 'add';
+			}
+		}
+
+		private function handleDragDrop(event:DragEvent):void {
+			var gridItemCanvas:GridItemCanvas = GridItemCanvas(event.currentTarget.getChildByName('GridItemCanvas'));
+			gridItemCanvas.currentState = '';
+
+			if (event.dragSource.hasFormat('WidgetInstance')) { // we're moving an instance
+				var widgetInstanceBeingMoved:WidgetInstance = WidgetInstance(event.dragSource.dataForFormat('WidgetInstance'));
+				var widgetInstanceBeingMovedGridItemCanvas:GridItemCanvas = GridItemCanvas(widgetInstanceBeingMoved.parent);
+				// see if there is a child here...
+				var currentWidgetInstance:WidgetInstance = WidgetInstance(gridItemCanvas.getChildByName('widgetInstance'));
+				if (currentWidgetInstance) {
+					widgetInstanceBeingMovedGridItemCanvas.addChild(gridItemCanvas.removeChild(currentWidgetInstance));
+					myWidgetInstances[widgetInstanceBeingMovedGridItemCanvas.position]=currentWidgetInstance;
+				}
+				gridItemCanvas.addChild(widgetInstanceBeingMovedGridItemCanvas.removeChild(widgetInstanceBeingMoved));
+				myWidgetInstances[gridItemCanvas.position]=widgetInstanceBeingMoved;
+				// call the command to save this move to the database
+				var moveCommand:MoveWidgetInDashboardCommand = new MoveWidgetInDashboardCommand();
+				moveCommand.dashboardID = this.dashboardData.id;
+				moveCommand.oldPosition = getGridItemPosition(widgetInstanceBeingMovedGridItemCanvas);
+				moveCommand.newPosition = getGridItemPosition(gridItemCanvas);
+				moveCommand.execute(null);
+
+			} else if (event.dragSource.hasFormat('WidgetTemplate')) { // we're adding a template to this dashboard
+				// right now, just kill the widget which currently lives here, if it exists
+				if (gridItemCanvas.numChildren > 0) {
+					gridItemCanvas.removeChild(gridItemCanvas.getChildByName('widgetInstance'));
+				}
+				var newWidgetInstance:WidgetInstance = new WidgetInstance();
+				newWidgetInstance.name = 'widgetInstance';
+				newWidgetInstance.widgetData = WidgetVO(event.dragSource.dataForFormat('WidgetTemplate'));
+				myWidgetInstances[gridItemCanvas.position]=newWidgetInstance;
+				gridItemCanvas.addChild(newWidgetInstance);
+				attachDragListeners(newWidgetInstance);
+				// call the command to save this add to the database
+				var addCommand:AddWidgetToDashboardCommand = new AddWidgetToDashboardCommand();
+				addCommand.dashboardID = this.dashboardData.id;
+				addCommand.widgetID = newWidgetInstance.widgetData.id;
+				addCommand.position = getGridItemPosition(gridItemCanvas);
+				addCommand.execute(null);
+			}
+		}
+
+		private function handleDragExit(event:DragEvent):void {
+			var gridItemCanvas:GridItemCanvas = GridItemCanvas(event.currentTarget.getChildByName('GridItemCanvas'));
+			gridItemCanvas.currentState = '';
+		}
+
+		private var myWidgetInstances:Object = new Object();
+		
+		public function widgetCount():int{
+			return ObjectUtil.getClassInfo(myWidgetInstances).properties.length;
+		}
+		
+		public function repositionWidgets():void{
+			var new_pos:int = 0;
+			var widget:WidgetInstance;
+			var myNewWidgetInstances:Object = new Object();
+			for  (var key:String in myWidgetInstances) {
+				widget = myWidgetInstances[key];
+				trace(GridItemCanvas(widget.parent).position);
+				var moveCommand:MoveWidgetInDashboardCommand = new MoveWidgetInDashboardCommand();
+				moveCommand.dashboardID = this.dashboardData.id;
+				moveCommand.oldPosition = GridItemCanvas(widget.parent).position;
+				moveCommand.newPosition = new_pos;
+				moveCommand.execute(null);
+				myNewWidgetInstances[new_pos]=widget;
+				new_pos++;
+			}
+			myWidgetInstances=myNewWidgetInstances;
+		}
+
+		// grid population, triggered by changes to this.dashboardData
+		private function populateGrid(... rest):void {
+			var position:int=0;
+			
+			if (dashboardData.dashboard_layout == null)
+			  return;
+			
+			for(var row:int=0; row < dashboardData.dashboard_layout.rows; row++) {
+				var gridRow:GridRow = new GridRow();
+				gridRow.percentWidth = 100;
+				gridRow.percentHeight = 100/dashboardData.dashboard_layout.rows;
+				this.addChild(gridRow);
+				for(var i:int=0; i < dashboardData.dashboard_layout.layout_data[row].length; i++){
+					// init the gridItem
+					var gridItem:GridItem = new GridItem();
+					gridItem.rowSpan = dashboardData.dashboard_layout.layout_data[row][i][0];
+					gridItem.colSpan = dashboardData.dashboard_layout.layout_data[row][i][1];
+					gridItem.percentHeight = 100;
+					gridItem.percentWidth = 100/dashboardData.dashboard_layout.cols;
+					gridItem.setStyle('backgroundColor', 'white');
+					gridItem.setStyle('backgroundAlpha', '0');
+					gridRow.addChild(gridItem);
+					attachDropListeners(gridItem);
+					
+					// attach the gridItemCanvas
+					var gridItemCanvas:GridItemCanvas = new GridItemCanvas();
+					gridItemCanvas.name = "GridItemCanvas";
+					gridItemCanvas.position = position;
+					gridItem.addChild(gridItemCanvas);
+					
+					// attach a widget if we can find a dashboard_widget which matches this position
+					for each (var dashboard_widget:DashboardWidgetVO in dashboardData.dashboard_widgets) {
+						if (dashboard_widget.position == position) {
+							var widgetInstance:WidgetInstance = new WidgetInstance();
+							widgetInstance.name = "widgetInstance";
+							widgetInstance.widgetData = dashboard_widget.widget;
+							myWidgetInstances[position]=widgetInstance;
+							gridItemCanvas.addChild(widgetInstance);
+							attachDragListeners(widgetInstance);
+							break;
+						}
+					}
+					position +=1;
+				}
+			}
+		}
+			
+		public function refresh():void {
+			this.removeAllChildren();
+			var position:int=0;
+			for(var row:int=0; row < dashboardData.dashboard_layout.rows; row++) {
+				var gridRow:GridRow = new GridRow();
+				gridRow.percentWidth = 100;
+				gridRow.percentHeight = 100/dashboardData.dashboard_layout.rows;
+				this.addChild(gridRow);
+				for(var i:int=0; i < dashboardData.dashboard_layout.layout_data[row].length; i++){
+					// init the gridItem
+					var gridItem:GridItem = new GridItem();
+					gridItem.rowSpan = dashboardData.dashboard_layout.layout_data[row][i][0];
+					gridItem.colSpan = dashboardData.dashboard_layout.layout_data[row][i][1];
+					gridItem.percentHeight = 100;
+					gridItem.percentWidth = 100/dashboardData.dashboard_layout.cols;
+					gridItem.setStyle('backgroundColor', 'white');
+					gridItem.setStyle('backgroundAlpha', '0');
+					gridRow.addChild(gridItem);
+					attachDropListeners(gridItem);
+					
+					// attach the gridItemCanvas
+					var gridItemCanvas:GridItemCanvas = new GridItemCanvas();
+					gridItemCanvas.name = "GridItemCanvas";
+					gridItemCanvas.position = position;
+					gridItem.addChild(gridItemCanvas);
+					if(myWidgetInstances[position]){
+						gridItemCanvas.addChild(myWidgetInstances[position]);
+					}
+					position +=1;
+				}
+			}
+		}
+
+		// grid helpers
+		private function getGridItemPosition(gridItemCanvas:GridItemCanvas):int {
+			return gridItemCanvas.position;
+			/*var gridItem:GridItem = GridItem(gridItemCanvas.parent);
+			var gridRow:GridRow = GridRow(gridItem.parent);
+			return (gridRow.parent.getChildIndex(gridRow) * dashboardData.dashboard_layout.cols) + gridRow.getChildIndex(gridItem);*/
+		}
+
+		private function getGridItemPositionOfWidget(widget:Object):int {
+	  		return getGridItemPosition(GridItemCanvas(widget.parent.parent));
+		}
+	]]></mx:Script>
+	<!--
+	I'm keeping this around because it's a nice representation of what gets created by this.populateGrid()
+	<mx:GridRow width="100%" height="50%">
+		<mx:GridItem width="50%" height="100%" creationComplete="attachDropListeners(event.currentTarget)" backgroundColor="white" backgroundAlpha="0">
+			<dashboard:GridItemCanvas name="GridItemCanvas">
+				<dashboard:WidgetInstance name="widgetInstance" creationComplete="attachDragListeners(event.currentTarget)"/>
+			</dashboard:GridItemCanvas>
+		</mx:GridItem>
+		<mx:GridItem width="50%" height="100%" creationComplete="attachDropListeners(event.currentTarget)" backgroundColor="white" backgroundAlpha="0">
+			<dashboard:GridItemCanvas name="GridItemCanvas">
+				<dashboard:WidgetInstance name="widgetInstance" creationComplete="attachDragListeners(event.currentTarget)"/>
+			</dashboard:GridItemCanvas>
+		</mx:GridItem>
+	</mx:GridRow>
+	<mx:GridRow width="100%" height="50%">
+		<mx:GridItem width="50%" height="100%" creationComplete="attachDropListeners(event.currentTarget)" backgroundColor="white" backgroundAlpha="0">
+			<dashboard:GridItemCanvas name="GridItemCanvas">
+				<dashboard:WidgetInstance name="widgetInstance" creationComplete="attachDragListeners(event.currentTarget)"/>
+			</dashboard:GridItemCanvas>
+		</mx:GridItem>
+		<mx:GridItem width="50%" height="100%" creationComplete="attachDropListeners(event.currentTarget)" backgroundColor="white" backgroundAlpha="0">
+			<dashboard:GridItemCanvas name="GridItemCanvas"/>
+		</mx:GridItem>
+	</mx:GridRow>
+	-->
+</mx:Grid>

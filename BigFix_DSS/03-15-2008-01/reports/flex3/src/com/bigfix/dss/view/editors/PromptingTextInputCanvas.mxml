@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:flexlib="flexlib.controls.*"
+	width="100%" height="100%" 
+	>
+	<mx:states>
+		<mx:State name="SearchState">
+			<mx:AddChild relativeTo="{hbox1}" position="lastChild">
+				<mx:Button id="btnSearch" width="30" icon="@Embed(source='/assets/search_16x16.gif')" toolTip="Click this button to perform a search." click="performSearch()"/>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.view.editors.events.PerformSearchEvent;
+			import com.bigfix.dss.view.editors.events.TextChangedEvent;
+			import com.bigfix.dss.view.general.Alert.AlertPopUp;
+
+			[Event(name="textChanged", type="com.bigfix.dss.view.editors.events.TextChangedEvent")]
+			[Event(name="performSearch", type="com.bigfix.dss.view.editors.events.PerformSearchEvent")]
+
+			private var _prompt:String;
+			
+			public function set prompt(prompt:String):void {
+				this._prompt = prompt;
+			}
+			
+			public function get prompt():String {
+				return this._prompt;
+			}
+			
+			public function set text(text:String):void {
+				this.input.text = text;
+			}
+			
+			public function get text():String {
+				return this.input.text;
+			}
+			
+			private function performSearch():void {
+				this.dispatchEvent(new PerformSearchEvent(PerformSearchEvent.TYPE_PERFORM_SEARCH, this.input.text));
+			}
+
+			private function onCreationCompletePromptingTextInput():void {
+				this.input.prompt = this.prompt;
+				this.input.styleName = this.styleName;
+			}
+			
+			private function onChangePromptingTextInput(event:Event):void {
+				this.dispatchEvent(new TextChangedEvent(TextChangedEvent.TYPE_TEXT_CHANGED, this.input.text));
+			}
+		]]>
+	</mx:Script>
+	<mx:HBox width="100%" id="hbox1">
+		<flexlib:PromptingTextInput id="input" width="100%" styleName="PromptingTextInput" change="onChangePromptingTextInput(event)" creationComplete="onCreationCompletePromptingTextInput()"/>
+	</mx:HBox>
+</mx:Canvas>

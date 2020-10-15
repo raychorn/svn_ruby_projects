@@ -1,0 +1,322 @@
+north_carolina:
+  title: North Carolina
+  subgroups:
+  - north_carolina_albemarle
+  - north_carolina_apex
+  - north_carolina_asheboro
+  - north_carolina_asheville
+  - north_carolina_burlington
+  - north_carolina_carrboro
+  - north_carolina_cary
+  - north_carolina_chapel_hill
+  - north_carolina_charlotte
+  - north_carolina_clemmons
+  - north_carolina_concord
+  - north_carolina_cornelius
+  - north_carolina_durham
+  - north_carolina_eden
+  - north_carolina_elizabeth_city
+  - north_carolina_fayetteville
+  - north_carolina_garner
+  - north_carolina_gastonia
+  - north_carolina_goldsboro
+  - north_carolina_greensboro
+  - north_carolina_greenville
+  - north_carolina_havelock
+  - north_carolina_henderson
+  - north_carolina_hickory
+  - north_carolina_high_point
+  - north_carolina_huntersville
+  - north_carolina_indian_trail
+  - north_carolina_jacksonville
+  - north_carolina_kannapolis
+  - north_carolina_kernersville
+  - north_carolina_kinston
+  - north_carolina_laurinburg
+  - north_carolina_lenoir
+  - north_carolina_lexington
+  - north_carolina_lumberton
+  - north_carolina_matthews
+  - north_carolina_mint_hill
+  - north_carolina_monroe
+  - north_carolina_mooresville
+  - north_carolina_morganton
+  - north_carolina_new_bern
+  - north_carolina_raleigh
+  - north_carolina_roanoke_rapids
+  - north_carolina_rocky_mount
+  - north_carolina_salisbury
+  - north_carolina_sanford
+  - north_carolina_shelby
+  - north_carolina_statesville
+  - north_carolina_thomasville
+  - north_carolina_wake_forest
+  - north_carolina_wilmington
+  - north_carolina_wilson
+  - north_carolina_winston_salem
+
+north_carolina_albemarle:
+  title: Albemarle
+  type: city
+  population: 15360
+
+north_carolina_apex:
+  title: Apex
+  type: city
+  population: 27624
+
+north_carolina_asheboro:
+  title: Asheboro
+  type: city
+  population: 23286
+
+north_carolina_asheville:
+  title: Asheville
+  type: city
+  population: 71662
+
+north_carolina_burlington:
+  title: Burlington
+  type: city
+  population: 47278
+
+north_carolina_carrboro:
+  title: Carrboro
+  type: city
+  population: 16389
+
+north_carolina_cary:
+  title: Cary
+  type: city
+  population: 103013
+
+north_carolina_chapel_hill:
+  title: Chapel Hill
+  type: city
+  population: 49172
+
+north_carolina_charlotte:
+  title: Charlotte
+  type: city
+  population: 598206
+
+north_carolina_clemmons:
+  title: Clemmons
+  type: city
+  population: 16234
+
+north_carolina_concord:
+  title: Concord
+  type: city
+  population: 59962
+
+north_carolina_cornelius:
+  title: Cornelius
+  type: city
+  population: 17868
+
+north_carolina_durham:
+  title: Durham
+  type: city
+  population: 201683
+
+north_carolina_eden:
+  title: Eden
+  type: city
+  population: 15704
+
+north_carolina_elizabeth_city:
+  title: Elizabeth City
+  type: city
+  population: 18079
+
+north_carolina_fayetteville:
+  title: Fayetteville
+  type: city
+  population: 131986
+
+north_carolina_garner:
+  title: Garner
+  type: city
+  population: 21826
+
+north_carolina_gastonia:
+  title: Gastonia
+  type: city
+  population: 68188
+
+north_carolina_goldsboro:
+  title: Goldsboro
+  type: city
+  population: 38800
+
+north_carolina_greensboro:
+  title: Greensboro
+  type: city
+  population: 229905
+
+north_carolina_greenville:
+  title: Greenville
+  type: city
+  population: 68371
+
+north_carolina_havelock:
+  title: Havelock
+  type: city
+  population: 21775
+
+north_carolina_henderson:
+  title: Henderson
+  type: city
+  population: 16221
+
+north_carolina_hickory:
+  title: Hickory
+  type: city
+  population: 40150
+
+north_carolina_high_point:
+  title: High Point
+  type: city
+  population: 93079
+
+north_carolina_huntersville:
+  title: Huntersville
+  type: city
+  population: 34268
+
+north_carolina_indian_trail:
+  title: Indian Trail
+  type: city
+  population: 15692
+
+north_carolina_jacksonville:
+  title: Jacksonville
+  type: city
+  population: 62740
+
+north_carolina_kannapolis:
+  title: Kannapolis
+  type: city
+  population: 38517
+
+north_carolina_kernersville:
+  title: Kernersville
+  type: city
+  population: 20583
+
+north_carolina_kinston:
+  title: Kinston
+  type: city
+  population: 22937
+
+north_carolina_laurinburg:
+  title: Laurinburg
+  type: city
+  population: 15781
+
+north_carolina_lenoir:
+  title: Lenoir
+  type: city
+  population: 17924
+
+north_carolina_lexington:
+  title: Lexington
+  type: city
+  population: 20436
+
+north_carolina_lumberton:
+  title: Lumberton
+  type: city
+  population: 21364
+
+north_carolina_matthews:
+  title: Matthews
+  type: city
+  population: 24487
+
+north_carolina_mint_hill:
+  title: Mint Hill
+  type: city
+  population: 17479
+
+north_carolina_monroe:
+  title: Monroe
+  type: city
+  population: 29400
+
+north_carolina_mooresville:
+  title: Mooresville
+  type: city
+  population: 20149
+
+north_carolina_morganton:
+  title: Morganton
+  type: city
+  population: 17031
+
+north_carolina_new_bern:
+  title: New Bern
+  type: city
+  population: 24004
+
+north_carolina_raleigh:
+  title: Raleigh
+  type: city
+  population: 327547
+
+north_carolina_roanoke_rapids:
+  title: Roanoke Rapids
+  type: city
+  population: 16433
+
+north_carolina_rocky_mount:
+  title: Rocky Mount
+  type: city
+  population: 56437
+
+north_carolina_salisbury:
+  title: Salisbury
+  type: city
+  population: 27464
+
+north_carolina_sanford:
+  title: Sanford
+  type: city
+  population: 25934
+
+north_carolina_shelby:
+  title: Shelby
+  type: city
+  population: 21281
+
+north_carolina_statesville:
+  title: Statesville
+  type: city
+  population: 24487
+
+north_carolina_thomasville:
+  title: Thomasville
+  type: city
+  population: 25698
+
+north_carolina_wake_forest:
+  title: Wake Forest
+  type: city
+  population: 17550
+
+north_carolina_wilmington:
+  title: Wilmington
+  type: city
+  population: 93371
+
+north_carolina_wilson:
+  title: Wilson
+  type: city
+  population: 46607
+
+north_carolina_winston_salem:
+  title: Winston-Salem
+  type: city
+  population: 191545
+

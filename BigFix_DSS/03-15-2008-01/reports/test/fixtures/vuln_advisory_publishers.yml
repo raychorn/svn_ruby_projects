@@ -1,0 +1,4 @@
+cve:
+  id: 1
+  name: CVE
+  url_prefix: http://nvd.nist.gov/nvd.cfm?cvename=

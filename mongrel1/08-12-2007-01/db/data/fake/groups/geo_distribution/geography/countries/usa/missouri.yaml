@@ -1,0 +1,262 @@
+missouri:
+  title: Missouri
+  subgroups:
+  - missouri_arnold
+  - missouri_ballwin
+  - missouri_belton
+  - missouri_blue_springs
+  - missouri_bridgeton
+  - missouri_cape_girardeau
+  - missouri_chesterfield
+  - missouri_clayton
+  - missouri_columbia
+  - missouri_creve_coeur
+  - missouri_ferguson
+  - missouri_florissant
+  - missouri_gladstone
+  - missouri_grandview
+  - missouri_hannibal
+  - missouri_hazelwood
+  - missouri_independence
+  - missouri_jefferson_city
+  - missouri_jennings
+  - missouri_joplin
+  - missouri_kansas_city
+  - missouri_kirksville
+  - missouri_kirkwood
+  - missouri_lee_s_summit
+  - missouri_liberty
+  - missouri_manchester
+  - missouri_maryland_heights
+  - missouri_o_fallon
+  - missouri_overland
+  - missouri_poplar_bluff
+  - missouri_raytown
+  - missouri_rolla
+  - missouri_st__charles
+  - missouri_st__joseph
+  - missouri_st__louis
+  - missouri_st__peters
+  - missouri_sedalia
+  - missouri_sikeston
+  - missouri_springfield
+  - missouri_university_city
+  - missouri_warrensburg
+  - missouri_webster_groves
+  - missouri_wildwood
+
+missouri_arnold:
+  title: Arnold
+  type: city
+  population: 20153
+
+missouri_ballwin:
+  title: Ballwin
+  type: city
+  population: 30729
+
+missouri_belton:
+  title: Belton
+  type: city
+  population: 23846
+
+missouri_blue_springs:
+  title: Blue Springs
+  type: city
+  population: 51910
+
+missouri_bridgeton:
+  title: Bridgeton
+  type: city
+  population: 15358
+
+missouri_cape_girardeau:
+  title: Cape Girardeau
+  type: city
+  population: 35914
+
+missouri_chesterfield:
+  title: Chesterfield
+  type: city
+  population: 47042
+
+missouri_clayton:
+  title: Clayton
+  type: city
+  population: 15926
+
+missouri_columbia:
+  title: Columbia
+  type: city
+  population: 89803
+
+missouri_creve_coeur:
+  title: Creve Coeur
+  type: city
+  population: 16616
+
+missouri_ferguson:
+  title: Ferguson
+  type: city
+  population: 21633
+
+missouri_florissant:
+  title: Florissant
+  type: city
+  population: 52293
+
+missouri_gladstone:
+  title: Gladstone
+  type: city
+  population: 27201
+
+missouri_grandview:
+  title: Grandview
+  type: city
+  population: 24835
+
+missouri_hannibal:
+  title: Hannibal
+  type: city
+  population: 17632
+
+missouri_hazelwood:
+  title: Hazelwood
+  type: city
+  population: 25610
+
+missouri_independence:
+  title: Independence
+  type: city
+  population: 110966
+
+missouri_jefferson_city:
+  title: Jefferson City
+  type: city
+  population: 38858
+
+missouri_jennings:
+  title: Jennings
+  type: city
+  population: 15032
+
+missouri_joplin:
+  title: Joplin
+  type: city
+  population: 46769
+
+missouri_kansas_city:
+  title: Kansas City
+  type: city
+  population: 444199
+
+missouri_kirksville:
+  title: Kirksville
+  type: city
+  population: 17031
+
+missouri_kirkwood:
+  title: Kirkwood
+  type: city
+  population: 27113
+
+missouri_lee_s_summit:
+  title: Lee's Summit
+  type: city
+  population: 78621
+
+missouri_liberty:
+  title: Liberty
+  type: city
+  population: 28547
+
+missouri_manchester:
+  title: Manchester
+  type: city
+  population: 19029
+
+missouri_maryland_heights:
+  title: Maryland Heights
+  type: city
+  population: 26766
+
+missouri_o_fallon:
+  title: O'Fallon
+  type: city
+  population: 67008
+
+missouri_overland:
+  title: Overland
+  type: city
+  population: 16246
+
+missouri_poplar_bluff:
+  title: Poplar Bluff
+  type: city
+  population: 16741
+
+missouri_raytown:
+  title: Raytown
+  type: city
+  population: 29334
+
+missouri_rolla:
+  title: Rolla
+  type: city
+  population: 17392
+
+missouri_st__charles:
+  title: St. Charles
+  type: city
+  population: 61450
+
+missouri_st__joseph:
+  title: St. Joseph
+  type: city
+  population: 72602
+
+missouri_st__louis:
+  title: St. Louis
+  type: city
+  population: 350705
+
+missouri_st__peters:
+  title: St. Peters
+  type: city
+  population: 53829
+
+missouri_sedalia:
+  title: Sedalia
+  type: city
+  population: 20166
+
+missouri_sikeston:
+  title: Sikeston
+  type: city
+  population: 17028
+
+missouri_springfield:
+  title: Springfield
+  type: city
+  population: 150701
+
+missouri_university_city:
+  title: University City
+  type: city
+  population: 37434
+
+missouri_warrensburg:
+  title: Warrensburg
+  type: city
+  population: 17457
+
+missouri_webster_groves:
+  title: Webster Groves
+  type: city
+  population: 23040
+
+missouri_wildwood:
+  title: Wildwood
+  type: city
+  population: 34508
+

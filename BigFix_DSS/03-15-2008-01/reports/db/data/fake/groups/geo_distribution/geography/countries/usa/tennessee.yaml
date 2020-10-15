@@ -1,0 +1,214 @@
+tennessee:
+  title: Tennessee
+  subgroups:
+  - tennessee_bartlett
+  - tennessee_brentwood
+  - tennessee_bristol
+  - tennessee_chattanooga
+  - tennessee_clarksville
+  - tennessee_cleveland
+  - tennessee_collierville
+  - tennessee_columbia
+  - tennessee_cookeville
+  - tennessee_dyersburg
+  - tennessee_east_ridge
+  - tennessee_farragut
+  - tennessee_franklin
+  - tennessee_gallatin
+  - tennessee_germantown
+  - tennessee_goodlettsville
+  - tennessee_greeneville
+  - tennessee_hendersonville
+  - tennessee_jackson
+  - tennessee_johnson_city
+  - tennessee_kingsport
+  - tennessee_knoxville
+  - tennessee_la_vergne
+  - tennessee_lebanon
+  - tennessee_maryville
+  - tennessee_memphis
+  - tennessee_morristown
+  - tennessee_mount_juliet
+  - tennessee_murfreesboro
+  - tennessee_nashville_davidson
+  - tennessee_oak_ridge
+  - tennessee_shelbyville
+  - tennessee_smyrna
+  - tennessee_springfield
+  - tennessee_tullahoma
+
+tennessee_bartlett:
+  title: Bartlett
+  type: city
+  population: 42825
+
+tennessee_brentwood:
+  title: Brentwood
+  type: city
+  population: 30584
+
+tennessee_bristol:
+  title: Bristol
+  type: city
+  population: 24895
+
+tennessee_chattanooga:
+  title: Chattanooga
+  type: city
+  population: 154873
+
+tennessee_clarksville:
+  title: Clarksville
+  type: city
+  population: 108664
+
+tennessee_cleveland:
+  title: Cleveland
+  type: city
+  population: 37691
+
+tennessee_collierville:
+  title: Collierville
+  type: city
+  population: 36497
+
+tennessee_columbia:
+  title: Columbia
+  type: city
+  population: 33619
+
+tennessee_cookeville:
+  title: Cookeville
+  type: city
+  population: 27562
+
+tennessee_dyersburg:
+  title: Dyersburg
+  type: city
+  population: 17354
+
+tennessee_east_ridge:
+  title: East Ridge
+  type: city
+  population: 19968
+
+tennessee_farragut:
+  title: Farragut
+  type: city
+  population: 19017
+
+tennessee_franklin:
+  title: Franklin
+  type: city
+  population: 51307
+
+tennessee_gallatin:
+  title: Gallatin
+  type: city
+  population: 25674
+
+tennessee_germantown:
+  title: Germantown
+  type: city
+  population: 37477
+
+tennessee_goodlettsville:
+  title: Goodlettsville
+  type: city
+  population: 15106
+
+tennessee_greeneville:
+  title: Greeneville
+  type: city
+  population: 15300
+
+tennessee_hendersonville:
+  title: Hendersonville
+  type: city
+  population: 43975
+
+tennessee_jackson:
+  title: Jackson
+  type: city
+  population: 61705
+
+tennessee_johnson_city:
+  title: Johnson City
+  type: city
+  population: 57658
+
+tennessee_kingsport:
+  title: Kingsport
+  type: city
+  population: 44079
+
+tennessee_knoxville:
+  title: Knoxville
+  type: city
+  population: 178118
+
+tennessee_la_vergne:
+  title: La Vergne
+  type: city
+  population: 24776
+
+tennessee_lebanon:
+  title: Lebanon
+  type: city
+  population: 22445
+
+tennessee_maryville:
+  title: Maryville
+  type: city
+  population: 25489
+
+tennessee_memphis:
+  title: Memphis
+  type: city
+  population: 673521
+
+tennessee_morristown:
+  title: Morristown
+  type: city
+  population: 26022
+
+tennessee_mount_juliet:
+  title: Mount Juliet
+  type: city
+  population: 17274
+
+tennessee_murfreesboro:
+  title: Murfreesboro
+  type: city
+  population: 81722
+
+tennessee_nashville_davidson:
+  title: Nashville-Davidson
+  type: city
+  population: 546219
+
+tennessee_oak_ridge:
+  title: Oak Ridge
+  type: city
+  population: 27224
+
+tennessee_shelbyville:
+  title: Shelbyville
+  type: city
+  population: 17952
+
+tennessee_smyrna:
+  title: Smyrna
+  type: city
+  population: 31883
+
+tennessee_springfield:
+  title: Springfield
+  type: city
+  population: 15651
+
+tennessee_tullahoma:
+  title: Tullahoma
+  type: city
+  population: 18699
+

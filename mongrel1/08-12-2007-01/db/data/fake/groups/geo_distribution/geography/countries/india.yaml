@@ -1,0 +1,23 @@
+india:
+  title: India
+  subgroups:
+  - in_bangalore
+  - in_bombay
+  - in_calcutta
+  - in_bhopal
+
+in_bangalore:
+  title: Bangalore
+  type: city
+
+in_bombay:
+  title: Bombay
+  type: city
+
+in_calcutta:
+  title: Calcutta
+  type: city
+
+in_bhopal:
+  title: Bhopal
+  type: city

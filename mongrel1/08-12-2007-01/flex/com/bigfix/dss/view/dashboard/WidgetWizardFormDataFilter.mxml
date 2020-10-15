@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:data="com.bigfix.dss.view.data.*" creationComplete="init()">
+	<mx:Script><![CDATA[
+		include 'WidgetWizardFormLib.as';
+		import mx.core.UIComponent;
+		import mx.controls.Alert;
+		import mx.controls.ComboBox;
+		import mx.collections.ArrayCollection;
+		import mx.events.ListEvent;
+		import mx.controls.TextInput;
+		import mx.binding.utils.ChangeWatcher;
+		import mx.events.PropertyChangeEvent;
+
+		import com.bigfix.dss.vo.PropertyVO;
+		import com.bigfix.dss.vo.SubjectVO;
+		
+		import com.bigfix.dss.model.Constants;
+
+		private function setValue():void {
+			//model.currentWidget.visualization_type_options.metric = formControlForMetric.selectedItem;
+			//coalesce(model.currentWidget.visualization_type_options.metric.name, labelField);
+			model.currentWidget.visualization_type_options.data_filters = dataFilterForm.collectDataFilters().source;
+			hideForm();
+		}
+
+		private function init():void {
+			WidgetWizardFormLib_init();
+			dataFilterForm.collectDataFilters().source = model.currentWidget.visualization_type_options.data_filters;
+			// for data filters in trend
+			watcherManager.manage(ChangeWatcher.watch(model.currentWidget.visualization_type_options, 'subject', handleSubjectChange));
+			// for data filters in column chart
+			watcherManager.manage(ChangeWatcher.watch(model.currentWidget.visualization_type_options, 'computer_group_distribution', handleComputerGroupDistributionChange));
+		}
+
+		private function handleSubjectChange(event:PropertyChangeEvent):void {
+			try {
+				model.currentWidget.visualization_type_options.subject.id;
+			} catch (e:Error) {
+				labelBox.removeEventListener(MouseEvent.CLICK, showForm);
+				labelBox.addEventListener(MouseEvent.CLICK, alert);
+				return;
+			}
+			labelBox.removeEventListener(MouseEvent.CLICK, alert);
+			labelBox.addEventListener(MouseEvent.CLICK, showForm);
+			var distinctProperties:ArrayCollection = new ArrayCollection();
+			for each (var property:PropertyVO in model.currentWidget.visualization_type_options.subject.properties) {
+				if (!property.is_aggregate) {
+					distinctProperties.addItem(property);
+				}
+			}
+			dataFilterForm.properties = distinctProperties;
+			model.currentWidget.visualization_type_options.data_filters = [];
+		}
+
+		private function handleComputerGroupDistributionChange(event:PropertyChangeEvent):void {
+			try {
+				model.currentWidget.visualization_type_options.computer_group_distribution.id;
+			} catch (e:Error) {
+				labelBox.removeEventListener(MouseEvent.CLICK, showForm);
+				labelBox.addEventListener(MouseEvent.CLICK, alert);
+				return;
+			}
+			labelBox.removeEventListener(MouseEvent.CLICK, alert);
+			labelBox.addEventListener(MouseEvent.CLICK, showForm);
+			var distinctProperties:ArrayCollection = new ArrayCollection();
+			for each (var subject:SubjectVO in model.subjects) {
+				if (subject.id == model.currentWidget.visualization_type_options.computer_group_distribution.report_subject_id || subject.id == Constants.SUBJECT_ID_COMPUTER) {
+					for each (var property:PropertyVO in subject.properties) {
+						distinctProperties.addItem(property);
+					}					
+				}
+			}
+			dataFilterForm.properties = distinctProperties;
+			model.currentWidget.visualization_type_options.data_filters = [];
+		}
+
+		private function alert(... rest):void {
+			Alert.show("You must choose a Metric before\nspecifying Data Filters");
+		}
+	]]></mx:Script>
+	<mx:HBox>
+		<mx:HBox id="labelBox"><mx:Label text="Data Filters" styleName="textLink"/></mx:HBox>
+		<mx:VBox>
+			<mx:Repeater id="dataFilters" dataProvider="{model.currentWidget.visualization_type_options.data_filters}">
+				<mx:HBox>
+					<mx:Label text="{dataFilters.currentItem.property.name}"/>
+					<mx:Label text="{dataFilters.currentItem.property_operator.name}"/>
+					<mx:Label text="{dataFilters.currentItem.value}"/>
+				</mx:HBox>
+			</mx:Repeater>
+		</mx:VBox>
+	</mx:HBox>
+
+	<mx:Panel id="form" title="Data Filters" styleName="wizardFormContainer" width="800" minHeight="200" maxHeight="500" includeInLayout="false" visible="false" verticalScrollPolicy="{ScrollPolicy.AUTO}">
+		<data:DataFilterForm id="dataFilterForm"/>
+		<mx:ControlBar horizontalAlign="right">
+			<mx:Button label="Cancel" click="hideForm()"/>
+			<mx:Button label="Done" click="setValue()"/>
+		</mx:ControlBar>
+	</mx:Panel>
+</mx:Canvas>

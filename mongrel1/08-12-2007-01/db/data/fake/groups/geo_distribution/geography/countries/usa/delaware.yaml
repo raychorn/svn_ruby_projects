@@ -1,0 +1,22 @@
+delaware:
+  title: Delaware
+  subgroups:
+  - delaware_dover
+  - delaware_newark
+  - delaware_wilmington
+
+delaware_dover:
+  title: Dover
+  type: city
+  population: 33737
+
+delaware_newark:
+  title: Newark
+  type: city
+  population: 30076
+
+delaware_wilmington:
+  title: Wilmington
+  type: city
+  population: 72692
+

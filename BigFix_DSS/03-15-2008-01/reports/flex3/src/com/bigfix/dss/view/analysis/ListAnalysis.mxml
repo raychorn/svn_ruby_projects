@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel title="List"
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:data="com.bigfix.dss.view.data.*"
+	xmlns:analysis="com.bigfix.dss.view.analysis.*"
+	xmlns:grid="com.bigfix.extensions.controls.grid.*"
+	xmlns:bfcollections="com.bigfix.extensions.collections.*"
+	width="100%" height="100%"
+	verticalAlign="middle" horizontalAlign="center"
+	verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	creationComplete="init()"
+	>
+	<mx:Script><![CDATA[
+		import com.bigfix.dss.view.general.Alert.AlertPopUp;
+		import mx.controls.Alert;
+		import mx.rpc.events.ResultEvent;
+		import mx.rpc.events.FaultEvent;
+		import mx.events.FlexEvent;
+		import mx.events.ListEvent;
+		import mx.events.MenuEvent;
+		import mx.events.PropertyChangeEvent;
+		import mx.binding.utils.ChangeWatcher;
+		import mx.controls.dataGridClasses.DataGridColumn;
+		import mx.messaging.messages.RemotingMessage;
+		import flash.utils.*;
+		
+
+    	import com.bigfix.dss.util.DSS;
+		import com.bigfix.dss.util.ValueObjectUtil;
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.model.Constants;
+		import com.bigfix.dss.vo.ListAnalysisVO;
+		import com.bigfix.dss.vo.ListSubjectVO;
+		import com.bigfix.dss.vo.PropertyVO;
+		import com.bigfix.dss.event.FileDownloadCompleteEvent;
+		import com.bigfix.dss.view.fileio.FileDownload;
+		import com.bigfix.dss.event.CreatePopUpEvent;
+		import com.bigfix.dss.command.CreatePopUpCommand;
+
+		import com.bigfix.extensions.renderers.PopUpMenuButtonDataGridItemRenderer;
+		import com.bigfix.extensions.events.PopUpMenuButtonDataGridItemRendererEvent;
+
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+
+		[Bindable]
+		public var options:ListAnalysisVO; // this stores all info for this List Analysis
+
+		private function init():void {
+			refreshDataProvider(null);
+		}
+
+		private function refreshDataProvider(event:PropertyChangeEvent):void {
+			trace("ListAnalysis.refreshDataProvider()");
+			var call:Object = service.checkListArgs(options);
+			call.resultHandler = checkListArgsResultHandler;
+			call.faultHandler = faultHandler;
+		}
+
+		private function faultHandler(event:FaultEvent):void {
+			AlertPopUp.error(event.message.toString(), "Service Fault");
+		}
+
+		private function checkListArgsResultHandler(event:ResultEvent):void {
+			trace("ListAnalysis.checkListArgsResultHandler()");
+			// check for success!
+			if (!event.result.success) {
+				return;
+			}
+			//service.generateTable(this.options).onResult(generateTableResultHandler).onFault(faultHandler);
+			var call:Object = service.generateTable(this.options);
+			call.resultHandler = generateTableResultHandler;
+			call.faultHandler = faultHandler;
+		}
+
+		private function generateTableResultHandler(event:ResultEvent):void {
+			trace("ListAnalysis.generateTableResultHandler()");
+			// store the token
+			if (!event.result.success) {
+				return;
+			} else {
+				this.options.user_temp_table_id = event.result.user_temp_table_id;
+			}
+			if (!this.title) {
+				this.title = "List of " + options.list_subjects[0].subject.name_plural;
+			}
+			// populate the DataGrid columns and parse meta data
+			var newCols:Array = [];
+			for (var property_name:String in event.result.column_meta_data) {
+				var dataGridColumn:DataGridColumn = new DataGridColumn();
+				dataGridColumn.dataField = property_name;
+				dataGridColumn.setStyle('textAlign',event.result.column_meta_data[property_name].align);
+				if (event.result.column_meta_data[property_name].links.length) {
+					var rendererFactory:ClassFactory = new ClassFactory(PopUpMenuButtonDataGridItemRenderer);
+					rendererFactory.properties = {
+						labelField: 'name',
+						dataProvider: event.result.column_meta_data[property_name].links
+					};
+					dataGridColumn.itemRenderer = rendererFactory;
+				}
+				newCols.push(dataGridColumn);
+			}
+			dataGrid.columns = newCols;
+			dataGrid.validateNow();
+			dataGrid.addEventListener(PopUpMenuButtonDataGridItemRendererEvent.ITEM_CLICK, handleLinkClick);
+			remoteObjectCollection.refresh();
+		}
+		
+		private function handleLinkClick(event:PopUpMenuButtonDataGridItemRendererEvent):void {
+			event.stopPropagation();
+			var dataProviderRowIndex:int = dataGrid.indicesToIndex(dataGrid.verticalScrollPosition + event.listData.rowIndex, event.listData.columnIndex);
+			for each (var replacementMap:Object in event.menuItem.replacementMaps) {
+				ValueObjectUtil.updateDeepAttribute(event.menuItem.currentAnalysisOptions, replacementMap.analysisOptionPropertyDescriptor, dataGrid.dataProvider[dataProviderRowIndex][replacementMap.columnName]);
+			}
+			model.currentAnalysisOptions = event.menuItem.currentAnalysisOptions;
+		}
+	]]></mx:Script>
+	<mx:RemoteObject id="service" destination="ListService" showBusyCursor="true" result="event.token.resultHandler(event);" fault="event.token.faultHandler(event);">
+		<mx:method name="checkListArgs"/>
+		<mx:method name="generateTable"/>
+		<mx:method name="getListCount"/>
+		<mx:method name="getListForWidget"/>
+		<mx:method name="getListForAnalysis"/>
+		<mx:method name="getCSVListForWidget"/>
+		<mx:method name="deleteCSVFileByName"/>
+	</mx:RemoteObject>
+	<bfcollections:RemoteObjectCollection id="remoteObjectCollection" listMethod="{service.getListForWidget}" countMethod="{service.getListCount}" remoteMethodArgs="{this.options}" pageSize="100"/>
+	<grid:SortableDataGrid id="dataGrid" selectable="false" sortableColumns="true" dataProvider="{remoteObjectCollection}" width="100%" height="100%"/>
+</mx:Panel>

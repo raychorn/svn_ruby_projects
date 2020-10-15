@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="remoteService.getSubjects.send()" explicitMinWidth="650" width="100%">
+	<mx:Script source="DataOptions_as.as"/>
+	
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.view.general.Alert.AlertPopUp;
+		]]>
+	</mx:Script>
+
+	<mx:RemoteObject id="remoteService" destination="TrendChart" showBusyCursor="true" fault="AlertPopUp.error(event.fault.faultString, 'Error');">
+		<mx:method name="getSubjects" result="remoteService.getFilterLibrary.send();remoteService.getMetrics.send();"/>
+		<mx:method name="getMetrics">
+			<mx:arguments>
+				<mx:arg1>{subject.selectedItem.id}</mx:arg1>
+			</mx:arguments>
+		</mx:method>
+		<mx:method name="getFilterLibrary" result="refreshFilters()">
+			<mx:arguments>
+				<arg1>{subject.selectedItem.id}</arg1>
+				<arg2>false</arg2>
+			</mx:arguments>
+		</mx:method>
+	</mx:RemoteObject>
+
+	<mx:FormHeading label="Choose a Subject"/>
+	<mx:HBox>
+		<mx:ComboBox id="subject" dataProvider="{remoteService.getSubjects.lastResult}" labelField="name" change="subjectChanged()"/>
+		<mx:ComboBox id="metric" dataProvider="{remoteService.getMetrics.lastResult}" labelField="name"/>
+	</mx:HBox>
+
+
+	<mx:FormHeading label="Add Filters"/>
+	<mx:VBox id="filterContainer" width="100%"/>
+</mx:Form>

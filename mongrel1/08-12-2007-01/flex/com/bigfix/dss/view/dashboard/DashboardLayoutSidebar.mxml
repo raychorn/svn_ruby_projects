@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:dashboard="com.bigfix.dss.view.dashboard.*"
+	xmlns:flexlib="http://code.google.com/p/flexlib/"
+	width="100%" height="100%"
+	horizontalAlign="center" borderStyle="solid" borderSides="left">
+	<mx:Script><![CDATA[
+		import flash.events.MouseEvent;
+		import mx.collections.ArrayCollection;
+		import mx.controls.Alert;
+
+		import com.bigfix.dss.event.CreatePopUpEvent;
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.command.GetWidgetsCommand;
+		import com.bigfix.dss.command.SaveDashboardCommand;
+		import com.bigfix.dss.event.RefreshDashboardsEvent;
+		import com.bigfix.dss.view.dashboard.DashboardLayoutTemplate;
+		import com.bigfix.dss.vo.DashboardLayoutVO;
+		
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+		
+		public function setSelection():void {
+			for each(var layout:DashboardLayoutVO in layoutList.dataProvider){
+				if(layout.id==model.currentDashboard.dashboard_layout.id){
+					layoutList.selectedIndex=model.dashboard_layouts.getItemIndex(layout);
+					break;
+				}
+			}
+		}
+		
+		private function manageLayouts():void {
+			new CreatePopUpEvent(DashboardLayoutManager).dispatch();
+		}
+		
+		private function change(event:Event):void {
+			if(	model.currentDashboard.parent.widgetCount() > DashboardLayoutVO(layoutList.selectedItem).max_widgets){
+				Alert.show("Current dashboard has more widgets than this layout supports");
+				setSelection();
+			}
+			else{
+				model.currentDashboard.dashboard_layout=DashboardLayoutVO(layoutList.selectedItem);
+				model.currentDashboard.dashboard_layout_id=DashboardLayoutVO(layoutList.selectedItem).id;
+				model.currentDashboard.parent.repositionWidgets();
+				var saveCommand:SaveDashboardCommand = new SaveDashboardCommand();
+				saveCommand.dashboard=model.currentDashboard;
+				saveCommand.resultHandler = function (data:Object) :void{
+					if (data.success){
+						model.currentDashboard.parent.refresh();
+					}
+					else{
+						Alert.show("Unable to Save Dashboard! - rails side");
+					}
+				}
+				saveCommand.execute(null);
+			}
+		}
+
+	]]></mx:Script>
+	<mx:Panel styleName="infoPanel" headerHeight="0" width="100%" textAlign="center" horizontalAlign="center" verticalAlign="middle">
+		<mx:Text selectable="false">
+<mx:text>
+<![CDATA[Add Layout by
+dragging them into
+your dashboard
+or you can
+]]></mx:text>
+		</mx:Text>
+		<mx:Label text="Manage Layouts" selectable="false" buttonMode="true" useHandCursor="true" 	color="white" textDecoration="underline" fontWeight="bold" click="manageLayouts()"/>
+	</mx:Panel>
+	<mx:TileList id="layoutList" dataProvider="{model.dashboard_layouts}" itemRenderer="com.bigfix.dss.view.dashboard.DashboardLayoutTemplate"
+      	height="100%" width="60%" borderStyle="none" change="change(event)"/>
+</mx:VBox>

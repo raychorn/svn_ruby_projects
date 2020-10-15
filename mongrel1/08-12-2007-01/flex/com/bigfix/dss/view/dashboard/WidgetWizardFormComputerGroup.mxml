@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:data="com.bigfix.dss.view.data.*" creationComplete="init()">
+	<mx:Script><![CDATA[
+		include 'WidgetWizardFormLib.as';
+		
+		private function init():void {
+			WidgetWizardFormLib_init();
+			/* INCOMPLETE: need to open nodes before selecting them!
+			if (allowMultipleSelection) {
+				formControlForComputerGroup.selectedItems = model.currentWidget.visualization_type_options.computer_groups;
+			} else {
+				formControlForComputerGroup.selectedItem = model.currentWidget.visualization_type_options.computer_group;
+			}
+			*/
+			
+			formControlForComputerGroupIncludeChildren.selected = !model.currentWidget.visualization_type_options.ignore_computer_group_children;
+			setLabelField();
+		}
+		
+		[Bindable]
+		public var allowMultipleSelection:Boolean = false;
+
+		private function setValue(event:ValidationResultEvent):void {
+			hideForm();
+			if (allowMultipleSelection) {
+				model.currentWidget.visualization_type_options.computer_groups = formControlForComputerGroup.selectedItems;
+			} else {
+				model.currentWidget.visualization_type_options.computer_group = formControlForComputerGroup.selectedItem;
+				model.currentWidget.visualization_type_options.ignore_computer_group_children = !formControlForComputerGroupIncludeChildren.selected;
+			}
+			setLabelField();
+		}
+		
+		private function setLabelField():void {
+			if (allowMultipleSelection) {
+				coalesce("multiple groups", labelField);
+			} else {
+				coalesce(model.currentWidget.visualization_type_options.computer_group.name, labelField);
+			}
+		}
+	]]></mx:Script>
+	<mx:NumberValidator
+		source="{formControlForComputerGroup}" property="selectedIndex"
+		required="true" allowNegative="false"
+		trigger="{submitButton}" triggerEvent="click"
+		valid="setValue(event)"/>
+
+	<mx:HBox>
+		<mx:HBox id="labelBox" click="showForm()"><mx:Label text="Computer Group:" styleName="textLink"/></mx:HBox>
+		<mx:Label id="labelField" creationComplete="coalesce(null, Label(event.currentTarget))"/>
+	</mx:HBox>
+
+	<mx:Panel id="form" title="Computer Group" styleName="wizardFormContainer" width="600" minHeight="300" maxHeight="500" includeInLayout="false" visible="false" verticalScrollPolicy="{ScrollPolicy.AUTO}">
+		<data:ComputerGroupTree id="formControlForComputerGroup" width="100%" height="100%" allowMultipleSelection="{allowMultipleSelection}"/>
+		<mx:CheckBox id="formControlForComputerGroupIncludeChildren" label="Include Children?" visible="{!allowMultipleSelection}"/>
+		<mx:ControlBar horizontalAlign="right">
+			<mx:Button label="Cancel" click="hideForm()"/>
+			<mx:Button label="Done" id="submitButton" toolTip="click here to commit your changes to computer group selection"/>
+		</mx:ControlBar>
+	</mx:Panel>
+</mx:Canvas>

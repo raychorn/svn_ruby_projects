@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:LineChart xmlns:mx="http://www.adobe.com/2006/mxml" showDataTips="true" dataTipFunction="dataTipFormatter" width="100%" height="100%">
+	<mx:Metadata>
+		[Event(name="change", type="mx.events.FlexEvent")]
+	</mx:Metadata>
+	<mx:Script><![CDATA[
+		/*
+		 GENERAL NOTEs:
+		 the term 'node' here refers to the selected element in the GroupTree
+		 'rangeOverlay' is the layer the user interacts with to select an area of the graph
+		*/
+		import flash.events.MouseEvent;
+		import mx.core.Application;
+		import mx.rpc.events.ResultEvent;
+		import mx.rpc.events.FaultEvent;
+		import mx.controls.Alert;
+		import mx.charts.HitData;
+		import mx.containers.dividedBoxClasses.BoxDivider;
+		import mx.events.DividerEvent;
+		import mx.events.FlexEvent;
+		import mx.binding.utils.BindingUtils;
+		import flash.utils.*;
+
+		import com.bigfix.dss.util.DSS;
+		import com.bigfix.dss.vo.TrendAnalysisVO;
+
+		// public bindable vars startEpoch and endEpoch
+		[Bindable]
+		public var startEpoch:Number;
+		[Bindable]
+		public var endEpoch:Number;
+
+		[Bindable]
+		private var result:Array; // this stores the result from the service, bound to the linechart series
+		private var service:Object = DSS.svc("trendChartService");
+
+		private const MAX_ZOOM_DAYS:int = 10;
+		private const DEFAULT_ZOOM_DAYS:int = 30;
+		private var maxZoomPixelWidth:Number;
+
+		// yay! magic numbers!
+		private const MAGIC_NUMBER_DIVIDER_LEFT_PADDING:Number = 2;
+		private const MAGIC_NUMBER_GUTTER_LEFT_PADDING:Number = 1.5;
+
+		public function refreshDataProvider(options:TrendAnalysisVO):void {
+			service.getMacroTrendForAnalysis(options).onResult(resultHandler).onFault(faultHandler);
+		}
+
+		private function faultHandler(event:FaultEvent):void {
+			Alert.show(event.message.toString(), "Unable to retrieve trend data");
+		}
+
+		private function resultHandler(event:ResultEvent):void {
+			result = event.result.trend_data[0].data;
+			maxZoomPixelWidth = this.dataToLocal(86400 * 1000 * MAX_ZOOM_DAYS,0).x - this.dataToLocal(0,0).x;
+			// move the left divider to 'DEFAULT_ZOOM_DAYS'
+			var defaultZoomPixelWidth:Number = this.dataToLocal(86400 * 1000 * DEFAULT_ZOOM_DAYS,0).x - this.dataToLocal(0,0).x;
+			rangeOverlay.moveDivider(0,-defaultZoomPixelWidth + (rightDivider.x + rightDivider.width) - (leftDivider.x - MAGIC_NUMBER_DIVIDER_LEFT_PADDING));
+			convertRangeOverlayToDateRange();
+		}
+
+		/* GRAPH HELPER METHODS */
+		private function epochToDate(epoch:Number):Date {
+			return new Date(epoch);
+		}
+		private function dataTipFormatter(hitData:HitData):String {
+			var date:Date = epochToDate(hitData.item.xValue);
+			return '<b>' + hitData.element['displayName'] + '</b><br/>Date: ' + date.toUTCString() + '<br/>Some Metric: ' + hitData.item.yValue;
+		}
+
+		/* RANGE OVERLAY METHODS */
+		private var clickedMouseXPos:Number;
+		private var leftDivider:BoxDivider;
+		private var rightDivider:BoxDivider;
+
+		private function initRangeOverlay(event:Event):void {
+			leftDivider = rangeOverlay.getDividerAt(0);
+			rightDivider = rangeOverlay.getDividerAt(1);
+		}
+
+		private function rangeOverlayStartDrag(event:MouseEvent):void {
+			clickedMouseXPos = event.stageX;
+			rangeOverlay.addEventListener(MouseEvent.MOUSE_MOVE, rangeOverlayMove);
+			rangeOverlay.addEventListener(MouseEvent.MOUSE_UP, rangeOverlayStopDrag);
+			rangeOverlay.addEventListener(MouseEvent.ROLL_OUT, rangeOverlayStopDrag);
+		}
+
+		private function rangeOverlayStopDrag(event:MouseEvent):void {
+			rangeOverlay.removeEventListener(MouseEvent.MOUSE_MOVE, rangeOverlayMove);
+			rangeOverlay.removeEventListener(MouseEvent.MOUSE_UP, rangeOverlayStopDrag);
+			rangeOverlay.removeEventListener(MouseEvent.ROLL_OUT, rangeOverlayStopDrag);
+		}
+
+		private function rangeOverlayMove(event:MouseEvent):void {
+			event.updateAfterEvent();
+			var diff:Number = event.stageX - clickedMouseXPos;
+			clickedMouseXPos = event.stageX;
+
+			// check if our dividers have hit an edge
+			// yeah... 3 is a magic number...
+			if ((leftDivider.x <= MAGIC_NUMBER_DIVIDER_LEFT_PADDING && diff < 0) || (rightDivider.x + rightDivider.width >= rangeOverlay.width - 3 && diff > 0)) return;
+
+			rangeOverlay.moveDivider(0, diff);
+			rangeOverlay.validateDisplayList(); // this has to be called before moving the other divider
+			rangeOverlay.moveDivider(1, diff);
+			convertRangeOverlayToDateRange();
+		}
+
+		private function rangeOverlayDividerDrag(event:DividerEvent):void {
+			convertRangeOverlayToDateRange();
+			if (
+				(rightDivider.x + rightDivider.width) - (leftDivider.x - MAGIC_NUMBER_DIVIDER_LEFT_PADDING) < maxZoomPixelWidth &&
+				(
+					(event.dividerIndex == 0 && event.delta > 0) ||
+					(event.dividerIndex == 1 && event.delta < 0)
+				)
+			) {
+				var divider:BoxDivider = event.target.getDividerAt(event.dividerIndex);
+				divider.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_UP));
+			}
+		}
+
+		private function convertRangeOverlayToDateRange():void {
+			startEpoch = this.localToData(new Point(leftDivider.x - MAGIC_NUMBER_DIVIDER_LEFT_PADDING + this.computedGutters.x + MAGIC_NUMBER_GUTTER_LEFT_PADDING, 0))[0];
+			endEpoch = this.localToData(new Point(rightDivider.x + rightDivider.width + this.computedGutters.x + MAGIC_NUMBER_GUTTER_LEFT_PADDING, 0))[0];
+			dispatchEvent(new FlexEvent("change"));
+			//trace("based on the left divider.x = " + rangeOverlay.getDividerAt(0).x + " makes date: " + (new Date(startEpoch)).toUTCString());
+			//trace("based on the right divider, makes date: " + (new Date(endEpoch)).toUTCString());
+			//dateRange = {startEpoch: startEpoch, endEpoch: endEpoch};
+		}
+	]]></mx:Script>
+	<mx:verticalAxisRenderer>
+		<mx:AxisRenderer showLabels="false" tickPlacement="none"/>
+	</mx:verticalAxisRenderer>
+	<mx:horizontalAxis>
+		<mx:DateTimeAxis parseFunction="epochToDate" displayLocalTime="false"/>
+	</mx:horizontalAxis>
+	<mx:series>
+		<mx:LineSeries id="lineSeries" yField="yValue" xField="xValue" displayName="foo" dataProvider="{result}">
+			<mx:lineStroke><mx:Stroke color="0x5c8a8b" pixelHinting="true"/></mx:lineStroke>
+		</mx:LineSeries>
+	</mx:series>
+	<mx:seriesFilters><mx:Array/></mx:seriesFilters>
+	<mx:annotationElements>
+		<mx:HDividedBox width="100%" height="100%" id="rangeOverlay" liveDragging="true" dividerDrag="rangeOverlayDividerDrag(event)" initialize="initRangeOverlay(event)">
+			<mx:Box name="left" width="100%" height="100%" backgroundColor="#CCCCCC" backgroundAlpha=".5"/>
+			<mx:Box name="selectionWindow" width="0" height="100%" backgroundAlpha="0" mouseDown="rangeOverlayStartDrag(event)" buttonMode="true"/>
+			<mx:Box name="right" width="0" height="100%" backgroundColor="#CCCCCC" backgroundAlpha=".5"/>
+		</mx:HDividedBox>
+	</mx:annotationElements>
+</mx:LineChart>

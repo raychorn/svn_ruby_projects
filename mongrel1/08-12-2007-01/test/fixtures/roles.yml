@@ -1,0 +1,8 @@
+admin:
+  id: 1
+  name: Administrator
+  admin: true
+user:
+  id: 2
+  name: Normal User
+  admin: false

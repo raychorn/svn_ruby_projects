@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cairngorm:ServiceLocator
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:cairngorm="http://www.adobe.com/2006/cairngorm">
+    <mx:RemoteObject id="taskRO"
+        source="TasksController"
+        destination="rubyamf">
+        <mx:method name="index"/>
+        <mx:method name="create"/>
+        <mx:method name="update"/>
+        <mx:method name="destroy"/>
+    </mx:RemoteObject>
+    <mx:RemoteObject id="projectRO"
+        source="ProjectsController"
+        destination="rubyamf">
+        <mx:method name="index"/>
+        <mx:method name="create"/>
+        <mx:method name="update"/>
+        <mx:method name="destroy"/>
+    </mx:RemoteObject>
+    <mx:RemoteObject id="locationRO"
+        source="LocationsController"
+        destination="rubyamf">
+        <mx:method name="index"/>
+        <mx:method name="create"/>
+        <mx:method name="update"/>
+        <mx:method name="destroy"/>
+    </mx:RemoteObject>
+    <mx:RemoteObject id="noteRO"
+        source="NotesController"
+        destination="rubyamf">
+        <mx:method name="show"/>
+        <mx:method name="update"/>
+    </mx:RemoteObject>
+</cairngorm:ServiceLocator>

@@ -1,0 +1,8 @@
+sweden:
+  title: Sweden
+  subgroups:
+  - se_stockholm
+
+se_stockholm:
+  title: Stockholm
+  type: city

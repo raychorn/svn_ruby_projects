@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Grid
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	creationComplete="init()"
+	width="100" height="75"
+	verticalGap="1"
+	horizontalGap="1"
+	paddingLeft="1"
+	paddingRight="1"
+	paddingBottom="1"
+	paddingTop="1"
+	borderColor="gray"
+	borderStyle="solid">
+	<mx:Script><![CDATA[	
+		import mx.containers.Grid;
+		import mx.containers.GridRow;
+		import mx.containers.GridItem;
+
+		// grid population
+		private function init():void {
+			for(var row:int=0; row < data.rows; row++) {
+				var gridRow:GridRow = new GridRow();
+				gridRow.percentWidth = 100;
+				gridRow.percentHeight = 100/data.rows;
+				this.addChild(gridRow);
+				for(var i:int=0; i < data.layout_data[row].length; i++){
+					// init the gridItem
+					var gridItem:GridItem = new GridItem();
+					gridItem.rowSpan = data.layout_data[row][i][0];
+					gridItem.colSpan = data.layout_data[row][i][1];
+					gridItem.percentHeight = 100;
+					gridItem.percentWidth = 100/data.cols;
+					gridItem.setStyle('borderColor', '0xB7BABC');
+					gridItem.setStyle('borderStyle', 'solid');
+					gridItem.alpha = 1;
+					gridRow.addChild(gridItem);
+				}
+			}
+		}
+]]></mx:Script>
+</mx:Grid>

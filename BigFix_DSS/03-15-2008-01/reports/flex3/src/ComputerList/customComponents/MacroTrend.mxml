@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:LineChart xmlns:mx="http://www.adobe.com/2006/mxml" showDataTips="true" dataTipFunction="dataTipFormatter" width="100%" height="100%">
+	<mx:Script source="MacroTrend_as.as"/>
+	<mx:String id="dataSourceURL"/>
+
+	<mx:HTTPService id="dataService"
+		resultFormat="e4x"
+		result="loadData(event);"
+		fault="Application.application.HTTPServiceFaultHandler(event);"
+		showBusyCursor="true"
+	/>
+	<mx:verticalAxisRenderer>
+		<mx:AxisRenderer showLabels="false" tickPlacement="none"/>
+	</mx:verticalAxisRenderer>
+	<mx:horizontalAxis>
+		<mx:DateTimeAxis parseFunction="epochToDate" displayLocalTime="false"/>
+	</mx:horizontalAxis>
+	<mx:series>
+		<mx:LineSeries id="lineSeries" yField="@yValue" xField="@xValue" displayName="{nodeInfo.@name}"/>
+	</mx:series>
+	<mx:annotationElements>
+		<mx:HDividedBox width="100%" height="100%" id="rangeOverlay" liveDragging="true" dividerDrag="rangeOverlayDividerDrag(event)" initialize="initRangeOverlay(event)">
+			<mx:Box name="left" width="100%" height="100%" backgroundColor="#CCCCCC" backgroundAlpha=".5"/>
+			<mx:Box name="selectionWindow" width="0" height="100%" backgroundAlpha="0" mouseDown="rangeOverlayStartDrag(event)" buttonMode="true"/>
+			<mx:Box name="right" width="0" height="100%" backgroundColor="#CCCCCC" backgroundAlpha=".5"/>
+		</mx:HDividedBox>
+	</mx:annotationElements>
+</mx:LineChart>

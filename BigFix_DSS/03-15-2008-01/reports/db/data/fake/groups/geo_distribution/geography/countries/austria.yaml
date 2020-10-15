@@ -1,0 +1,18 @@
+austria:
+  title: Austria
+  subgroups:
+  - at_vienna
+  - at_innsbruck
+  - at_linz
+
+at_vienna:
+  title: Vienna
+  type: city
+
+at_innsbruck:
+  title: Innsbruck
+  type: city
+
+at_linz:
+  title: Linz
+  type: city

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bfcontainers:Panel
+	xmlns:bfcontainers="com.bigfix.extensions.containers.*"
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	width="100%" height="100%"
+	verticalAlign="middle" horizontalAlign="center" verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	currentState="needOptions"
+	creationComplete="init()"
+	>
+
+	<mx:Metadata>
+	  [Event(name=WidgetRemoveEvent.EVENT_WIDGET_REMOVE, type='com.bigfix.dss.event.WidgetRemoveEvent')]
+  </mx:Metadata>
+	
+	<mx:Script><![CDATA[
+		import mx.controls.Alert;
+		import mx.rpc.events.ResultEvent;
+		import mx.rpc.events.FaultEvent;
+		import mx.events.FlexEvent;
+		import mx.events.PropertyChangeEvent;
+		import mx.charts.HitData;
+		import mx.charts.series.LineSeries;
+		import mx.charts.chartClasses.NumericAxis;
+		import mx.charts.DateTimeAxis;
+		import mx.graphics.Stroke;
+		import mx.binding.utils.ChangeWatcher;
+
+	    import com.bigfix.dss.util.DSS;
+		import com.bigfix.dss.model.Constants;
+		import com.bigfix.dss.vo.TrendWidgetVO;
+		import com.bigfix.dss.util.WatcherManager;
+		import com.bigfix.dss.event.WidgetRemoveEvent;
+
+		// public vars
+		public var previewMode:Boolean = true; // this changes the title and hides the 'analyze' button
+		[Bindable]
+		public var options:TrendWidgetVO; // this stores all info for this trend widget
+		[Bindable]
+		public var requiredOptionsSet:Boolean = false; // if we have enough options set, this is set to 'true'. Also, bindable for the wizard interface to activate 'Save' button
+
+		[Bindable]
+		private var needOptionsMessage:String; // a string we get back from the remote service about missing arguments
+
+		// color wheel for line series
+		private var colorWheel:Array = [0x8f56a2, 0x5970A4, 0xb18467, 0xb0b631, 0xe4b61b];
+
+		// threshold for this trend
+		private var threshold:Number;
+
+		private var watcherManager:WatcherManager = new WatcherManager();
+
+		private function init():void {
+			if (previewMode) {
+				this.title = "Trend Chart Preview";
+				if (this.addlHeaderElement) {
+					this.addlHeaderElement.parent.removeChild(this.addlHeaderElement);
+				}
+				options = DSS.model.currentWidget.visualization_type_options;
+				this.styleName = "listBuilderPanel";
+			}
+			watcherManager.manage(ChangeWatcher.watch(this, ['options', 'computer_group'], refreshDataProvider));
+			watcherManager.manage(ChangeWatcher.watch(this, ['options', 'metric'], refreshDataProvider));
+			watcherManager.manage(ChangeWatcher.watch(this, ['options', 'days'], refreshDataProvider));
+			watcherManager.manage(ChangeWatcher.watch(this, ['options', 'data_filters'], refreshDataProvider));
+			refreshDataProvider(null);
+			this.addEventListener(FlexEvent.REMOVE, _destruct, false, 0, true);
+		}
+
+		private function _destruct(event:FlexEvent):void {
+			watcherManager.removeAll();
+			this.options = null;
+			this.removeEventListener(FlexEvent.REMOVE, _destruct);
+		}
+
+		private function refreshDataProvider(event:PropertyChangeEvent):void {
+			if (!options || !(options is TrendWidgetVO)) return;
+			DSS.svc("trendChartService").getTrendForWidget(options).onResult(resultHandler).onFault(faultHandler);
+		}
+
+		private function faultHandler(event:FaultEvent):void {
+			Alert.show(event.message.toString(), "Service Fault");
+		}
+
+		private function resultHandler(event:ResultEvent):void {
+			// check for success!
+			if (!event.result.success) {
+				needOptionsMessage = event.result.message;
+				this.currentState = 'needOptions';
+				this.requiredOptionsSet = false;
+				return;
+			}
+			this.currentState = 'chart';
+			this.requiredOptionsSet = true;
+			if (!this.title) {
+				this.title = options.metric.name + ' for ' + options.computer_group.name;
+			}
+			// blank stuff out
+			chart.series = [];
+
+			var trendSeries:LineSeries;
+			var colorCounter:int = 0;
+			for each (var trend:Object in event.result.trend_data) {
+				trendSeries = new LineSeries();
+				trendSeries.name = trend.id; // dataSeries.name will be the computer group ID!
+				trendSeries.displayName = trend.name;
+				trendSeries.xField = "xValue";
+				trendSeries.yField = "yValue";
+				trendSeries.dataProvider = trend.data;
+				trendSeries.setStyle('lineStroke',new Stroke(colorWheel[colorCounter % colorWheel.length], 1));
+				chart.series.push(trendSeries);
+				colorCounter++;
+			}
+			chart.validateNow(); // this is so "DateTimeAxis(chart.horizontalAxis).minimum" returns the proper value
+
+			// now make a new LineSeries which will represent the threshold
+			// this may not be the best way to handle this because I would eventually want the user to drag this thing around and base additional
+			// detail displays off this thing
+			trendSeries = new LineSeries();
+			trendSeries.name = "threshold";
+			trendSeries.displayName = "Threshold";
+			trendSeries.interactive = false;
+			trendSeries.xField = "xValue";
+			trendSeries.yField = "yValue";
+			trendSeries.dataProvider = [
+				{
+					xValue: DateTimeAxis(chart.horizontalAxis).minimum,
+					yValue: event.result.threshold
+				},
+				{
+					xValue: DateTimeAxis(chart.horizontalAxis).maximum,
+					yValue: event.result.threshold
+				}
+			];
+			trendSeries.setStyle('lineStroke',new Stroke(0xFF0000, 2, 0.65));
+			chart.series.push(trendSeries);
+
+			chart.series = chart.series;
+			chart.validateNow();
+
+		}
+
+		/* this function handles changing state to analysis mode */
+		private function analyze():void {
+			DSS.model.workspaceTabNavigatorSelectedIndex = Constants.WORKSPACE_ANALYSIS;
+			DSS.model.currentAnalysisOptions = this.options.toTrendAnalysis();
+		}
+
+		private function remove():void {
+		  dispatchEvent(new WidgetRemoveEvent(this));
+		}
+
+		/* GRAPH HELPER METHODS */
+		private function epochToDate(epoch:Number):Date {
+			return new Date(epoch);
+		}
+
+		private function dataTipFormatter(hitData:HitData):String {
+			var date:Date = epochToDate(hitData.item.xValue);
+			return '<b>' + hitData.element['displayName'] + '</b><br/>Date: ' + date.toUTCString() + '<br/>' + options.metric.name + ': ' + hitData.item.yValue;
+		}
+
+	]]></mx:Script>
+	<bfcontainers:addlHeaderElement>
+	  <mx:HBox width="80" height="15">
+  		<mx:Button label="Analyze" width="60" height="15" fontSize="9" click="analyze()"/>
+  		<mx:Button styleName="closeButton" click="remove()" />
+		</mx:HBox>
+	</bfcontainers:addlHeaderElement>
+	<bfcontainers:states>
+		<mx:State name="chart">
+			<mx:AddChild>
+				<mx:VBox width="100%" height="100%">
+				<mx:LineChart id="chart" width="100%" height="100%" showDataTips="true" dataTipFunction="dataTipFormatter">
+					<mx:horizontalAxis>
+						<mx:DateTimeAxis parseFunction="epochToDate" displayLocalTime="false"/>
+					</mx:horizontalAxis>
+					<!-- no drop shadows! -->
+					<mx:seriesFilters><mx:Array/></mx:seriesFilters>
+				</mx:LineChart>
+				<mx:Legend dataProvider="{chart}" direction="horizontal" fontSize="10" width="100%"/>
+				</mx:VBox>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="needOptions">
+			<mx:AddChild>
+				<mx:Panel headerHeight="0" styleName="infoPanel">
+					<mx:Text text="{needOptionsMessage}" width="300"/>
+				</mx:Panel>
+			</mx:AddChild>
+		</mx:State>
+	</bfcontainers:states>
+</bfcontainers:Panel>

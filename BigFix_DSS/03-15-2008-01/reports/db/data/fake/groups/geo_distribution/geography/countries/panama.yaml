@@ -1,0 +1,14 @@
+panama:
+  title: Panama
+  subgroups:
+    - pa_panama_city
+
+pa_panama_city:
+  title: Panama City
+  type: city
+  population: 1063000
+
+pa_colon:
+  title: Colon
+  type: city
+  population: 204000

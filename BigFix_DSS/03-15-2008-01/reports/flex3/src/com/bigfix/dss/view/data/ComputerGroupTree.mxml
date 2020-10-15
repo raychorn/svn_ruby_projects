@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bfcontrols:Tree xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:bfcontrols="com.bigfix.extensions.controls.*"
+	width="100%" height="100%"
+	showRoot="false"
+	dataProvider="{model.computer_group_tree}" labelField="name"
+	defaultLeafIcon="{null}" folderClosedIcon="{null}" folderOpenIcon="{null}"
+	creationComplete="init()">
+	<mx:Script><![CDATA[
+		import com.bigfix.dss.event.GetComputerGroupTreeEvent;
+		import com.bigfix.dss.model.DSSModelLocator;
+
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+
+		private function init():void {
+			new GetComputerGroupTreeEvent().dispatch();
+		}
+	]]></mx:Script>
+</bfcontrols:Tree>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:Script><![CDATA[
+		import flash.display.Graphics;
+		import mx.graphics.LinearGradient;
+		import mx.graphics.GradientEntry;
+
+		[Bindable]
+		public var gradientColors:Array;
+		[Bindable]
+		public var gradientAlphas:Array;
+		[Bindable]
+		public var gradientAngle:int = 0;
+
+		private var linearGradient:LinearGradient;
+
+		override protected function createChildren():void {
+
+			super.createChildren();
+			if (!gradientColors.length) {
+				throw new Error("You must define GradientBox.gradientColors");
+			}
+			linearGradient = new LinearGradient();
+			linearGradient.angle = gradientAngle;
+			for (var i:int = 0; i < gradientColors.length; i++) {
+				linearGradient.entries.push(new GradientEntry(gradientColors[i]));
+			}
+			linearGradient.entries = linearGradient.entries;
+		}
+
+		override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void {
+			super.updateDisplayList(unscaledWidth, unscaledHeight);
+
+			graphics.clear();
+			graphics.moveTo(0,0);
+			linearGradient.begin(graphics,new Rectangle(0,0,unscaledWidth,unscaledHeight));
+			graphics.lineTo(unscaledWidth,0);
+			graphics.lineTo(unscaledWidth,unscaledHeight);
+			graphics.lineTo(0,unscaledHeight);
+			graphics.lineTo(0,0);
+			linearGradient.end(graphics);
+		}
+	]]></mx:Script>
+
+</mx:Box>

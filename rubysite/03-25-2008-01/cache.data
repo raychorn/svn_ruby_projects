@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+  <head>
+    <title>Home Page</title>
+    <link href="/rss/" rel="alternate" title="RSS" type="application/rss+xml" />
+    <link rel="stylesheet" type="text/css" href="/styles.css" />
+  </head>
+  <body>
+    <div id="page">
+      <div id="header">
+<table width="100%">
+	<tr>
+		<td width="30%" align="left">
+<img src="http://www.near-by.info/templates/rhuk_milkyway/images/mw_joomla_logo.png" alt="Ruby.Near-By.INFO" />
+		</td>
+		<td width="*" align="center" valign="middle">
+    <div id="site-title">We are NEAR-BY and we have your Ruby INFO!</div>
+  <div id="site-subtitle"></div>
+		</td>
+	</tr>
+</table>
+</div>
+<hr class="hidden" />
+
+      <div id="main">
+        <div id="content-wrapper">
+          <div id="content">
+            
+            
+
+
+<div class="first entry">
+  <h3><a href="/articles/2008/03/24/ruby-rocks-/">Ruby Rocks !</a></h3>
+  <p>I love the Ruby Language !</p>
+<p>I I have been coding Ruby for just about 3 years by now and I just cannot get enough!</p>
+
+  <a href="/articles/2008/03/24/ruby-rocks-/#extended">Continue Reading&#8230;</a>
+  <p class="info">Posted by Administrator on Mar 24, 2008</p>
+</div>
+
+
+
+
+
+
+            
+            
+          </div>
+        </div>
+        <div id="sidebar-wrapper">
+          <div id="sidebar">
+            <h3><a href="/" href="/about">About Me</a></h3>
+
+
+	<h3>Favorite Sites</h3>
+
+
+	<ul>
+	<li><a href="http://python.near-by.info">Python.Near-By.INFO</a></li>
+	</ul>
+
+
+	<h3>Recent Entries</h3>
+
+
+	<p><a href="/articles/">Archives&#8230;</a></p>
+
+
+	<h3>Syndicate</h3>
+
+
+	<p><a href="/rss/">Articles <span class="caps">RSS</span> Feed</a></p>
+          </div>
+        </div>
+      </div>
+      <hr class="hidden" />
+<div id="footer">
+  <p>Copyright &copy; 2008, Hierarchical Applications Limited, Inc. All rights reserved.<br />
+    <small>This site is powered by <a href="http://radiantcms.org/" target="_blank">Radiant CMS</a>.</small></p>
+</div>
+
+    </div>
+  </body>
+</html>

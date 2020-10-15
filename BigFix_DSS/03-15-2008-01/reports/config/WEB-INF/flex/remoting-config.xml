@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service id="remoting-service"
+	class="flex.messaging.services.RemotingService"
+	messageTypes="flex.messaging.messages.RemotingMessage">
+
+	<default-channels>
+		<channel ref="my-amf"/>
+	</default-channels>
+
+	<destination id="ColumnChartService">
+		<properties>
+			<source>ColumnChartService</source>
+		</properties>
+	</destination>
+	<destination id="SearchService">
+		<properties>
+			<source>SearchService</source>
+		</properties>
+	</destination>
+	<destination id="ListService">
+		<properties>
+			<source>ListService</source>
+		</properties>
+	</destination>
+	<destination id="ReportService">
+		<properties>
+			<source>ReportService</source>
+		</properties>
+	</destination>
+	<destination id="DashboardWidgetService">
+		<properties>
+			<source>DashboardWidgetService</source>
+		</properties>
+	</destination>
+	<destination id="ReportingCatalog">
+		<properties>
+			<source>ReportingCatalog</source>
+		</properties>
+	</destination>
+
+	<destination id="Auth">
+		<properties>
+			<source>Auth</source>
+		</properties>
+	</destination>
+
+	<destination id="Editor">
+		<properties>
+			<source>Editor</source>
+		</properties>
+	</destination>
+
+	<destination id="DashboardService">
+		<properties>
+			<source>DashboardService</source>
+		</properties>
+	</destination>
+
+	<destination id="DashboardFolderService">
+		<properties>
+			<source>DashboardFolderService</source>
+		</properties>
+	</destination>
+
+	<destination id="ContactList">
+	  <properties>
+		<source>ContactList</source>
+	</properties>
+	</destination>
+
+	<destination id="ComputerGroups">
+		<properties>
+			<source>ComputerGroups</source>
+		</properties>
+	</destination>
+
+	<destination id="ComputerList">
+		<properties>
+			<source>ComputerList</source>
+		</properties>
+	</destination>
+
+	<destination id="TrendChart">
+		<properties>
+			<source>TrendChart</source>
+		</properties>
+	</destination>
+
+	<destination id="ComputerGroup">
+		<properties>
+			<source>ComputerGroup</source>
+		</properties>
+	</destination>
+</service>

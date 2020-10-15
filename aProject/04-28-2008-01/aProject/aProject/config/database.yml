@@ -1,0 +1,16 @@
+# MySQL
+
+development:
+  adapter: mysql
+  host: localhost
+  username: root
+  database: aProject_development
+  password: peekaboo
+
+production:
+  adapter: mysql
+  host: localhost
+  username: root
+  database: aProject_production
+  password: peekaboo
+

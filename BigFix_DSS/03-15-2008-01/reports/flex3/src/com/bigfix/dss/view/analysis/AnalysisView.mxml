@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:flexlib="http://code.google.com/p/flexlib/"
+	xmlns:analysis="com.bigfix.dss.view.analysis.*"
+	width="100%" height="100%"
+	verticalGap="0" paddingTop="10"
+	creationComplete="init()"
+	>
+	<mx:Script><![CDATA[
+		import mx.controls.Alert;
+		import mx.binding.utils.ChangeWatcher;
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.command.GetDashboardsCommand;
+		import com.bigfix.dss.vo.TrendAnalysisVO;
+		import com.bigfix.dss.vo.ListAnalysisVO;
+		import com.bigfix.dss.vo.ColumnAnalysisVO;
+		import com.bigfix.dss.vo.SubjectDetailsVO;
+
+		import com.bigfix.dss.view.analysis.TrendAnalysis;
+		import com.bigfix.dss.view.analysis.ListAnalysis;
+		import com.bigfix.dss.view.analysis.ComputerGroupDetails;
+		import com.bigfix.dss.view.analysis.VulnerabilityDetails;
+		import com.bigfix.dss.view.analysis.PolicyDetails;
+		import com.bigfix.dss.view.analysis.DLPDetails;
+		import com.bigfix.dss.view.analysis.MalwareDetails;
+		import com.bigfix.dss.view.analysis.ComputerDetails;
+		import com.bigfix.dss.view.analysis.OperatingSystemDetails;
+		import com.bigfix.dss.view.analysis.ApplicationDetails;
+
+		import mx.events.PropertyChangeEvent;
+
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+
+		// the current typed analysis
+		private var analysis:*;
+
+		private function init():void {
+			ChangeWatcher.watch(model, 'currentAnalysisOptions', initTypedAnalysis);
+		}
+
+		private function initTypedAnalysis(event:PropertyChangeEvent):void {
+			while (this.numChildren) {
+				this.removeChildAt(0);
+			}
+			if (model.currentAnalysisOptions is TrendAnalysisVO) {
+				analysis = new TrendAnalysis();
+			} else if (model.currentAnalysisOptions is ListAnalysisVO) {
+				analysis = new ListAnalysis();
+			} else if (model.currentAnalysisOptions is ColumnAnalysisVO) {
+				//analysis = new ColumnAnalysis();
+			} else if (model.currentAnalysisOptions is SubjectDetailsVO) {
+				switch (model.currentAnalysisOptions.className) {
+					case 'ComputerGroup':
+						analysis = new ComputerGroupDetails();
+						break;
+					case 'Vuln':
+						analysis = new VulnerabilityDetails();
+						break;
+					case 'Policy':
+						analysis = new PolicyDetails();
+						break;
+					case 'DLP':
+						analysis = new DLPDetails();
+						break;
+					case 'Malware':
+						analysis = new MalwareDetails();
+						break;
+					case 'Computer':
+						analysis = new ComputerDetails();
+						break;
+					case 'OperatingSystem':
+						analysis = new OperatingSystemDetails();
+						break;
+					case 'App':
+						analysis = new ApplicationDetails();
+						break;
+				}
+			} else {
+				throw new Error("unknown Analysis type");
+			}
+			analysis.options = model.currentAnalysisOptions;
+			this.addChild(analysis);
+		}
+
+	]]></mx:Script>
+</mx:Box>

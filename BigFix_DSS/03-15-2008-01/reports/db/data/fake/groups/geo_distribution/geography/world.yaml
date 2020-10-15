@@ -1,0 +1,27 @@
+world:
+  title: The World
+  views:
+    - world_by_na_business_groupings
+    - world_by_continent
+
+world_by_na_business_groupings:
+  title: The World (by North American business groupings)
+  type: view
+  subgroups:
+  - noram
+  - latam
+  - emea
+  - apac
+
+world_by_continent:
+  title: The World (by Continent)
+  type: view
+  subgroups:
+  - africa
+  - antarctica
+  - asia
+  - europe
+  - north_america
+  - oceania
+  - south_america
+

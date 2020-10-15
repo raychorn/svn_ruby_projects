@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:LineChart xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
+	showDataTips="true"
+	dataTipFunction="dataTipFormatter"
+	creationComplete="init()"
+>
+	<mx:Script source="DetailTrend_as.as"/>
+	<mx:RemoteObject id="remoteService" destination="TrendChart" showBusyCursor="true" fault="Alert.show(event.fault.faultString, 'Error');">
+		<mx:method name="getDetailTrend" result="createSeries(event)">
+			<mx:arguments>
+				<mx:arg1>{trendChartOptions.valueOf()}</mx:arg1>
+			</mx:arguments>
+		</mx:method>
+	</mx:RemoteObject>
+
+	<mx:horizontalAxis>
+		<mx:DateTimeAxis parseFunction="epochToDate" displayLocalTime="false"/>
+	</mx:horizontalAxis>
+	<mx:series>
+		<mx:AreaSet type="stacked" id="areaSet"/>
+	</mx:series>
+	<mx:seriesFilters><mx:Array/></mx:seriesFilters>
+</mx:LineChart>

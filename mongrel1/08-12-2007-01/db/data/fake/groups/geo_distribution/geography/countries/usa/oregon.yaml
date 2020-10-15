@@ -1,0 +1,190 @@
+oregon:
+  title: Oregon
+  subgroups:
+  - oregon_albany
+  - oregon_ashland
+  - oregon_beaverton
+  - oregon_bend
+  - oregon_central_point
+  - oregon_coos_bay
+  - oregon_corvallis
+  - oregon_eugene
+  - oregon_forest_grove
+  - oregon_grants_pass
+  - oregon_gresham
+  - oregon_hillsboro
+  - oregon_keizer
+  - oregon_klamath_falls
+  - oregon_lake_oswego
+  - oregon_mcminnville
+  - oregon_medford
+  - oregon_milwaukie
+  - oregon_newberg
+  - oregon_oregon_city
+  - oregon_pendleton
+  - oregon_portland
+  - oregon_redmond
+  - oregon_roseburg
+  - oregon_salem
+  - oregon_springfield
+  - oregon_tigard
+  - oregon_tualatin
+  - oregon_west_linn
+  - oregon_wilsonville
+  - oregon_woodburn
+
+oregon_albany:
+  title: Albany
+  type: city
+  population: 43808
+
+oregon_ashland:
+  title: Ashland
+  type: city
+  population: 20744
+
+oregon_beaverton:
+  title: Beaverton
+  type: city
+  population: 81894
+
+oregon_bend:
+  title: Bend
+  type: city
+  population: 63003
+
+oregon_central_point:
+  title: Central Point
+  type: city
+  population: 15143
+
+oregon_coos_bay:
+  title: Coos Bay
+  type: city
+  population: 15581
+
+oregon_corvallis:
+  title: Corvallis
+  type: city
+  population: 49471
+
+oregon_eugene:
+  title: Eugene
+  type: city
+  population: 142794
+
+oregon_forest_grove:
+  title: Forest Grove
+  type: city
+  population: 19235
+
+oregon_grants_pass:
+  title: Grants Pass
+  type: city
+  population: 28102
+
+oregon_gresham:
+  title: Gresham
+  type: city
+  population: 95257
+
+oregon_hillsboro:
+  title: Hillsboro
+  type: city
+  population: 81782
+
+oregon_keizer:
+  title: Keizer
+  type: city
+  population: 34378
+
+oregon_klamath_falls:
+  title: Klamath Falls
+  type: city
+  population: 19732
+
+oregon_lake_oswego:
+  title: Lake Oswego
+  type: city
+  population: 36287
+
+oregon_mcminnville:
+  title: McMinnville
+  type: city
+  population: 28970
+
+oregon_medford:
+  title: Medford
+  type: city
+  population: 69249
+
+oregon_milwaukie:
+  title: Milwaukie
+  type: city
+  population: 20714
+
+oregon_newberg:
+  title: Newberg
+  type: city
+  population: 20282
+
+oregon_oregon_city:
+  title: Oregon City
+  type: city
+  population: 29664
+
+oregon_pendleton:
+  title: Pendleton
+  type: city
+  population: 16624
+
+oregon_portland:
+  title: Portland
+  type: city
+  population: 532888
+
+oregon_redmond:
+  title: Redmond
+  type: city
+  population: 18127
+
+oregon_roseburg:
+  title: Roseburg
+  type: city
+  population: 20435
+
+oregon_salem:
+  title: Salem
+  type: city
+  population: 146176
+
+oregon_springfield:
+  title: Springfield
+  type: city
+  population: 55294
+
+oregon_tigard:
+  title: Tigard
+  type: city
+  population: 46675
+
+oregon_tualatin:
+  title: Tualatin
+  type: city
+  population: 25261
+
+oregon_west_linn:
+  title: West Linn
+  type: city
+  population: 24951
+
+oregon_wilsonville:
+  title: Wilsonville
+  type: city
+  population: 15480
+
+oregon_woodburn:
+  title: Woodburn
+  type: city
+  population: 21507
+

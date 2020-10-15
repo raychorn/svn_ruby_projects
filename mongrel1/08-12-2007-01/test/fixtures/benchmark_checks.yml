@@ -1,0 +1,15 @@
+one:
+  id: 1
+  name: Check One
+  benchmark_version_id: 1
+  benchmark_check_group_id: 1
+two:
+  id: 2
+  name: Check Two
+  benchmark_version_id: 1
+  benchmark_check_group_id: 2
+three:
+  id: 3
+  name: Check Three
+  benchmark_version_id: 1
+  benchmark_check_group_id: 3

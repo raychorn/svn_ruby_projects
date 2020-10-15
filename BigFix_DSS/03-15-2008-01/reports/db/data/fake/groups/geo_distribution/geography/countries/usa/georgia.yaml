@@ -1,0 +1,286 @@
+georgia:
+  title: Georgia
+  subgroups:
+  - georgia_acworth
+  - georgia_albany
+  - georgia_alpharetta
+  - georgia_americus
+  - georgia_athens_clarke_county
+  - georgia_atlanta
+  - georgia_augusta_richmond_county
+  - georgia_brunswick
+  - georgia_canton
+  - georgia_carrollton
+  - georgia_cartersville
+  - georgia_college_park
+  - georgia_columbus
+  - georgia_dalton
+  - georgia_decatur
+  - georgia_douglasville
+  - georgia_dublin
+  - georgia_duluth
+  - georgia_east_point
+  - georgia_forest_park
+  - georgia_gainesville
+  - georgia_griffin
+  - georgia_hinesville
+  - georgia_kennesaw
+  - georgia_lagrange
+  - georgia_lawrenceville
+  - georgia_macon
+  - georgia_marietta
+  - georgia_milledgeville
+  - georgia_newnan
+  - georgia_peachtree_city
+  - georgia_riverdale
+  - georgia_rome
+  - georgia_roswell
+  - georgia_st__marys
+  - georgia_savannah
+  - georgia_smyrna
+  - georgia_snellville
+  - georgia_statesboro
+  - georgia_sugar_hill
+  - georgia_thomasville
+  - georgia_tifton
+  - georgia_union_city
+  - georgia_valdosta
+  - georgia_warner_robins
+  - georgia_waycross
+  - georgia_woodstock
+
+georgia_acworth:
+  title: Acworth
+  type: city
+  population: 18065
+
+georgia_albany:
+  title: Albany
+  type: city
+  population: 75898
+
+georgia_alpharetta:
+  title: Alpharetta
+  type: city
+  population: 40881
+
+georgia_americus:
+  title: Americus
+  type: city
+  population: 16968
+
+georgia_athens_clarke_county:
+  title: Athens-Clarke County
+  type: city
+  population: 104537
+
+georgia_atlanta:
+  title: Atlanta
+  type: city
+  population: 465621
+
+georgia_augusta_richmond_county:
+  title: Augusta-Richmond County
+  type: city
+  population: 191979
+
+georgia_brunswick:
+  title: Brunswick
+  type: city
+  population: 15885
+
+georgia_canton:
+  title: Canton
+  type: city
+  population: 15336
+
+georgia_carrollton:
+  title: Carrollton
+  type: city
+  population: 21433
+
+georgia_cartersville:
+  title: Cartersville
+  type: city
+  population: 17248
+
+georgia_college_park:
+  title: College Park
+  type: city
+  population: 20498
+
+georgia_columbus:
+  title: Columbus
+  type: city
+  population: 185662
+
+georgia_dalton:
+  title: Dalton
+  type: city
+  population: 31337
+
+georgia_decatur:
+  title: Decatur
+  type: city
+  population: 18214
+
+georgia_douglasville:
+  title: Douglasville
+  type: city
+  population: 26443
+
+georgia_dublin:
+  title: Dublin
+  type: city
+  population: 16612
+
+georgia_duluth:
+  title: Duluth
+  type: city
+  population: 24238
+
+georgia_east_point:
+  title: East Point
+  type: city
+  population: 40707
+
+georgia_forest_park:
+  title: Forest Park
+  type: city
+  population: 21307
+
+georgia_gainesville:
+  title: Gainesville
+  type: city
+  population: 31196
+
+georgia_griffin:
+  title: Griffin
+  type: city
+  population: 23315
+
+georgia_hinesville:
+  title: Hinesville
+  type: city
+  population: 30318
+
+georgia_kennesaw:
+  title: Kennesaw
+  type: city
+  population: 28177
+
+georgia_lagrange:
+  title: LaGrange
+  type: city
+  population: 27100
+
+georgia_lawrenceville:
+  title: Lawrenceville
+  type: city
+  population: 27242
+
+georgia_macon:
+  title: Macon
+  type: city
+  population: 94819
+
+georgia_marietta:
+  title: Marietta
+  type: city
+  population: 61274
+
+georgia_milledgeville:
+  title: Milledgeville
+  type: city
+  population: 19274
+
+georgia_newnan:
+  title: Newnan
+  type: city
+  population: 22491
+
+georgia_peachtree_city:
+  title: Peachtree City
+  type: city
+  population: 33766
+
+georgia_riverdale:
+  title: Riverdale
+  type: city
+  population: 15557
+
+georgia_rome:
+  title: Rome
+  type: city
+  population: 35978
+
+georgia_roswell:
+  title: Roswell
+  type: city
+  population: 85077
+
+georgia_st__marys:
+  title: St. Marys
+  type: city
+  population: 16185
+
+georgia_savannah:
+  title: Savannah
+  type: city
+  population: 129964
+
+georgia_smyrna:
+  title: Smyrna
+  type: city
+  population: 47185
+
+georgia_snellville:
+  title: Snellville
+  type: city
+  population: 18641
+
+georgia_statesboro:
+  title: Statesboro
+  type: city
+  population: 24506
+
+georgia_sugar_hill:
+  title: Sugar Hill
+  type: city
+  population: 15396
+
+georgia_thomasville:
+  title: Thomasville
+  type: city
+  population: 18457
+
+georgia_tifton:
+  title: Tifton
+  type: city
+  population: 16168
+
+georgia_union_city:
+  title: Union City
+  type: city
+  population: 15023
+
+georgia_valdosta:
+  title: Valdosta
+  type: city
+  population: 45609
+
+georgia_warner_robins:
+  title: Warner Robins
+  type: city
+  population: 56358
+
+georgia_waycross:
+  title: Waycross
+  type: city
+  population: 15136
+
+georgia_woodstock:
+  title: Woodstock
+  type: city
+  population: 17714
+

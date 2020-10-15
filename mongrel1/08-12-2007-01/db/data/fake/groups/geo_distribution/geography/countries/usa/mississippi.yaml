@@ -1,0 +1,166 @@
+mississippi:
+  title: Mississippi
+  subgroups:
+  - mississippi_biloxi
+  - mississippi_brandon
+  - mississippi_clarksdale
+  - mississippi_clinton
+  - mississippi_columbus
+  - mississippi_gautier
+  - mississippi_greenville
+  - mississippi_greenwood
+  - mississippi_gulfport
+  - mississippi_hattiesburg
+  - mississippi_horn_lake
+  - mississippi_jackson
+  - mississippi_laurel
+  - mississippi_long_beach
+  - mississippi_madison
+  - mississippi_meridian
+  - mississippi_moss_point
+  - mississippi_natchez
+  - mississippi_ocean_springs
+  - mississippi_olive_branch
+  - mississippi_pascagoula
+  - mississippi_pearl
+  - mississippi_ridgeland
+  - mississippi_southaven
+  - mississippi_starkville
+  - mississippi_tupelo
+  - mississippi_vicksburg
+
+mississippi_biloxi:
+  title: Biloxi
+  type: city
+  population: 50279
+
+mississippi_brandon:
+  title: Brandon
+  type: city
+  population: 18652
+
+mississippi_clarksdale:
+  title: Clarksdale
+  type: city
+  population: 19493
+
+mississippi_clinton:
+  title: Clinton
+  type: city
+  population: 26022
+
+mississippi_columbus:
+  title: Columbus
+  type: city
+  population: 24758
+
+mississippi_gautier:
+  title: Gautier
+  type: city
+  population: 16821
+
+mississippi_greenville:
+  title: Greenville
+  type: city
+  population: 38949
+
+mississippi_greenwood:
+  title: Greenwood
+  type: city
+  population: 17703
+
+mississippi_gulfport:
+  title: Gulfport
+  type: city
+  population: 71898
+
+mississippi_hattiesburg:
+  title: Hattiesburg
+  type: city
+  population: 46458
+
+mississippi_horn_lake:
+  title: Horn Lake
+  type: city
+  population: 21795
+
+mississippi_jackson:
+  title: Jackson
+  type: city
+  population: 179190
+
+mississippi_laurel:
+  title: Laurel
+  type: city
+  population: 18190
+
+mississippi_long_beach:
+  title: Long Beach
+  type: city
+  population: 17254
+
+mississippi_madison:
+  title: Madison
+  type: city
+  population: 16439
+
+mississippi_meridian:
+  title: Meridian
+  type: city
+  population: 38832
+
+mississippi_moss_point:
+  title: Moss Point
+  type: city
+  population: 15277
+
+mississippi_natchez:
+  title: Natchez
+  type: city
+  population: 17188
+
+mississippi_ocean_springs:
+  title: Ocean Springs
+  type: city
+  population: 17662
+
+mississippi_olive_branch:
+  title: Olive Branch
+  type: city
+  population: 26596
+
+mississippi_pascagoula:
+  title: Pascagoula
+  type: city
+  population: 25767
+
+mississippi_pearl:
+  title: Pearl
+  type: city
+  population: 23060
+
+mississippi_ridgeland:
+  title: Ridgeland
+  type: city
+  population: 21580
+
+mississippi_southaven:
+  title: Southaven
+  type: city
+  population: 36245
+
+mississippi_starkville:
+  title: Starkville
+  type: city
+  population: 21970
+
+mississippi_tupelo:
+  title: Tupelo
+  type: city
+  population: 35418
+
+mississippi_vicksburg:
+  title: Vicksburg
+  type: city
+  population: 25832
+

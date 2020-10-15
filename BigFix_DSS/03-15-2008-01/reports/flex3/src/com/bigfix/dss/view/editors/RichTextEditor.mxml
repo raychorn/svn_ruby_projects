@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" height="100%" 
+	showCloseButton="false">
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.view.graphics.sprites.TextSprite;
+			import com.bigfix.dss.view.editors.events.OpenedRichTextEditorEvent;
+
+			[Event(name="openedRichTextEditor", type="com.bigfix.dss.view.editors.events.OpenedRichTextEditorEvent")]
+			
+			private var _sprite:TextSprite;
+			
+			public function set sprite(sprite:TextSprite):void {
+				this._sprite = sprite;
+				if (sprite != null) {
+					this.editor.htmlText = sprite.htmlText;
+				}
+			}
+			
+			public function get sprite():TextSprite {
+				return this._sprite;
+			}
+			
+			private function onCreationCompleteRichTextEditor():void {
+				this.dispatchEvent(new OpenedRichTextEditorEvent(OpenedRichTextEditorEvent.TYPE_OPENED_RICH_TEXT_EDITOR));
+			}
+			
+			private function onKeyUpRichTextEditor(event:KeyboardEvent):void {
+				this.btn_save.enabled = (this.editor.htmlText.length > 0);
+			}
+		]]>
+	</mx:Script>
+	<mx:VBox width="100%" height="100%">
+		<mx:RichTextEditor x="0" y="0" id="editor" minWidth="400" minHeight="200" width="100%" height="100%" keyUp="onKeyUpRichTextEditor(event)" creationComplete="onCreationCompleteRichTextEditor()"/>
+		<mx:HBox width="100%">
+			<mx:Button id="btn_save" label="Save" enabled="false"/>
+			<mx:Spacer width="10"/>
+			<mx:Button id="btn_Dismiss" label="Dismiss"/>
+		</mx:HBox>
+	</mx:VBox>
+</mx:TitleWindow>

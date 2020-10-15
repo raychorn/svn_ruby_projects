@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel title="Distribution" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+	<mx:Script><![CDATA[
+		import mx.controls.Alert;
+		import mx.events.ListEvent;
+
+		private function formatPieLabel(data:Object, field:String, index:Number, percentValue:Number):String {
+			//return data.label + ": " + data[field] + " (" + percentValue + "%)";
+			return data.label + "fdasfdsa";
+		}
+
+		private function handleDistributionChange():void {
+			remoteService.getDistribution.send()
+			pieLegend.dataProvider = distributionPie;
+		}
+	]]></mx:Script>
+
+	<mx:RemoteObject id="remoteService" destination="ComputerList" showBusyCursor="true" fault="Alert.show(event.fault.faultString, 'Error');">
+		<mx:method name="getDistribution">
+			<mx:arguments>
+				<mx:arg1>operating_system_name</mx:arg1>
+			</mx:arguments>
+		</mx:method>
+	</mx:RemoteObject>
+	<mx:ComboBox change="handleDistributionChange()">
+		<mx:dataProvider>
+			<mx:Array>
+				<mx:Object label="Operating System"/>
+				<mx:Object label="NetBIOS Domain Name"/>
+				<mx:Object label="Remote Vector"/>
+			</mx:Array>
+		</mx:dataProvider>
+	</mx:ComboBox>
+	<mx:VBox width="100%" height="100%">
+		<mx:Legend id="pieLegend" width="100%" fontSize="10" fontWeight="normal" fontFamily="Arial"/>
+		<mx:PieChart id="distributionPie" dataProvider="{remoteService.getDistribution.lastResult}" showDataTips="true" width="100%" height="100%">
+			<mx:series>
+				<mx:PieSeries nameField="label" field="total" labelFunction="formatPieLabel"/>
+			</mx:series>
+		</mx:PieChart>
+	</mx:VBox>
+</mx:Panel>

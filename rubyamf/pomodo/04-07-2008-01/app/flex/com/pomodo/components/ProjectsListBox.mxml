@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VDividedBox xmlns:mx="http://www.adobe.com/2006/mxml"
+    width="100%" height="100%" label="Projects">
+<mx:Script>
+<![CDATA[
+    import mx.controls.Alert;
+    import com.pomodo.control.EventNames;
+    import com.pomodo.model.Project;
+    import com.pomodo.model.PomodoModelLocator;
+    import com.pomodo.util.CairngormUtils;
+    
+    [Bindable]
+    private var _model:PomodoModelLocator =
+        PomodoModelLocator.getInstance();
+
+    public function updateSelectedProjectFromSummaryPanel():
+    void {
+        var project:Project =
+            Project(projectsGrid.selectedItem);
+        project.name = nameTI.text;
+        project.completed = completedCB.selected;
+        project.notes = notesTI.text;
+        updateProject(project);
+    }
+
+    public function updateProject(project:Project):void {
+        CairngormUtils.dispatchEvent(
+            EventNames.UPDATE_PROJECT, project);
+    }
+
+    public function deleteProject(project:Project):void {
+        CairngormUtils.dispatchEvent(
+            EventNames.DESTROY_PROJECT, project);
+    }
+]]>
+</mx:Script>
+    <mx:DataGrid id="projectsGrid" width="100%" height="60%"
+        dataProvider="{_model.projects}">
+        <mx:columns>
+            <mx:DataGridColumn
+                headerText=""
+                width="25"
+                dataField="completed"
+                editable="false">
+                <mx:itemRenderer>
+                    <mx:Component>
+<mx:HBox width="25" paddingLeft="5">
+    <mx:Script>
+        <![CDATA[
+            import com.pomodo.model.Project;
+            
+            private function updateCompleted():void {
+                var project:Project = Project(data);
+                project.completed = !project.completed;
+                outerDocument.updateProject(project);
+            }
+        ]]>
+    </mx:Script>
+    <mx:CheckBox selected="{data.completed}"
+        click="updateCompleted()"/>
+</mx:HBox>
+                    </mx:Component>
+                </mx:itemRenderer>
+            </mx:DataGridColumn>
+            <mx:DataGridColumn headerText="Name" width="400"
+                dataField="name"/>
+            <mx:DataGridColumn headerText="Notes"
+                dataField="notes"/>
+            <mx:DataGridColumn headerText="" width="70"
+                editable="false" dataField="name">
+                <!-- arbitrary dataField -->
+                <mx:itemRenderer>
+                    <mx:Component>
+                        <mx:Button label="delete"
+             click="outerDocument.deleteProject(Project(data))">
+                            <mx:Script>
+                            <![CDATA[
+                                import com.pomodo.model.Project;
+                            ]]>
+                            </mx:Script>
+                        </mx:Button>
+                    </mx:Component>
+                </mx:itemRenderer>
+            </mx:DataGridColumn>
+        </mx:columns>
+    </mx:DataGrid>
+    <mx:Panel id="summaryPanel"
+        title="Project" width="100%" height="40%"
+        paddingLeft="5" paddingRight="5" paddingTop="5"
+        paddingBottom="5">
+        <mx:HBox width="100%">
+            <mx:Label text="Name" width="50"/>
+            <mx:TextInput id="nameTI" width="100%"
+                text="{projectsGrid.selectedItem.name}"/>
+            <mx:CheckBox id="completedCB" label="Completed"
+              selected="{projectsGrid.selectedItem.completed}"/>
+        </mx:HBox>
+        <mx:HBox width="100%" height="100%">
+            <mx:Label text="Notes" width="50"/>
+            <mx:TextArea id="notesTI" width="100%" height="100%"
+                text="{projectsGrid.selectedItem.notes}"/>
+        </mx:HBox>
+        <mx:ControlBar width="100%" horizontalAlign="center">
+            <mx:Button id="updateButton" label="Update"
+                width="100%" height="30"
+                click="updateSelectedProjectFromSummaryPanel()"
+                enabled="{projectsGrid.selectedItem != null}"/>
+            <mx:Button id="deleteButton" label="Delete"
+                height="30"
+       click="deleteProject(Project(projectsGrid.selectedItem))"
+               enabled="{projectsGrid.selectedItem != null}"/>
+        </mx:ControlBar>
+    </mx:Panel>
+</mx:VDividedBox>

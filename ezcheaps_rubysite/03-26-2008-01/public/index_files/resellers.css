@@ -1,0 +1,180 @@
+/*---------------------------
+New mix 
+----------------------------*/
+#banner {
+  margin-top: -25px;
+  padding: 0;
+  }
+#rebatebanner {
+  width: 760px;
+  float: left;
+  border-top: 1px solid #B5C9CF;
+  border-bottom: 1px solid #B5C9CF;
+  margin-bottom: 10px;
+  }
+#features {
+  float: left;
+  width: 759px;
+  margin: 0 0 20px 0;
+  padding: 0;
+  border-bottom: 1px dashed #CFCFCF;
+  }
+#features h1.sharedhead {
+  font-family: Arial, Helvetica, Sans-serif;
+  letter-spacing: -1px;
+  padding-bottom: 5px;
+  margin: 5px 0px 10px 0px;
+  border-bottom: 1px dashed #CFCFCF;
+  }
+.sharedhead {
+  font-family: Arial, Helvetica, Sans-serif;
+  letter-spacing: -1px;
+  padding-bottom: 0px;
+  padding-bottom: 5px;
+  border-bottom: 1px dashed #CFCFCF;
+  }
+#features .listing {
+  float: left;
+  margin-bottom: 10px;
+  }
+#linkrow {
+  font-family: Arial, Helvetica, Sans-serif;
+  font-weight: bold;
+  text-align: right;
+  padding-top: 10px;
+  }
+#linkrow a {
+  color: #1286A9;
+  text-decoration: underline;
+  }
+#features .listing img {
+  float: left;
+  padding-right: 20px;
+  padding-bottom: 40px;
+  display: inline;
+  }
+#features .feature-box {
+  width: 45%;
+  float: left;
+  background: #fff;
+  margin-right: 35px;
+  margin-left: 0px;
+  }
+#features .feature-box h2 {
+  font-size: 110%;
+  color: black;
+  margin: 0;
+  padding: 0;
+  }
+#features .feature-box p {
+  font-family: Arial, Helvetica, Sans-serif;
+  font-size: 95%;
+  line-height: 16px;
+  margin: 0;
+  padding: 0;
+  color: #6F6F6F;
+  }
+  
+  
+  
+
+
+/* Custom additions to the "grid" table style */
+#bonus {
+  width: 100%;
+  text-align: center;
+  font-size: 95%;
+  font-weight: bold;
+}
+
+#bonus p {
+  text-align: right;
+}
+
+#grid {
+  margin-top: 1em;
+  cell-spacing: 0;
+  border-collapse: collapse;
+}
+
+#grid div.definition {
+  padding: 0 .1em .5em 1.1em;
+}
+
+#grid .definition {
+  font-family: Arial, Helvetica, Sans-serif;
+  color: #6F6F6F;
+  font-weight: bold;
+  line-height: 1.3em;
+  font-size: 95%;
+  }
+
+#grid .row-explanation {
+  background:#EBEBEB none repeat fixed top;
+  text-align: center;
+  padding: 0.4em;
+  font-size: 1em;
+  font-weight: bold;
+  font-family: "Lucida Grande", Arial;
+  line-height: 1em;
+}
+
+#grid th {
+  font-size: 1em;
+  padding: 7px 0px;
+  font-family: Arial;
+  background: url(/images/homepage7/new-th.gif) repeat-x top left;
+  border-bottom: 1px solid #FFF;
+}
+
+#orderbutton {
+  font-size: 150%;
+  font-weight: bold;
+  margin: 0;
+  padding-left: 35px;
+  padding-top: 14px;
+  width: 373px;
+  height: 60px;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+
+#grid TD.popupIcon,
+#grid TD.featureName {
+  background: #CFCFCF;
+  border-bottom: 1px solid white;
+}
+
+#grid TD.popupIcon {
+  text-align: center;
+  padding: 1px 4px;
+  border-right: 1px solid white;
+}
+
+#grid TD.featureName {
+  text-align: left;
+  font-weight: bold;
+  padding: 1px 5px 1px 7px;
+}
+
+#grid .popupIcon A,
+#grid .popupIcon A:hover {
+  text-decoration: none;
+}
+
+#grid .featureName A {
+  color: black;
+}
+
+
+#grid #flashbackRow TD {
+  background: url(/images/flashback/fbcell-bg.gif) bottom left;
+  border-right: 1px solid #FFF;
+}
+
+
+
+#grid #tellYourFriendsRow TD {
+  background: #FEDFAF url(/images/risingsun/specialrowbg.gif) repeat-x top left;
+  border-right: 1px solid #FFF;
+}

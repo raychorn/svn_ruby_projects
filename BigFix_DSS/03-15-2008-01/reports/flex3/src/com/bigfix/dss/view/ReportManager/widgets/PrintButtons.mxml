@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.util.ArrayCollectionUtils;
+			import mx.collections.ArrayCollection;
+			import mx.events.ListEvent;
+			import com.bigfix.dss.view.ReportManager.widgets.events.BeginSaveAsEvent;
+			import com.bigfix.dss.view.ReportManager.widgets.events.BeginPrintJobEvent;
+
+			[Event(name="beginPrintJob", type="com.bigfix.dss.view.ReportManager.widgets.events.BeginPrintJobEvent")]
+			[Event(name="saveAs", type="com.bigfix.dss.view.ReportManager.widgets.events.saveAs")]
+			
+			private function onClickPrintJobButton():void {
+				this.dispatchEvent(new BeginPrintJobEvent(BeginPrintJobEvent.TYPE_BEGIN_PRINT_JOB, BeginPrintJobEvent.const_source_reportBuilder, BeginPrintJobEvent.const_dest_printer));
+			}
+
+			private function onClickSaveImageButton():void {
+				this.dispatchEvent(new BeginSaveAsEvent(BeginSaveAsEvent.TYPE_SAVE_AS, BeginSaveAsEvent.const_source_reportBuilder, BeginSaveAsEvent.const_dest_image));
+			}
+
+			private function onClickSavePDFButton():void {
+				this.dispatchEvent(new BeginSaveAsEvent(BeginSaveAsEvent.TYPE_SAVE_AS, BeginSaveAsEvent.const_source_reportBuilder, BeginSaveAsEvent.const_dest_pdf));
+			}
+			
+			private function onChangePrintButtonsComboBox(event:ListEvent):void {
+				var cmbo:ComboBox = ComboBox(event.currentTarget);
+				var btn:Button = Button(cmbo.selectedItem);
+				switch (btn.id) {
+					case this.btn_Choose.id:
+						// do nothing...
+					break;
+
+					case this.btn_PrintJob.id:
+						btn.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+					break;
+
+					case this.btn_SaveAsImage.id:
+						btn.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+					break;
+
+					case this.btn_SaveAsPDF.id:
+						btn.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+					break;
+				}
+				cmbo.selectedIndex = 0;
+			}
+			
+			private function onCreationCompletePrintComboBox():void {
+				var dp:ArrayCollection = ArrayCollection(this.cmbo_printButtons.dataProvider);
+				var i:int = ArrayCollectionUtils.findIndexOfItem(dp,"label",this.btn_PrintJob.label);
+				if (i > 0) {
+					dp.removeItemAt(i);	// Print direct to Printer is not an option because Flex printing functions are pretty weak therefore print via PDF is the preferred method.
+				}
+			}
+		]]>
+	</mx:Script>
+	<mx:HBox width="100%" horizontalAlign="left">
+		<mx:ComboBox id="cmbo_printButtons" change="onChangePrintButtonsComboBox(event)" creationComplete="onCreationCompletePrintComboBox()">
+			<mx:Button id="btn_Choose" label="Print/Export Options..." toolTip="Choose an export method."/>
+			<mx:Button id="btn_PrintJob" label="Print" toolTip="Print the report." click="onClickPrintJobButton()"/>
+			<mx:Button id="btn_SaveAsPDF" label="Print or Export as PDF..." toolTip="Save the report as PDF." click="onClickSavePDFButton()"/>
+			<mx:Button id="btn_SaveAsImage" label="Print or Export as Image..." toolTip="Save the report as Image." click="onClickSaveImageButton()"/>
+		</mx:ComboBox>
+	</mx:HBox>
+</mx:Canvas>

@@ -1,0 +1,13 @@
+one:
+  id: 1
+  name: Group One
+  benchmark_version_id: 1
+two:
+  id: 2
+  name: Group Two
+  benchmark_version_id: 1
+three:
+  id: 3
+  name: Group Three
+  parent_id: 1
+  benchmark_version_id: 1

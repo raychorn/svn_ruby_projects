@@ -1,0 +1,70 @@
+nebraska:
+  title: Nebraska
+  subgroups:
+  - nebraska_bellevue
+  - nebraska_columbus
+  - nebraska_fremont
+  - nebraska_grand_island
+  - nebraska_hastings
+  - nebraska_kearney
+  - nebraska_lincoln
+  - nebraska_norfolk
+  - nebraska_north_platte
+  - nebraska_omaha
+  - nebraska_papillion
+
+nebraska_bellevue:
+  title: Bellevue
+  type: city
+  population: 47294
+
+nebraska_columbus:
+  title: Columbus
+  type: city
+  population: 20924
+
+nebraska_fremont:
+  title: Fremont
+  type: city
+  population: 25232
+
+nebraska_grand_island:
+  title: Grand Island
+  type: city
+  population: 44250
+
+nebraska_hastings:
+  title: Hastings
+  type: city
+  population: 25107
+
+nebraska_kearney:
+  title: Kearney
+  type: city
+  population: 28643
+
+nebraska_lincoln:
+  title: Lincoln
+  type: city
+  population: 236979
+
+nebraska_norfolk:
+  title: Norfolk
+  type: city
+  population: 24009
+
+nebraska_north_platte:
+  title: North Platte
+  type: city
+  population: 24032
+
+nebraska_omaha:
+  title: Omaha
+  type: city
+  population: 409019
+
+nebraska_papillion:
+  title: Papillion
+  type: city
+  population: 19476
+

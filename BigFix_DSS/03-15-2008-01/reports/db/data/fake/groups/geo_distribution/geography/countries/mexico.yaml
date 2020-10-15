@@ -1,0 +1,23 @@
+mexico:
+  title: Mexico
+  abbrev: MX
+  subgroups:
+  - mexico_city
+  - mexico_guadalajara
+  - mexico_monterrey
+
+mexico_city:
+  title: Mexico City
+  type: city
+  population: 19230000
+
+mexico_guadalajara:
+  title: Guadalajara
+  type: city
+  population: 4100000
+
+mexico_monterrey:
+  title: Monterrey
+  type: city
+  population: 3660000
+

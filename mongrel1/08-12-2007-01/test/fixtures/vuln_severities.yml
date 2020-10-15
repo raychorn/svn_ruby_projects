@@ -1,0 +1,12 @@
+low:
+  id: 1
+  name: Low
+moderate:
+  id: 2
+  name: Moderate
+important:
+  id: 3
+  name: Important
+critical:
+  id: 4
+  name: Critical

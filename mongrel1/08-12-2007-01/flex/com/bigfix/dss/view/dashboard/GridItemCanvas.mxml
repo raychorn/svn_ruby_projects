@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:dashboard="com.bigfix.dss.view.dashboard.*" width="100%" height="100%">
+	<mx:Script><![CDATA[
+		public var position:int;
+	]]></mx:Script>
+	<mx:states>
+		<mx:State name="swap">
+			<mx:AddChild>
+				<mx:target>
+					<mx:Box width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+						<mx:Panel width="200" height="40" headerHeight="0" backgroundColor="0xe4b61b" horizontalAlign="center" verticalAlign="middle">
+							<mx:Label fontSize="18" text="Drop Here to swap"/>
+						</mx:Panel>
+					</mx:Box>
+				</mx:target>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="add">
+			<mx:AddChild>
+				<mx:target>
+					<mx:Box width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+						<mx:Panel width="200" height="40" headerHeight="0" backgroundColor="0xe4b61b" horizontalAlign="center" verticalAlign="middle">
+							<mx:Label fontSize="18" text="Drop Here to add"/>
+						</mx:Panel>
+					</mx:Box>
+				</mx:target>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+</mx:Canvas>

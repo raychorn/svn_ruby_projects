@@ -1,0 +1,32 @@
+<h1>Editing project</h1>
+
+<%= error_messages_for :project %>
+
+<% form_for(@project) do |f| %>
+  <p>
+    <b>User</b><br />
+    <%= f.text_field :user_id %>
+  </p>
+
+  <p>
+    <b>Name</b><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <b>Notes</b><br />
+    <%= f.text_area :notes %>
+  </p>
+
+  <p>
+    <b>Completed</b><br />
+    <%= f.check_box :completed %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @project %> |
+<%= link_to 'Back', projects_path %>

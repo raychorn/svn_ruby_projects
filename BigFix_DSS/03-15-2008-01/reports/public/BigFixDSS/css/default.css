@@ -1,0 +1,820 @@
+
+/*
+dark Grey: 4f4f47
+Green: b0b631
+Orange: e4b61b
+Blue: 7c94b7
+
+chart colors
+Dark Green: 5c8a8b
+Purple: 8f56a2
+Brown: b18467
+
+Light Grey: f8f7f5
+middle grey?? 81807c
+Deep Blue: 5970A4
+*/
+@font-face {
+	src: url("/assets/fonts/NeoSansIntel.ttf");
+	fontFamily: NeoSansIntel;
+}
+
+Application {
+	backgroundColor: #4f4f47;
+	backgroundGradientColors: #4f4f47, #4f4f47;
+	color: #4f4f47;
+	themeColor: #b0b631;
+	paddingLeft: 0;
+	paddingRight: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	horizontalAlign: center;
+	verticalAlign: middle;
+	fontFamily: NeoSansIntel;
+}
+
+.applicationControlBar {
+	borderStyle: solid;
+	borderThickness: 0;
+	cornerRadius: 7;
+	color: #FFFFFF;
+	fontWeight: bold;
+	fontSize: 16;
+	fontFamily: NeoSansIntel;
+}
+
+ButtonBar {
+	buttonStyleName: "mybuttonBarButtonStyle";
+}
+
+.mybuttonBarButtonStyle {
+	fontSize: 10;
+	highlightAlphas: 0, 0;
+	fillAlphas: 0, 0, 1, 1;
+	fillColors: #000000, #000000, #b0b631, #b0b631;
+	textRollOverColor: #ffffff;
+	borderColor: #ffffff;
+	fontFamily: NeoSansIntel;
+	borderThickness: 0.0;
+}
+
+.mybuttonBarPressedButtonStyle {
+	fontSize: 10;
+	highlightAlphas: 0, 0;
+	fillAlphas: 0, 0, 1, 1;
+	fillColors: #000000, #000000, #b0b631, #b0b631;
+	textRollOverColor: #ffffff;
+	borderColor: #ffff00;
+	fontFamily: NeoSansIntel;
+	borderThickness: 5.0;
+}
+
+Panel, TitleWindow {
+	borderStyle: solid;
+	borderColor: #d2d2d2;
+	borderAlpha: 1;
+	borderThickness: 1;
+	roundedBottomCorners: true;
+	cornerRadius: 7;
+	backgroundColor: #f8f7f5;
+	dropShadowEnabled: false;
+	titleStyleName: "mypanelTitle";
+	modalTransparencyColor: #4f4f47;
+	modalTransparency: 0.75;
+	fontFamily: NeoSansIntel;
+}
+
+.mypanelTitle {
+	color: #5970a4;
+	fontSize: 11;
+	fontWeight: bold;
+	fontFamily: NeoSansIntel;
+}
+
+ToolTip {
+	backgroundColor: #e4b61b;
+	color: #4f4f47;
+	fontFamily: NeoSansIntel;
+}
+
+HScrollBar {
+	cornerRadius: 0;
+}
+
+VScrollBar {
+	cornerRadius: 0;
+}
+
+SuperTabBar {
+	/*
+	paddingBottom: -1;
+	verticalAlign: bottom;
+	*/
+	horizontalGap: 3;
+	tabStyleName: firefoxLikeTabs;
+	fontFamily: NeoSansIntel;
+}
+
+.firefoxLikeTabs {
+	indicatorClass: Embed("/assets/assets.swf#indicator");    
+	
+	tabCloseButtonStyleName: 'closeButton';
+	fontFamily: NeoSansIntel;
+}
+
+.closeButton {
+	upSkin: Embed("/assets/assets.swf#firefox_close_up");
+	downSkin: Embed("/assets/assets.swf#firefox_close_down");
+	overSkin: Embed("/assets/assets.swf#firefox_close_over");
+	disabledSkin: Embed("/assets/assets.swf#firefox_close_disabled");
+	fontFamily: NeoSansIntel;
+}
+
+TabNavigator {
+	tabStyleName: tabNavigatorTabStyle;
+	tab-width: 120;
+	horizontalGap: 3;
+	backgroundColor: #f8f7f5;
+	fontFamily: NeoSansIntel;
+}
+
+.tabNavigatorTabStyle {
+	fontSize: 16;
+	fontFamily: NeoSansIntel;
+}
+
+Tree {
+	useRollOver: false;
+	borderStyle: none;
+	selectionColor: #b0b631;
+	backgroundAlpha: 0;
+	fontFamily: NeoSansIntel;
+}
+
+PieSeries {
+	fills: #8f56a2, #5970A4, #b18467, #b0b631, #e4b61b;
+}
+
+.textLink {
+	color: #b0b631;
+	textDecoration: underline;
+	fontFamily: NeoSansIntel;
+}
+
+.dashboardTabs {
+	fontSize: 12;
+	verticalAlign: bottom;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+}
+
+HRule {
+	strokeWidth: 1;
+}
+
+Panel.detailsContainer {
+	borderStyle: default;
+	borderColor: #7c94b7;
+	borderThickness: 1;
+	borderAlpha: 1;
+	roundedBottomCorners: true;
+	cornerRadius: 7;
+	backgroundColor: #dee4ea;
+	dropShadowEnabled: false;
+	titleStyleName: "detailsContainer";
+	color: #262626;
+	fontFamily: NeoSansIntel;
+	/*
+	borderStyle: none;
+	borderColor: #e4b61b;
+	borderAlpha: 1;
+	borderThickness: 1;
+	roundedBottomCorners: true;
+	cornerRadius: 7;
+	backgroundColor: #e4b61b;
+	dropShadowEnabled: false;
+	titleStyleName: "wizardFormContainerTitle";
+	*/
+}
+
+Panel.wizardFormContainer {
+	borderStyle: default;
+	borderColor: #7c94b7;
+	borderAlpha: 1;
+	roundedBottomCorners: true;
+	cornerRadius: 7;
+	backgroundColor: #dee4ea;
+	dropShadowEnabled: false;
+	titleStyleName: "wizardFormContainerTitle";
+	color: #262626;
+	fontFamily: NeoSansIntel;
+	/*
+	borderStyle: none;
+	borderColor: #e4b61b;
+	borderAlpha: 1;
+	borderThickness: 1;
+	roundedBottomCorners: true;
+	cornerRadius: 7;
+	backgroundColor: #e4b61b;
+	dropShadowEnabled: false;
+	titleStyleName: "wizardFormContainerTitle";
+	*/
+}
+
+.wizardFormContainerTitle {
+   color: #FFFFFF;
+   fontSize: 12;
+   fontWeight: bold;
+	fontFamily: NeoSansIntel;
+}
+
+HBox.wizardFormLabelActive {
+	borderStyle: 'solid';
+	borderColor: #7c94b7;
+	borderThickness: 3;
+	cornerRadius: 3;
+}
+
+HBox.wizardFormLabelInactive {
+	borderStyle: 'none';
+}
+
+.infoText {
+	color: #e4b61b;
+	fontSize: 14;
+}
+
+.selectedEMailAddresses {
+	color: #000000;
+	fontSize: 12;
+}
+
+.availableEMailAddresses {
+	color: #000000;
+	fontSize: 12;
+}
+
+Panel.infoPanel {
+	backgroundColor: #e4b61b;
+	color: #000000;
+	fontSize: 14;
+	fontFamily: NeoSansIntel;
+}
+
+Panel.listBuilderSelectedSubject {
+	backgroundColor: white;
+	backgroundAlpha: .1;
+	borderColor: #4f4f47;
+	borderThickness: 2;
+	borderStyle: solid;
+	borderAlpha: 1;
+	color: #000000;
+	titleStyleName: "listBuilderSelectedSubjectTitle";
+	fontFamily: NeoSansIntel;
+}
+
+.listBuilderSelectedSubjectTitle {
+	color: #7c94b7;
+	fontWeight: bold;
+	fontFamily: NeoSansIntel;
+}
+
+Panel.listBuilderPanel {
+	borderStyle: default;
+	borderColor: #81807c;
+	borderAlpha: 1;
+	roundedBottomCorners: true;
+	cornerRadius: 7;
+	backgroundColor: red;
+	backgroundAlpha: 0;
+	dropShadowEnabled: false;
+	titleStyleName: "listBuilderPanelTitle";
+	fontFamily: NeoSansIntel;
+}
+
+.listBuilderPanelTitle {
+	color: #FFFFFF;
+	fontSize: 11;
+	fontWeight: bold;
+	fontFamily: NeoSansIntel;
+}
+
+List {
+	cornerRadius: 7;
+	fontSize: 11;
+	fontFamily: NeoSansIntel;
+}
+
+ComboBox {
+	themeColor: #b0b631;
+	fontFamily: NeoSansIntel;
+}
+
+.bigFormHeading {
+	color: #4f4f47;
+	fontSize: 14;
+	fontWeight: bold;
+	fontFamily: NeoSansIntel;
+}
+/* Styles for DataFilterForm */
+Button.plusButton {
+	fontSize: 12;
+	paddingRight: 0;
+	paddingLeft: 0;
+	fontFamily: NeoSansIntel;
+}
+
+Button.minusButton {
+	fontSize: 16;
+	paddingRight: 0;
+	paddingLeft: 0;
+	fontFamily: NeoSansIntel;
+}
+
+PopUpMenuButtonDataGridItemRenderer {	
+	cornerRadius: 0;
+	highlightAlphas: 0, 0;
+	fillAlphas: 0, 0, 0, 0;
+	textRollOverColor: #0000FF;
+	textSelectedColor: #0000FF;
+	color: #0000FF;
+	fontWeight: 'normal';
+	skin: ClassReference('com.bigfix.extensions.skins.PopUpButtonSkinClear');
+	popUpIcon: Embed('/assets/assets.swf#down_arrow');
+	fontFamily: NeoSansIntel;
+}
+
+Button.widgetButton {
+	fontSize: 12;
+	paddingRight: 0;
+	paddingLeft: 0;
+	paddingTop: 10;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+Button.layoutButton {
+	fontSize: 12;
+	paddingRight: 0;
+	paddingLeft: 0;
+	paddingTop: 10;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+Button.pdfExportButton {
+	fontSize: 12;
+	paddingRight: 0;
+	paddingLeft: 0;
+	paddingTop: 10;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: bold;
+}
+
+Button.addDashboardLink {
+	fontSize: 12;
+	paddingRight: 0;
+	paddingLeft: 0;
+	paddingTop: 10;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.popUpTextPromptPanel {
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+	fontSize: 12;
+	borderThickness: 2;
+	borderColor: #000000;
+	headerHeight: 20;
+	shadowDistance: 10;
+	shadowDirection: right;
+}
+
+.popUpTextPromptPanelTitle {
+	fontFamily: NeoSansIntel;
+	fontWeight: bold;
+	fontSize: 14;
+}
+
+Button.Cancel {
+	fontSize: 12;
+	paddingRight: 0;
+	paddingLeft: 0;
+	paddingTop: 10;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+Button.OK {
+	fontSize: 12;
+	paddingRight: 0;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.ExportButton {
+	fontSize: 10;
+	paddingRight: 0;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.AnalyzeButton {
+	fontSize: 10;
+	paddingRight: 0;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+Button.loginButton {
+	fontSize: 12;
+	paddingRight: 0;
+	paddingLeft: 0;
+	paddingTop: 10;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.LoginPanel {
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+	fontSize: 12;
+	borderThickness: 2;
+	borderColor: #000000;
+	headerHeight: 20;
+	shadowDistance: 10;
+	shadowDirection: right;
+}
+
+.LoginTitle {
+	fontFamily: NeoSansIntel;
+	fontWeight: bold;
+	fontSize: 14;
+}
+
+TextInput.username {
+	fontSize: 12;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+TextInput.password {
+	fontSize: 12;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.LogoutPanel {
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+	fontSize: 12;
+	borderThickness: 2;
+	borderColor: #000000;
+	headerHeight: 20;
+	shadowDistance: 10;
+	shadowDirection: right;
+}
+
+.LogoutTitle {
+	fontFamily: NeoSansIntel;
+	fontWeight: bold;
+	fontSize: 14;
+}
+
+.HelpViewPanel {
+	backgroundColor: #dee4ea;
+	fontFamily: NeoSansIntel;
+	fontSize: 12;
+	headerColors: #cccccc, #4f4f47;
+}
+
+.HelpViewTitle {
+	fontFamily: NeoSansIntel;
+	fontWeight: bold;
+	fontSize: 14;
+	color: #ffffff;
+}
+
+.MyAccountPanel {
+	background-color: #ffffff;
+	fontFamily: NeoSansIntel;
+	fontSize: 12;
+	headerColors: #cccccc, #4f4f47;
+}
+
+.MyAccountTitle {
+	fontFamily: NeoSansIntel;
+	fontWeight: bold;
+	fontSize: 14;
+	color: #ffffff;
+}
+
+.WidgetLibrarySidebar {
+	fontFamily: NeoSansIntel;
+	fontSize: 12;
+	horizontalAlign: center;
+	borderStyle: solid;
+	borderSides: left;
+}
+
+.PromptingTextInput {
+	fontFamily: NeoSansIntel;
+	fontSize: 10;
+}
+
+.btnCreateWidget {
+	fontSize: 12;
+	paddingRight: 10;
+	paddingLeft: 0;
+	paddingTop: 10;
+	paddingBottom: 10;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.btnManageWidgets {
+	fontSize: 12;
+	paddingRight: 10;
+	paddingLeft: 0;
+	paddingTop: 10;
+	paddingBottom: 10;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.btnSearch {
+	fontSize: 12;
+	paddingRight: 0;
+	paddingLeft: 0;
+	paddingTop: 5;
+	paddingBottom: 5;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.btnBackButton {
+	fontSize: 12;
+	paddingRight: 5;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.ManageWidgetsPanel {
+	background-color: #ffffff;
+	fontFamily: NeoSansIntel;
+	fontSize: 12;
+	headerColors: #4f4f47, #4f4f47;
+}
+
+.ManageWidgetsTitle {
+	fontFamily: NeoSansIntel;
+	fontWeight: bold;
+	fontSize: 14;
+	color: #ffffff;
+}
+
+.btnDeleteWidget {
+	fontSize: 12;
+	paddingRight: 5;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 5;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.btnCreateAWidget {
+	fontSize: 12;
+	paddingRight: 5;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 5;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.WidgetCreationPanel {
+	background-color: #ffffff;
+	fontFamily: NeoSansIntel;
+	fontSize: 12;
+	headerColors: #4f4f47, #4f4f47;
+}
+
+.WidgetCreationTitle {
+	fontFamily: NeoSansIntel;
+	fontWeight: bold;
+	fontSize: 14;
+	color: #ffffff;
+}
+
+.btnSaveButton {
+	fontSize: 12;
+	paddingRight: 5;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+Canvas {
+	fontSize: 11;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.btnNewReportBuilder {
+	fontSize: 12;
+	paddingRight: 5;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.btnDeleteReports {
+	fontSize: 12;
+	paddingRight: 5;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.btnSetSchedule {
+	fontSize: 12;
+	paddingRight: 5;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.btnSetDistribution {
+	fontSize: 12;
+	paddingRight: 5;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.btnCloseReport {
+	fontSize: 12;
+	paddingRight: 5;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.btnOpenReportBuilder {
+	fontSize: 12;
+	paddingRight: 5;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.btnEditReport {
+	fontSize: 12;
+	paddingRight: 5;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+	icon: Embed(source='/assets/edit-script_16x16.gif')
+}
+
+.btnCloseReportBuilder {
+	fontSize: 12;
+	paddingRight: 5;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+	icon: Embed(source='/assets/undo_16x16.gif')
+}
+
+.btnNewReport {
+	fontSize: 12;
+	paddingRight: 5;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+	icon: Embed(source='/assets/add-window_16x16.gif')
+}
+
+.btnSaveCurrentReport {
+	fontSize: 12;
+	paddingRight: 5;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+	icon: Embed(source='/assets/save-as_16x16.gif')
+}
+
+.btnOpenReport {
+	fontSize: 12;
+	paddingRight: 5;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+	icon: Embed(source='/assets/edit-script_16x16.gif')
+}
+
+.selectStartDate {
+	todayColor: #666666;
+	selectionColor: #00ffff;
+	themeColor: #0000ff;
+	dropShadowEnabled: true;
+	shadowDirection: center;
+	dropShadowColor: #000000;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+	fontSize: 12;
+}
+
+.btnCommitSchedule {
+	fontSize: 12;
+	paddingRight: 5;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 5;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+	icon: Embed(source='/assets/save-as_16x16.gif')
+}
+
+.btnCloneReport {
+	fontSize: 12;
+	paddingRight: 5;
+	paddingLeft: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	fontFamily: NeoSansIntel;
+	fontWeight: normal;
+}
+
+.AdvanceTree {
+	backgroundColor: #ffffcc;
+	borderStyle: outset;
+	textIndent: 0;
+	letterSpacing: 0;
+	indentation: 15;
+	openDuration: 300;
+	selectionDuration: 500;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+	fontFamily: NeoSansIntel;
+	fontSize: 12;
+	fontWeight: bold;
+}
+
+.addlHeaderElement {
+	fontFamily: NeoSansIntel;
+	fontSize: 12;
+	fontWeight: bold;
+}
+
+.errorTip { 
+	fontFamily: NeoSansIntel;
+	fontSize: 11;
+	fontWeight: normal;
+	borderColor: #ff0000;
+}
+

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
+    width="100%" height="100%" label="Notely" paddingLeft="5"
+    paddingRight="5" paddingTop="5" paddingBottom="5">
+<mx:Script>
+<![CDATA[
+    import com.pomodo.control.EventNames;
+    import com.pomodo.model.PomodoModelLocator;
+    import com.pomodo.util.CairngormUtils;
+    
+    [Bindable]
+    private var _model:PomodoModelLocator =
+        PomodoModelLocator.getInstance();
+    
+    private function doSave():void {
+        _model.note.content = notelyTA.text;
+        CairngormUtils.dispatchEvent(EventNames.UPDATE_NOTE);
+    }
+
+    private function doRevert():void {
+        notelyTA.text = _model.note.content;
+    }
+]]>
+</mx:Script>
+    <mx:TextArea id="notelyTA" width="100%" height="100%"
+        text="{_model.note.content}"/>
+    <mx:ControlBar width="100%" horizontalAlign="center">
+        <mx:Button id="saveButton" label="Save" width="100%"
+            height="30" click="doSave()"/>
+        <mx:Button id="revertButton" label="Revert"
+            height="30" click="doRevert()"/>
+    </mx:ControlBar>
+</mx:VBox>

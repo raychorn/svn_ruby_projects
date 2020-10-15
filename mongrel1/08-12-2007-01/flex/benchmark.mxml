@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:busy="com.bigfix.dss.view.general.Busy.*"
+	layout="absolute" 
+	>
+	<mx:states>
+		<mx:State name="RunningBenchmarks">
+			<mx:SetProperty target="{hbox_buttons}" name="enabled" value="false"/>
+		</mx:State>
+	</mx:states>
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.SortField;
+			import mx.collections.Sort;
+			import mx.controls.ComboBase;
+			import mx.events.ListEvent;
+			import com.bigfix.dss.util.ArrayUtils;
+			import mx.utils.ObjectUtil;
+			import mx.formatters.NumberFormatter;
+			import mx.charts.series.BarSeries;
+			import mx.collections.ArrayCollection;
+			import flash.utils.getTimer;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			import com.bigfix.dss.view.general.Alert.AlertPopUp;
+			import com.bigfix.dss.weborb.RemoteWebOrbObject;
+
+			private var _weborbObj:RemoteWebOrbObject;
+			
+			private const _options:String = "isfast=";
+			
+			private const _optionsDebug:String = "isdebug=";
+			private const _optionsDebugVerbose:String = "isdebugverbose=";
+			private const _optionsDebugAnalysis:String = "isdebuganalysis=";
+
+			private const _endPoint:String = "http://localhost:3000/weborb";
+			
+			private const _fixedNumbers_Test:String = "getData1";
+			private const _randomStrings_Test:String = "getData2";
+			private const _fixedHash_Test:String = "getData1a";
+			private const _randomLongInt_Test:String = "getData3";
+			private const _randomDouble_Test:String = "getData4";
+
+			private var _beginMs:Number;
+			private var _endMs:Number;
+			
+			private var _runTimes:Array = [];
+			
+			private var _iterationsCurrent:Number = 0;
+			private var _iterationCurrent:Number = 0;
+			
+			private var _etArray:Array = [];
+
+			private var _commands:Array = [];
+			
+			private var _stateStack:Array = [];
+			
+			[Bindable]
+			public var _benchmarkData:ArrayCollection = new ArrayCollection([
+				{Method:"Slow1", Ms:0},
+				{Method:"Fast1", Ms:0}
+			]);
+
+			[Bindable]
+			public var _benchmarkIterations:ArrayCollection = new ArrayCollection([
+				{label:0, data:0},
+				{label:1, data:1},
+				{label:2, data:2},
+				{label:5, data:5},
+				{label:10, data:10},
+				{label:100, data:100}
+			]);
+
+			private function pushState(state:String = ""):void {
+				if (state.length > 0) {
+					this._stateStack.push(this.currentState);
+					this.currentState = state;
+				}
+			}
+			
+			private function popState():void {
+				var state:String = this._stateStack.pop();
+				this.currentState = ((state != null) ? state : '');
+			}
+
+			private function hashToArray(hash:Object):Array {
+				var ar:Array = [];
+				ar.push(hash["method"]);
+				for (var o:Object in hash) {
+					if (o.toString() != "method") {
+						ar.push(hash[o]);
+					}
+				}
+				return ar;
+			}
+			
+			private function onResultWebOrb(event:ResultEvent, _vo:*):void {
+				var obj:Object;
+				if ((_vo is Array) == false) {
+					_vo = this.hashToArray(_vo);
+				}
+				if (_vo is Array) {
+					this._endMs = getTimer();
+					var vo:Array = _vo as Array;
+					var size:Number = vo.length;
+					var etMs:Number = (this._endMs - this._beginMs);
+					this._runTimes.push(etMs);
+					if (this._runTimes.length > this._benchmarkData.length) {
+						obj = new Object();
+						obj.Method = (((this._runTimes.length - 1) % 2) == 0 ? "Slow" + (this._iterationCurrent + 1).toString() : "Fast" + (this._iterationCurrent + 1).toString());
+						obj.Ms = etMs;
+						this._benchmarkData.source.push(obj);
+					} else {
+						this._benchmarkData.source[this._runTimes.length - 1].Ms = this._runTimes[this._runTimes.length - 1];
+					}
+					var func:Function = this._commands.pop();
+					var myVO:Array;
+					if (func != null) {
+						myVO = ArrayUtils.deepCopyFrom(vo).reverse();
+						myVO.push(etMs);
+						this.label_slow.text = etMs.toString();
+						this._etArray = [];
+						this._etArray.push(etMs);
+						myVO.reverse();
+						this.cmbo_dataSlow.dataProvider = new ArrayCollection(myVO);
+						try { func(vo[0]); } catch (err:Error) { AlertPopUp.error(err.toString(),"WebOrb Command Fault"); }
+					} else {
+						myVO = ArrayUtils.deepCopyFrom(vo).reverse();
+						myVO.push(etMs);
+						this.label_fast.text = etMs.toString();
+						this._etArray.push(etMs);
+						myVO.reverse();
+						this.cmbo_dataFast.dataProvider = new ArrayCollection(myVO);
+						this.popState();
+						var numFmt:NumberFormatter = new NumberFormatter();
+						numFmt.precision = 2;
+						numFmt.rounding = "up";
+						if (this._etArray[0] < this._etArray[1]) {
+							this.label_slow.text = numFmt.format(((this._etArray[1] - this._etArray[0]) / this._etArray[1]) * 100.0) + "%";
+							this.label_fast.text = "";
+						} else {
+							this.label_fast.text = numFmt.format(((this._etArray[0] - this._etArray[1]) / this._etArray[0]) * 100.0) + "%";
+							this.label_slow.text = "";
+						}
+						this._iterationCurrent++;
+						if (this._iterationCurrent < this._iterationsCurrent) {
+							this.pushState('RunningBenchmarks');
+							this._commands.push(this.runFast);
+							var testMethod:String = myVO[1];
+							this.runSlow(testMethod);
+						} else {
+							var sort:Sort = new Sort();
+							sort.fields = [new SortField("Method",true)];
+							this._benchmarkData.sort = sort;
+							this._benchmarkData.refresh();
+							this.barchart1.dataProvider = this._benchmarkData;
+							this.barchart1.verticalAxis.update();
+
+							this.performStatisticalAnalysis();
+							this.cmbo_buttons.selectedIndex = 0;
+							this.cmbo_iterations.selectedIndex = 0;
+						}
+					}
+				}
+			}
+			
+			private function performStatisticalAnalysis():void {
+				var totalSlow:Number = 0;
+				var numSlow:int = 0;
+				var dataSlow:ArrayCollection = new ArrayCollection();
+				var totalFast:Number = 0;
+				var numFast:int = 0;
+				var dataFast:ArrayCollection = new ArrayCollection();
+				var i:int;
+				var obj:Object;
+				for (i = 0; i < this._benchmarkData.length; i++) {
+					obj = this._benchmarkData.getItemAt(i);
+					var m:String = String(obj.Method).toLowerCase();
+					if (m.indexOf("slow") > -1) {
+						totalSlow += obj.Ms;
+						numSlow++;
+						dataSlow.addItem(obj);
+					} else if (m.indexOf("fast") > -1) {
+						totalFast += obj.Ms;
+						numFast++;
+						dataFast.addItem(obj);
+					}
+				}
+				var mesnSlow:Number = totalSlow / numSlow;
+				var mesnFast:Number = totalFast / numFast;
+
+				var sort:Sort = new Sort();
+				sort.fields = [new SortField("Ms",true)];
+				dataSlow.sort = sort;
+				dataSlow.refresh();
+
+				dataFast.sort = sort;
+				dataFast.refresh();
+			}
+			
+			private function onFaultWebOrb(event:FaultEvent):void {
+				AlertPopUp.error(event.fault.toString(),"WebOrb Fault");
+			}
+			
+			private function getFastOption():String {
+				return this._options + ((this.radio_slow.selected) ? "false" : "true");
+			}
+			
+			private function getDebugOption():String {
+				return this._optionsDebug + ((this.chkbx_debug.selected) ? "true" : "false");
+			}
+			
+			private function getDebugVerboseOption():String {
+				return this._optionsDebugVerbose + ((this.chkbx_debugVerbose.selected) ? "true" : "false");
+			}
+			
+			private function getDebugAnalysisOption():String {
+				return this._optionsDebugAnalysis + ((this.chkbx_debugAnalysis.selected) ? "true" : "false");
+			}
+			
+			private function runBenchmark(testMethod:String):void {
+				this.busy.label_loading.text = "Running " + "(" + testMethod + ") " + (this._iterationCurrent + 1) + " of " + this._iterationsCurrent + " " + ((this.radio_slow.selected) ? "slow" : "fast") + "...";
+				_weborbObj = new RemoteWebOrbObject("BenchmarkTest", testMethod, busy, onResultWebOrb, onFaultWebOrb);
+				_weborbObj.endpoint = this._endPoint + "?" + this.getFastOption() + "&" + this.getDebugOption() + "&" + this.getDebugVerboseOption() + "&" + this.getDebugAnalysisOption();
+				this._beginMs = getTimer();
+				_weborbObj.doWebOrbServiceCall(testMethod);
+			}
+			
+			private function runSlow(testMethod:String):void {
+				this.radio_fast.selected = false;
+				this.radio_slow.selected = true;
+				this.runBenchmark(testMethod);
+			}
+			
+			private function runFast(testMethod:String):void {
+				this.radio_slow.selected = false;
+				this.radio_fast.selected = true;
+				this.runBenchmark(testMethod);
+			}
+			
+			private function beginBenchmark(testMethod:String):void {
+				this._runTimes = [];
+				this._iterationCurrent = 0;
+				this._etArray = [];
+
+				this.cmbo_dataSlow.dataProvider = new ArrayCollection();
+				this.cmbo_dataFast.dataProvider = new ArrayCollection();
+				this.pushState('RunningBenchmarks');
+				this._commands.push(this.runFast);
+				this.runSlow(testMethod);
+			}
+			
+			private function onClickTest1():void {
+				this.beginBenchmark(this._fixedNumbers_Test);
+			}
+
+			private function onClickTest2():void {
+				this.beginBenchmark(this._randomStrings_Test);
+			}
+
+			private function onClickTest1a():void {
+				this.beginBenchmark(this._fixedHash_Test);
+			}
+
+			private function onClickTest3():void {
+				this.beginBenchmark(this._randomLongInt_Test);
+			}
+
+			private function onClickTest4():void {
+				this.beginBenchmark(this._randomDouble_Test);
+			}
+
+			private function onChangeButtonsComboBox(event:ListEvent):void {
+				var cmbo:ComboBox = ComboBox(event.currentTarget);
+				var btn:Button = cmbo.selectedItem as Button;
+				if (btn != null) {
+					try { btn.dispatchEvent(new MouseEvent(MouseEvent.CLICK)); } catch (err:Error) { AlertPopUp.error(err.toString(), "Error in onChangeButtonsComboBox()."); }
+				}
+			}
+			
+			private function onChangeIterationsComboBox(event:ListEvent):void {
+				this._iterationsCurrent = this.cmbo_iterations.selectedItem.data;
+			}
+			
+			private function onChangeDebugCheckBox(event:Event):void {
+				this.chkbx_debugVerbose.selected = (this.chkbx_debug.selected == false);
+			}
+			
+			private function onChangeDebugVerboseCheckBox(event:Event):void {
+				this.chkbx_debug.selected = (this.chkbx_debugVerbose.selected == false);
+			}
+			
+			private function onChangeDebugAnalysisCheckBox(event:Event):void {
+				if (this.chkbx_debugAnalysis.selected == true) {
+					this.chkbx_debug.selected = true;
+					this.chkbx_debugVerbose.selected = false;
+				} else {
+					this.chkbx_debug.selected = false;
+					this.chkbx_debugVerbose.selected = false;
+				}
+			}
+		]]>
+	</mx:Script>
+	<mx:VBox width="100%" height="100%">
+		<mx:HBox width="100%">
+			<mx:HBox id="hbox_radio" width="10%" enabled="false">
+				<mx:Spacer/>
+				<mx:RadioButton label="Slow" id="radio_slow" groupName="speed" selected="true"/>
+				<mx:Spacer/>
+				<mx:RadioButton label="Fast" id="radio_fast" groupName="speed"/>
+			</mx:HBox>
+			<mx:Spacer/>
+			<mx:HBox width="90%">
+				<mx:Spacer/>
+				<mx:CheckBox label="Debug" id="chkbx_debug" toolTip="When checked this causes the server to collect-up binary WebOrb response files." selected="false" change="onChangeDebugCheckBox(event)"/>
+				<mx:Spacer/>
+				<mx:CheckBox label="Debug Verbose" id="chkbx_debugVerbose" toolTip="When checked this causes the server to collect-up human-readable binary WebOrb response files." selected="false" change="onChangeDebugVerboseCheckBox(event)"/>
+				<mx:Spacer/>
+				<mx:CheckBox label="Debug Analysis" id="chkbx_debugAnalysis" toolTip="When checked this causes the server to compare binary WebOrb response files for equalness." selected="false" change="onChangeDebugAnalysisCheckBox(event)"/>
+			</mx:HBox>
+		</mx:HBox>
+		<mx:HBox width="100%">
+			<mx:HBox id="hbox_buttons">
+				<mx:ComboBox id="cmbo_iterations" dataProvider="{this._benchmarkIterations}" change="onChangeIterationsComboBox(event)"/>
+				<mx:ComboBox id="cmbo_buttons" change="onChangeButtonsComboBox(event)">
+					<mx:Button label="Choose..." toolTip="" id="btn_choose"/>
+					<mx:Button label="Test 1 (10000 Numbers)" toolTip="Benchmark using Fixed Numbers 0 to 65535." id="btn_test1" click="onClickTest1()"/>
+					<mx:Button label="Test 2 (10000 Random Length Strings)" toolTip="Benchmark using Random Length Strings." id="btn_test2" click="onClickTest2()"/>
+					<mx:Button label="Test 1a (10000 Numbers in Hash)" toolTip="Benchmark using Fixed Numbers 0 to 65535." id="btn_test1a" click="onClickTest1a()"/>
+					<mx:Button label="Test 3 (10000 Random Long Ints)" toolTip="Benchmark using Random Long Ints." id="btn_test3" click="onClickTest3()"/>
+					<mx:Button label="Test 4 (10000 Random Doubles)" toolTip="Benchmark using Random Doubles." id="btn_test4" click="onClickTest4()"/>
+				</mx:ComboBox>
+				<mx:VBox>
+					<mx:ComboBox id="cmbo_dataSlow" toolTip="Slow test."/>
+					<mx:Label id="label_slow"/>
+				</mx:VBox>
+				<mx:VBox>
+					<mx:ComboBox id="cmbo_dataFast" toolTip="Fast test."/>
+					<mx:Label id="label_fast"/>
+				</mx:VBox>
+			</mx:HBox>
+			<busy:Busy id="busy" x="130" y="10"/>
+		</mx:HBox>
+		<mx:VBox height="100%" id="vbox_charts">
+			<mx:TabNavigator width="{this.width - 20}" height="{this.height - (this.hbox_radio.height + this.hbox_buttons.height + 20)}" id="tabs_charts">
+				<mx:Canvas label="Bar Chart" width="100%" height="100%" id="view_barChart">
+					<mx:BarChart x="0" y="0" id="barchart1" width="100%" height="100%" showDataTips="true" dataTipMode="single">
+						<mx:verticalAxis>
+						   <mx:CategoryAxis 
+						        categoryField="Method"
+						   />
+						</mx:verticalAxis>
+						<mx:series>
+						   <mx:BarSeries 
+						        yField="Method" 
+						        xField="Ms" 
+						        displayName="Benchmark"
+						   />
+						</mx:series>
+					</mx:BarChart>
+				</mx:Canvas>
+			</mx:TabNavigator>
+		</mx:VBox>
+	</mx:VBox>
+</mx:Application>

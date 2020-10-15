@@ -1,0 +1,52 @@
+nevada:
+  title: Nevada
+  subgroups:
+  - nevada_boulder_city
+  - nevada_carson
+  - nevada_elko
+  - nevada_henderson
+  - nevada_las_vegas
+  - nevada_north_las_vegas
+  - nevada_reno
+  - nevada_sparks
+
+nevada_boulder_city:
+  title: Boulder City
+  type: city
+  population: 15226
+
+nevada_carson:
+  title: Carson
+  type: city
+  population: 55926
+
+nevada_elko:
+  title: Elko
+  type: city
+  population: 16454
+
+nevada_henderson:
+  title: Henderson
+  type: city
+  population: 224542
+
+nevada_las_vegas:
+  title: Las Vegas
+  type: city
+  population: 534506
+
+nevada_north_las_vegas:
+  title: North Las Vegas
+  type: city
+  population: 158540
+
+nevada_reno:
+  title: Reno
+  type: city
+  population: 197897
+
+nevada_sparks:
+  title: Sparks
+  type: city
+  population: 80162
+

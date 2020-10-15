@@ -1,0 +1,24 @@
+publishes:
+  id: 1
+  name: publishes
+  rev_name: is published by
+bundles:
+  id: 2
+  name: bundles
+  rev_name: is bundled by
+inst_by:
+  id: 3
+  name: is instantiated by
+  rev_name: is an instance of
+offers:
+  id: 4
+  name: offers
+  rev_name: is offered by
+uses:
+  id: 5
+  name: uses
+  rev_name: is used by
+alias:
+  id: 6
+  name: is an alias of
+  rev_name: is an alias of

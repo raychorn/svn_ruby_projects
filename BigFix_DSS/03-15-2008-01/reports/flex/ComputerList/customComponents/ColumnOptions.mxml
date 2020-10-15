@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="init(event)">
+	<mx:int id="subject_id">2</mx:int>
+	<mx:Number id="grouping_type">1</mx:Number>
+	<mx:Array id="selected_columns"></mx:Array>
+
+	<mx:Script><![CDATA[
+		import mx.controls.Alert;
+		import mx.binding.utils.BindingUtils;
+		import mx.rpc.events.ResultEvent;
+		import flash.events.Event;
+		import com.bigfix.dss.view.general.Alert.AlertPopUp;
+
+		public function init(event:Event):void {
+			BindingUtils.bindSetter(set_subject_id, event.target, 'subject_id');
+			BindingUtils.bindSetter(set_grouping_type, event.target, 'grouping_type');
+		}
+
+		private function set_subject_id(value:int):void {
+			subject_id = value;
+			computerList.getAvailableColumns.send();
+		}
+		private function set_grouping_type(value:int):void {
+			grouping_type = value;
+			computerList.getAvailableColumns.send();
+		}
+
+		public function submit():void {
+			dispatchEvent(new Event("columnSelectionChange"));
+		}
+	]]></mx:Script>
+
+	<mx:Metadata>
+		[Event(name='columnSelectionChange', type='flash.events.Event')]
+	</mx:Metadata>
+
+
+	<mx:RemoteObject id="computerList" destination="ComputerList" showBusyCursor="true" fault="AlertPopUp.error(event.fault.faultString, 'Error');">
+		<mx:method name="getAvailableColumns">
+			<mx:arguments>
+				<mx:arg1 subject_id="{subject_id}" grouping_type="{grouping_type}" selected_columns="{selected_columns}"/>
+			</mx:arguments>
+		</mx:method>
+	</mx:RemoteObject>
+
+
+	<mx:FormHeading label="Column Inclusion"/>
+	<mx:HBox>
+		<mx:List labelField="label" rowCount="5" width="200" dragMoveEnabled="true" dragEnabled="true" dropEnabled="true" dataProvider="{computerList.getAvailableColumns.lastResult}"/>
+		<mx:List labelField="label" rowCount="5" width="200" dragMoveEnabled="true" dragEnabled="true" dropEnabled="true" dataProvider="{selected_columns}"/>
+	</mx:HBox>
+</mx:Form>

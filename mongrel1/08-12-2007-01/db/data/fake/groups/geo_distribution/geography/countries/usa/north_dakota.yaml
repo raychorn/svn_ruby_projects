@@ -1,0 +1,46 @@
+north_dakota:
+  title: North Dakota
+  subgroups:
+  - north_dakota_bismarck
+  - north_dakota_dickinson
+  - north_dakota_fargo
+  - north_dakota_grand_forks
+  - north_dakota_mandan
+  - north_dakota_minot
+  - north_dakota_west_fargo
+
+north_dakota_bismarck:
+  title: Bismarck
+  type: city
+  population: 56701
+
+north_dakota_dickinson:
+  title: Dickinson
+  type: city
+  population: 15696
+
+north_dakota_fargo:
+  title: Fargo
+  type: city
+  population: 91953
+
+north_dakota_grand_forks:
+  title: Grand Forks
+  type: city
+  population: 50081
+
+north_dakota_mandan:
+  title: Mandan
+  type: city
+  population: 17001
+
+north_dakota_minot:
+  title: Minot
+  type: city
+  population: 35343
+
+north_dakota_west_fargo:
+  title: West Fargo
+  type: city
+  population: 17623
+

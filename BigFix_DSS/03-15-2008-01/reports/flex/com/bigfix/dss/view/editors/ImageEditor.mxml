@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel
+	xmlns:fileio="com.bigfix.dss.view.fileio.*"
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" height="100%">
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import com.bigfix.dss.view.fileio.FileChooser;
+			import com.bigfix.dss.view.fileio.events.FileUploadCompletedEvent;
+			import mx.events.CloseEvent;
+			import com.bigfix.dss.view.editors.events.OpenedImageEditorEvent;
+
+			[Event(name="openedImageEditor", type="com.bigfix.dss.view.editors.events.OpenedImageEditorEvent")]
+			
+			private var _chooser:FileChooser;
+
+			private var _sprite:*;
+			
+			[Bindable]
+			private var _busy:*;
+			
+			[Bindable]
+			private var _initialImageCreation:Boolean = false;
+			
+			public function set initialImageCreation(initialImageCreation:Boolean):void {
+				this._initialImageCreation = initialImageCreation;
+			}
+			
+			public function get initialImageCreation():Boolean {
+				return this._initialImageCreation;
+			}
+			
+			private function attachServerSideImageChooser():void {
+				this._chooser = new FileChooser();
+				this._chooser.id = "chooser";
+				this._chooser.setStyle("backgroundColor", 0xffff99);
+				this._chooser.width = this.width - 10;
+				this._chooser.height = 95;
+				this._chooser.x = 0;
+				this._chooser.y = this.editor.btnUpload.y - (this._chooser.height + 5);
+				this._chooser.addEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompleteFileChooser);
+				this.editor.vbox_container.addChild(this._chooser);
+				this.height += ((this._initialImageCreation) ? this._chooser.height : -50);
+				this.editor.isChoosingFileFromServer = true;
+			}
+			
+			public function set busy(busy:*):void {
+				this._busy = busy;
+			}
+			
+			public function get busy():* {
+				return this._busy;
+			}
+			
+			public function set sprite(sprite:*):void {
+				this._sprite = sprite;
+			}
+			
+			public function get sprite():* {
+				return this._sprite;
+			}
+			
+			private function onCreationCompleteFileChooser(event:FlexEvent):void {
+			}
+			
+			public function set showCloseButton(bool:Boolean):void {
+			}
+			
+			public function get showCloseButton():Boolean {
+				return false;
+			}
+			
+			private function onCloseFileUpload(event:CloseEvent):void {
+				this.dispatchEvent(event.clone());
+			}
+			
+			private function onCreationCompleteFileUpload():void {
+				this.attachServerSideImageChooser();
+				this.dispatchEvent(new OpenedImageEditorEvent(OpenedImageEditorEvent.TYPE_OPENED_IMAGE_EDITOR));
+				this.editor.addEventListener(CloseEvent.CLOSE, onCloseFileUpload);
+			}
+		]]>
+	</mx:Script>
+	<mx:VBox width="100%" height="100%" horizontalAlign="left" verticalAlign="top" id="vbox1">
+		<fileio:FileUploader id="editor" width="100%" height="100%" creationComplete="onCreationCompleteFileUpload()"/>
+	</mx:VBox>
+</mx:Panel>

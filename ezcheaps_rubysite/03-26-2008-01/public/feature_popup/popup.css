@@ -1,0 +1,112 @@
+/* Feature Popup CSS */
+
+A {
+  color: #FEFF6F;
+}
+
+A:hover {
+  background-color: #FEFF6F;
+  color: #245773;
+  text-decoration: none;
+}
+
+DIV#closeWin {
+  text-align: right;
+  margin: 40px 30px 10px 10px;
+  font-size: .7em;
+}
+
+#closeWin A {
+  color: #7FD2FF;
+  text-decoration: none;
+  padding: 2px 3px;
+}
+
+#closeWin A:hover {
+  background-color: #7FD2FF;
+  color: #245773;
+}
+
+body {
+  text-align: left;
+  padding-top: 25px;
+  padding-right: 15px;
+  margin:0;
+  color: white;
+  font-family: Verdana, Helvetica, Arial, Sans-serif;
+  font-size: medium;
+  background: #245773 url(/imagesweb_hosting.htmpopup/popbg.jpg) no-repeat top left;
+  width: 400px;
+}
+
+p,ul {
+  font-family: Verdana, Helvetica, Arial, Sans-serif;
+  font-size: 77%;
+  line-height: 1.5em;
+  margin: 20px 20px 20px 20px;
+}
+
+p.highlight {
+  background:#E6FCD8;
+}
+
+h1,h2,h3 {
+  color: white; 
+  margin-left: 20px;
+  margin-right: 20px; 
+  font-family: "Lucida Grande", "Trebuchet MS", Verdana, helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 140%;
+  padding-bottom: 0px;
+}
+
+h2 {
+  font-size: 110%;
+  color: #FFF;
+  padding-bottom: 0px;
+}
+
+h3 {
+  color: #3F4A52;
+  font-size: 100%;
+  font-weight: bold;
+  padding-bottom: 0px;
+}
+
+#mainArea {
+  background-color: white; 
+  border: 1px solid #4B9CD4; 
+  margin: 40px; 
+  padding: 10px 15px 10px 10px; 
+}
+
+#mainArea h1.intro {
+  color: red;
+  font-size: 150%; 
+}
+
+#tableContents {
+  background-color: #F4FED3;
+  font-size: 75%; 
+  border: 1px solid gray; 
+  margin: 20px; 
+  padding-top: 10px; 
+  float: center;
+}
+#tableContents h2 {
+  font-size: 110%;
+  color: red;
+}
+#tableContents h3 {
+  font-size: 100%;
+  color:#30393F;
+}
+#header {
+margin-left:40px;
+float: left;
+width:300px;
+height:100px;
+background-image:url(/images/head-bg.gif);
+}

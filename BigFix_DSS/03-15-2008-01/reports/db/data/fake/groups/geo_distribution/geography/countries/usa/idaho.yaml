@@ -1,0 +1,82 @@
+idaho:
+  title: Idaho
+  subgroups:
+  - idaho_boise_city
+  - idaho_caldwell
+  - idaho_coeur_d_alene
+  - idaho_eagle
+  - idaho_idaho_falls
+  - idaho_lewiston
+  - idaho_meridian
+  - idaho_moscow
+  - idaho_nampa
+  - idaho_pocatello
+  - idaho_post_falls
+  - idaho_rexburg
+  - idaho_twin_falls
+
+idaho_boise_city:
+  title: Boise City
+  type: city
+  population: 192703
+
+idaho_caldwell:
+  title: Caldwell
+  type: city
+  population: 32814
+
+idaho_coeur_d_alene:
+  title: Coeur d'Alene
+  type: city
+  population: 38507
+
+idaho_eagle:
+  title: Eagle
+  type: city
+  population: 16188
+
+idaho_idaho_falls:
+  title: Idaho Falls
+  type: city
+  population: 52219
+
+idaho_lewiston:
+  title: Lewiston
+  type: city
+  population: 30952
+
+idaho_meridian:
+  title: Meridian
+  type: city
+  population: 45621
+
+idaho_moscow:
+  title: Moscow
+  type: city
+  population: 21869
+
+idaho_nampa:
+  title: Nampa
+  type: city
+  population: 68094
+
+idaho_pocatello:
+  title: Pocatello
+  type: city
+  population: 52910
+
+idaho_post_falls:
+  title: Post Falls
+  type: city
+  population: 21408
+
+idaho_rexburg:
+  title: Rexburg
+  type: city
+  population: 24721
+
+idaho_twin_falls:
+  title: Twin Falls
+  type: city
+  population: 37732
+

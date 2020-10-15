@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	creationComplete="onCreationComplete()" 
+	width="400"
+	styleName="FileUploader"
+	>
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.view.fileio.view.events.ImageSelectedEvent;
+			import mx.utils.URLUtil;
+			import com.bigfix.dss.view.general.Busy.Busy;
+			import mx.core.UIComponent;
+			import com.bigfix.dss.command.GetReportsCommand;
+			import mx.rpc.remoting.mxml.RemoteObject;
+			import com.bigfix.dss.util.DSS;
+			import mx.collections.XMLListCollection;
+			import com.bigfix.dss.view.fileio.events.FileUploadCompletedEvent;
+			import mx.managers.PopUpManager;
+			import com.bigfix.dss.view.general.Alert.AlertPopUp;
+			import com.bigfix.dss.rest.httpService;
+			import mx.collections.ArrayCollection;
+			import mx.rpc.events.ResultEvent;
+			import com.bigfix.dss.util.URLUtils;
+			import com.bigfix.dss.util.StringUtils;
+		
+			[Event(name="fileUploadComplete", type="com.bigfix.dss.view.fileio.events.FileUploadCompletedEvent")]
+
+			private const _uploadDomain:String = "http://localhost:3000/";
+			private const _uploadController:String = _uploadDomain + "fileUpload";
+			
+			private var _uploadFilesAR:Array;
+			private var _addFilesList:FileReferenceList;	
+			private var _uploadFileRef:FileReference;
+
+			private var _progressBar:winProgress;
+			
+			private var _url:String = _uploadController;
+			
+			private var srvc:httpService;
+			
+			private var _uploadStatus:Object;
+			
+			[Bindable]
+			private var _isChoosingFileFromServer:Boolean = false;
+			
+			private var _selectedImage_Source:String;
+			private var _selectedImage_Size:Array;
+
+			[Bindable]
+			private var _busy:Busy;
+			
+			public function set isChoosingFileFromServer(isChoosingFileFromServer:Boolean):void {
+				this._isChoosingFileFromServer = isChoosingFileFromServer;
+			}
+			
+			public function get isChoosingFileFromServer():Boolean {
+				return this._isChoosingFileFromServer;
+			}
+			
+			public function set busy(busy:Busy):void {
+				this._busy = busy;
+			}
+			
+			public function get busy():Busy {
+				return this._busy;
+			}
+			
+			public function set urlUploadScript(url:String):void {
+				this._url = url;
+			}
+			
+			public function get urlUploadScript():String {
+				return this._url;
+			}
+			
+			public function get urlServer():String {
+				var ar:Array = this._url.split("/");
+				ar.pop();
+				return ar.join("/");
+			}
+			
+			public function get uploadStatus():Object {
+				return this._uploadStatus;
+			}
+			
+			private function onClose():void {
+				if (this.isPopUp) {
+					PopUpManager.removePopUp(this);
+				} else {
+					this.visible = false;
+				}
+				this.dispatchEvent(new FileUploadCompletedEvent(FileUploadCompletedEvent.TYPE_FILE_UPLOAD_COMPLETE, this._uploadStatus));
+			}
+			
+			private function refershButtonState():void {
+				this.btnUpload.enabled = false;
+				this.btnRemove.enabled = false;
+				this.btnAdd.enabled = true;
+				try { this.btnUpload.enabled = (this.listFiles.dataProvider.length > 0); } catch (err:Error) { }
+				try { this.btnRemove.enabled = (this.listFiles.dataProvider.length > 0); } catch (err:Error) { }
+				try { this.btnAdd.enabled = (this.listFiles.dataProvider.length == 0); } catch (err:Error) { }
+			}
+			
+			private function onImageSelected(event:ImageSelectedEvent):void {
+				this._selectedImage_Source = event.source;
+				this._selectedImage_Size = event.size;
+				this.btnUpload.enabled = true;
+				this._isChoosingFileFromServer = true;
+			}
+			
+			private function onCreationComplete():void {
+				Security.allowDomain("*");
+				this._uploadFilesAR = new Array();
+				this.srvc = new httpService(false);
+				this.refershButtonState();
+
+				var svc:RemoteObject = GetReportsCommand.svc.svc;
+				var domain:String = URLUtils.urlProtocol + URLUtil.getServerNameWithPort(svc.channelSet.currentChannel.endpoint) + "/";
+				this._url = this._url.replace(this._uploadDomain, domain);
+				
+				this.addEventListener(ImageSelectedEvent.TYPE_IMAGE_SELECTED, onImageSelected);
+			}
+			
+			private function addFiles():void {
+				this._isChoosingFileFromServer = false;
+				var filters:Array = [];
+				filters.push(new FileFilter("Images (*.jpg, *.jpeg, *.gif, *.png)", "*.jpg;*.jpeg;*.gif;*.png"));
+				this._addFilesList = new FileReferenceList();
+				with (this._addFilesList) {
+					addEventListener(Event.SELECT, onSelectFile);
+					browse(filters);
+				}
+			}
+
+			private function refreshFileList():void {
+				listFiles.dataProvider = this._uploadFilesAR;
+			}
+			
+			private function removeFiles():void {
+				var ar:Array = listFiles.selectedIndices;
+				for (var i:Number = 0; i < ar.length; i++) {
+					this._uploadFilesAR[Number(ar[i])] = null;
+				}
+				for (var j:Number = 0; j < this._uploadFilesAR.length; j++) {
+					if (this._uploadFilesAR[j] == null) {
+						this._uploadFilesAR.splice(j, 1);
+						j--;
+					}
+				}
+				listFiles.dataProvider = this._uploadFilesAR;
+				listFiles.selectedIndex = 0;
+				this.refershButtonState();
+			}
+			
+			private function onSelectFile(event:Event):void {
+				var ar:Array = new Array();
+				for (var i:Number = 0; i < this._uploadFilesAR.length; i++) {
+					for (var j:Number = 0; j < this._addFilesList.fileList.length; j++) {
+						if (this._uploadFilesAR[i].label == this._addFilesList.fileList[j].name) {
+							ar.push(this._addFilesList.fileList[j].name);
+							this._addFilesList.fileList.splice(j, 1);
+							j--;
+						}
+					}
+				}
+				if (this._addFilesList.fileList.length >= 1) {
+					for (var k:Number = 0; k < this._addFilesList.fileList.length; k++) {
+						if (this._uploadFilesAR.length < 1) {
+							this._uploadFilesAR.push({label:this._addFilesList.fileList[k].name, data:this._addFilesList.fileList[k]});
+						}
+					}
+					with (this.listFiles) {
+						dataProvider = this._uploadFilesAR;
+						selectedIndex = this._uploadFilesAR.length - 1;
+					}
+				}				
+				if (ar.length >= 1) {
+					AlertPopUp.info("The file(s): \n\n• " + ar.join("\n• ") + "\n\n...are already on the upload list. Please change the filename(s) or pick a different file.", "File(s) already on list");
+				}
+				this.refershButtonState();
+			}
+			
+			
+			private function clearUpload():void {
+				with (this._uploadFileRef) {
+					removeEventListener(ProgressEvent.PROGRESS, onUploadProgress);
+					removeEventListener(Event.COMPLETE, onUploadComplete);
+					removeEventListener(IOErrorEvent.IO_ERROR, onUploadIoError);
+					removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onUploadSecurityError);
+					cancel();
+				}
+			}
+			
+			private function startUpload():void {
+				if (this._isChoosingFileFromServer) {
+					var toks:Array = this._selectedImage_Source.split(".");
+					this.triggerFileUploadCompletedEvent(this._selectedImage_Source + "|" + toks[toks.length - 1] + "," + this._selectedImage_Size[0] + "," + this._selectedImage_Size[1]);
+				} else {
+					if (this.listFiles.dataProvider.length > 0) {
+						var obj:Object = this._uploadFilesAR.pop();
+						this._progressBar = winProgress(PopUpManager.createPopUp(this, winProgress, true));
+						with (this._progressBar) {
+							btnCancel.removeEventListener("click", onUploadCanceled);
+							btnCancel.addEventListener("click", onUploadCanceled);
+							title = "Uploading file to " + URLUtil.getServerNameWithPort(this.urlUploadScript);
+							txtFile.text = obj.label;
+							progBar.label = "0%";
+						}
+						PopUpManager.centerPopUp(this._progressBar);
+	
+						var _userName:String = DSS.model.user.username;
+	
+						var sendVars:URLVariables = new URLVariables();
+						
+						var request:URLRequest = new URLRequest();
+						with (request) {
+							data = sendVars;
+						    url = this.urlUploadScript + "?username=" + _userName;
+						    method = URLRequestMethod.POST;
+						}
+	
+					    this._uploadFileRef = new FileReference();
+					    this._uploadFileRef = obj.data;
+					    with (this._uploadFileRef) {
+						    addEventListener(ProgressEvent.PROGRESS, onUploadProgress);
+						   	addEventListener(Event.COMPLETE, onUploadComplete);
+						    addEventListener(IOErrorEvent.IO_ERROR, onUploadIoError);
+						  	addEventListener(SecurityErrorEvent.SECURITY_ERROR, onUploadSecurityError);
+						  	addEventListener(DataEvent.UPLOAD_COMPLETE_DATA, onDataUploadComplete);
+					    }
+	
+						var mime:String = "image/" + this._uploadFileRef.type.replace(".", "");
+					    var header:URLRequestHeader = new URLRequestHeader("Content-Type", mime);
+					    request.requestHeaders.push(header);
+	
+					    this._uploadFileRef.upload(request, "file", false);
+					}
+				}
+			}
+
+			private function triggerFileUploadCompletedEvent(data:String):void {
+				this._uploadStatus = new Object();
+				this._uploadStatus["success"] = (data.length > 0);
+				var ar:Array = data.split("|");
+				this._uploadStatus["serverFileName"] = ar[0];
+				var ar2:Array = ar[ar.length - 1].toString().split(",");
+				try {
+					this._uploadStatus["image_type"] = String(ar2[0]);
+					this._uploadStatus["image_width"] = new Number(String(ar2[1]));
+					this._uploadStatus["image_height"] = new Number(String(ar2[2]));
+				} catch (err:Error) { }
+				this._uploadStatus["serverFileName"] = String(this._uploadStatus["serverFileName"]).replace("public/", this.urlServer + "/");
+				this.dispatchEvent(new FileUploadCompletedEvent(FileUploadCompletedEvent.TYPE_FILE_UPLOAD_COMPLETE, this._uploadStatus));
+			}
+			
+			private function onDataUploadComplete(event:DataEvent):void {
+				this.triggerFileUploadCompletedEvent(event.data);
+			}
+			
+			private function onUploadCanceled(event:Event):void {
+				PopUpManager.removePopUp(this._progressBar);
+				this._progressBar = null;
+				this._uploadFileRef.cancel();
+				clearUpload();
+				this._uploadStatus = new Object();
+			}
+			
+			private function onUploadProgress(event:ProgressEvent):void {
+				var numPerc:Number = Math.round((Number(event.bytesLoaded) / Number(event.bytesTotal)) * 100);
+				this._progressBar.progBar.setProgress(numPerc, 100);
+				this._progressBar.progBar.label = numPerc + "%";
+				this._progressBar.progBar.validateNow();
+				this._progressBar.btnCancel.enabled = ((numPerc > 90) ? false : true);
+			}
+			
+			private function onUploadComplete(event:Event):void {
+				this.refreshFileList();
+				PopUpManager.removePopUp(this._progressBar);
+				this.refershButtonState();
+			}
+			
+			private function onUploadIoError(event:IOErrorEvent):void {
+				AlertPopUp.info("IO Error in uploading file.", "Error");
+				PopUpManager.removePopUp(this._progressBar);
+				this._progressBar = null;
+				this._uploadFileRef.cancel();
+				clearUpload();
+				this.refershButtonState();
+				this._uploadStatus = new Object();
+				this.dispatchEvent(new FileUploadCompletedEvent(FileUploadCompletedEvent.TYPE_FILE_UPLOAD_COMPLETE, this._uploadStatus));
+			}
+			
+			private function onUploadSecurityError(event:SecurityErrorEvent):void {
+				AlertPopUp.info("Security Error in uploading file.", "Error");
+				PopUpManager.removePopUp(this._progressBar);
+				this._progressBar = null;
+				this._uploadFileRef.cancel();
+				clearUpload();
+				this.refershButtonState();
+				this._uploadStatus = new Object();
+				this.dispatchEvent(new FileUploadCompletedEvent(FileUploadCompletedEvent.TYPE_FILE_UPLOAD_COMPLETE, this._uploadStatus));
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:VBox id="vbox_container" width="100%" height="100%">
+		<mx:List width="100%" id="listFiles" height="20" allowMultipleSelection="false"/>
+		<mx:HBox width="100%" horizontalAlign="center">
+			<mx:Button label="Choose file to upload.." id="btnAdd" enabled="{this.listFiles.dataProvider.length == 0}" click="addFiles()"/>
+			<mx:Spacer width="50%"/>
+			<mx:Button label="Remove file" id="btnRemove" enabled="{this.listFiles.dataProvider.length > 0}" click="removeFiles()"/>
+		</mx:HBox>
+		<mx:ControlBar horizontalAlign="right">
+			<mx:Button label="{(this._isChoosingFileFromServer) ? 'Choose file from server' : 'Upload file to server'}" id="btnUpload" enabled="{this.listFiles.dataProvider.length > 0}" click="startUpload()"/>
+			<mx:Spacer width="50%"/>
+			<mx:Button label="Dismiss" id="btn_dismiss" click="onClose()"/>
+		</mx:ControlBar>
+	</mx:VBox>
+</mx:Canvas>

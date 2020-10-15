@@ -1,0 +1,8 @@
+one:
+  id: 1
+  computer_id: 1
+  benchmark_check_id: 1
+  current_state: foobar
+  pass: true
+  valid_from: 2006-10-21
+  valid_to: 2007-01-15

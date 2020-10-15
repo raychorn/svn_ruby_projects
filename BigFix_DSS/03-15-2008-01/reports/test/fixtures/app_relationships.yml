@@ -1,0 +1,20 @@
+ms_publishes_windows:
+  id: 1
+  app_id: 7
+  related_app_id: 8
+  app_relationship_type_id: 1
+windows_published_by_ms:
+  id: 2
+  app_id: 8
+  related_app_id: 7
+  app_relationship_type_id: 2
+windows_bundles_ie:
+  id: 3
+  app_id: 8
+  related_app_id: 1
+  app_relationship_type_id: 3
+ie_bundled_by_windows:
+  id: 4
+  app_id: 1
+  related_app_id: 8
+  app_relationship_type_id: 4

@@ -1,0 +1,712 @@
+florida:
+  title: Florida
+  subgroups:
+  - florida_altamonte_springs
+  - florida_apopka
+  - florida_aventura
+  - florida_bartow
+  - florida_belle_glade
+  - florida_boca_raton
+  - florida_bonita_springs
+  - florida_boynton_beach
+  - florida_bradenton
+  - florida_cape_coral
+  - florida_casselberry
+  - florida_clearwater
+  - florida_cocoa
+  - florida_coconut_creek
+  - florida_cooper_city
+  - florida_coral_gables
+  - florida_coral_springs
+  - florida_crestview
+  - florida_dania_beach
+  - florida_davie
+  - florida_daytona_beach
+  - florida_de_bary
+  - florida_deerfield_beach
+  - florida_de_land
+  - florida_delray_beach
+  - florida_deltona
+  - florida_doral
+  - florida_dunedin
+  - florida_edgewater
+  - florida_eustis
+  - florida_fort_lauderdale
+  - florida_fort_myers
+  - florida_fort_pierce
+  - florida_fort_walton_beach
+  - florida_gainesville
+  - florida_greenacres
+  - florida_hallandale_beach
+  - florida_hialeah
+  - florida_hialeah_gardens
+  - florida_hollywood
+  - florida_homestead
+  - florida_jacksonville
+  - florida_jacksonville_beach
+  - florida_jupiter
+  - florida_key_west
+  - florida_kissimmee
+  - florida_lakeland
+  - florida_lake_worth
+  - florida_largo
+  - florida_lauderdale_lakes
+  - florida_lauderhill
+  - florida_leesburg
+  - florida_marco_island
+  - florida_margate
+  - florida_melbourne
+  - florida_miami
+  - florida_miami_beach
+  - florida_miami_gardens
+  - florida_miami_lakes
+  - florida_miramar
+  - florida_naples
+  - florida_new_port_richey
+  - florida_new_smyrna_beach
+  - florida_north_lauderdale
+  - florida_north_miami
+  - florida_north_miami_beach
+  - florida_north_port
+  - florida_oakland_park
+  - florida_ocala
+  - florida_ocoee
+  - florida_opa_locka
+  - florida_orlando
+  - florida_ormond_beach
+  - florida_oviedo
+  - florida_palm_bay
+  - florida_palm_beach_gardens
+  - florida_palm_coast
+  - florida_palmetto_bay
+  - florida_panama_city
+  - florida_parkland
+  - florida_pembroke_pines
+  - florida_pensacola
+  - florida_pinecrest
+  - florida_pinellas_park
+  - florida_plantation
+  - florida_plant_city
+  - florida_pompano_beach
+  - florida_port_orange
+  - florida_port_st__lucie
+  - florida_punta_gorda
+  - florida_riviera_beach
+  - florida_rockledge
+  - florida_royal_palm_beach
+  - florida_safety_harbor
+  - florida_st__cloud
+  - florida_st__petersburg
+  - florida_sanford
+  - florida_sarasota
+  - florida_sebastian
+  - florida_seminole
+  - florida_stuart
+  - florida_sunny_isles_beach
+  - florida_sunrise
+  - florida_tallahassee
+  - florida_tamarac
+  - florida_tampa
+  - florida_tarpon_springs
+  - florida_temple_terrace
+  - florida_titusville
+  - florida_venice
+  - florida_vero_beach
+  - florida_wellington
+  - florida_weston
+  - florida_west_palm_beach
+  - florida_winter_garden
+  - florida_winter_haven
+  - florida_winter_park
+  - florida_winter_springs
+
+florida_altamonte_springs:
+  title: Altamonte Springs
+  type: city
+  population: 40764
+
+florida_apopka:
+  title: Apopka
+  type: city
+  population: 32439
+
+florida_aventura:
+  title: Aventura
+  type: city
+  population: 27159
+
+florida_bartow:
+  title: Bartow
+  type: city
+  population: 15788
+
+florida_belle_glade:
+  title: Belle Glade
+  type: city
+  population: 15456
+
+florida_boca_raton:
+  title: Boca Raton
+  type: city
+  population: 86861
+
+florida_bonita_springs:
+  title: Bonita Springs
+  type: city
+  population: 35851
+
+florida_boynton_beach:
+  title: Boynton Beach
+  type: city
+  population: 64834
+
+florida_bradenton:
+  title: Bradenton
+  type: city
+  population: 52998
+
+florida_cape_coral:
+  title: Cape Coral
+  type: city
+  population: 128193
+
+florida_casselberry:
+  title: Casselberry
+  type: city
+  population: 24108
+
+florida_clearwater:
+  title: Clearwater
+  type: city
+  population: 109034
+
+florida_cocoa:
+  title: Cocoa
+  type: city
+  population: 16933
+
+florida_coconut_creek:
+  title: Coconut Creek
+  type: city
+  population: 48859
+
+florida_cooper_city:
+  title: Cooper City
+  type: city
+  population: 29777
+
+florida_coral_gables:
+  title: Coral Gables
+  type: city
+  population: 42921
+
+florida_coral_springs:
+  title: Coral Springs
+  type: city
+  population: 128208
+
+florida_crestview:
+  title: Crestview
+  type: city
+  population: 16785
+
+florida_dania_beach:
+  title: Dania Beach
+  type: city
+  population: 28446
+
+florida_davie:
+  title: Davie
+  type: city
+  population: 82485
+
+florida_daytona_beach:
+  title: Daytona Beach
+  type: city
+  population: 64298
+
+florida_de_bary:
+  title: De Bary
+  type: city
+  population: 16218
+
+florida_deerfield_beach:
+  title: Deerfield Beach
+  type: city
+  population: 75980
+
+florida_de_land:
+  title: De Land
+  type: city
+  population: 22867
+
+florida_delray_beach:
+  title: Delray Beach
+  type: city
+  population: 64177
+
+florida_deltona:
+  title: Deltona
+  type: city
+  population: 79781
+
+florida_doral:
+  title: Doral
+  type: city
+  population: 22220
+
+florida_dunedin:
+  title: Dunedin
+  type: city
+  population: 36736
+
+florida_edgewater:
+  title: Edgewater
+  type: city
+  population: 20719
+
+florida_eustis:
+  title: Eustis
+  type: city
+  population: 17331
+
+florida_fort_lauderdale:
+  title: Fort Lauderdale
+  type: city
+  population: 164354
+
+florida_fort_myers:
+  title: Fort Myers
+  type: city
+  population: 57061
+
+florida_fort_pierce:
+  title: Fort Pierce
+  type: city
+  population: 38097
+
+florida_fort_walton_beach:
+  title: Fort Walton Beach
+  type: city
+  population: 19958
+
+florida_gainesville:
+  title: Gainesville
+  type: city
+  population: 108453
+
+florida_greenacres:
+  title: Greenacres
+  type: city
+  population: 32053
+
+florida_hallandale_beach:
+  title: Hallandale Beach
+  type: city
+  population: 36308
+
+florida_hialeah:
+  title: Hialeah
+  type: city
+  population: 223913
+
+florida_hialeah_gardens:
+  title: Hialeah Gardens
+  type: city
+  population: 19934
+
+florida_hollywood:
+  title: Hollywood
+  type: city
+  population: 144371
+
+florida_homestead:
+  title: Homestead
+  type: city
+  population: 37852
+
+florida_jacksonville:
+  title: Jacksonville
+  type: city
+  population: 776104
+
+florida_jacksonville_beach:
+  title: Jacksonville Beach
+  type: city
+  population: 21296
+
+florida_jupiter:
+  title: Jupiter
+  type: city
+  population: 46843
+
+florida_key_west:
+  title: Key West
+  type: city
+  population: 24607
+
+florida_kissimmee:
+  title: Kissimmee
+  type: city
+  population: 56139
+
+florida_lakeland:
+  title: Lakeland
+  type: city
+  population: 88338
+
+florida_lake_worth:
+  title: Lake Worth
+  type: city
+  population: 35971
+
+florida_largo:
+  title: Largo
+  type: city
+  population: 73420
+
+florida_lauderdale_lakes:
+  title: Lauderdale Lakes
+  type: city
+  population: 31603
+
+florida_lauderhill:
+  title: Lauderhill
+  type: city
+  population: 59475
+
+florida_leesburg:
+  title: Leesburg
+  type: city
+  population: 18151
+
+florida_marco_island:
+  title: Marco Island
+  type: city
+  population: 15841
+
+florida_margate:
+  title: Margate
+  type: city
+  population: 55089
+
+florida_melbourne:
+  title: Melbourne
+  type: city
+  population: 75772
+
+florida_miami:
+  title: Miami
+  type: city
+  population: 378654
+
+florida_miami_beach:
+  title: Miami Beach
+  type: city
+  population: 88856
+
+florida_miami_gardens:
+  title: Miami Gardens
+  type: city
+  population: 100611
+
+florida_miami_lakes:
+  title: Miami Lakes
+  type: city
+  population: 22624
+
+florida_miramar:
+  title: Miramar
+  type: city
+  population: 101367
+
+florida_naples:
+  title: Naples
+  type: city
+  population: 21479
+
+florida_new_port_richey:
+  title: New Port Richey
+  type: city
+  population: 16590
+
+florida_new_smyrna_beach:
+  title: New Smyrna Beach
+  type: city
+  population: 21780
+
+florida_north_lauderdale:
+  title: North Lauderdale
+  type: city
+  population: 40686
+
+florida_north_miami:
+  title: North Miami
+  type: city
+  population: 58588
+
+florida_north_miami_beach:
+  title: North Miami Beach
+  type: city
+  population: 39809
+
+florida_north_port:
+  title: North Port
+  type: city
+  population: 35298
+
+florida_oakland_park:
+  title: Oakland Park
+  type: city
+  population: 31476
+
+florida_ocala:
+  title: Ocala
+  type: city
+  population: 48868
+
+florida_ocoee:
+  title: Ocoee
+  type: city
+  population: 28257
+
+florida_opa_locka:
+  title: Opa-locka
+  type: city
+  population: 15284
+
+florida_orlando:
+  title: Orlando
+  type: city
+  population: 206972
+
+florida_ormond_beach:
+  title: Ormond Beach
+  type: city
+  population: 37974
+
+florida_oviedo:
+  title: Oviedo
+  type: city
+  population: 28792
+
+florida_palm_bay:
+  title: Palm Bay
+  type: city
+  population: 88663
+
+florida_palm_beach_gardens:
+  title: Palm Beach Gardens
+  type: city
+  population: 44330
+
+florida_palm_coast:
+  title: Palm Coast
+  type: city
+  population: 51208
+
+florida_palmetto_bay:
+  title: Palmetto Bay
+  type: city
+  population: 23863
+
+florida_panama_city:
+  title: Panama City
+  type: city
+  population: 37080
+
+florida_parkland:
+  title: Parkland
+  type: city
+  population: 20532
+
+florida_pembroke_pines:
+  title: Pembroke Pines
+  type: city
+  population: 149933
+
+florida_pensacola:
+  title: Pensacola
+  type: city
+  population: 54828
+
+florida_pinecrest:
+  title: Pinecrest
+  type: city
+  population: 19378
+
+florida_pinellas_park:
+  title: Pinellas Park
+  type: city
+  population: 47383
+
+florida_plantation:
+  title: Plantation
+  type: city
+  population: 85399
+
+florida_plant_city:
+  title: Plant City
+  type: city
+  population: 30888
+
+florida_pompano_beach:
+  title: Pompano Beach
+  type: city
+  population: 103278
+
+florida_port_orange:
+  title: Port Orange
+  type: city
+  population: 52799
+
+florida_port_st__lucie:
+  title: Port St. Lucie
+  type: city
+  population: 118655
+
+florida_punta_gorda:
+  title: Punta Gorda
+  type: city
+  population: 17237
+
+florida_riviera_beach:
+  title: Riviera Beach
+  type: city
+  population: 32537
+
+florida_rockledge:
+  title: Rockledge
+  type: city
+  population: 23267
+
+florida_royal_palm_beach:
+  title: Royal Palm Beach
+  type: city
+  population: 30381
+
+florida_safety_harbor:
+  title: Safety Harbor
+  type: city
+  population: 17547
+
+florida_st__cloud:
+  title: St. Cloud
+  type: city
+  population: 22516
+
+florida_st__petersburg:
+  title: St. Petersburg
+  type: city
+  population: 248905
+
+florida_sanford:
+  title: Sanford
+  type: city
+  population: 45594
+
+florida_sarasota:
+  title: Sarasota
+  type: city
+  population: 53388
+
+florida_sebastian:
+  title: Sebastian
+  type: city
+  population: 18727
+
+florida_seminole:
+  title: Seminole
+  type: city
+  population: 18307
+
+florida_stuart:
+  title: Stuart
+  type: city
+  population: 15692
+
+florida_sunny_isles_beach:
+  title: Sunny Isles Beach
+  type: city
+  population: 15355
+
+florida_sunrise:
+  title: Sunrise
+  type: city
+  population: 90125
+
+florida_tallahassee:
+  title: Tallahassee
+  type: city
+  population: 156530
+
+florida_tamarac:
+  title: Tamarac
+  type: city
+  population: 59211
+
+florida_tampa:
+  title: Tampa
+  type: city
+  population: 321291
+
+florida_tarpon_springs:
+  title: Tarpon Springs
+  type: city
+  population: 22529
+
+florida_temple_terrace:
+  title: Temple Terrace
+  type: city
+  population: 21807
+
+florida_titusville:
+  title: Titusville
+  type: city
+  population: 42372
+
+florida_venice:
+  title: Venice
+  type: city
+  population: 20093
+
+florida_vero_beach:
+  title: Vero Beach
+  type: city
+  population: 17445
+
+florida_wellington:
+  title: Wellington
+  type: city
+  population: 50621
+
+florida_weston:
+  title: Weston
+  type: city
+  population: 63461
+
+florida_west_palm_beach:
+  title: West Palm Beach
+  type: city
+  population: 95375
+
+florida_winter_garden:
+  title: Winter Garden
+  type: city
+  population: 22083
+
+florida_winter_haven:
+  title: Winter Haven
+  type: city
+  population: 27921
+
+florida_winter_park:
+  title: Winter Park
+  type: city
+  population: 27927
+
+florida_winter_springs:
+  title: Winter Springs
+  type: city
+  population: 31924
+

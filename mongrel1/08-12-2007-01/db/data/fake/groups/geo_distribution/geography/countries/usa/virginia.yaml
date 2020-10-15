@@ -1,0 +1,184 @@
+virginia:
+  title: Virginia
+  subgroups:
+  - virginia_alexandria
+  - virginia_arlington
+  - virginia_blacksburg
+  - virginia_bristol
+  - virginia_charlottesville
+  - virginia_chesapeake
+  - virginia_christiansburg
+  - virginia_colonial_heights
+  - virginia_danville
+  - virginia_fairfax
+  - virginia_fredericksburg
+  - virginia_hampton
+  - virginia_harrisonburg
+  - virginia_herndon
+  - virginia_hopewell
+  - virginia_leesburg
+  - virginia_lynchburg
+  - virginia_manassas
+  - virginia_newport_news
+  - virginia_norfolk
+  - virginia_petersburg
+  - virginia_portsmouth
+  - virginia_richmond
+  - virginia_roanoke
+  - virginia_salem
+  - virginia_staunton
+  - virginia_suffolk
+  - virginia_virginia_beach
+  - virginia_waynesboro
+  - virginia_winchester
+
+virginia_alexandria:
+  title: Alexandria
+  type: city
+  population: 136635
+
+virginia_arlington:
+  title: Arlington
+  type: city
+  population: 197955
+
+virginia_blacksburg:
+  title: Blacksburg
+  type: city
+  population: 39227
+
+virginia_bristol:
+  title: Bristol
+  type: city
+  population: 17345
+
+virginia_charlottesville:
+  title: Charlottesville
+  type: city
+  population: 40745
+
+virginia_chesapeake:
+  title: Chesapeake
+  type: city
+  population: 214830
+
+virginia_christiansburg:
+  title: Christiansburg
+  type: city
+  population: 17470
+
+virginia_colonial_heights:
+  title: Colonial Heights
+  type: city
+  population: 17465
+
+virginia_danville:
+  title: Danville
+  type: city
+  population: 46473
+
+virginia_fairfax:
+  title: Fairfax
+  type: city
+  population: 21989
+
+virginia_fredericksburg:
+  title: Fredericksburg
+  type: city
+  population: 20776
+
+virginia_hampton:
+  title: Hampton
+  type: city
+  population: 145001
+
+virginia_harrisonburg:
+  title: Harrisonburg
+  type: city
+  population: 40645
+
+virginia_herndon:
+  title: Herndon
+  type: city
+  population: 21633
+
+virginia_hopewell:
+  title: Hopewell
+  type: city
+  population: 22401
+
+virginia_leesburg:
+  title: Leesburg
+  type: city
+  population: 34848
+
+virginia_lynchburg:
+  title: Lynchburg
+  type: city
+  population: 66268
+
+virginia_manassas:
+  title: Manassas
+  type: city
+  population: 37626
+
+virginia_newport_news:
+  title: Newport News
+  type: city
+  population: 181917
+
+virginia_norfolk:
+  title: Norfolk
+  type: city
+  population: 237347
+
+virginia_petersburg:
+  title: Petersburg
+  type: city
+  population: 32764
+
+virginia_portsmouth:
+  title: Portsmouth
+  type: city
+  population: 99404
+
+virginia_richmond:
+  title: Richmond
+  type: city
+  population: 193915
+
+virginia_roanoke:
+  title: Roanoke
+  type: city
+  population: 92570
+
+virginia_salem:
+  title: Salem
+  type: city
+  population: 24507
+
+virginia_staunton:
+  title: Staunton
+  type: city
+  population: 23065
+
+virginia_suffolk:
+  title: Suffolk
+  type: city
+  population: 76529
+
+virginia_virginia_beach:
+  title: Virginia Beach
+  type: city
+  population: 439224
+
+virginia_waynesboro:
+  title: Waynesboro
+  type: city
+  population: 20826
+
+virginia_winchester:
+  title: Winchester
+  type: city
+  population: 24862
+

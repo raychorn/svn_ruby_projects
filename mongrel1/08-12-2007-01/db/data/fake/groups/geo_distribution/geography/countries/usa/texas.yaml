@@ -1,0 +1,904 @@
+texas:
+  title: Texas
+  subgroups:
+  - texas_abilene
+  - texas_alamo
+  - texas_alice
+  - texas_allen
+  - texas_alvin
+  - texas_amarillo
+  - texas_angleton
+  - texas_arlington
+  - texas_austin
+  - texas_balch_springs
+  - texas_bay_city
+  - texas_baytown
+  - texas_beaumont
+  - texas_bedford
+  - texas_bellaire
+  - texas_belton
+  - texas_benbrook
+  - texas_big_spring
+  - texas_brownsville
+  - texas_brownwood
+  - texas_bryan
+  - texas_burleson
+  - texas_carrollton
+  - texas_cedar_hill
+  - texas_cedar_park
+  - texas_cleburne
+  - texas_college_station
+  - texas_colleyville
+  - texas_conroe
+  - texas_coppell
+  - texas_copperas_cove
+  - texas_corinth
+  - texas_corpus_christi
+  - texas_corsicana
+  - texas_dallas
+  - texas_deer_park
+  - texas_del_rio
+  - texas_denison
+  - texas_denton
+  - texas_desoto
+  - texas_dickinson
+  - texas_donna
+  - texas_duncanville
+  - texas_eagle_pass
+  - texas_edinburg
+  - texas_el_paso
+  - texas_ennis
+  - texas_euless
+  - texas_farmers_branch
+  - texas_flower_mound
+  - texas_fort_worth
+  - texas_friendswood
+  - texas_frisco
+  - texas_gainesville
+  - texas_galveston
+  - texas_garland
+  - texas_gatesville
+  - texas_georgetown
+  - texas_grand_prairie
+  - texas_grapevine
+  - texas_greenville
+  - texas_groves
+  - texas_haltom_city
+  - texas_harker_heights
+  - texas_harlingen
+  - texas_houston
+  - texas_huntsville
+  - texas_hurst
+  - texas_irving
+  - texas_keller
+  - texas_kerrville
+  - texas_killeen
+  - texas_kingsville
+  - texas_lake_jackson
+  - texas_lancaster
+  - texas_la_porte
+  - texas_laredo
+  - texas_league_city
+  - texas_leander
+  - texas_lewisville
+  - texas_little_elm
+  - texas_longview
+  - texas_lubbock
+  - texas_lufkin
+  - texas_mcallen
+  - texas_mckinney
+  - texas_mansfield
+  - texas_marshall
+  - texas_mesquite
+  - texas_midland
+  - texas_mineral_wells
+  - texas_mission
+  - texas_missouri_city
+  - texas_nacogdoches
+  - texas_nederland
+  - texas_new_braunfels
+  - texas_north_richland_hills
+  - texas_odessa
+  - texas_orange
+  - texas_palestine
+  - texas_pampa
+  - texas_paris
+  - texas_pasadena
+  - texas_pearland
+  - texas_pflugerville
+  - texas_pharr
+  - texas_plainview
+  - texas_plano
+  - texas_port_arthur
+  - texas_portland
+  - texas_richardson
+  - texas_rockwall
+  - texas_rosenberg
+  - texas_round_rock
+  - texas_rowlett
+  - texas_sachse
+  - texas_saginaw
+  - texas_san_angelo
+  - texas_san_antonio
+  - texas_san_benito
+  - texas_san_juan
+  - texas_san_marcos
+  - texas_schertz
+  - texas_seguin
+  - texas_sherman
+  - texas_socorro
+  - texas_south_houston
+  - texas_southlake
+  - texas_stafford
+  - texas_stephenville
+  - texas_sugar_land
+  - texas_sulphur_springs
+  - texas_temple
+  - texas_terrell
+  - texas_texarkana
+  - texas_texas_city
+  - texas_the_colony
+  - texas_tyler
+  - texas_universal_city
+  - texas_university_park
+  - texas_uvalde
+  - texas_victoria
+  - texas_waco
+  - texas_watauga
+  - texas_waxahachie
+  - texas_weatherford
+  - texas_weslaco
+  - texas_white_settlement
+  - texas_wichita_falls
+  - texas_wylie
+
+texas_abilene:
+  title: Abilene
+  type: city
+  population: 114774
+
+texas_alamo:
+  title: Alamo
+  type: city
+  population: 15908
+
+texas_alice:
+  title: Alice
+  type: city
+  population: 19451
+
+texas_allen:
+  title: Allen
+  type: city
+  population: 66421
+
+texas_alvin:
+  title: Alvin
+  type: city
+  population: 22124
+
+texas_amarillo:
+  title: Amarillo
+  type: city
+  population: 180490
+
+texas_angleton:
+  title: Angleton
+  type: city
+  population: 18680
+
+texas_arlington:
+  title: Arlington
+  type: city
+  population: 359199
+
+texas_austin:
+  title: Austin
+  type: city
+  population: 680748
+
+texas_balch_springs:
+  title: Balch Springs
+  type: city
+  population: 19300
+
+texas_bay_city:
+  title: Bay City
+  type: city
+  population: 18363
+
+texas_baytown:
+  title: Baytown
+  type: city
+  population: 67282
+
+texas_beaumont:
+  title: Beaumont
+  type: city
+  population: 112374
+
+texas_bedford:
+  title: Bedford
+  type: city
+  population: 48474
+
+texas_bellaire:
+  title: Bellaire
+  type: city
+  population: 16958
+
+texas_belton:
+  title: Belton
+  type: city
+  population: 15416
+
+texas_benbrook:
+  title: Benbrook
+  type: city
+  population: 21617
+
+texas_big_spring:
+  title: Big Spring
+  type: city
+  population: 24477
+
+texas_brownsville:
+  title: Brownsville
+  type: city
+  population: 163192
+
+texas_brownwood:
+  title: Brownwood
+  type: city
+  population: 19388
+
+texas_bryan:
+  title: Bryan
+  type: city
+  population: 66225
+
+texas_burleson:
+  title: Burleson
+  type: city
+  population: 27860
+
+texas_carrollton:
+  title: Carrollton
+  type: city
+  population: 117752
+
+texas_cedar_hill:
+  title: Cedar Hill
+  type: city
+  population: 40108
+
+texas_cedar_park:
+  title: Cedar Park
+  type: city
+  population: 45417
+
+texas_cleburne:
+  title: Cleburne
+  type: city
+  population: 28768
+
+texas_college_station:
+  title: College Station
+  type: city
+  population: 71674
+
+texas_colleyville:
+  title: Colleyville
+  type: city
+  population: 21698
+
+texas_conroe:
+  title: Conroe
+  type: city
+  population: 43371
+
+texas_coppell:
+  title: Coppell
+  type: city
+  population: 38852
+
+texas_copperas_cove:
+  title: Copperas Cove
+  type: city
+  population: 29957
+
+texas_corinth:
+  title: Corinth
+  type: city
+  population: 17205
+
+texas_corpus_christi:
+  title: Corpus Christi
+  type: city
+  population: 281055
+
+texas_corsicana:
+  title: Corsicana
+  type: city
+  population: 25835
+
+texas_dallas:
+  title: Dallas
+  type: city
+  population: 1208829
+
+texas_deer_park:
+  title: Deer Park
+  type: city
+  population: 28617
+
+texas_del_rio:
+  title: Del Rio
+  type: city
+  population: 35858
+
+texas_denison:
+  title: Denison
+  type: city
+  population: 23365
+
+texas_denton:
+  title: Denton
+  type: city
+  population: 100739
+
+texas_desoto:
+  title: DeSoto
+  type: city
+  population: 43004
+
+texas_dickinson:
+  title: Dickinson
+  type: city
+  population: 17756
+
+texas_donna:
+  title: Donna
+  type: city
+  population: 15594
+
+texas_duncanville:
+  title: Duncanville
+  type: city
+  population: 35260
+
+texas_eagle_pass:
+  title: Eagle Pass
+  type: city
+  population: 24958
+
+texas_edinburg:
+  title: Edinburg
+  type: city
+  population: 58393
+
+texas_el_paso:
+  title: El Paso
+  type: city
+  population: 591748
+
+texas_ennis:
+  title: Ennis
+  type: city
+  population: 18589
+
+texas_euless:
+  title: Euless
+  type: city
+  population: 50478
+
+texas_farmers_branch:
+  title: Farmers Branch
+  type: city
+  population: 26658
+
+texas_flower_mound:
+  title: Flower Mound
+  type: city
+  population: 62159
+
+texas_fort_worth:
+  title: Fort Worth
+  type: city
+  population: 603067
+
+texas_friendswood:
+  title: Friendswood
+  type: city
+  population: 32753
+
+texas_frisco:
+  title: Frisco
+  type: city
+  population: 62390
+
+texas_gainesville:
+  title: Gainesville
+  type: city
+  population: 16302
+
+texas_galveston:
+  title: Galveston
+  type: city
+  population: 57383
+
+texas_garland:
+  title: Garland
+  type: city
+  population: 216701
+
+texas_gatesville:
+  title: Gatesville
+  type: city
+  population: 15581
+
+texas_georgetown:
+  title: Georgetown
+  type: city
+  population: 36411
+
+texas_grand_prairie:
+  title: Grand Prairie
+  type: city
+  population: 139833
+
+texas_grapevine:
+  title: Grapevine
+  type: city
+  population: 47294
+
+texas_greenville:
+  title: Greenville
+  type: city
+  population: 25155
+
+texas_groves:
+  title: Groves
+  type: city
+  population: 15116
+
+texas_haltom_city:
+  title: Haltom City
+  type: city
+  population: 40095
+
+texas_harker_heights:
+  title: Harker Heights
+  type: city
+  population: 20256
+
+texas_harlingen:
+  title: Harlingen
+  type: city
+  population: 61447
+
+texas_houston:
+  title: Houston
+  type: city
+  population: 2011119
+
+texas_huntsville:
+  title: Huntsville
+  type: city
+  population: 36442
+
+texas_hurst:
+  title: Hurst
+  type: city
+  population: 37907
+
+texas_irving:
+  title: Irving
+  type: city
+  population: 194121
+
+texas_keller:
+  title: Keller
+  type: city
+  population: 34884
+
+texas_kerrville:
+  title: Kerrville
+  type: city
+  population: 21696
+
+texas_killeen:
+  title: Killeen
+  type: city
+  population: 96971
+
+texas_kingsville:
+  title: Kingsville
+  type: city
+  population: 24906
+
+texas_lake_jackson:
+  title: Lake Jackson
+  type: city
+  population: 27018
+
+texas_lancaster:
+  title: Lancaster
+  type: city
+  population: 30243
+
+texas_la_porte:
+  title: La Porte
+  type: city
+  population: 33268
+
+texas_laredo:
+  title: Laredo
+  type: city
+  population: 202831
+
+texas_league_city:
+  title: League City
+  type: city
+  population: 58129
+
+texas_leander:
+  title: Leander
+  type: city
+  population: 16049
+
+texas_lewisville:
+  title: Lewisville
+  type: city
+  population: 89127
+
+texas_little_elm:
+  title: Little Elm
+  type: city
+  population: 15039
+
+texas_longview:
+  title: Longview
+  type: city
+  population: 75172
+
+texas_lubbock:
+  title: Lubbock
+  type: city
+  population: 207976
+
+texas_lufkin:
+  title: Lufkin
+  type: city
+  population: 33421
+
+texas_mcallen:
+  title: McAllen
+  type: city
+  population: 120552
+
+texas_mckinney:
+  title: McKinney
+  type: city
+  population: 88440
+
+texas_mansfield:
+  title: Mansfield
+  type: city
+  population: 34645
+
+texas_marshall:
+  title: Marshall
+  type: city
+  population: 23860
+
+texas_mesquite:
+  title: Mesquite
+  type: city
+  population: 129436
+
+texas_midland:
+  title: Midland
+  type: city
+  population: 98055
+
+texas_mineral_wells:
+  title: Mineral Wells
+  type: city
+  population: 16820
+
+texas_mission:
+  title: Mission
+  type: city
+  population: 57737
+
+texas_missouri_city:
+  title: Missouri City
+  type: city
+  population: 66528
+
+texas_nacogdoches:
+  title: Nacogdoches
+  type: city
+  population: 30545
+
+texas_nederland:
+  title: Nederland
+  type: city
+  population: 16807
+
+texas_new_braunfels:
+  title: New Braunfels
+  type: city
+  population: 44956
+
+texas_north_richland_hills:
+  title: North Richland Hills
+  type: city
+  population: 60616
+
+texas_odessa:
+  title: Odessa
+  type: city
+  population: 92734
+
+texas_orange:
+  title: Orange
+  type: city
+  population: 18100
+
+texas_palestine:
+  title: Palestine
+  type: city
+  population: 17773
+
+texas_pampa:
+  title: Pampa
+  type: city
+  population: 16685
+
+texas_paris:
+  title: Paris
+  type: city
+  population: 26511
+
+texas_pasadena:
+  title: Pasadena
+  type: city
+  population: 144003
+
+texas_pearland:
+  title: Pearland
+  type: city
+  population: 51936
+
+texas_pflugerville:
+  title: Pflugerville
+  type: city
+  population: 25878
+
+texas_pharr:
+  title: Pharr
+  type: city
+  population: 56745
+
+texas_plainview:
+  title: Plainview
+  type: city
+  population: 22076
+
+texas_plano:
+  title: Plano
+  type: city
+  population: 245606
+
+texas_port_arthur:
+  title: Port Arthur
+  type: city
+  population: 56682
+
+texas_portland:
+  title: Portland
+  type: city
+  population: 15638
+
+texas_richardson:
+  title: Richardson
+  type: city
+  population: 99417
+
+texas_rockwall:
+  title: Rockwall
+  type: city
+  population: 26999
+
+texas_rosenberg:
+  title: Rosenberg
+  type: city
+  population: 29486
+
+texas_round_rock:
+  title: Round Rock
+  type: city
+  population: 82109
+
+texas_rowlett:
+  title: Rowlett
+  type: city
+  population: 52698
+
+texas_sachse:
+  title: Sachse
+  type: city
+  population: 16051
+
+texas_saginaw:
+  title: Saginaw
+  type: city
+  population: 16858
+
+texas_san_angelo:
+  title: San Angelo
+  type: city
+  population: 88163
+
+texas_san_antonio:
+  title: San Antonio
+  type: city
+  population: 1235089
+
+texas_san_benito:
+  title: San Benito
+  type: city
+  population: 24582
+
+texas_san_juan:
+  title: San Juan
+  type: city
+  population: 29702
+
+texas_san_marcos:
+  title: San Marcos
+  type: city
+  population: 44746
+
+texas_schertz:
+  title: Schertz
+  type: city
+  population: 25008
+
+texas_seguin:
+  title: Seguin
+  type: city
+  population: 24136
+
+texas_sherman:
+  title: Sherman
+  type: city
+  population: 36530
+
+texas_socorro:
+  title: Socorro
+  type: city
+  population: 28515
+
+texas_south_houston:
+  title: South Houston
+  type: city
+  population: 16327
+
+texas_southlake:
+  title: Southlake
+  type: city
+  population: 24468
+
+texas_stafford:
+  title: Stafford
+  type: city
+  population: 18781
+
+texas_stephenville:
+  title: Stephenville
+  type: city
+  population: 15632
+
+texas_sugar_land:
+  title: Sugar Land
+  type: city
+  population: 73769
+
+texas_sulphur_springs:
+  title: Sulphur Springs
+  type: city
+  population: 15037
+
+texas_temple:
+  title: Temple
+  type: city
+  population: 54521
+
+texas_terrell:
+  title: Terrell
+  type: city
+  population: 16976
+
+texas_texarkana:
+  title: Texarkana
+  type: city
+  population: 35484
+
+texas_texas_city:
+  title: Texas City
+  type: city
+  population: 43564
+
+texas_the_colony:
+  title: The Colony
+  type: city
+  population: 36302
+
+texas_tyler:
+  title: Tyler
+  type: city
+  population: 89939
+
+texas_universal_city:
+  title: Universal City
+  type: city
+  population: 15791
+
+texas_university_park:
+  title: University Park
+  type: city
+  population: 23639
+
+texas_uvalde:
+  title: Uvalde
+  type: city
+  population: 16267
+
+texas_victoria:
+  title: Victoria
+  type: city
+  population: 61589
+
+texas_waco:
+  title: Waco
+  type: city
+  population: 119064
+
+texas_watauga:
+  title: Watauga
+  type: city
+  population: 23605
+
+texas_waxahachie:
+  title: Waxahachie
+  type: city
+  population: 24575
+
+texas_weatherford:
+  title: Weatherford
+  type: city
+  population: 22341
+
+texas_weslaco:
+  title: Weslaco
+  type: city
+  population: 31092
+
+texas_white_settlement:
+  title: White Settlement
+  type: city
+  population: 15646
+
+texas_wichita_falls:
+  title: Wichita Falls
+  type: city
+  population: 100955
+
+texas_wylie:
+  title: Wylie
+  type: city
+  population: 25796
+

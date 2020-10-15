@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" title="Login" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+	<mx:Script><![CDATA[
+		import mx.validators.Validator;
+		import mx.events.ValidationResultEvent;
+		import com.bigfix.dss.event.LoginEvent;
+		import com.adobe.cairngorm.control.CairngormEventDispatcher;
+
+
+		[Bindable]
+		private var formIsValid:Boolean = false;
+
+		private function doLogin():void {
+			checkForm();
+			if (formIsValid) {
+				new LoginEvent(username.text, password.text).dispatch();
+			}
+		}
+
+		private function checkForm():void {
+			formIsValid = true;
+			validate(validateUsername);
+			validate(validatePassword);
+		}
+
+		private function validate(validator:Validator):void {
+			var event:ValidationResultEvent = validator.validate();
+			formIsValid = formIsValid && (event.type == ValidationResultEvent.VALID);
+		}
+
+	]]></mx:Script>
+
+	<mx:Form id="loginForm" defaultButton="{loginButton}">
+		<mx:FormItem label="Username:">
+			<mx:TextInput id="username" creationComplete="event.currentTarget.setFocus()"/>
+		</mx:FormItem>
+
+		<mx:FormItem label="Password:">
+			<mx:TextInput id="password" displayAsPassword="true"/>
+		</mx:FormItem>
+	</mx:Form>
+
+	<mx:ControlBar horizontalAlign="right">
+		<mx:Button label="Login" id="loginButton" click="doLogin()" />
+	</mx:ControlBar>
+
+	<mx:StringValidator id="validateUsername" source="{username}" property="text" required="true"/>
+	<mx:StringValidator id="validatePassword" source="{password}" property="text" required="true"/>
+</mx:Panel>
+
+

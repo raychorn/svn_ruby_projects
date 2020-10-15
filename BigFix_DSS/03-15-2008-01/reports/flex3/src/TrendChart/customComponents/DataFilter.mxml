@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:ViewStack xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:mxeffects="com.adobe.ac.mxeffects.*" width="100%" height="100%" resizeToContent="true">
+	<mx:Script source="DataFilter_as.as"/>
+	<mx:String id="dataSourceURL"/>
+
+	<mx:HTTPService id="dataService"
+		url="{dataSourceURL}"
+		resultFormat="e4x"
+		result="loadData(event);"
+		fault="Application.application.HTTPServiceFaultHandler(event);"
+		showBusyCursor="true"
+	/>
+
+	<mxeffects:Flip
+		id="flipIn"
+		target="{ viewPane }" siblings="{ [ editPane ] }"
+		direction="LEFT" duration="1000" smooth="true"/>
+	<mxeffects:Flip
+		id="flipBack"
+		target="{ editPane }" siblings="{ [ viewPane ] }"
+		direction="RIGHT" duration="1000" smooth="true"/>
+
+	<mx:HBox id="viewPane" width="100%" height="100%">
+		<mx:VBox>
+			<mx:HBox>
+				<mx:Label styleName="chartTitle" text="{metricName}"/>
+				<mx:Spacer width="100%"/>
+				<mx:Button label="Change" click="selectedChild = editPane"/>
+		</mx:VBox>
+
+	</mx:HBox>
+	<mx:VBox id="editPane" width="100%" height="100%">
+		<mx:HBox>
+			<mx:Label styleName="componentTitle" text="Choose a Metric:"/>
+			<mx:ComboBox id="metricComboBox" itemRenderer="customComponents.renderers.MetricListItemRenderer" dataProvider="{subjectMetricsFlat}" labelFunction="formatComboBoxElements" rowCount="10" creationComplete="initComboBox(event)" change="showSubjectOptions(event)"/>
+			<mx:Spacer width="100%"/>
+			<mx:Button label="Cancel" click="selectedChild = viewPane"/>
+			<mx:Button label="Commit" click="commitFilterChanges(event)"/>
+		</mx:HBox>
+		<mx:ViewStack id="optionsForSubjects">
+			<mx:VBox id="optionsForSubjectID_1"/>
+			<mx:VBox id="optionsForSubjectID_2">
+				<mx:Form width="100%" height="100%">
+					<mx:FormHeading label="Filter Vulnerabilities"/>
+					<mx:FormItem label="Severity">
+						<mx:ComboBox id="vuln_severity_id"/>
+					</mx:FormItem>
+					<mx:FormItem label="Advisory Publisher">
+						<mx:TextInput id="advisory" width="200"/>
+					</mx:FormItem>
+				</mx:Form>
+			</mx:VBox>
+			<mx:VBox id="optionsForSubjectID_3">
+			</mx:VBox>
+			<mx:VBox id="optionsForSubjectID_4">
+			</mx:VBox>
+			<mx:VBox id="optionsForSubjectID_5">
+			</mx:VBox>
+		</mx:ViewStack>
+		<!-- validators -->
+		<mx:NumberValidator source="{metricComboBox}" property="selectedItem.id" minLength="4" maxLength="12"/>
+	</mx:VBox>
+</mx:ViewStack>
+

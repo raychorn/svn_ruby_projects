@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title><%= AppConstants::APP_NAME %> <%= "| #{@title}" if @title %></title>
+
+<%= stylesheet_link_tag "default.css" %>
+<%= stylesheet_link_tag 'pagination' %>
+<%= stylesheet_link_tag("admin.css") if in_admin_area? %>
+<link rel="stylesheet" type="text/css" media="print" href="/stylesheets/print.css" />
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<%= javascript_include_tag :defaults %>
+
+</head>
+
+<body>
+	
+	<div id="header">
+  		<%= in_admin_area? ? render_partial('admin/shared/header') : render_partial('shared/header') %>		
+	</div>
+  </div>
+  <table id="container">
+ 	  	<tr>
+ 	  		<td id="main" valign="top" style="position:relative">
+	<div style="text-align:right;margin-right:-30px;margin-top:-10px">
+		<%= image_tag 'sidebar_background_corner.gif' %>
+	</div>
+			<%= render :partial => 'shared/flash_messages' %>
+			<%= @content_for_layout %>
+			
+			<div id="footer">
+			 <%= render_partial 'shared/footer' %>		
+			</div>
+ 	  		</td>
+			<td id="sidebar" valign="top">
+				<%= @content_for_sidebar %>
+				<%= @content_for_right %>
+				<%= render_component :controller => 'tips', :action => 'list', 
+						:params => {:tips_controller => params[:controller], :tips_action => params[:action]} %>
+			</td>
+ 	  	</tr>
+    </table>
+<%= render_partial 'shared/google_analytics' %>		
+</body>
+</html>

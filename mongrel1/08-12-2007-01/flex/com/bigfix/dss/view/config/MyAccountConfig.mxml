@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+           width="100%" height="100%"
+           backgroundColor="white"
+           creationComplete="onCreationComplete()">
+  <mx:Script>
+    <![CDATA[
+      import mx.collections.ArrayCollection;
+      import mx.binding.utils.BindingUtils;
+      import mx.events.ItemClickEvent;
+      import com.bigfix.dss.model.DSSModelLocator;
+      import com.bigfix.dss.util.DSS;
+      import com.bigfix.dss.event.EditorEvent;
+      import com.bigfix.dss.event.ChangePasswordEvent;
+      import com.bigfix.dss.view.config.ChangePassword;
+      import com.bigfix.dss.vo.UserVO;
+      import com.bigfix.dss.vo.RoleVO;
+      
+      [Bindable]
+      private var model:DSSModelLocator = DSS.model;
+      
+      [Bindable]
+      private var roles:ArrayCollection;
+      
+      [Bindable]
+      private var changePasswordDialog:ChangePassword;
+      
+      private var dirty:Boolean = false;
+            
+      private function onCreationComplete():void {
+        DSS.svc('EditorService').get_property({ 'class': 'User',
+                                                'id': model.user.id,
+                                                'property': 'roles'
+                                               }).onResult(gotUserRoles);
+        changePasswordDialog = new ChangePassword();
+        changePasswordDialog.addEventListener('save', passwordChanged, false, 0, true);
+        emailInput.setFocus();
+      }
+      
+      private function passwordChanged(event:*):void {
+        new ChangePasswordEvent(changePasswordDialog.oldPassword.text,
+                                changePasswordDialog.newPassword.text).dispatch();
+      }
+      
+      private function gotUserRoles(event:*):void {
+        roles = new ArrayCollection(event.result);
+      }
+      
+      private function formDataChanged():void {
+        dirty = true;
+      }
+      
+      private function saveUser():void {
+        if (dirty) {
+          DSS.model.user.email = emailInput.text;
+          new EditorEvent(EditorEvent.EDITOR_UPDATE, 'User', DSS.model.user).dispatch();
+          dirty = false;
+        }
+      }
+    ]]>
+  </mx:Script>
+  <mx:Grid top="10" left="10">
+    <mx:GridRow width="100%" height="100%">
+      <mx:GridItem width="100%" height="100%">
+        <mx:Label text="Username"/>
+      </mx:GridItem>
+      <mx:GridItem width="100%" height="100%">
+        <mx:TextInput width="100%" text="{model.user.username}" editable="false"/>
+      </mx:GridItem>
+    </mx:GridRow>
+    <mx:GridRow width="100%" height="100%">
+      <mx:GridItem width="100%" height="100%">
+        <mx:Label text="Name"/>
+      </mx:GridItem>
+      <mx:GridItem width="100%" height="100%">
+        <mx:TextInput width="100%" text="{model.user.name}" editable="false" />
+      </mx:GridItem>
+    </mx:GridRow>
+    <mx:GridRow width="100%" height="100%">
+      <mx:GridItem width="100%" height="100%">
+        <mx:Label text="Email Address"/>
+      </mx:GridItem>
+      <mx:GridItem width="100%" height="100%">
+        <mx:TextInput id="emailInput" minWidth="250" width="100%" editable="true" text="{model.user.email}" change="formDataChanged()"
+                      focusOut="saveUser()"/>
+      </mx:GridItem>
+    </mx:GridRow>
+    <mx:GridRow width="100%" height="100%">
+      <mx:GridItem width="100%" height="100%">
+        <mx:Label text="Roles"/>
+      </mx:GridItem>
+      <mx:GridItem width="100%" height="100%">
+        <mx:List width="100%" dataProvider="{roles}" labelField="name" selectable="false" />
+      </mx:GridItem>
+    </mx:GridRow>
+    <mx:GridRow width="100%" height="100%">
+      <mx:GridItem width="100%" height="100%" colSpan="2">
+        <mx:Canvas width="100%">
+          <mx:Button left="0" top="0" label="Change Password" click="changePasswordDialog.show(this)"/>
+          <mx:Button right="0" top="0" label="Done" click="DSS.model.workspaceViewState='Default'"/>
+        </mx:Canvas>
+      </mx:GridItem>
+    </mx:GridRow>
+  </mx:Grid>
+
+</mx:Canvas>

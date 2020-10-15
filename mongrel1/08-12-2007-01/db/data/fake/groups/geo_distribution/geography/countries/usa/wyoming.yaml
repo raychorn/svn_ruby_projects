@@ -1,0 +1,40 @@
+wyoming:
+  title: Wyoming
+  subgroups:
+  - wyoming_casper
+  - wyoming_cheyenne
+  - wyoming_gillette
+  - wyoming_laramie
+  - wyoming_rock_springs
+  - wyoming_sheridan
+
+wyoming_casper:
+  title: Casper
+  type: city
+  population: 51223
+
+wyoming_cheyenne:
+  title: Cheyenne
+  type: city
+  population: 55186
+
+wyoming_gillette:
+  title: Gillette
+  type: city
+  population: 22174
+
+wyoming_laramie:
+  title: Laramie
+  type: city
+  population: 26454
+
+wyoming_rock_springs:
+  title: Rock Springs
+  type: city
+  population: 18658
+
+wyoming_sheridan:
+  title: Sheridan
+  type: city
+  population: 16255
+

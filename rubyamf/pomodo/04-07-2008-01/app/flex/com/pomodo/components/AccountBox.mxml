@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
+    width="100%" height="100%" label="Account"
+    paddingLeft="5" paddingRight="5" paddingTop="5"
+    paddingBottom="5">
+<mx:Script>
+<![CDATA[
+    import com.pomodo.control.EventNames;
+    import com.pomodo.model.PomodoModelLocator;
+    import com.pomodo.util.CairngormUtils;
+    import mx.controls.Alert;
+    import mx.events.CloseEvent;
+    
+    [Bindable]
+    private var _model:PomodoModelLocator =
+        PomodoModelLocator.getInstance();
+    
+    private function handleDeleteAccount(event:Event):void {
+        Alert.show(
+    "Do you want to delete your account? This is irreversible.",
+            "Delete Account",
+            Alert.YES | Alert.NO,
+            this,
+            handleAlertClick);
+    }
+
+    private function handleAlertClick(event:CloseEvent):void {
+        if (event.detail == Alert.YES) {
+            CairngormUtils.dispatchEvent(
+                EventNames.DESTROY_USER, _model.user);
+        }
+    }
+]]>
+</mx:Script>
+    <mx:Button label="Delete Account"
+        click="handleDeleteAccount(event)"/>
+</mx:VBox>

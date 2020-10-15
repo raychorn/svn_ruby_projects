@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" height="100%" 
+	creationComplete="onCreationComplete()" 
+	resize="onResize(event)">
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import com.bigfix.dss.view.dashboard.WidgetInstance;
+			import com.bigfix.dss.vo.WidgetVO;
+			import com.bigfix.dss.view.dashboard.events.ClosedWidgetChooserEvent;
+			import com.bigfix.dss.view.dashboard.WidgetChooser;
+			import mx.managers.PopUpManager;
+			import mx.events.ResizeEvent;
+			import mx.collections.ArrayCollection;
+			
+			[Bindable]
+			public var dataProvider:ArrayCollection = new ArrayCollection();
+			
+			private var _popUp:WidgetChooser;
+			
+			private var _vo:*;
+			
+			private static var _count:Number = 0;
+			
+			public static function get count():Number {
+				_count++;
+				return (_count - 1);
+			}
+			
+			public function set vo(vo:*):void {
+				this._vo = vo;
+			}
+			
+			public function get vo():* {
+				return this._vo;
+			}
+			
+			private function onCreationCompleteWidgetInstance(event:FlexEvent):void {
+				var w:Number = -1;
+				var h:Number = -1;
+				try {
+					w = event.currentTarget["width"];
+					h = event.currentTarget["height"];
+				} catch (err:Error) { }
+				if ( (w > -1) && (h > -1) ) {
+					if (this.width < w) {
+						this.width = 300;
+						this.parent.width = this.width;
+					}
+					if (this.height < h) {
+						this.height = 150;
+						this.parent.height = this.height;
+					}
+				}
+			}
+			
+			private function onClosedWidgetChooser(event:ClosedWidgetChooserEvent):void {
+				var w:WidgetVO = WidgetVO(event.widget);
+				PopUpManager.removePopUp(this._popUp);
+
+				if (w != null) {
+					var newWidgetInstance:WidgetInstance = new WidgetInstance();
+					newWidgetInstance.name = 'widgetInstance';
+					newWidgetInstance.widgetData = w;
+					newWidgetInstance.removeHeaderElements();
+					newWidgetInstance.addEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompleteWidgetInstance);
+					this.addChild(newWidgetInstance);
+				}
+			}
+			
+			private function onCreationComplete():void {
+				if (this._vo == null) {
+					this._popUp = WidgetChooser(PopUpManager.createPopUp(this, WidgetChooser, true));
+					this._popUp.width = 300;
+					this._popUp.height = 500;
+					PopUpManager.bringToFront(this._popUp);
+					PopUpManager.centerPopUp(this._popUp);
+					this._popUp.x = ((this._popUp.x < 10) ? 100 : this._popUp.x);
+					this._popUp.y = ((this._popUp.y < 100) ? 100 : this._popUp.y);
+					this._popUp.addEventListener(ClosedWidgetChooserEvent.TYPE_CLOSED_WIDGET_CHOOSER, onClosedWidgetChooser);
+				}
+			}
+			
+			private function onResize(event:ResizeEvent):void {
+				try {
+					this.width = event.currentTarget.parent.width;
+					this.height = event.currentTarget.parent.height;
+				} catch (err:Error) { }
+			}
+		]]>
+	</mx:Script>
+</mx:Canvas>

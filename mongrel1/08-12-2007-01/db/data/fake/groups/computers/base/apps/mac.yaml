@@ -1,0 +1,11 @@
+osx_10_4_base:
+  title: MacOS X 10.4 (base applications)
+  applications:
+  - Mac OS X 10.4
+  - iPhoto
+  - iCal
+  - Safari
+  - iTunes
+  - iChat
+  - iSync
+  - QuickTime Player

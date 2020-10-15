@@ -1,0 +1,15 @@
+!.gitignore
+BigFix_DSS/03-15-2008-01/reports/db/data/fake/sources/SUB-EST2005-all.csv
+Magma-DA.Com/molten5/04-11-2008-01/db/salesforce.sql
+Magma-DA.Com/molten5/04-11-2008-01/db/sfcontact.sql
+Magma-DA.Com/molten5/06-20-2008-01/db/salesforce.sql
+Magma-DA.Com/molten5/06-20-2008-01/db/sfcontact.sql
+Magma-DA.Com/molten5_3.0.19/06-06-2008-01/db/salesforce.sql
+Magma-DA.Com/molten5_3.0.19/06-06-2008-01/db/sfcontact.sql
+Magma-DA.Com/molten5_3.0.4/06-05-2008-01/db/salesforce.sql
+Magma-DA.Com/molten5_3.0.4/06-05-2008-01/db/sfcontact.sql
+Magma-DA.Com/molten5_3.0.4/Ruby_In_Steel/06-05-2008-01/db/salesforce.sql
+Magma-DA.Com/molten5_3.0.4/Ruby_In_Steel/06-05-2008-01/db/sfcontact.sql
+mongrel1/08-12-2007-01/db/data/fake/sources/SUB-EST2005-all.csv
+ruby-shootout/06-17-2008-01/benchmark/other-lang/profile-ack-gen.txt
+ruby-shootout/06-17-2008-01/benchmark/wc.input

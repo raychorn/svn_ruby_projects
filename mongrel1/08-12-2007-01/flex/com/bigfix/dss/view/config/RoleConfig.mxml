@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml"
+         xmlns:bfcontrols="com.bigfix.extensions.controls.*"
+         width="100%" height="100%"
+         paddingLeft="5" paddingRight="5"
+         creationComplete="onCreationComplete()">
+  <mx:Script>
+  	<![CDATA[
+  	  import mx.collections.ArrayCollection;
+  	  import mx.binding.utils.BindingUtils;
+      import mx.events.ItemClickEvent;
+  		import com.bigfix.dss.model.DSSModelLocator;
+  		import com.bigfix.dss.util.DSS;
+  		import com.bigfix.dss.event.EditorEvent;
+  		import com.bigfix.dss.view.general.SaveConfirm;
+  		import com.bigfix.dss.vo.ComputerGroupVO;
+  		import com.bigfix.dss.vo.RoleVO;
+  		import com.bigfix.dss.vo.UserVO;
+  		import com.bigfix.dss.model.ComputerGroupTree;
+  		import com.bigfix.extensions.controls.treeClasses.CheckTreeRenderer;
+  		
+  		[Bindable]
+  		private var model:DSSModelLocator = DSS.model;
+  		
+  		[Bindable]
+  		private var editedRole:RoleVO;
+  		
+  		[Bindable]
+  		private var availableUsers:ArrayCollection;
+  		[Bindable]
+  		private var selectedUsers:ArrayCollection;
+  		
+  		private var roleUserIDs:Array;
+
+  		private var nextAction:Function;
+  		
+  		private var saveConfirmDialog:SaveConfirm;
+
+  		[Bindable]
+  		private var computerGroups:ComputerGroupTree = DSS.model.computerGroupTree;
+  		
+  		private function onCreationComplete():void {
+  		  new EditorEvent(EditorEvent.EDITOR_LIST, 'Role').dispatch();
+  		  new EditorEvent(EditorEvent.EDITOR_LIST, 'User').dispatch();
+  		  BindingUtils.bindSetter(modelUsersChanged, DSS.model, "users");
+  		  deleteButton.enabled = false;
+  		  
+  		  saveConfirmDialog = new SaveConfirm();
+  		  saveConfirmDialog.addEventListener('save', function(event:*):void { applyChanges(nextAction); });
+  		  saveConfirmDialog.addEventListener('dontsave', function(event:*):void { revertChanges(); nextAction(); });
+  		  
+  		  if (computerGroups == null)
+  		    DSS.svc("EditorService").list({ 'class': 'ComputerGroup' }).onResult(function (event:*):void { computerGroups = new ComputerGroupTree(new ArrayCollection(event.result)); });
+      }
+  		
+  		private function updateUserLists():void {
+  		  if (editedRole == null || roleUserIDs == null)
+  		    return;
+  		  
+  		  availableUsers = new ArrayCollection();
+  		  selectedUsers = new ArrayCollection();
+  		  
+  		  for each (var user:UserVO in model.users) {
+  		    if (roleUserIDs[user.id])
+  		      selectedUsers.addItem(user);
+  		    else
+  		      availableUsers.addItem(user);
+  		  }
+  		}
+  		
+  		private function gotRoleUsers(event:*):void {
+  		  roleUserIDs = new Array();
+  		  
+  		  for each (var userID:int in event.result) {
+  		    roleUserIDs[userID] = true;
+  		  }
+  		  updateUserLists();
+  		}
+  		
+  		private function gotRoleCGs(event:*):void {
+  		  var checkedGroups:Array = new Array();
+  		  
+  		  for each (var cgID:int in event.result) {
+  		    var cg:ComputerGroupVO = computerGroups.getByID(cgID);
+  		    
+  		    if (cg != null)
+  		      checkedGroups.push(cg);
+  		  }
+  		  
+  		  computerGroupTree.checkedItems = new ArrayCollection(checkedGroups);
+  		}
+  		
+  		private function modelUsersChanged(roles:*):void {
+  		  updateUserLists();
+  		}
+  		
+  		private function changesPending():Boolean {
+  		  return applyButton.enabled;
+  		}
+  		
+  		private function changeSelection(newSelection:RoleVO):void {
+  		  if (newSelection != null && newSelection.busy)
+  		    newSelection = null;
+  		  
+  		  if (roleList.selectedItem != newSelection) {
+	        roleList.selectedItem =
+	          (newSelection != null && newSelection.id != 0 ? newSelection : null);
+  		  }
+  		  
+  		  if (editedRole != newSelection) {
+  		    editedRole = newSelection;
+  		    availableUsers = new ArrayCollection();
+  		    selectedUsers = new ArrayCollection();
+    		  computerGroupTree.checkedItems = new ArrayCollection();
+
+  		    // Enable the apply button iff we have an unsaved Role selected.
+  		    applyButton.enabled = (editedRole != null && editedRole.id == 0);
+  		    
+  		    // Reset the form.
+          nameInput.horizontalScrollPosition = 0;
+          
+          // Load the role's users.
+          if (editedRole == null)
+            ;
+          else if (editedRole.id == 0) {
+            roleUserIDs = new Array();
+            updateUserLists();
+          }
+          else {
+            DSS.svc('EditorService').get_property({ 'class': 'Role',
+                                                    'id': editedRole.id,
+                                                    'property': 'user_ids'
+                                                   }).onResult(gotRoleUsers);
+            DSS.svc('EditorService').get_property({ 'class': 'Role',
+                                                    'id': editedRole.id,
+                                                    'property': 'computer_group_ids'
+                                                   }).onResult(gotRoleCGs);
+          }
+		    }
+  		  
+  		  // Enable the delete button iff we have any selected roles.
+  		  deleteButton.enabled = (roleList.selectedItems.length != 0);
+  		  
+        // Enable the form iff we have a selected role.
+  		  form.enabled = (editedRole != null);
+  		  
+  		  // Change the text of the apply button as appropriate.
+  		  applyButton.label = (editedRole != null && editedRole.id == 0 ? 'Create' : 'Apply');
+  		}
+  		
+  		private function selectionChanged():void {
+  		  var newSelection:RoleVO;
+  		  
+  		  if (roleList.selectedItems.length != 1)
+  		    newSelection = null;
+  		  else
+  		    newSelection = roleList.selectedItem as RoleVO;
+
+  		  // Stop the user from throwing away changes.  Instead, show a confirmation
+  		  // dialog and revert the selection state.
+	      if (changesPending()) {
+	        saveConfirm(function():void { changeSelection(newSelection); });
+	        roleList.selectedItem = editedRole;
+	        return;
+	      }
+        
+        changeSelection(newSelection);
+  		}
+  		
+  		private function formDataChanged():void {
+  		  if (editedRole != null)
+  		    applyButton.enabled = true;
+  		}
+  		
+  		private function revertChanges():void {
+  		  changeSelection(null);
+  		}
+  		
+  		private function applyChanges(nextAction:Function=null):void {
+  		  editedRole.name = nameInput.text;
+  		  editedRole.admin = adminCheckbox.selected;
+  		  applyButton.enabled = false;
+  		  var userIDs:Array = selectedUsers.source.map(function (user:UserVO, idx:int, ary:Array):int { return user.id });
+  		  var cgIDs:Array = computerGroupTree.checkedItems.source.map(function (group:ComputerGroupVO, idx:int, ary:Array):int { return group.id; });
+  		  
+  		  var editEvent:EditorEvent;
+
+  		  // Mark the role "busy", so it can't be edited while we're saving it.
+  		  editedRole.busy = true;
+  		  
+		    editEvent = new EditorEvent(editedRole.id == 0 ? EditorEvent.EDITOR_CREATE
+		                                                   : EditorEvent.EDITOR_UPDATE,
+		                                'Role', editedRole,
+		                                { 'user_ids': userIDs,
+		                                  'computer_group_ids': cgIDs });
+  		  
+  		  if (nextAction != null) {
+  		    editEvent.followup = function(role:RoleVO):void { updateComplete(role); nextAction(); }
+  		  }
+  		  else
+  		    editEvent.followup = this.updateComplete;
+  		  
+  		  editEvent.dispatch();
+  		  changeSelection(null);
+  		}
+  		
+  		private function updateComplete(role:RoleVO):void {
+  		  if (roleList.selectedItems.length == 0) {
+  		    changeSelection(role);
+  		    nameInput.setFocus();
+		    }
+  		}
+  		
+  		private function deleteRoles():void {
+  		  if (roleList.selectedItems.length == 0)
+  		    return;
+  		  
+  		  var deleteEvent:EditorEvent;
+  		  var roleIDs:Array;
+
+  		  // Mark the roles "busy" so they can't be changed while we're deleting them.
+  		  roleList.selectedItems.forEach(function (role:RoleVO, index:int, array:Array):void { role.busy = true; });
+
+  		  roleIDs = roleList.selectedItems.map(function (role:RoleVO, index:int, array:Array):int { return role.id; });
+  		  deleteEvent = new EditorEvent(EditorEvent.EDITOR_DELETE, 'Role', roleIDs);
+  		  deleteEvent.dispatch();
+
+        // We have to do this last, because this will change selectedItems.
+  		  if (editedRole != null &&
+  		      roleList.selectedItems.indexOf(editedRole) != -1) {
+  		    revertChanges();
+  		  }
+    	}
+  		
+  		private function createRole():void {
+  		  if (changesPending()) {
+	        saveConfirm(function():void { createRole(); });
+	        return;
+	      }
+	      
+  		  var r:RoleVO = new RoleVO();
+  		  
+  		  r.name = 'New Role';
+  		  r.admin = false;
+  		  changeSelection(r);
+  		  nameInput.setFocus();
+  		  nameInput.setSelection(0, nameInput.text.length);
+  		  formDataChanged(); // Activate the Create/Revert buttons
+  		}
+  		
+  		private function saveConfirm(nextAction:Function):void {
+				this.nextAction = nextAction;
+				saveConfirmDialog.show(this);
+			}
+
+			private function get addButton():Button
+      {
+        return addDeleteButtons.getChildAt(0) as Button;
+      }
+      
+      private function get deleteButton():Button
+      {
+        return addDeleteButtons.getChildAt(1) as Button;
+      }
+      
+      private function buttonClicked(event:ItemClickEvent):void
+      {
+        switch (event.item.name) {
+          case 'add':
+            createRole();
+            break;
+          case 'delete':
+            deleteRoles();
+            break;
+        }
+      }
+  	]]>
+  </mx:Script>
+
+  <mx:VBox width="400" minHeight="500" height="100%" paddingBottom="10">
+    <mx:List id="roleList" width="100%" height="100%"
+             dataProvider="{model.roles}" labelField="name"
+             allowMultipleSelection="true"
+             change="selectionChanged()" />
+    <mx:ButtonBar id="addDeleteButtons" toolTipField="toolTip" labelField="label" itemClick="buttonClicked(event)">
+      <mx:dataProvider>
+        <mx:Array>
+          <mx:Object label="+" toolTip="Add a new role" name="add"/>
+          <mx:Object label="-" toolTip="Delete selected role(s)" name="delete"/>
+        </mx:Array>
+      </mx:dataProvider>
+    </mx:ButtonBar>
+  </mx:VBox>
+  <mx:VBox id="form" enabled="false" minWidth="450" minHeight="500"
+           height="100%" borderStyle="solid"
+           defaultButton="{applyButton}"
+           paddingLeft="10" paddingRight="10" paddingTop="10" paddingBottom="10"
+           keyDown="if (event.keyCode == Keyboard.ESCAPE) revertChanges();">
+    <mx:Grid width="100%" height="100%">
+      <mx:GridRow>
+        <mx:GridItem>
+          <mx:Label text="Name:" />
+        </mx:GridItem>
+        <mx:GridItem>
+          <mx:TextInput id="nameInput" text="{editedRole.name}" change="formDataChanged()" />
+        </mx:GridItem>
+      </mx:GridRow>
+      <mx:GridRow>
+        <mx:GridItem>
+          <mx:Label text="Admin:" />
+        </mx:GridItem>
+        <mx:GridItem>
+          <mx:CheckBox id="adminCheckbox" selected="{editedRole.admin}" change="formDataChanged()" />
+        </mx:GridItem>
+      </mx:GridRow>
+      <mx:GridRow height="50%">
+      	<mx:GridItem colSpan="2">
+      	  <mx:Panel title="Users" height="100%">
+        		<bfcontrols:DoubleList leftListDataProvider="{availableUsers}"
+        		                       rightListDataProvider="{selectedUsers}"
+        		                       labelField="name" width="100%" height="100%"
+        		                       change="formDataChanged()" />
+        	</mx:Panel>
+      	</mx:GridItem>
+      </mx:GridRow>
+      <mx:GridRow height="50%">
+      	<mx:GridItem colSpan="2">
+      	  <mx:Panel title="Computer Groups" width="100%" height="100%">
+        		<bfcontrols:CheckTree id="computerGroupTree" change="formDataChanged()"
+        		                      dataProvider="{computerGroups.root.children}"
+        		                      width="100%" height="100%"
+                                  labelField="name" />
+        	</mx:Panel>
+      	</mx:GridItem>
+      </mx:GridRow>
+    </mx:Grid>
+    <mx:Spacer height="15" />
+    <mx:HBox>
+      <mx:Button id="applyButton" label="Apply" enabled="false" click="applyChanges()" />
+      <mx:Button id="revertButton" label="Revert" enabled="{applyButton.enabled}" click="revertChanges()" />
+    </mx:HBox>
+  </mx:VBox>
+</mx:HBox>

@@ -1,0 +1,42 @@
+<h1>Editing employee</h1>
+
+<%= error_messages_for :employee %>
+
+<% form_for(@employee) do |f| %>
+  <p>
+    <b>Name</b><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <b>Hiredate</b><br />
+    <%= f.date_select :hiredate %>
+  </p>
+
+  <p>
+    <b>Salary</b><br />
+    <%= f.text_field :salary %>
+  </p>
+
+  <p>
+    <b>Fulltime</b><br />
+    <%= f.check_box :fulltime %>
+  </p>
+
+  <p>
+    <b>Vacationdays</b><br />
+    <%= f.text_field :vacationdays %>
+  </p>
+
+  <p>
+    <b>Comments</b><br />
+    <%= f.text_area :comments %>
+  </p>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @employee %> |
+<%= link_to 'Back', employees_path %>

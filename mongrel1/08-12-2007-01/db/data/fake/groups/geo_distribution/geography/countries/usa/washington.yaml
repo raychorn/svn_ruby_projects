@@ -1,0 +1,334 @@
+washington:
+  title: Washington
+  subgroups:
+  - washington_aberdeen
+  - washington_anacortes
+  - washington_auburn
+  - washington_bainbridge_island
+  - washington_bellevue
+  - washington_bellingham
+  - washington_bothell
+  - washington_bremerton
+  - washington_burien
+  - washington_camas
+  - washington_centralia
+  - washington_covington
+  - washington_des_moines
+  - washington_edmonds
+  - washington_ellensburg
+  - washington_everett
+  - washington_federal_way
+  - washington_issaquah
+  - washington_kenmore
+  - washington_kennewick
+  - washington_kent
+  - washington_kirkland
+  - washington_lacey
+  - washington_lakewood
+  - washington_longview
+  - washington_lynnwood
+  - washington_marysville
+  - washington_mercer_island
+  - washington_monroe
+  - washington_moses_lake
+  - washington_mountlake_terrace
+  - washington_mount_vernon
+  - washington_mukilteo
+  - washington_oak_harbor
+  - washington_olympia
+  - washington_pasco
+  - washington_port_angeles
+  - washington_pullman
+  - washington_puyallup
+  - washington_redmond
+  - washington_renton
+  - washington_richland
+  - washington_sammamish
+  - washington_seatac
+  - washington_seattle
+  - washington_shoreline
+  - washington_spokane
+  - washington_spokane_valley
+  - washington_tacoma
+  - washington_tukwila
+  - washington_university_place
+  - washington_vancouver
+  - washington_walla_walla
+  - washington_wenatchee
+  - washington_yakima
+
+washington_aberdeen:
+  title: Aberdeen
+  type: city
+  population: 16354
+
+washington_anacortes:
+  title: Anacortes
+  type: city
+  population: 15711
+
+washington_auburn:
+  title: Auburn
+  type: city
+  population: 45007
+
+washington_bainbridge_island:
+  title: Bainbridge Island
+  type: city
+  population: 21917
+
+washington_bellevue:
+  title: Bellevue
+  type: city
+  population: 116914
+
+washington_bellingham:
+  title: Bellingham
+  type: city
+  population: 73083
+
+washington_bothell:
+  title: Bothell
+  type: city
+  population: 30687
+
+washington_bremerton:
+  title: Bremerton
+  type: city
+  population: 38270
+
+washington_burien:
+  title: Burien
+  type: city
+  population: 30908
+
+washington_camas:
+  title: Camas
+  type: city
+  population: 16049
+
+washington_centralia:
+  title: Centralia
+  type: city
+  population: 15200
+
+washington_covington:
+  title: Covington
+  type: city
+  population: 15930
+
+washington_des_moines:
+  title: Des Moines
+  type: city
+  population: 28822
+
+washington_edmonds:
+  title: Edmonds
+  type: city
+  population: 39531
+
+washington_ellensburg:
+  title: Ellensburg
+  type: city
+  population: 16824
+
+washington_everett:
+  title: Everett
+  type: city
+  population: 96090
+
+washington_federal_way:
+  title: Federal Way
+  type: city
+  population: 83333
+
+washington_issaquah:
+  title: Issaquah
+  type: city
+  population: 15581
+
+washington_kenmore:
+  title: Kenmore
+  type: city
+  population: 19366
+
+washington_kennewick:
+  title: Kennewick
+  type: city
+  population: 60528
+
+washington_kent:
+  title: Kent
+  type: city
+  population: 81669
+
+washington_kirkland:
+  title: Kirkland
+  type: city
+  population: 45587
+
+washington_lacey:
+  title: Lacey
+  type: city
+  population: 32862
+
+washington_lakewood:
+  title: Lakewood
+  type: city
+  population: 58075
+
+washington_longview:
+  title: Longview
+  type: city
+  population: 35950
+
+washington_lynnwood:
+  title: Lynnwood
+  type: city
+  population: 33411
+
+washington_marysville:
+  title: Marysville
+  type: city
+  population: 29014
+
+washington_mercer_island:
+  title: Mercer Island
+  type: city
+  population: 22197
+
+washington_monroe:
+  title: Monroe
+  type: city
+  population: 15175
+
+washington_moses_lake:
+  title: Moses Lake
+  type: city
+  population: 16455
+
+washington_mountlake_terrace:
+  title: Mountlake Terrace
+  type: city
+  population: 20306
+
+washington_mount_vernon:
+  title: Mount Vernon
+  type: city
+  population: 28838
+
+washington_mukilteo:
+  title: Mukilteo
+  type: city
+  population: 19430
+
+washington_oak_harbor:
+  title: Oak Harbor
+  type: city
+  population: 21748
+
+washington_olympia:
+  title: Olympia
+  type: city
+  population: 43970
+
+washington_pasco:
+  title: Pasco
+  type: city
+  population: 42756
+
+washington_port_angeles:
+  title: Port Angeles
+  type: city
+  population: 18663
+
+washington_pullman:
+  title: Pullman
+  type: city
+  population: 25117
+
+washington_puyallup:
+  title: Puyallup
+  type: city
+  population: 35502
+
+washington_redmond:
+  title: Redmond
+  type: city
+  population: 47142
+
+washington_renton:
+  title: Renton
+  type: city
+  population: 54934
+
+washington_richland:
+  title: Richland
+  type: city
+  population: 43408
+
+washington_sammamish:
+  title: Sammamish
+  type: city
+  population: 34259
+
+washington_seatac:
+  title: SeaTac
+  type: city
+  population: 25171
+
+washington_seattle:
+  title: Seattle
+  type: city
+  population: 571360
+
+washington_shoreline:
+  title: Shoreline
+  type: city
+  population: 51981
+
+washington_spokane:
+  title: Spokane
+  type: city
+  population: 196527
+
+washington_spokane_valley:
+  title: Spokane Valley
+  type: city
+  population: 81082
+
+washington_tacoma:
+  title: Tacoma
+  type: city
+  population: 196108
+
+washington_tukwila:
+  title: Tukwila
+  type: city
+  population: 17003
+
+washington_university_place:
+  title: University Place
+  type: city
+  population: 30401
+
+washington_vancouver:
+  title: Vancouver
+  type: city
+  population: 155072
+
+washington_walla_walla:
+  title: Walla Walla
+  type: city
+  population: 30892
+
+washington_wenatchee:
+  title: Wenatchee
+  type: city
+  population: 28988
+
+washington_yakima:
+  title: Yakima
+  type: city
+  population: 81030
+

@@ -1,0 +1,359 @@
+/*---------------------
+New Additions
+----------------------*/
+body {
+  background: white url(index_files/dom-bg16.png) repeat-x;
+  }
+#specialrow {
+  font-family: Arial, Helvetica, Sans-serif;
+  float: left;
+  width: 100%;
+  height: 500px;
+  margin: 0;
+  padding-top: 20px;
+  background: transparent;
+  }
+#specialbottom {
+  background: transparent;
+  margin-top: -23px;
+  } 
+#specialbottom .countdown {
+  float: left;
+  color: red;
+  font-weight: bold;
+  font-size: 115%;
+  border: 0px solid #B3E5EF;
+  padding: 5px 15px;
+  }
+#specialbottom .order {
+  float: right;
+  color: #A4D6EF;
+  font-weight: bold;
+  font-size: 190%;
+  padding-right: 25px;
+  }
+#specialbottom .order a{
+  color: #EF1D2F;
+  }
+  
+
+.link1 {
+  float: left;
+  margin: 185px 0 0 190px;
+  display: inline;
+  }
+.link1 a {
+  padding-right: 20px;
+  background: url(/images/homepage7/arrow.gif) no-repeat right center;
+  font-weight: bold;
+  font-size: 140%;
+  color: white;
+  }
+.link2 {
+  float: right; 
+  margin-top: 167px;
+  margin-right: 35px;
+  display: inline;
+  }
+.link2 a {
+  padding-right: 20px;
+  background: url(/images/homepage7/arrow.gif) no-repeat right center;
+  font-size: 130%;
+  color: white;
+  }
+/*  ----------------       SPECIALS ROW   ------------------     */
+
+#firstrow {
+  float: left;
+  width: 759px;
+  background: white;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  border: 0;
+  padding-top: 10px;
+  border-top: 1px dotted #C9EBF7;
+  }
+#specialbox1 {
+  float: right;
+  }
+#specialbox2 {
+  font-family: Arial, Helvetica, Sans-serif;
+  border-left: 1px solid #CDCFCF;
+  height: 285px;
+  margin-top: 0px;
+  width: 38%;
+  float: left;
+  }
+#specialbox2 h3{
+  color: #147E9D;
+  font-size: 160%;
+  letter-spacing: -1px;
+  margin-top: 5px;
+  }
+#specialbox2 h4 {
+  font-family: Arial, Helvetica, Sans-serif;
+  color: gray;
+  font-size: 120%;
+  letter-spacing: -1px;
+  margin-top: 0px;
+  padding: 0;
+  }
+#specialbox2 ul {
+  margin: 0px 0px 0px 20px;
+  padding: 0;
+  list-style-image: url(images/risingsun/checkmark.gif);
+}
+#specialbox2 li {
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  } 
+#specialbox2 .big {
+  text-align: center;
+  font-size: 140%;
+  font-weight: bold;
+  letter-spacing: -1px;
+  }
+
+/*--------------------------------------------
+Body
+---------------------------------------------*/
+#body {
+  width: 546px;
+  float: left;
+}
+
+/*--------------------------------------------
+Sidebar (aka Rightside)
+---------------------------------------------*/
+#sidebar {
+  margin-top: 10px;
+  background: #fff;
+  padding: 0;
+  width: 191px;
+  border: 0;
+  text-align: left;
+  float: right;
+  display: inline;
+  color: black;
+  line-height: 18px;
+  font-family: Arial, Helvetica, Sans-serif;
+  }
+#sidebar p {
+  margin-bottom: 0px;
+  margin-top: 0;
+  font-size: 95%;
+  font-weight: bold;
+  line-height: 1.4em;
+  padding: 2px 4px;
+  }
+#sidebar a {
+  color: #17697F;
+  text-decoration: underline;
+  color: black;
+  border-bottom: none;
+  text-decoration: none;
+  background: none;
+  }
+#sidebar a:hover {
+  text-decoration: underline;
+  background: none;
+  }
+#sidebar ul {
+  list-style-type: none;
+  margin: 7px 0px 15px 0px;
+  padding:0;
+}
+#sidebar li {
+  margin-bottom: 2px;
+  padding-bottom: 3px;
+  padding-left: 4px;
+  border-bottom: 1px dotted #CCC;
+  font-size: 95%;
+  line-height: 16px;
+  background: url(index_files/sidebullet.gif) no-repeat  left;
+}
+#sidebar h2 {
+  font-size: 110%;
+  background: #fff url(index_files/sideh2.gif) repeat-x bottom left;
+  color: #1D6CA8;
+  font-weight: bold;
+  padding: 2px 0 2px 0;
+  text-align: center;
+  margin: 19px 0 0px 0;
+  border-bottom: 1px solid #C3D5DF;
+  border-top: 1px solid #6D98AF;
+  }
+#rightside h1.talkbox {
+margin-bottom: 10px;
+  }
+#rightside .special a{
+  text-align: center;
+  margin-left: 9px;
+  font-size: 110%;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  background: #fff url(/images/black/home/redzonebuttonb.gif) no-repeat center;
+  padding: 7px;
+}
+#rightside .special a:hover{
+  color: white;
+  text-decoration: underline;
+  background: #fff url(/images/black/home/redzonebuttonb.gif) no-repeat center;
+}
+#rightside .h2special{
+  font-size: 160%;
+  line-height: 22px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.box {
+  margin-top: 15px;
+  }
+.box img{
+  margin-top: 5px;
+  }
+#blogroll li{
+  background: url(/images/black/home/blogbullet.gif) no-repeat left;
+  padding-left: 22px;
+  font-size: 95%;
+}
+#reasons {
+  float: left;
+  width: 100%;
+}  
+
+#reasons dt {
+  float: right;
+  width: 440px;
+  margin: 0;
+  padding: 0;
+  font-size: 110%;
+  font-weight: bold;
+  font-family: Arial, Helvetica, Sans-serif;
+  color: black;
+}
+
+#reasons dl {
+float: left;
+display: inline;
+}
+
+#reasons dd {
+  margin: 0;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  font-size: 95%;
+  line-height: 18px;
+  border-bottom: 1px solid #DFDFDF;
+}
+#reasons dd.img {
+  float: left;
+  padding: 10px;
+  border: none;
+}
+
+#redzone {
+float: left;
+width: 100%;
+background: white;
+border-top: 1px solid #BFBFBF;
+border-bottom: 1px solid #BFBFBF;
+margin-top: 20px;
+margin-bottom: 20px;
+}
+#redzone .redzone {
+  font-size: 160%;
+  letter-spacing: -1px;
+  width: 350px;
+  float: left;
+  padding-left: 0px;
+  color: #5F5F5F;
+}
+#redzone .getstart {
+  font-family: "Lucida Grande", Arial, Helvetica, Sans-serif;
+  font-size: 140%;
+  color: black;
+  float: right;
+  width: 300px;
+  text-align: center;
+  background: #fff url(/images/black/home/redzonebuttonb.gif) no-repeat center;
+  padding: 10px 10px;
+  margin-top: 34px;
+  margin-right: 0px;
+}
+#redzone .getstart a {
+color: white;
+}
+
+.gofeatures a {
+  float: right;
+  font-size: 140%;
+  font-family: Arial, Helvetica, Sans-serif;
+}
+
+#secondrow {
+  width: 759px;
+  float: left;
+  display: inline;
+  margin-top: -20px;
+  padding: 0;
+}
+#secondrow h2,h3 {
+  font-family: "Lucida Grande", Arial, Sans-serif;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  }
+#secondrow img {
+  border: 0;
+  }
+#secondrow h2 {
+  border: 0;
+  color: #FB0000;
+  }
+#secondrow p {
+  font-size: 95%;
+  margin: 0;
+  padding: 5px;
+  }
+#secondrow h3 {
+  font-weight: bold;
+  font-size: 110%;
+  color: black;
+  }
+#secondrow .planbox1 {
+  width: 243px;
+  padding: 0;
+  margin: 13px 30px 0 0px;
+  float: left;
+}
+#secondrow .planbox2 {
+  width: 243px;
+  padding: 0;
+  margin: 13px 14px 0 0px;
+  float: left;
+  
+
+}
+.strikethrough {
+  text-decoration: line-through;  
+}
+#awardbar {
+  float: left;
+  border-top: 1px solid #CDCFCF;
+  margin-top: 20px;
+  }
+
+
+#specialrow {
+  margin-top: -19px;
+  margin-bottom: -5px;
+}
+
+
+#morebar {
+  width: 100%;
+  float: left;
+  }

@@ -1,0 +1,19 @@
+quentin:
+  id: 1
+  user_id: 1
+  content: Quentin's notes
+
+aaron:
+  id: 2
+  user_id: 2
+  content: Aaron's notes
+
+ludwig:
+  id: 3
+  user_id: 3
+  content: Ludwig's notes
+
+wolfgang:
+  id: 4
+  user_id: 4
+  content: Wolfgang's notes

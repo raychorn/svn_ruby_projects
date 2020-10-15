@@ -1,0 +1,1666 @@
+# Logfile created on Fri Aug 10 08:58:25 -0700 2007 by /
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-10 08:58:34) [POST]
+  Session ID: 9b067295ab7cd4f7d6e80be45eed3795
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+ArgumentError (wrong number of arguments (0 for 1)):
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:1096:in `render'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:1096:in `perform_action_without_filters'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:632:in `call_filter'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:619:in `perform_action_without_benchmark'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/benchmarking.rb:66:in `perform_action_without_rescue'
+    c:/ruby/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/benchmarking.rb:66:in `perform_action_without_rescue'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/rescue.rb:83:in `perform_action'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:430:in `send'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:430:in `process_without_filters'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:624:in `process_without_session_management_support'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/session_management.rb:114:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:330:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/dispatcher.rb:41:in `dispatch'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:78:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:76:in `synchronize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:76:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:618:in `process_client'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:617:in `each'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:617:in `process_client'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `initialize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `new'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `initialize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `new'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:271:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:270:in `each'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:270:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/bin/mongrel_rails:127:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/command.rb:211:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/bin/mongrel_rails:243
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:342:in `new_constants_in'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/commands/servers/mongrel.rb:60
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:495:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:342:in `new_constants_in'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:495:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/commands/server.rb:39
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    ./script/server:3
+
+
+Rendering c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/templates/rescues/layout.rhtml (500 Internal Error)
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-10 09:00:16) [POST]
+  Session ID: 0950f1f33ca97ba85e4bbf642e96f000
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+ArgumentError (wrong number of arguments (0 for 1)):
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:1096:in `render'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:1096:in `perform_action_without_filters'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:632:in `call_filter'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:619:in `perform_action_without_benchmark'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/benchmarking.rb:66:in `perform_action_without_rescue'
+    c:/ruby/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/benchmarking.rb:66:in `perform_action_without_rescue'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/rescue.rb:83:in `perform_action'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:430:in `send'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:430:in `process_without_filters'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:624:in `process_without_session_management_support'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/session_management.rb:114:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:330:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/dispatcher.rb:41:in `dispatch'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:78:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:76:in `synchronize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:76:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:618:in `process_client'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:617:in `each'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:617:in `process_client'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `initialize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `new'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `initialize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `new'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:271:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:270:in `each'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:270:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/bin/mongrel_rails:127:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/command.rb:211:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/bin/mongrel_rails:243
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:342:in `new_constants_in'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/commands/servers/mongrel.rb:60
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:495:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:342:in `new_constants_in'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:495:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/commands/server.rb:39
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    ./script/server:3
+
+
+Rendering c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/templates/rescues/layout.rhtml (500 Internal Error)
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-10 09:01:02) [POST]
+  Session ID: 28e078ceb4788c8708a6419dd2dddb9c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+ArgumentError (wrong number of arguments (0 for 1)):
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:1096:in `render'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:1096:in `perform_action_without_filters'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:632:in `call_filter'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:619:in `perform_action_without_benchmark'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\benchmarking.rb:66:in `perform_action_without_rescue'
+    c:\ruby\lib\ruby\1.8\benchmark.rb:293:in `measure'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\benchmarking.rb:66:in `perform_action_without_rescue'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\rescue.rb:83:in `perform_action'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:430:in `send'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:430:in `process_without_filters'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:624:in `process_without_session_management_support'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\session_management.rb:114:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:330:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\dispatcher.rb:41:in `dispatch'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:78:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:76:in `synchronize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:76:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:618:in `process_client'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:617:in `each'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:617:in `process_client'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `initialize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `new'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `initialize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `new'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:271:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:270:in `each'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:270:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\bin\mongrel_rails:127:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\command.rb:211:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\bin\mongrel_rails:243
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:342:in `new_constants_in'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\commands\servers\mongrel.rb:60
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `gem_original_require'
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:495:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:342:in `new_constants_in'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:495:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\commands\server.rb:39
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `gem_original_require'
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `require'
+    C:\Program Files\SapphireSteel Software\Ruby In Steel\v1.0\Scripts\webbrick_service.rb:6
+
+
+Rendering c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/templates/rescues/layout.rhtml (500 Internal Error)
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-10 09:01:59) [POST]
+  Session ID: 4e4a010dd5c5956f35575f35d1f4ead5
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-10 12:27:20) [POST]
+  Session ID: 0a64f0dec0042d73097d32befecd5b0a
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+ArgumentError (wrong number of arguments (0 for 1)):
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:1096:in `render'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:1096:in `perform_action_without_filters'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:632:in `call_filter'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:619:in `perform_action_without_benchmark'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/benchmarking.rb:66:in `perform_action_without_rescue'
+    c:/ruby/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/benchmarking.rb:66:in `perform_action_without_rescue'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/rescue.rb:83:in `perform_action'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:430:in `send'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:430:in `process_without_filters'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:624:in `process_without_session_management_support'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/session_management.rb:114:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:330:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/dispatcher.rb:41:in `dispatch'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:78:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:76:in `synchronize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:76:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:618:in `process_client'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:617:in `each'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:617:in `process_client'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `initialize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `new'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `initialize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `new'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:271:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:270:in `each'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:270:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/bin/mongrel_rails:127:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/command.rb:211:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/bin/mongrel_rails:243
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:342:in `new_constants_in'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/commands/servers/mongrel.rb:60
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:495:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:342:in `new_constants_in'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:495:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/commands/server.rb:39
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    ./script/server:3
+
+
+Rendering c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/templates/rescues/layout.rhtml (500 Internal Error)
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-10 12:27:57) [POST]
+  Session ID: 3dfd8262621bc833a573577e29817301
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+ArgumentError (wrong number of arguments (0 for 1)):
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:1096:in `render'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:1096:in `perform_action_without_filters'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:632:in `call_filter'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:619:in `perform_action_without_benchmark'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\benchmarking.rb:66:in `perform_action_without_rescue'
+    c:\ruby\lib\ruby\1.8\benchmark.rb:293:in `measure'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\benchmarking.rb:66:in `perform_action_without_rescue'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\rescue.rb:83:in `perform_action'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:430:in `send'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:430:in `process_without_filters'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:624:in `process_without_session_management_support'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\session_management.rb:114:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:330:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\dispatcher.rb:41:in `dispatch'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:78:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:76:in `synchronize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:76:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:618:in `process_client'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:617:in `each'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:617:in `process_client'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `initialize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `new'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `initialize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `new'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:271:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:270:in `each'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:270:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\bin\mongrel_rails:127:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\command.rb:211:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\bin\mongrel_rails:243
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:342:in `new_constants_in'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\commands\servers\mongrel.rb:60
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `gem_original_require'
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:495:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:342:in `new_constants_in'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:495:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\commands\server.rb:39
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `gem_original_require'
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `require'
+    C:\Program Files\SapphireSteel Software\Ruby In Steel\v1.0\Scripts\webbrick_service.rb:6
+
+
+Rendering c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/templates/rescues/layout.rhtml (500 Internal Error)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2007-08-10 20:28:31) [POST]
+  Session ID: 312b18ab6df9add034795d6a3ae5d69c
+  Parameters: {}
+
+
+ActionController::RoutingError (no route found to match "/weborb" with {:method=>:post}):
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\routing.rb:1292:in `recognize_path'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\routing.rb:1282:in `recognize'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\dispatcher.rb:40:in `dispatch'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:78:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:76:in `synchronize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:76:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:618:in `process_client'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:617:in `each'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:617:in `process_client'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `initialize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `new'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `initialize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `new'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:271:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:270:in `each'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:270:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\bin\mongrel_rails:127:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\command.rb:211:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\bin\mongrel_rails:243
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:342:in `new_constants_in'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\commands\servers\mongrel.rb:60
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `gem_original_require'
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:495:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:342:in `new_constants_in'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:495:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\commands\server.rb:39
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `gem_original_require'
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `require'
+    C:\Program Files\SapphireSteel Software\Ruby In Steel\v1.0\Scripts\webbrick_service.rb:6
+
+
+Rendering c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/templates/rescues/layout.rhtml (404 Page Not Found)
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#index (for 127.0.0.1 at 2007-08-10 20:29:54) [POST]
+  Session ID: 543677e4f81decd9f042b2fb64c92a28
+  Parameters: {"action"=>"index", "controller"=>"rubyamf"}
+
+
+ActionController::UnknownAction (No action responded to index):
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:632:in `call_filter'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:619:in `perform_action_without_benchmark'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\benchmarking.rb:66:in `perform_action_without_rescue'
+    c:\ruby\lib\ruby\1.8\benchmark.rb:293:in `measure'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\benchmarking.rb:66:in `perform_action_without_rescue'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\rescue.rb:83:in `perform_action'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:430:in `send'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:430:in `process_without_filters'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:624:in `process_without_session_management_support'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\session_management.rb:114:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:330:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\dispatcher.rb:41:in `dispatch'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:78:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:76:in `synchronize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:76:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:618:in `process_client'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:617:in `each'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:617:in `process_client'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `initialize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `new'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `initialize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `new'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:271:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:270:in `each'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:270:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\bin\mongrel_rails:127:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\command.rb:211:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\bin\mongrel_rails:243
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:342:in `new_constants_in'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\commands\servers\mongrel.rb:60
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `gem_original_require'
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:495:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:342:in `new_constants_in'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:495:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\commands\server.rb:39
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `gem_original_require'
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `require'
+    C:\Program Files\SapphireSteel Software\Ruby In Steel\v1.0\Scripts\webbrick_service.rb:6
+
+
+Rendering c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/templates/rescues/layout.rhtml (404 Page Not Found)
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-10 21:03:19) [POST]
+  Session ID: aeacdb2953bcee3ad184d45cf4a7e4d1
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.48600 (2 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-10 21:03:20) [POST]
+  Session ID: aeacdb2953bcee3ad184d45cf4a7e4d1
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+MyController: missing default helper path my_helper
+Completed in 0.14400 (6 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 08:55:17) [POST]
+  Session ID: dbf8ea8c37fb1c704a2c53e91caf309d
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.02800 (35 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 08:55:18) [POST]
+  Session ID: dbf8ea8c37fb1c704a2c53e91caf309d
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+MyController: missing default helper path my_helper
+Completed in 0.04200 (23 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 08:56:11) [POST]
+  Session ID: 9861ce76ccb0996d3c821c49652a9a1d
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+ArgumentError (wrong number of arguments (0 for 1)):
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:1096:in `render'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:1096:in `perform_action_without_filters'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:632:in `call_filter'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:619:in `perform_action_without_benchmark'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/benchmarking.rb:66:in `perform_action_without_rescue'
+    c:/ruby/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/benchmarking.rb:66:in `perform_action_without_rescue'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/rescue.rb:83:in `perform_action'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:430:in `send'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:430:in `process_without_filters'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:624:in `process_without_session_management_support'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/session_management.rb:114:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:330:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/dispatcher.rb:41:in `dispatch'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:78:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:76:in `synchronize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:76:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:618:in `process_client'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:617:in `each'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:617:in `process_client'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `initialize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `new'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `initialize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `new'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:271:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:270:in `each'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:270:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/bin/mongrel_rails:127:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/command.rb:211:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/bin/mongrel_rails:243
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:342:in `new_constants_in'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/commands/servers/mongrel.rb:60
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:495:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:342:in `new_constants_in'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:495:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/commands/server.rb:39
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    ./script/server:3
+
+
+Rendering c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/templates/rescues/layout.rhtml (500 Internal Error)
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 08:57:04) [POST]
+  Session ID: e68971315a1b30f72a95f014e3225c78
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01900 (52 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 08:57:05) [POST]
+  Session ID: e68971315a1b30f72a95f014e3225c78
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+MyController: missing default helper path my_helper
+Completed in 0.03200 (31 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 09:00:08) [POST]
+  Session ID: a8570578a8d275987f50394b90b4fdab
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+ArgumentError (wrong number of arguments (0 for 1)):
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:1096:in `render'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:1096:in `perform_action_without_filters'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:632:in `call_filter'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:619:in `perform_action_without_benchmark'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\benchmarking.rb:66:in `perform_action_without_rescue'
+    c:\ruby\lib\ruby\1.8\benchmark.rb:293:in `measure'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\benchmarking.rb:66:in `perform_action_without_rescue'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\rescue.rb:83:in `perform_action'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:430:in `send'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:430:in `process_without_filters'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:624:in `process_without_session_management_support'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\session_management.rb:114:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:330:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\dispatcher.rb:41:in `dispatch'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:78:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:76:in `synchronize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:76:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:618:in `process_client'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:617:in `each'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:617:in `process_client'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `initialize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `new'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `initialize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `new'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:271:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:270:in `each'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:270:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\bin\mongrel_rails:127:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\command.rb:211:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\bin\mongrel_rails:243
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:342:in `new_constants_in'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\commands\servers\mongrel.rb:60
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `gem_original_require'
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:495:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:342:in `new_constants_in'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:495:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\commands\server.rb:39
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `gem_original_require'
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `require'
+    C:\Program Files\SapphireSteel Software\Ruby In Steel\v1.0\Scripts\webbrick_service.rb:6
+
+
+Rendering c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/templates/rescues/layout.rhtml (500 Internal Error)
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 09:02:25) [POST]
+  Session ID: f13cadd2c20e4a4fc11cf5c18eb44fee
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 09:03:10) [POST]
+  Session ID: 045273a96aec8860c8e64e88d05229b0
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 09:04:24) [POST]
+  Session ID: af719598fe2aa30f914c0309d7840a7c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+ArgumentError (wrong number of arguments (0 for 1)):
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:1096:in `render'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:1096:in `perform_action_without_filters'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:632:in `call_filter'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:619:in `perform_action_without_benchmark'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\benchmarking.rb:66:in `perform_action_without_rescue'
+    c:\ruby\lib\ruby\1.8\benchmark.rb:293:in `measure'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\benchmarking.rb:66:in `perform_action_without_rescue'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\rescue.rb:83:in `perform_action'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:430:in `send'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:430:in `process_without_filters'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:624:in `process_without_session_management_support'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\session_management.rb:114:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:330:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\dispatcher.rb:41:in `dispatch'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:78:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:76:in `synchronize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:76:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:618:in `process_client'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:617:in `each'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:617:in `process_client'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `initialize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `new'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `initialize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `new'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:271:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:270:in `each'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:270:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\bin\mongrel_rails:127:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\command.rb:211:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\bin\mongrel_rails:243
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:342:in `new_constants_in'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\commands\servers\mongrel.rb:60
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `gem_original_require'
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:495:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:342:in `new_constants_in'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:495:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\commands\server.rb:39
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `gem_original_require'
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `require'
+    C:\Program Files\SapphireSteel Software\Ruby In Steel\v1.0\Scripts\webbrick_service.rb:6
+
+
+Rendering c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/templates/rescues/layout.rhtml (500 Internal Error)
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 09:06:24) [POST]
+  Session ID: de230ea91872cd98ac32cb7c02e85670
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 09:08:33) [POST]
+  Session ID: 877fcc599db23a7129a53e378f76e5e9
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+ArgumentError (wrong number of arguments (0 for 1)):
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:1096:in `render'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:1096:in `perform_action_without_filters'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:632:in `call_filter'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:619:in `perform_action_without_benchmark'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/benchmarking.rb:66:in `perform_action_without_rescue'
+    c:/ruby/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/benchmarking.rb:66:in `perform_action_without_rescue'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/rescue.rb:83:in `perform_action'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:430:in `send'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:430:in `process_without_filters'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:624:in `process_without_session_management_support'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/session_management.rb:114:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:330:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/dispatcher.rb:41:in `dispatch'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:78:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:76:in `synchronize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:76:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:618:in `process_client'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:617:in `each'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:617:in `process_client'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `initialize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `new'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `initialize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `new'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:271:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:270:in `each'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:270:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/bin/mongrel_rails:127:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/command.rb:211:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/bin/mongrel_rails:243
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:342:in `new_constants_in'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/commands/servers/mongrel.rb:60
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:495:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:342:in `new_constants_in'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:495:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/commands/server.rb:39
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    ./script/server:3
+
+
+Rendering c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/templates/rescues/layout.rhtml (500 Internal Error)
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 09:09:22) [POST]
+  Session ID: 307e06f034879607e79b6b3b505f857f
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+ArgumentError (wrong number of arguments (0 for 1)):
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:1096:in `render'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:1096:in `perform_action_without_filters'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:632:in `call_filter'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:619:in `perform_action_without_benchmark'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/benchmarking.rb:66:in `perform_action_without_rescue'
+    c:/ruby/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/benchmarking.rb:66:in `perform_action_without_rescue'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/rescue.rb:83:in `perform_action'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:430:in `send'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:430:in `process_without_filters'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:624:in `process_without_session_management_support'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/session_management.rb:114:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:330:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/dispatcher.rb:41:in `dispatch'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:78:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:76:in `synchronize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:76:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:618:in `process_client'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:617:in `each'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:617:in `process_client'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `initialize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `new'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `initialize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `new'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:271:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:270:in `each'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:270:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/bin/mongrel_rails:127:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/command.rb:211:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/bin/mongrel_rails:243
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:342:in `new_constants_in'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/commands/servers/mongrel.rb:60
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:495:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:342:in `new_constants_in'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:495:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/commands/server.rb:39
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    ./script/server:3
+
+
+Rendering c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/templates/rescues/layout.rhtml (500 Internal Error)
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 09:10:07) [POST]
+  Session ID: c7bed5cc7207b3a4d1cb6386d02ddd61
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 09:13:11) [POST]
+  Session ID: 07c67022a7ddf6b455236f9c951d2f07
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.02300 (43 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 09:13:12) [POST]
+  Session ID: 07c67022a7ddf6b455236f9c951d2f07
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+MyController: missing default helper path my_helper
+Completed in 0.03700 (27 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 09:16:48) [POST]
+  Session ID: 45ad6aa01a67de3f9644b82c4e3bbefc
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 09:16:49) [POST]
+  Session ID: 45ad6aa01a67de3f9644b82c4e3bbefc
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01700 (58 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 15:24:38) [POST]
+  Session ID: 8aed99fb8e153ef19ab80ad1f8e4ca9e
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.02200 (45 reqs/sec) | Rendering: 0.00100 (4%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 15:24:39) [POST]
+  Session ID: 8aed99fb8e153ef19ab80ad1f8e4ca9e
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+MyController: missing default helper path my_helper
+Completed in 0.03200 (31 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 16:31:44) [POST]
+  Session ID: 0b17ca5bccc153e8e9a4276ee04946ec
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01500 (66 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 16:31:45) [POST]
+  Session ID: 0b17ca5bccc153e8e9a4276ee04946ec
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01800 (55 reqs/sec) | Rendering: 0.00100 (5%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 16:31:56) [POST]
+  Session ID: 0b17ca5bccc153e8e9a4276ee04946ec
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 16:31:57) [POST]
+  Session ID: 0b17ca5bccc153e8e9a4276ee04946ec
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+
+
+ArgumentError (wrong number of arguments (0 for 1)):
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:1096:in `render'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:1096:in `perform_action_without_filters'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:632:in `call_filter'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:619:in `perform_action_without_benchmark'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/benchmarking.rb:66:in `perform_action_without_rescue'
+    c:/ruby/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/benchmarking.rb:66:in `perform_action_without_rescue'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/rescue.rb:83:in `perform_action'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:430:in `send'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:430:in `process_without_filters'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:624:in `process_without_session_management_support'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/session_management.rb:114:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:330:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/dispatcher.rb:41:in `dispatch'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:78:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:76:in `synchronize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:76:in `process'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:618:in `process_client'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:617:in `each'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:617:in `process_client'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `initialize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `new'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `initialize'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `new'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:271:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:270:in `each'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:270:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/bin/mongrel_rails:127:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/command.rb:211:in `run'
+    c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/bin/mongrel_rails:243
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:342:in `new_constants_in'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:488:in `load'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/commands/servers/mongrel.rb:60
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:495:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:342:in `new_constants_in'
+    c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/dependencies.rb:495:in `require'
+    c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/commands/server.rb:39
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `gem_original_require'
+    c:/ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:27:in `require'
+    ./script/server:3
+
+
+Rendering c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/templates/rescues/layout.rhtml (500 Internal Error)
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 16:34:31) [POST]
+  Session ID: 75a325465946cc6f7d24deef74819100
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 8.06400 (0 reqs/sec) | Rendering: 0.00100 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 16:34:41) [POST]
+  Session ID: 75a325465946cc6f7d24deef74819100
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+MyController: missing default helper path my_helper
+Completed in 0.05200 (19 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 16:34:47) [POST]
+  Session ID: 75a325465946cc6f7d24deef74819100
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.02200 (45 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 16:34:48) [POST]
+  Session ID: 75a325465946cc6f7d24deef74819100
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+
+
+ArgumentError (wrong number of arguments (0 for 1)):
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:1096:in `render'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:1096:in `perform_action_without_filters'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:632:in `call_filter'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:619:in `perform_action_without_benchmark'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\benchmarking.rb:66:in `perform_action_without_rescue'
+    c:\ruby\lib\ruby\1.8\benchmark.rb:293:in `measure'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\benchmarking.rb:66:in `perform_action_without_rescue'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\rescue.rb:83:in `perform_action'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:430:in `send'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:430:in `process_without_filters'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\filters.rb:624:in `process_without_session_management_support'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\session_management.rb:114:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\actionpack-1.13.3\lib\action_controller\base.rb:330:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\dispatcher.rb:41:in `dispatch'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:78:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:76:in `synchronize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\rails.rb:76:in `process'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:618:in `process_client'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:617:in `each'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:617:in `process_client'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `initialize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `new'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:736:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `initialize'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `new'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel.rb:720:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:271:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:270:in `each'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\configurator.rb:270:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\bin\mongrel_rails:127:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\lib\mongrel\command.rb:211:in `run'
+    c:\ruby\lib\ruby\gems\1.8\gems\mongrel-1.0.1-mswin32\bin\mongrel_rails:243
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:342:in `new_constants_in'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:488:in `load'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\commands\servers\mongrel.rb:60
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `gem_original_require'
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:495:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:342:in `new_constants_in'
+    c:\ruby\lib\ruby\gems\1.8\gems\activesupport-1.4.2\lib\active_support\dependencies.rb:495:in `require'
+    c:\ruby\lib\ruby\gems\1.8\gems\rails-1.2.3\lib\commands\server.rb:39
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `gem_original_require'
+    c:\ruby\lib\ruby\site_ruby\1.8\rubygems\custom_require.rb:27:in `require'
+    C:\Program Files\SapphireSteel Software\Ruby In Steel\v1.0\Scripts\webbrick_service.rb:6
+
+
+Rendering c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/templates/rescues/layout.rhtml (500 Internal Error)
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 17:46:00) [POST]
+  Session ID: 9a43e00150ee72a0d1b2adde8b69332b
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.12300 (8 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 17:46:01) [POST]
+  Session ID: 9a43e00150ee72a0d1b2adde8b69332b
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+MyController: missing default helper path my_helper
+Completed in 0.05300 (18 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 17:46:07) [POST]
+  Session ID: 9a43e00150ee72a0d1b2adde8b69332b
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.02500 (40 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 17:46:08) [POST]
+  Session ID: 9a43e00150ee72a0d1b2adde8b69332b
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01700 (58 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:07:00) [POST]
+  Session ID: 16b7c7d99b55b21c0913d9b960c14eef
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.12800 (7 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:07:01) [POST]
+  Session ID: 16b7c7d99b55b21c0913d9b960c14eef
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+MyController: missing default helper path my_helper
+Completed in 0.05300 (18 reqs/sec) | Rendering: 0.00100 (1%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:07:07) [POST]
+  Session ID: 16b7c7d99b55b21c0913d9b960c14eef
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.02300 (43 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:07:08) [POST]
+  Session ID: 16b7c7d99b55b21c0913d9b960c14eef
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01700 (58 reqs/sec) | Rendering: 0.00100 (5%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:12:57) [POST]
+  Session ID: eee485d3c24ff3e0421a555195fc32c8
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.02400 (41 reqs/sec) | Rendering: 0.00100 (4%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:12:59) [POST]
+  Session ID: eee485d3c24ff3e0421a555195fc32c8
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.12200 (8 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:15:35) [POST]
+  Session ID: 8f552603e969034b2a47f3400700e49f
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.11800 (8 reqs/sec) | Rendering: 0.00100 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:15:36) [POST]
+  Session ID: 8f552603e969034b2a47f3400700e49f
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.03000 (33 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:15:41) [POST]
+  Session ID: 8f552603e969034b2a47f3400700e49f
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.02300 (43 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:15:42) [POST]
+  Session ID: 8f552603e969034b2a47f3400700e49f
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.02300 (43 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:19:10) [POST]
+  Session ID: 0cc9166ac19ebf07d44fa47919a7505d
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.02600 (38 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:19:11) [POST]
+  Session ID: 0cc9166ac19ebf07d44fa47919a7505d
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 3.61700 (0 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:19:21) [POST]
+  Session ID: 0cc9166ac19ebf07d44fa47919a7505d
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.02400 (41 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:19:22) [POST]
+  Session ID: 0cc9166ac19ebf07d44fa47919a7505d
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:24:11) [POST]
+  Session ID: 38f6be42e78d020143f998f68c19d929
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01900 (52 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:24:12) [POST]
+  Session ID: 38f6be42e78d020143f998f68c19d929
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:25:11) [POST]
+  Session ID: 43475218bb7d4c315edaeb800175f947
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.02200 (45 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:25:12) [POST]
+  Session ID: 43475218bb7d4c315edaeb800175f947
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+MyController: missing default helper path my_helper
+Completed in 0.03500 (28 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:25:19) [POST]
+  Session ID: 43475218bb7d4c315edaeb800175f947
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:25:20) [POST]
+  Session ID: 43475218bb7d4c315edaeb800175f947
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01600 (62 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:27:12) [POST]
+  Session ID: f496b5ab453ec4e19be284b9a9df73d1
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01400 (71 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:27:13) [POST]
+  Session ID: f496b5ab453ec4e19be284b9a9df73d1
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01700 (58 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:27:20) [POST]
+  Session ID: f496b5ab453ec4e19be284b9a9df73d1
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:27:21) [POST]
+  Session ID: f496b5ab453ec4e19be284b9a9df73d1
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01600 (62 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:27:23) [POST]
+  Session ID: f496b5ab453ec4e19be284b9a9df73d1
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01200 (83 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:27:24) [POST]
+  Session ID: f496b5ab453ec4e19be284b9a9df73d1
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:29:02) [POST]
+  Session ID: d363b516ff13eb9341e86750eec0d245
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.02000 (50 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:29:03) [POST]
+  Session ID: d363b516ff13eb9341e86750eec0d245
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+MyController: missing default helper path my_helper
+Completed in 0.03300 (30 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:29:13) [POST]
+  Session ID: d363b516ff13eb9341e86750eec0d245
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:29:14) [POST]
+  Session ID: d363b516ff13eb9341e86750eec0d245
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01600 (62 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:29:15) [POST]
+  Session ID: d363b516ff13eb9341e86750eec0d245
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:29:16) [POST]
+  Session ID: d363b516ff13eb9341e86750eec0d245
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01600 (62 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:29:18) [POST]
+  Session ID: d363b516ff13eb9341e86750eec0d245
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:29:19) [POST]
+  Session ID: d363b516ff13eb9341e86750eec0d245
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01500 (66 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:29:20) [POST]
+  Session ID: d363b516ff13eb9341e86750eec0d245
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:29:21) [POST]
+  Session ID: d363b516ff13eb9341e86750eec0d245
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01600 (62 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:29:22) [POST]
+  Session ID: d363b516ff13eb9341e86750eec0d245
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:29:23) [POST]
+  Session ID: d363b516ff13eb9341e86750eec0d245
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01500 (66 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:34:30) [POST]
+  Session ID: 80822c509235678ee17e9aa784ceb482
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:34:31) [POST]
+  Session ID: 80822c509235678ee17e9aa784ceb482
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01500 (66 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:34:37) [POST]
+  Session ID: 80822c509235678ee17e9aa784ceb482
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01200 (83 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:34:38) [POST]
+  Session ID: 80822c509235678ee17e9aa784ceb482
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01600 (62 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:40:03) [POST]
+  Session ID: 88ff7c76caa1844201480e57865f332a
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01400 (71 reqs/sec) | Rendering: 0.00100 (7%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:40:04) [POST]
+  Session ID: 88ff7c76caa1844201480e57865f332a
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.11200 (8 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:40:11) [POST]
+  Session ID: 88ff7c76caa1844201480e57865f332a
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:40:12) [POST]
+  Session ID: 88ff7c76caa1844201480e57865f332a
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01600 (62 reqs/sec) | Rendering: 0.00100 (6%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:40:13) [POST]
+  Session ID: 88ff7c76caa1844201480e57865f332a
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01200 (83 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:40:15) [POST]
+  Session ID: 88ff7c76caa1844201480e57865f332a
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01600 (62 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:40:16) [POST]
+  Session ID: 88ff7c76caa1844201480e57865f332a
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01700 (58 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:40:17) [POST]
+  Session ID: 88ff7c76caa1844201480e57865f332a
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.02200 (45 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:40:18) [POST]
+  Session ID: 88ff7c76caa1844201480e57865f332a
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01200 (83 reqs/sec) | Rendering: 0.00100 (8%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:40:20) [POST]
+  Session ID: 88ff7c76caa1844201480e57865f332a
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01500 (66 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:40:21) [POST]
+  Session ID: 88ff7c76caa1844201480e57865f332a
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:40:22) [POST]
+  Session ID: 88ff7c76caa1844201480e57865f332a
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01600 (62 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:43:29) [POST]
+  Session ID: 4700c33c0ead4ce78aa5baa1428570f3
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01900 (52 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:43:30) [POST]
+  Session ID: 4700c33c0ead4ce78aa5baa1428570f3
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+MyController: missing default helper path my_helper
+Completed in 0.03300 (30 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:43:49) [POST]
+  Session ID: ceec3446d84b520cf5dfda41f1954146
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01200 (83 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:43:51) [POST]
+  Session ID: ceec3446d84b520cf5dfda41f1954146
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01500 (66 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:43:57) [POST]
+  Session ID: ceec3446d84b520cf5dfda41f1954146
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01200 (83 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:43:58) [POST]
+  Session ID: ceec3446d84b520cf5dfda41f1954146
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.40600 (2 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:44:30) [POST]
+  Session ID: 46f982f84f0a8f870ef77ed56f5c82cb
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01200 (83 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:44:31) [POST]
+  Session ID: 46f982f84f0a8f870ef77ed56f5c82cb
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01600 (62 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:44:37) [POST]
+  Session ID: 46f982f84f0a8f870ef77ed56f5c82cb
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:44:38) [POST]
+  Session ID: 46f982f84f0a8f870ef77ed56f5c82cb
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.48800 (2 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:44:41) [POST]
+  Session ID: 46f982f84f0a8f870ef77ed56f5c82cb
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01200 (83 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:44:42) [POST]
+  Session ID: 46f982f84f0a8f870ef77ed56f5c82cb
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.49500 (2 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:44:44) [POST]
+  Session ID: 46f982f84f0a8f870ef77ed56f5c82cb
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01200 (83 reqs/sec) | Rendering: 0.00100 (8%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:44:46) [POST]
+  Session ID: 46f982f84f0a8f870ef77ed56f5c82cb
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.46900 (2 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:44:48) [POST]
+  Session ID: 46f982f84f0a8f870ef77ed56f5c82cb
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01200 (83 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:44:50) [POST]
+  Session ID: 46f982f84f0a8f870ef77ed56f5c82cb
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.39500 (2 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:44:52) [POST]
+  Session ID: 46f982f84f0a8f870ef77ed56f5c82cb
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01200 (83 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:44:53) [POST]
+  Session ID: 46f982f84f0a8f870ef77ed56f5c82cb
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.52200 (1 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:46:22) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Completed in 0.01800 (55 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:46:24) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+MyController: missing default helper path my_helper
+Completed in 0.03500 (28 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:46:34) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:46:35) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.49000 (2 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:46:37) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01200 (83 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:46:39) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.48700 (2 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:46:41) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:46:42) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.39200 (2 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:46:45) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.10800 (9 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:46:46) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.42700 (2 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:46:49) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01200 (83 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:46:50) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.52700 (1 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:46:53) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01200 (83 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:46:54) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.49000 (2 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:46:56) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:46:58) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.48600 (2 reqs/sec) | Rendering: 0.00100 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:47:00) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01100 (90 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:47:01) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.52400 (1 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:47:04) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01200 (83 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:47:05) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.52600 (1 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:47:08) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.01200 (83 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]
+RubyamfController: missing default helper path rubyamf_helper
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2007-08-11 18:47:09) [POST]
+  Session ID: 04d58b2cab4373dcc846ee8290e22485
+  Parameters: {"isdebug"=>"false", "isdebugverbose"=>"false", "action"=>"gateway", "isfast"=>"true", "controller"=>"rubyamf", "isdebuganalysis"=>"false"}
+Completed in 0.39300 (2 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway?isfast=true&isdebug=false&isdebugverbose=false&isdebuganalysis=false]

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" height="100%" 
+	creationComplete="onCreationComplete()">
+	<mx:states>
+		<mx:State name="MouseOverState">
+			<mx:AddChild position="lastChild">
+				<mx:ApplicationControlBar x="0" y="0" width="100%" id="appBar" styleName="ReportBuilderAppControlBar">
+					<mx:HBox width="5%" horizontalAlign="right" id="hbox1">
+						<mx:Button id="btn_editButton" width="20" toolTip="Edit this report content element." click="onClickEditButton()">
+							<mx:icon>@Embed('/assets/edit_16x16.gif')</mx:icon>
+						</mx:Button>
+					</mx:HBox>
+					<mx:HBox width="100%" toolTip="Click the close button to remove this element from the current report." horizontalAlign="center">
+						<mx:Label text="Report Builder Menu" toolTip="Report Element context menu." styleName="ContextMenuLabel"/>
+					</mx:HBox>
+					<mx:HBox width="5%" horizontalAlign="right">
+						<mx:Button id="btn_deleteButton" width="20" toolTip="Delete this report content element." click="onClickDeleteButton()">
+							<mx:icon>@Embed('/assets/close_16x16.gif')</mx:icon>
+						</mx:Button>
+					</mx:HBox>
+				</mx:ApplicationControlBar>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="MouseOverWidgetState" basedOn="MouseOverState">
+			<mx:RemoveChild target="{hbox1}"/>
+		</mx:State>
+	</mx:states>
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.util.URLUtils;
+			import com.bigfix.dss.view.ReportManager.events.ResizedReportElementEvent;
+			import com.bigfix.dss.view.general.widgets.ImageWidget;
+			import com.bigfix.dss.view.ReportManager.events.EditReportElementEvent;
+			import com.bigfix.dss.view.ReportManager.events.DeleteReportElementEvent;
+			import com.bigfix.dss.objects.StateStack;
+			import com.bigfix.dss.view.ReportManager.events.MovedReportElementEvent;
+			import com.bigfix.dss.view.ReportManager.events.HideWidgetMenuEvent;
+			import com.bigfix.dss.view.ReportManager.events.ShowWidgetMenuEvent;
+			import com.bigfix.dss.view.ReportManager.view.WidgetMenu;
+			import com.bigfix.dss.vo.ReportBuilderVO;
+			import com.bigfix.dss.view.dashboard.WidgetInstance;
+			import mx.events.ResizeEvent;
+			import com.bigfix.dss.view.graphics.sprites.events.ResizeSpriteEvent;
+			import com.bigfix.dss.util.CursorUtils;
+			import com.bigfix.dss.view.graphics.canvas.ReportBuilderCanvas;
+			import com.bigfix.dss.view.graphics.sprites.events.MouseOutSpriteEvent;
+			import com.bigfix.dss.view.graphics.sprites.events.MouseOverSpriteEvent;
+			import com.bigfix.dss.view.graphics.canvas.events.SelectedReportElementEvent;
+			
+			[Event(name="selectedReportElement", type="com.bigfix.dss.view.graphics.canvas.events.SelectedReportElementEvent")]
+			[Event(name="movedReportElement", type="com.bigfix.dss.view.ReportManager.events.MovedReportElementEvent")]
+			[Event(name="showWidgetMenu", type="com.bigfix.dss.view.ReportManager.events.ShowWidgetMenuEvent")]
+			[Event(name="hideWidgetMenu", type="com.bigfix.dss.view.ReportManager.events.HideWidgetMenuEvent")]
+			[Event(name="deleteReportElement", type="com.bigfix.dss.view.ReportManager.events.DeleteReportElementEvent")]
+			[Event(name="editReportElement", type="com.bigfix.dss.view.ReportManager.events.EditReportElementEvent")]
+			[Event(name="resizedReportElement", type="com.bigfix.dss.view.ReportManager.events.ResizedReportElementEvent")]
+
+			private static var _count:Number = 0;
+			
+			private var _isSelectionShown:Boolean = false;
+			
+			private var _canResizeNow:Boolean = false;
+
+			private var _currentCursorID:int;
+
+			private var isMouseOver:Boolean = false;
+			private var isMouseDown:Boolean = false;
+
+			private const dragThreshold:int = 5 * 4;
+
+			public var shapeType:String;
+
+			private var _vo:ReportBuilderVO;
+			
+			private var _stateStack:StateStack;
+
+			[Embed(source="/assets/cursors/sizeNWSE.gif")]
+			public static var sizeNWSECursorSymbol:Class;
+								
+			protected var initX:Number;
+			protected var initY:Number;
+			
+			private var _appURL:String = "";
+			
+			public function set appURL(url:String):void {
+				this._appURL = url;
+			}
+			
+			public function get appURL():String {
+				return this._appURL;
+			}
+			
+			public function get missingImage_image():String {
+				var sBase:String = URLUtils.base(this.appURL);
+				var sUrl:String = sBase + ((sBase.charAt(sBase.length - 1) == "/") ? "" : "/") + "assets/missing-image.jpg";
+				return sUrl;
+			}
+		
+			public function get isSelectionShown():Boolean {
+				return this._isSelectionShown;
+			}
+			
+			public static function get count():Number {
+				_count++;
+				return (_count - 1);
+			}
+			
+			public function set vo(vo:ReportBuilderVO):void {
+				this._vo = vo;
+			}
+			
+			public function get vo():ReportBuilderVO {
+				return this._vo;
+			}
+			
+			private function onCreationComplete():void {
+				this._stateStack = new StateStack(this);
+				
+				this.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+				this.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+				this.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+				this.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+				this.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+				this.addEventListener(ResizeEvent.RESIZE, onResize);
+
+				this.shapeType = ReportBuilderCanvas.const_WIDGET_ELEMENTS;
+			}
+
+			private function onClickDeleteButton():void {
+				this.dispatchEvent(new DeleteReportElementEvent(DeleteReportElementEvent.TYPE_DELETE_REPORT_ELEMENT, this));
+			}
+			
+			private function onClickEditButton():void {
+				this.dispatchEvent(new EditReportElementEvent(EditReportElementEvent.TYPE_EDIT_REPORT_ELEMENT,this));
+			}
+			
+			private function resetCursorToParentSetting():void {
+				var dc:ReportBuilderCanvas = ReportBuilderCanvas(this.parent);
+				this._canResizeNow = false;
+			}
+			
+			private function refreshSelection():void {
+				this.graphics.clear();
+		        this.graphics.lineStyle(1.0, 0xFF0000, 1.0);
+			    this.graphics.drawRect(-1, -1, this.width + 1, this.height + 1);
+			}
+			
+			private function showSelected():void {
+			    if (this.isSelectionShown == false) {
+			    	this.refreshSelection();
+			        this.graphics.lineStyle(1.0, 0xFF0000, 1.0);
+				    this.graphics.drawRect(-1, -1, this.width + 1, this.height + 1);
+				    this._isSelectionShown = true;
+				    this.dispatchEvent(new ShowWidgetMenuEvent(ShowWidgetMenuEvent.TYPE_SHOW_WIDGET_MENU, this));
+				    this.dispatchEvent(new SelectedReportElementEvent(SelectedReportElementEvent.TYPE_SELECTED_REPORT_ELEMENT, this));
+			    }
+			}
+		
+			public function hideSelected():void {
+			    if (this.isSelectionShown) {		    
+			        this.graphics.lineStyle(1.0, 0xFFFFFF, 1.0);
+				    this.graphics.drawRect(-1, -1, this.width + 1, this.height + 1);
+				    this._isSelectionShown = false;
+				    this.dispatchEvent(new HideWidgetMenuEvent(HideWidgetMenuEvent.TYPE_HIDE_WIDGET_MENU, this));
+			    }
+			}
+			
+			private function onResize(event:ResizeEvent):void {
+				var children:Array = this.getChildren();
+				var aChild:DisplayObjectContainer;
+				for (var i:int = 0; i < children.length; i++) {
+					aChild = DisplayObjectContainer(children[i]);
+					aChild.dispatchEvent(event.clone());
+				}
+			    if (this.isSelectionShown) {
+			    	this.refreshSelection();
+			    }
+			}
+		
+			private function onMouseDown(evt:MouseEvent):void {
+				if (this._canResizeNow == false) {
+					this.showSelected();
+					
+					var boundsRect:Rectangle = this.parent.getRect(this.parent);
+					boundsRect.width -= this.width;
+					boundsRect.height -= this.height;
+					this.startDrag(false, boundsRect);
+				}
+				this.isMouseDown = true;
+			}
+
+			public function onMouseUp(evt:MouseEvent):void {
+				if (this._canResizeNow == false) {
+					this.stopDrag();
+					this.dispatchEvent(new MovedReportElementEvent(MovedReportElementEvent.TYPE_MOVED_REPORT_ELEMENT, this.id, this.x, this.y));
+				} else {
+					this.dispatchEvent(new ResizedReportElementEvent(ResizedReportElementEvent.TYPE_RESIZED_REPORT_ELEMENT, this.id, this.width, this.height));
+				}
+				this.isMouseDown = false;
+			}
+		
+			private function onMouseOut(event:MouseEvent):void {
+				this.resetCursorToParentSetting();
+				if (this.isMouseOver == true) {
+					if ( (this.currentState == 'MouseOverState') || (this.currentState == 'MouseOverWidgetState') ) {
+						this._stateStack.popStateDelayed();
+					}
+					this.dispatchEvent(new MouseOutSpriteEvent(MouseOutSpriteEvent.TYPE_MOUSE_OUT_SPRITE));
+				}
+				this.isMouseOver = false;
+			}
+
+			private function onMouseOver(event:MouseEvent):void {
+				if (this.isMouseOver == false) {
+					if ( (this.width > 100) && (this.height > 50) ) {
+						this._stateStack.pushStateOnce(((this._vo != null) && (this._vo.source == null)) ? 'MouseOverWidgetState' : 'MouseOverState');
+					}
+					this.dispatchEvent(new MouseOverSpriteEvent(MouseOverSpriteEvent.TYPE_MOUSE_OVER_SPRITE));
+				}
+				this.isMouseOver = true;
+			}
+		
+			private function onMouseMove(event:MouseEvent):void {
+				var ptM:Point = new Point(this.mouseX, this.mouseY);
+				var ptR:Point = new Point(this.width, this.height);
+				var dist:Number = Point.distance(ptM, ptR);
+				if ( (dist < this.dragThreshold) && (this.isMouseOver) ) {
+					if (this._canResizeNow == false) {
+						initX = event.stageX;
+						initY = event.stageY;						
+					}
+					this._canResizeNow = true;
+				} else {
+					this.resetCursorToParentSetting();
+				}
+				if ( (this._canResizeNow) && (this.isMouseDown) ) {
+					var y:Number = (event.stageY - initY);
+					var x:Number = (event.stageX - initX);
+					
+					initX = event.stageX;
+					initY = event.stageY;
+					
+					this.dispatchEvent(new ResizeSpriteEvent(ResizeSpriteEvent.TYPE_RESIZE_SPRITE, x, y));
+				}
+			}
+
+			public function get serializeForRuby():ReportBuilderVO {
+				if (this.vo == null) {
+					this.vo = new ReportBuilderVO(this);
+				} else {
+					this.vo.fromWidgetCanvas(this, this.missingImage_image);
+				}
+				return this.vo;
+			}
+			
+			public function set image(source:String):void {
+				if ( (source != null) && (source.length > 0) ) {
+					var children:Array = this.getChildren();
+					for (var i:int = 0; i < children.length; i++) {
+						if (children[i] is ImageWidget) {
+							var widget:ImageWidget = ImageWidget(children[i]);
+							widget.image.source = source;
+							widget.toolTip = "";
+						}
+					}
+				}
+			}
+		]]>
+	</mx:Script>
+</mx:Canvas>

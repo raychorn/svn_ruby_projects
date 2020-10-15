@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:data="com.bigfix.dss.view.data.*"
+	xmlns:dashboard="com.bigfix.dss.view.dashboard.*"
+	xmlns:bfstates="com.bigfix.extensions.states.*"
+	backgroundAlpha="0" width="100%" height="100%"
+	creationComplete="init()"
+	>
+
+	<mx:Script><![CDATA[
+		import com.bigfix.dss.event.RefreshDashboardsEvent;
+		import com.bigfix.extensions.core.DeferredInstance;
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.model.Constants;
+		import com.bigfix.dss.command.SaveWidgetCommand;
+		import com.bigfix.dss.event.LogoutEvent;
+		import com.bigfix.dss.event.LibraryWidgetEditEvent;
+		import com.bigfix.dss.vo.ComputerGroupVO;
+		import com.bigfix.dss.vo.MetricVO;
+		import com.bigfix.dss.vo.WidgetVO;
+		import com.bigfix.dss.vo.VisualizationTypeVO;
+		import com.bigfix.dss.vo.TrendWidgetVO;
+		import com.bigfix.dss.event.RefreshWidgetsEvent;
+		import com.bigfix.dss.view.data.TrendWidget;
+		import com.bigfix.dss.view.data.ListWidget;
+		import com.bigfix.dss.util.WatcherManager;
+
+		import flash.events.MouseEvent;
+		import mx.events.ItemClickEvent;
+		import mx.events.PropertyChangeEvent;
+		import mx.events.FlexEvent;
+		import mx.events.ValidationResultEvent;
+		import mx.managers.PopUpManager;
+		import mx.validators.StringValidator;
+		import mx.binding.utils.BindingUtils;
+		import mx.binding.utils.ChangeWatcher;
+		import mx.core.Container;
+		import mx.controls.Alert;
+		import mx.states.IOverride;
+		import mx.states.AddChild;
+
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+		private var watcherManager:WatcherManager = new WatcherManager();
+
+		private function init():void {
+			//model.currentWidget must be first set.
+			watcherManager.manage(BindingUtils.bindProperty(this, 'currentState', model.currentWidget, ['visualization_type', 'id']));
+			this.addEventListener(FlexEvent.REMOVE, _destruct, false, 0, true);
+		}
+
+		private function _destruct(event:FlexEvent):void {
+			watcherManager.removeAll();
+			this.model = null;
+			this.removeEventListener(FlexEvent.REMOVE, _destruct);
+		}
+
+		public function hideAllForms():void {
+			for (var i:int = 0; i < forms.numChildren; i++) {
+				try {
+					forms.getChildAt(i)['hideForm']();
+				} catch (e:Error) { }
+			}
+		}
+
+		private function cancelWidgetCreation():void {
+			//this.hideAllForms();
+			//model.currentWidget = null;
+
+			this.currentState = '';
+			model.dashboardViewState = model.previousDashboardViewState;
+		}
+
+		private function saveWidgetEdit():void {
+			var passChecks:Boolean = false;
+			try {
+				if (this.previewContainer.getChildAt(0)['requiredOptionsSet']) {
+					passChecks = true;
+				}
+			} catch (e:Error) { }
+			if (!passChecks) {
+				Alert.show("You must set all required options", "Field required");
+				return;
+			}
+			if (model.currentWidget.name == null) {
+				Alert.show("Please specify a name first", "Field required");
+				return;
+			}
+			// make sure the user is set to this user
+			model.currentWidget.user_id = model.user.id;
+			// execute the SaveWidgetCommand
+			var saveCommand:SaveWidgetCommand = new SaveWidgetCommand();
+			saveCommand.widget = model.currentWidget;
+			saveCommand.resultHandler = this.handleSaveResult;
+			saveCommand.faultHandler = this.handleSaveFault;
+			saveCommand.execute(null);
+			saveButton.enabled = false;
+		}
+
+		private function handleSaveResult(data:Object):void {
+			if (data.success) {
+				// refresh model.widgets
+				new RefreshWidgetsEvent().dispatch();
+				
+		  		dispatchEvent(new LibraryWidgetEditEvent(data.widget));
+				cancelWidgetCreation();
+			}
+			saveButton.enabled = true;
+		}
+
+		private function handleSaveFault(data:Object):void {
+			saveButton.enabled = true;
+		}
+	]]></mx:Script>
+	<mx:states>
+		<bfstates:StateDestroy name="{Constants.VISUALIZATION_TYPE_LINE}">
+			<mx:AddChild relativeTo="{forms}" targetFactory="{new DeferredInstance(com.bigfix.dss.view.dashboard.WidgetWizardFormMetric)}"/>
+			<mx:AddChild relativeTo="{forms}" targetFactory="{new DeferredInstance(com.bigfix.dss.view.dashboard.WidgetWizardFormComputerGroup)}"/>
+			<mx:AddChild relativeTo="{forms}" targetFactory="{new DeferredInstance(com.bigfix.dss.view.dashboard.WidgetWizardFormDays)}"/>
+			<mx:AddChild relativeTo="{forms}" targetFactory="{new DeferredInstance(com.bigfix.dss.view.dashboard.WidgetWizardFormDataFilter)}"/>
+			<mx:AddChild relativeTo="{forms}" targetFactory="{new DeferredInstance(com.bigfix.dss.view.dashboard.WidgetWizardFormName)}"/>
+			<mx:AddChild relativeTo="{previewContainer}" position="firstChild" targetFactory="{new DeferredInstance(TrendWidget, {id: 'previewWidget', previewMode: true, percentWidth: 100})}"/>
+		</bfstates:StateDestroy>
+		<bfstates:StateDestroy name="{Constants.VISUALIZATION_TYPE_LIST}">
+			<mx:AddChild relativeTo="{forms}" targetFactory="{new DeferredInstance(com.bigfix.dss.view.dashboard.WidgetWizardFormName)}"/>
+			<mx:AddChild relativeTo="{forms}" targetFactory="{new DeferredInstance(com.bigfix.dss.view.dashboard.WidgetWizardFormRowLimit)}"/>
+			<mx:AddChild relativeTo="{forms}" targetFactory="{new DeferredInstance(com.bigfix.dss.view.dashboard.WidgetWizardFormList, {percentWidth: 100, height: 350})}"/>
+			<!--
+			<mx:AddChild relativeTo="{forms}" targetFactory="{new DeferredInstance(com.bigfix.dss.view.dashboard.WidgetWizardFormSubjects)}"/>
+			<mx:AddChild relativeTo="{forms}" targetFactory="{new DeferredInstance(com.bigfix.dss.view.dashboard.WidgetWizardFormColumns)}"/>
+			<mx:AddChild relativeTo="{forms}" targetFactory="{new DeferredInstance(com.bigfix.dss.view.dashboard.WidgetWizardFormName)}"/>
+			-->
+			<mx:SetProperty target="{previewContainer}" name="height" value="200"/>
+			<mx:AddChild relativeTo="{previewContainer}" position="firstChild" targetFactory="{new DeferredInstance(ListWidget, {id: 'previewWidget', previewMode: true, percentWidth: 100, height:200})}"/>
+		</bfstates:StateDestroy>
+		<bfstates:StateDestroy name="{Constants.VISUALIZATION_TYPE_PIE}">
+			<mx:AddChild>
+				<mx:Label text="ZOMG" creationComplete="trace('pie label created')"/>
+			</mx:AddChild>
+		</bfstates:StateDestroy>
+	</mx:states>
+	<mx:VBox width="100%" height="100%" paddingRight="10" paddingLeft="10">
+		<mx:VBox width="100%">
+			<mx:Text text="Edit Widget" styleName="bigFormHeading"/>
+		</mx:VBox>
+		<mx:VBox width="100%" height="100%" minHeight="0">
+			<mx:VBox id="forms" width="100%" height="100%">
+			</mx:VBox>
+			<mx:Box width="100%" height="200" horizontalAlign="center" id="previewContainer"/>
+		</mx:VBox>
+		<mx:HBox horizontalAlign="right" width="100%">
+			<mx:Button label="Cancel" click="cancelWidgetCreation()"/>
+			<mx:Button label="Save" id="saveButton" click="saveWidgetEdit()" enabled="true"/>
+		</mx:HBox>
+	</mx:VBox>
+</mx:Canvas>
+

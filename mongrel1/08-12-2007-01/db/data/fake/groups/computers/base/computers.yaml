@@ -1,0 +1,128 @@
+high_end_windows_workstations:
+  title: High-end Windows Workstations
+  subgroups:
+  - h_win_1
+  - h_win_2
+
+h_win_1:
+  title: High-end Windows Workstation 1
+  type: computer
+  os: Windows XP SP2
+  include:
+  - windows_xp_sp2_base
+
+h_win_2:
+  title: High-end Windows Workstation 2
+  type: computer
+  os: Windows Vista
+  include:
+  - windows_vista_base
+
+midgrade_windows_workstations:
+  title: Midgrade Windows Workstations
+  subgroups:
+  - m_win_1
+  - m_win_2
+  - m_win_3
+
+m_win_1:
+  title: Midgrade Windows Workstation 1
+  type: computer
+  os: Windows XP
+  include:
+  - windows_xp_sp2_base
+
+m_win_2:
+  title: Midgrade Windows Workstation 2
+  type: computer
+  os: Windows XP SP2
+  include:
+  - windows_xp_sp2_base
+
+m_win_3:
+  title: Midgrade Windows Workstation 3
+  type: computer
+  os: Windows 2000 SP4
+  include:
+  - windows_2000_sp4_base
+
+low_end_windows_workstations:
+  title: Low-end Windows Workstations
+  subgroups:
+  - l_win_1
+
+l_win_1:
+  title: Low-end Windows Workstation 1
+  type: computer
+  os: Windows 2000 SP4
+  include:
+  - windows_2000_sp4_base
+
+windows_laptops:
+  title: Windows Laptops
+  subgroups:
+  - win_lap_1
+
+win_lap_1:
+  title: Windows Laptop
+  type: computer
+  os: Windows XP SP2
+  include:
+  - windows_xp_sp2_base
+
+mac_laptops:
+  title: Mac Laptops
+  subgroups:
+  - powerbook
+  - macbook
+  - macbook_pro
+
+powerbook:
+  title: Powerbook
+  type: computer
+  os: MacOS X 10.4 (PowerPC)
+  include:
+  - osx_10_4_base
+
+macbook:
+  title: MacBook
+  type: computer
+  os: MacOS X 10.4 (Intel)
+  include:
+  - osx_10_4_base
+
+macbook_pro:
+  title: MacBook Pro
+  type: computer
+  os: MacOS X 10.4 (Intel)
+  include:
+  - osx_10_4_base
+
+mac_desktops:
+  title: Mac Desktops
+  subgroups:
+  - powermac_g5
+  - intel_mac_mini
+  - intel_imac
+
+powermac_g5:
+  title: PowerMac G5
+  type: computer
+  os: MacOS X 10.4 (PowerPC)
+  include:
+  - osx_10_4_base
+
+intel_mac_mini:
+  title: Mac Mini (Intel)
+  type: computer
+  os: MacOS X 10.4 (Intel)
+  include:
+  - osx_10_4_base
+
+intel_imac:
+  title: iMac (Intel)
+  type: computer
+  os: MacOS X 10.4 (Intel)
+  include:
+  - osx_10_4_base
+

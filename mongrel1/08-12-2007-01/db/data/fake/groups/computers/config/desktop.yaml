@@ -1,0 +1,24 @@
+xp_sp2_desktop_1:
+  applications:
+    - Office XP
+    - Acrobat Reader 7.0.8
+    
+xp_sp2_desktop_2:
+  applications:
+    - Office 2000 SP3
+
+w2k_sp4_desktop_1:
+  applications:
+    - Office 2000 SP3
+
+w2k_sp4_desktop_2:
+  applications:
+    - WinZip 7.0
+    - Acrobat Reader 7.0
+
+creative:
+  applications:
+    - Acrobat 7.0
+    - Illustrator 10.0
+    - InDesign
+    - Photoshop CS

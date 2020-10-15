@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:analysis="com.bigfix.dss.view.analysis.*"
+	xmlns:dashboard="com.bigfix.dss.view.dashboard.*"
+	xmlns:report="com.bigfix.dss.view.report.*"
+	xmlns:help="com.bigfix.dss.view.help.*"
+	xmlns:config="com.bigfix.dss.view.config.*"
+	xmlns:states="com.bigfix.extensions.states.*"
+	width="100%" height="100%"
+	horizontalAlign="center"
+	verticalAlign="middle"
+	currentState="Default"
+	creationComplete="init()">
+	<mx:Script><![CDATA[
+		import com.bigfix.dss.view.main.events.WorkspaceTabNavigatorDisplayedEvent;
+		import com.bigfix.dss.view.general.Alert.AlertPopUp;
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.view.dashboard.WidgetCreation;
+		import com.bigfix.extensions.core.DeferredInstance;
+		import mx.binding.utils.ChangeWatcher;
+		import mx.binding.utils.BindingUtils;
+		import mx.events.IndexChangedEvent;
+		import mx.events.PropertyChangeEvent;
+
+		[Event(name="workspaceTabNavigatorDisplayed", type="com.bigfix.dss.view.main.events.WorkspaceTabNavigatorDisplayedEvent")]
+
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+
+		private function init():void {
+			BindingUtils.bindProperty(tabNavigator, 'selectedIndex', model, 'workspaceTabNavigatorSelectedIndex');
+			BindingUtils.bindProperty(model, 'workspaceTabNavigatorSelectedIndex', tabNavigator, 'selectedIndex');
+		}
+
+	]]></mx:Script>
+
+	<mx:states>
+		<mx:State name="Default">
+			<mx:AddChild>
+				<mx:TabNavigator id="tabNavigator" width="100%" height="100%">
+					<mx:Box label="Dashboards">
+						<dashboard:DashboardView/>
+					</mx:Box>
+					<mx:Box label="Analysis">
+						<analysis:AnalysisView/>
+					</mx:Box>
+					<mx:Box id="box_reports" label="Reports">
+						<report:ReportManagementView/>
+					</mx:Box>
+					<mx:Box label="Configuration">
+					  <config:ConfigurationView />
+					</mx:Box>
+				</mx:TabNavigator>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="My Account">
+		  <mx:AddChild>
+		    <config:MyAccountConfig />
+		  </mx:AddChild>
+		</mx:State>
+		<mx:State name="Help">
+			<mx:AddChild>
+				<help:HelpView/>
+			</mx:AddChild>
+		</mx:State>
+		<states:StateDestroy name="WidgetCreation">
+			<mx:AddChild targetFactory="{new DeferredInstance(com.bigfix.dss.view.dashboard.WidgetCreation)}"/>
+		</states:StateDestroy>
+	</mx:states>
+
+	<mx:Binding destination="this.currentState" source="model.workspaceViewState" />
+</mx:Box>

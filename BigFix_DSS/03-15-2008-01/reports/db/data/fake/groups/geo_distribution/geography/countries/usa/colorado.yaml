@@ -1,0 +1,190 @@
+colorado:
+  title: Colorado
+  subgroups:
+  - colorado_arvada
+  - colorado_aurora
+  - colorado_boulder
+  - colorado_brighton
+  - colorado_broomfield
+  - colorado_canon_city
+  - colorado_castle_rock
+  - colorado_centennial
+  - colorado_colorado_springs
+  - colorado_commerce_city
+  - colorado_denver
+  - colorado_durango
+  - colorado_englewood
+  - colorado_evans
+  - colorado_fort_collins
+  - colorado_fountain
+  - colorado_golden
+  - colorado_grand_junction
+  - colorado_greeley
+  - colorado_lafayette
+  - colorado_lakewood
+  - colorado_littleton
+  - colorado_longmont
+  - colorado_louisville
+  - colorado_loveland
+  - colorado_northglenn
+  - colorado_parker
+  - colorado_pueblo
+  - colorado_thornton
+  - colorado_westminster
+  - colorado_wheat_ridge
+
+colorado_arvada:
+  title: Arvada
+  type: city
+  population: 102613
+
+colorado_aurora:
+  title: Aurora
+  type: city
+  population: 291445
+
+colorado_boulder:
+  title: Boulder
+  type: city
+  population: 92350
+
+colorado_brighton:
+  title: Brighton
+  type: city
+  population: 26878
+
+colorado_broomfield:
+  title: Broomfield
+  type: city
+  population: 42456
+
+colorado_canon_city:
+  title: Canon City
+  type: city
+  population: 15879
+
+colorado_castle_rock:
+  title: Castle Rock
+  type: city
+  population: 32697
+
+colorado_centennial:
+  title: Centennial
+  type: city
+  population: 98153
+
+colorado_colorado_springs:
+  title: Colorado Springs
+  type: city
+  population: 369314
+
+colorado_commerce_city:
+  title: Commerce City
+  type: city
+  population: 29594
+
+colorado_denver:
+  title: Denver
+  type: city
+  population: 555991
+
+colorado_durango:
+  title: Durango
+  type: city
+  population: 15260
+
+colorado_englewood:
+  title: Englewood
+  type: city
+  population: 32402
+
+colorado_evans:
+  title: Evans
+  type: city
+  population: 16417
+
+colorado_fort_collins:
+  title: Fort Collins
+  type: city
+  population: 127033
+
+colorado_fountain:
+  title: Fountain
+  type: city
+  population: 18807
+
+colorado_golden:
+  title: Golden
+  type: city
+  population: 17447
+
+colorado_grand_junction:
+  title: Grand Junction
+  type: city
+  population: 44972
+
+colorado_greeley:
+  title: Greeley
+  type: city
+  population: 85778
+
+colorado_lafayette:
+  title: Lafayette
+  type: city
+  population: 23818
+
+colorado_lakewood:
+  title: Lakewood
+  type: city
+  population: 141599
+
+colorado_littleton:
+  title: Littleton
+  type: city
+  population: 40418
+
+colorado_longmont:
+  title: Longmont
+  type: city
+  population: 80810
+
+colorado_louisville:
+  title: Louisville
+  type: city
+  population: 18540
+
+colorado_loveland:
+  title: Loveland
+  type: city
+  population: 58291
+
+colorado_northglenn:
+  title: Northglenn
+  type: city
+  population: 33081
+
+colorado_parker:
+  title: Parker
+  type: city
+  population: 36906
+
+colorado_pueblo:
+  title: Pueblo
+  type: city
+  population: 103472
+
+colorado_thornton:
+  title: Thornton
+  type: city
+  population: 101933
+
+colorado_westminster:
+  title: Westminster
+  type: city
+  population: 104515
+
+colorado_wheat_ridge:
+  title: Wheat Ridge
+  type: city
+  population: 31430
+

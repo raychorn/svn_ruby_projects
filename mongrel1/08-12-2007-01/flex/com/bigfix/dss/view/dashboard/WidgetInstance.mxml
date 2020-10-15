@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml" buttonMode="true" width="100%" height="100%" textAlign="center" horizontalAlign="center" verticalAlign="middle" creationComplete="init()">
+	<mx:Script><![CDATA[
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.extensions.collections.RemoteObjectCollection;
+		import mx.containers.HBox;
+		import mx.controls.Button;
+		import mx.events.FlexEvent;
+
+		import com.bigfix.dss.vo.WidgetVO;
+		import com.bigfix.dss.model.Constants;
+		import com.bigfix.dss.view.data.TrendWidget;
+		import com.bigfix.dss.view.data.ListWidget;
+		import com.bigfix.dss.view.data.ColumnWidget;
+		import com.bigfix.dss.event.WidgetRemoveEvent;
+		import com.bigfix.dss.util.DSS;
+		import mx.controls.Alert;
+
+		private var widget:*;
+
+		private var _widgetData:WidgetVO;
+		
+		private function init():void {
+			/*this will get called when the widget is moved, which we don't want.
+			 we're not worrying about destructing for now*/
+			//this.addEventListener(FlexEvent.REMOVE, _destruct, false, 0, true);
+		}
+
+		private function _destruct(event:FlexEvent):void {
+			trace("WidgetInstance._destruct()");
+			if (this.widget) {
+				this.removeChild(this.widget);
+				this.widget = null;
+				this._widgetData = null;
+			}
+			this.removeEventListener(FlexEvent.REMOVE, _destruct);
+		}
+
+		public function removeHeaderElements():void {
+			var addlHeaderElement:HBox = HBox(widget.addlHeaderElement);
+			addlHeaderElement.removeAllChildren();
+		}
+		
+		private function onClickExportButton(event:MouseEvent):void {
+			var listWidget:ListWidget = ListWidget(event.currentTarget.parent.parent.parent);
+			var roc:RemoteObjectCollection = listWidget.remoteObjectCollection;
+			if ( (listWidget != null) && (roc != null) ) {
+				var args:* = roc.remoteMethodArgs;
+				var PageSize:int = roc.pageSize;
+				var userName:String = DSS.model.user.username;
+				listWidget.service.getCSVListForWidget(args, 0, 0, "", userName);
+			}
+		}
+		
+		public function set widgetData(value:WidgetVO):void {
+			_widgetData = value;
+			switch (widgetData.visualization_type.id) {
+				case Constants.VISUALIZATION_TYPE_LINE:
+					widget = new TrendWidget();
+					break;
+				case Constants.VISUALIZATION_TYPE_LIST:
+					widget = new ListWidget();
+					var btn:Button = new Button();
+					with (btn) {
+						width = 65;
+						height = 15;
+						label = "Export";
+						addEventListener(MouseEvent.CLICK, onClickExportButton);
+					}
+					var addlHeaderElement:HBox = HBox(widget.addlHeaderElement);
+					addlHeaderElement.addChildAt(btn, 1);
+					widget.addlHeaderElement.width += btn.width + 10;
+					break;
+				case Constants.VISUALIZATION_TYPE_COLUMN:
+					widget = new ColumnWidget();
+					break;
+			}
+			widget.previewMode = false;
+			widget.options = _widgetData.visualization_type_options;
+			widget.title = _widgetData.name;
+			this.addChild(widget);
+		}
+		public function get widgetData():WidgetVO {
+			return _widgetData;
+		}
+	]]></mx:Script>
+</mx:Box>

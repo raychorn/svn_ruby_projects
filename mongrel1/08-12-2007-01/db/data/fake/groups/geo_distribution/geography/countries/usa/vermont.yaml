@@ -1,0 +1,22 @@
+vermont:
+  title: Vermont
+  subgroups:
+  - vermont_burlington
+  - vermont_rutland
+  - vermont_south_burlington
+
+vermont_burlington:
+  title: Burlington
+  type: city
+  population: 38952
+
+vermont_rutland:
+  title: Rutland
+  type: city
+  population: 17062
+
+vermont_south_burlington:
+  title: South Burlington
+  type: city
+  population: 16471
+

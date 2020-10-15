@@ -1,0 +1,28 @@
+routers:
+  title: Routers
+  subgroups:
+  - cisco_2801
+  - cisco_3825
+  - cisco_3845
+  - cisco_7206
+  - cisco_7613
+
+cisco_2801:
+  title: Cisco 2801 Router
+  type: computer
+
+cisco_3825:
+  title: Cisco 3825 Router
+  type: computer
+
+cisco_3845:
+  title: Cisco 3845 Router
+  type: computer
+
+cisco_7206:
+  title: Cisco 7206 Router
+  type: computer
+
+cisco_7613:
+  title: Cisco 7613 Router
+  type: computer

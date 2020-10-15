@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TileList 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" height="100%" 
+	creationComplete="onCreationComplete()">
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.util.ArrayCollectionUtils;
+			import com.bigfix.dss.view.fileio.view.events.ImageSelectedEvent;
+			import com.bigfix.dss.view.fileio.view.events.ToggleImageBrowserButtonEvent;
+			import mx.utils.URLUtil;
+			import com.bigfix.dss.util.URLUtils;
+			import com.bigfix.dss.view.fileio.events.NoImagesOnServerEvent;
+			import com.bigfix.dss.vo.WebOrbResultVO;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			import com.bigfix.dss.command.GetReportsCommand;
+			import com.bigfix.dss.model.DSSModelLocator;
+			import mx.rpc.remoting.mxml.RemoteObject;
+			import com.bigfix.dss.weborb.RemoteWebOrbObject;
+			import com.bigfix.dss.util.MathUtils;
+			import mx.controls.TextInput;
+			import mx.controls.Image;
+			import mx.controls.Label;
+			import mx.containers.Canvas;
+			import com.bigfix.dss.view.general.Alert.AlertPopUp;
+			import mx.collections.ArrayCollection;
+			
+			[Event(name="noImagesOnServer", type="com.bigfix.dss.view.fileio.events.NoImagesOnServerEvent")]
+			[Event(name="toggleImageBrowserButton", type="com.bigfix.dss.view.fileio.view.events.ToggleImageBrowserButtonEvent")]
+			[Event(name="imageSelected", type="com.bigfix.dss.view.fileio.view.events.ImageSelectedEvent")]
+
+			[Bindable]
+			private var model:DSSModelLocator = DSSModelLocator.getInstance();
+
+			private var _weborbObj:RemoteWebOrbObject;
+
+			[Bindable]
+			private var _numImages:Number = 0;
+
+			[Bindable]
+			private var _curImage:Number = 0;
+
+			[Bindable]
+			private var _images:Array = [];
+
+			[Bindable]
+			private var _padding:Point = new Point(5,10);
+
+			[Bindable]
+			private var _paddedWidth:Number = -1;
+
+			[Bindable]
+			private var _numPerRow:Number = -1;
+
+			[Bindable]
+			private var _busy:*;
+			
+			[Bindable]
+			private var _dataProvider:ArrayCollection;
+			
+			[Bindable]
+			private var _children:Array;
+			
+			[Bindable]
+			private var _canvasDimentions:Point = new Point(67,67);
+
+			[Bindable]
+			private var _delayedImageRequests:int = 0;
+			
+			public function set busy(busy:*):void {
+				this._busy = busy;
+			}
+			
+			public function get busy():* {
+				return this._busy;
+			}
+			
+			private function onCreationComplete():void {
+				this._dataProvider = new ArrayCollection();
+				this._children = [];
+				this.beginImagePopulation();
+			}
+			
+			override public function set dataProvider(dataProvider:Object):void {
+				if (dataProvider is Array) {
+					this._dataProvider = new ArrayCollection(dataProvider as Array);
+				} else if (dataProvider is ArrayCollection) {
+					this._dataProvider = dataProvider as ArrayCollection;
+				}
+				this.removeAllChildren();
+			}
+			
+			override public function get dataProvider():Object {
+				return this._dataProvider;
+			}
+			
+			public function get children():Array {
+				return this._children;
+			}
+			
+			private function removeAllChildren():void {
+				for (var i:int = 0; i < this._children.length; i++) {
+					this.removeChild(this._children[i]);
+				}
+				this._children = [];
+			}
+			
+			private function onImageMouseOver(event:MouseEvent):void {
+				var canvas:Canvas = Canvas(event.currentTarget);
+				canvas.styleName = "ImageMouseOver";
+			}
+			
+			private function onImageMouseOut(event:MouseEvent):void {
+				var canvas:Canvas = Canvas(event.currentTarget);
+				canvas.styleName = "ImageTile";
+			}
+			
+			private function onImageClick(event:MouseEvent):void {
+				var canvas:Canvas = Canvas(event.currentTarget);
+				var image:Image = Image(canvas.getChildByName("image"));
+				var imageSource:String = image.source.toString();
+				var imageSize:Array = [];
+				var i:int = ArrayCollectionUtils.findIndexOfItem( this._images, "image", imageSource);
+				if (i > -1) {
+					imageSize = this._images[i].size;
+				}
+				this.dispatchEvent(new ImageSelectedEvent(ImageSelectedEvent.TYPE_IMAGE_SELECTED, imageSource, imageSize));
+			}
+			
+			private function get numPerRow():Number {
+				this._paddedWidth = (this._canvasDimentions.x + this._padding.x);
+				this._numPerRow = Math.floor(this.width / this._paddedWidth);
+				return this._numPerRow;
+			}
+			
+			private function tileFactory(obj:Object):Canvas {
+				var label:String = "";
+				var canvas:Canvas;
+				var imageSource:String = "";
+				var numPerRow:Number = -1;
+				try { label = obj[this.labelField]; } catch (err:Error) { }
+				try { imageSource = obj["image"]; } catch (err:Error) { }
+				if ( (label.length > 0) && (imageSource.length > 0) ) {
+					var anImage:Image = new Image();
+					anImage.x = 0;
+					anImage.y = 0;
+					anImage.width = 65;
+					anImage.height = 65;
+					anImage.autoLoad = true;
+					anImage.showBusyCursor = true;
+					anImage.scaleContent = true;
+					anImage.maintainAspectRatio = false;
+					anImage.name = "image";
+					anImage.source = imageSource;
+					
+					canvas = new Canvas();
+					canvas.y = 0;
+					canvas.width = this._canvasDimentions.x;
+					canvas.height = this._canvasDimentions.y;
+					
+					var numChildren:Number = (this._children.length + 1);
+					
+		//			this._paddedWidth = (canvas.width + this._padding.x);
+		//			this._numPerRow = Math.floor(this.width / this._paddedWidth);
+		//			var numRows:Number = Math.ceil(numChildren / this._numPerRow);
+
+					numPerRow = this.numPerRow
+					var numRows:Number = Math.ceil(numChildren / numPerRow);
+					
+					var c:Number = numChildren / numPerRow;
+					var y:Number = MathUtils.int(c) as Number;
+					var x:Number = MathUtils.frac(c);
+					
+					canvas.x = ( (this._children.length * canvas.width) + (this._children.length * this._padding.x) );
+					if ((canvas.x + this._paddedWidth) > this.width) {
+						canvas.y += ((numRows * canvas.height) + (numRows * this._padding.y));
+					}
+					canvas.styleName = "ImageTile";
+					canvas.toolTip = label;
+
+					canvas.addEventListener(MouseEvent.MOUSE_OVER, onImageMouseOver);
+					canvas.addEventListener(MouseEvent.MOUSE_OUT, onImageMouseOut);
+					canvas.addEventListener(MouseEvent.CLICK, onImageClick);
+					
+					canvas.addChild(anImage);
+				}
+				return canvas;
+			}
+			
+			private function populateImageFrom(obj:Object):void {
+				if (obj != null) {
+					this._curImage++;
+
+					this.populateChild(obj);
+		
+					var numPerRow:Number = this.numPerRow;
+					if ( (this._curImage < this._numImages) && (this._children.length > 0) && (numPerRow > 0) && (this._children.length < numPerRow) ) {
+	//					this.requestAnImage();
+					}
+					var isBrowseUp:Boolean = ((this._curImage - numPerRow) > 0);
+					this.dispatchEvent(new ToggleImageBrowserButtonEvent(ToggleImageBrowserButtonEvent.TYPE_TOGGLE_IMAGE_BROWSER_BUTTON, "btn_browseUp", isBrowseUp));
+					var isBrowseDn:Boolean = (this._curImage < this._numImages);
+					this.dispatchEvent(new ToggleImageBrowserButtonEvent(ToggleImageBrowserButtonEvent.TYPE_TOGGLE_IMAGE_BROWSER_BUTTON, "btn_browseDn", isBrowseDn));
+				}
+			}
+			
+			private function requestAnImage():void {
+				if (this._curImage >= this._images.length) {
+					this._delayedImageRequests++;
+					if ( (this._delayedImageRequests == this.numPerRow) || ((this._curImage + this._delayedImageRequests) >= this._numImages) ) {
+						_weborbObj = new RemoteWebOrbObject("ReportWriter", "getAnImage", this._busy, onResultWebOrb, onFaultWebOrb);
+						var svc:RemoteObject = GetReportsCommand.svc.svc;
+						_weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+						_weborbObj.doWebOrbServiceCall(model.user.username, this._curImage + 1, this._delayedImageRequests);
+					} else {
+						this.requestAnImage();
+					}
+				} else {
+					this.populateImageFrom(this._images[this._curImage]);
+				}
+			}
+			
+			private function onResultWebOrb(event:ResultEvent, _vo:*):void {
+				if (_vo != null) {
+					var vo:WebOrbResultVO = WebOrbResultVO(_vo);
+					if (vo.info == "ReportWriter::getImageCount") {
+						this._numImages = vo.data as Number;
+						this._curImage = 0;
+						if (this._numImages == 0) {
+							this.dispatchEvent(new NoImagesOnServerEvent(NoImagesOnServerEvent.type_NO_IMAGES_ON_SERVER));
+						} else {
+							this.requestAnImage();
+						}
+					} else if (vo.info == "ReportWriter::getAnImage") {
+						var protocol:String = URLUtil.getProtocol(event.currentTarget.service.endpoint);
+						var domain:String = URLUtil.getServerNameWithPort(event.currentTarget.service.endpoint);
+
+						var data:Array = vo.data as Array;
+						for (var i:int = 1; i < data.length; i++) {
+							var obj:Object = new Object();
+							obj.label = data[i][1] + " image " + (this._curImage + 1) + " of " + this._numImages;
+							obj.image = protocol + "://" + domain + "/" + data[0] + "/";
+							try { obj.image += data[i][0]; } catch (err:Error) { obj.image += ''; }
+							obj.size = [];
+							try { obj.size = data[i][1]; } catch (err:Error) { }
+							this._images.push(obj);
+	
+							this.populateImageFrom(obj);
+						}
+						this._delayedImageRequests = 0;
+					}
+				}
+			}
+			
+			private function onFaultWebOrb(event:FaultEvent):void {
+				AlertPopUp.error(event.fault.toString(),"WebOrb Fault");
+			}
+
+			public function browseDown():void {
+				this.removeAllChildren();
+				this.requestAnImage();
+			}
+			
+			public function browseUp():void {
+				this._curImage -= (this._children.length + this.numPerRow);
+				if (this._curImage < 0) {
+					this._curImage = 0;
+				}
+				this.removeAllChildren();
+				this.requestAnImage();
+			}
+
+			private function getNumImages():void {
+				_weborbObj = new RemoteWebOrbObject("ReportWriter", "getImageCount", this._busy, onResultWebOrb, onFaultWebOrb);
+				var svc:RemoteObject = GetReportsCommand.svc.svc;
+				_weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+				_weborbObj.doWebOrbServiceCall(model.user.username);
+			}
+			
+			private function populateChild(obj:Object):void {
+				var aTile:Canvas;
+				var labelField:String = this.labelField;
+				aTile = this.tileFactory(obj);
+				if (aTile != null) {
+					this.addChild(aTile);
+					this._children.push(aTile);
+				}
+			}
+			
+			private function populateChildren():void {
+				var aTile:Canvas;
+				var labelField:String = this.labelField;
+				for (var i:int = 0; i < this._dataProvider.length; i++) {
+					this.populateChild(this._dataProvider[i]);
+				}
+			}
+			
+			private function beginImagePopulation():void {
+				this.getNumImages();
+			}
+		]]>
+	</mx:Script>
+</mx:TileList>

@@ -1,0 +1,676 @@
+ohio:
+  title: Ohio
+  subgroups:
+  - ohio_akron
+  - ohio_alliance
+  - ohio_ashland
+  - ohio_ashtabula
+  - ohio_athens
+  - ohio_avon_lake
+  - ohio_barberton
+  - ohio_bay_village
+  - ohio_beavercreek
+  - ohio_berea
+  - ohio_bowling_green
+  - ohio_broadview_heights
+  - ohio_brook_park
+  - ohio_brunswick
+  - ohio_canton
+  - ohio_centerville
+  - ohio_chillicothe
+  - ohio_cincinnati
+  - ohio_cleveland
+  - ohio_cleveland_heights
+  - ohio_columbus
+  - ohio_cuyahoga_falls
+  - ohio_dayton
+  - ohio_defiance
+  - ohio_delaware
+  - ohio_dublin
+  - ohio_east_cleveland
+  - ohio_eastlake
+  - ohio_elyria
+  - ohio_euclid
+  - ohio_fairborn
+  - ohio_fairfield
+  - ohio_fairview_park
+  - ohio_findlay
+  - ohio_forest_park
+  - ohio_fremont
+  - ohio_gahanna
+  - ohio_garfield_heights
+  - ohio_green
+  - ohio_grove_city
+  - ohio_hamilton
+  - ohio_hilliard
+  - ohio_huber_heights
+  - ohio_hudson
+  - ohio_kent
+  - ohio_kettering
+  - ohio_lakewood
+  - ohio_lancaster
+  - ohio_lebanon
+  - ohio_lima
+  - ohio_lorain
+  - ohio_mansfield
+  - ohio_maple_heights
+  - ohio_marion
+  - ohio_marysville
+  - ohio_mason
+  - ohio_massillon
+  - ohio_mayfield_heights
+  - ohio_medina
+  - ohio_mentor
+  - ohio_miamisburg
+  - ohio_middleburg_heights
+  - ohio_middletown
+  - ohio_mount_vernon
+  - ohio_newark
+  - ohio_new_philadelphia
+  - ohio_niles
+  - ohio_north_canton
+  - ohio_north_olmsted
+  - ohio_north_ridgeville
+  - ohio_north_royalton
+  - ohio_norwalk
+  - ohio_norwood
+  - ohio_oregon
+  - ohio_oxford
+  - ohio_painesville
+  - ohio_parma
+  - ohio_parma_heights
+  - ohio_perrysburg
+  - ohio_piqua
+  - ohio_portsmouth
+  - ohio_reynoldsburg
+  - ohio_riverside
+  - ohio_rocky_river
+  - ohio_sandusky
+  - ohio_shaker_heights
+  - ohio_sidney
+  - ohio_solon
+  - ohio_south_euclid
+  - ohio_springboro
+  - ohio_springfield
+  - ohio_steubenville
+  - ohio_stow
+  - ohio_strongsville
+  - ohio_sylvania
+  - ohio_tallmadge
+  - ohio_tiffin
+  - ohio_toledo
+  - ohio_trotwood
+  - ohio_troy
+  - ohio_twinsburg
+  - ohio_upper_arlington
+  - ohio_wadsworth
+  - ohio_warren
+  - ohio_westerville
+  - ohio_westlake
+  - ohio_whitehall
+  - ohio_willoughby
+  - ohio_wooster
+  - ohio_xenia
+  - ohio_youngstown
+  - ohio_zanesville
+
+ohio_akron:
+  title: Akron
+  type: city
+  population: 211882
+
+ohio_alliance:
+  title: Alliance
+  type: city
+  population: 22858
+
+ohio_ashland:
+  title: Ashland
+  type: city
+  population: 21572
+
+ohio_ashtabula:
+  title: Ashtabula
+  type: city
+  population: 20329
+
+ohio_athens:
+  title: Athens
+  type: city
+  population: 20940
+
+ohio_avon_lake:
+  title: Avon Lake
+  type: city
+  population: 20215
+
+ohio_barberton:
+  title: Barberton
+  type: city
+  population: 27326
+
+ohio_bay_village:
+  title: Bay Village
+  type: city
+  population: 15419
+
+ohio_beavercreek:
+  title: Beavercreek
+  type: city
+  population: 39359
+
+ohio_berea:
+  title: Berea
+  type: city
+  population: 18307
+
+ohio_bowling_green:
+  title: Bowling Green
+  type: city
+  population: 29723
+
+ohio_broadview_heights:
+  title: Broadview Heights
+  type: city
+  population: 17201
+
+ohio_brook_park:
+  title: Brook Park
+  type: city
+  population: 20269
+
+ohio_brunswick:
+  title: Brunswick
+  type: city
+  population: 34840
+
+ohio_canton:
+  title: Canton
+  type: city
+  population: 79946
+
+ohio_centerville:
+  title: Centerville
+  type: city
+  population: 23097
+
+ohio_chillicothe:
+  title: Chillicothe
+  type: city
+  population: 22051
+
+ohio_cincinnati:
+  title: Cincinnati
+  type: city
+  population: 313860
+
+ohio_cleveland:
+  title: Cleveland
+  type: city
+  population: 458080
+
+ohio_cleveland_heights:
+  title: Cleveland Heights
+  type: city
+  population: 48580
+
+ohio_columbus:
+  title: Columbus
+  type: city
+  population: 728907
+
+ohio_cuyahoga_falls:
+  title: Cuyahoga Falls
+  type: city
+  population: 50515
+
+ohio_dayton:
+  title: Dayton
+  type: city
+  population: 160158
+
+ohio_defiance:
+  title: Defiance
+  type: city
+  population: 16200
+
+ohio_delaware:
+  title: Delaware
+  type: city
+  population: 30071
+
+ohio_dublin:
+  title: Dublin
+  type: city
+  population: 34264
+
+ohio_east_cleveland:
+  title: East Cleveland
+  type: city
+  population: 25891
+
+ohio_eastlake:
+  title: Eastlake
+  type: city
+  population: 19898
+
+ohio_elyria:
+  title: Elyria
+  type: city
+  population: 56128
+
+ohio_euclid:
+  title: Euclid
+  type: city
+  population: 50331
+
+ohio_fairborn:
+  title: Fairborn
+  type: city
+  population: 31963
+
+ohio_fairfield:
+  title: Fairfield
+  type: city
+  population: 42373
+
+ohio_fairview_park:
+  title: Fairview Park
+  type: city
+  population: 16732
+
+ohio_findlay:
+  title: Findlay
+  type: city
+  population: 40105
+
+ohio_forest_park:
+  title: Forest Park
+  type: city
+  population: 18362
+
+ohio_fremont:
+  title: Fremont
+  type: city
+  population: 17148
+
+ohio_gahanna:
+  title: Gahanna
+  type: city
+  population: 32753
+
+ohio_garfield_heights:
+  title: Garfield Heights
+  type: city
+  population: 29407
+
+ohio_green:
+  title: Green
+  type: city
+  population: 23399
+
+ohio_grove_city:
+  title: Grove City
+  type: city
+  population: 30499
+
+ohio_hamilton:
+  title: Hamilton
+  type: city
+  population: 61114
+
+ohio_hilliard:
+  title: Hilliard
+  type: city
+  population: 26412
+
+ohio_huber_heights:
+  title: Huber Heights
+  type: city
+  population: 38194
+
+ohio_hudson:
+  title: Hudson
+  type: city
+  population: 23021
+
+ohio_kent:
+  title: Kent
+  type: city
+  population: 28202
+
+ohio_kettering:
+  title: Kettering
+  type: city
+  population: 55900
+
+ohio_lakewood:
+  title: Lakewood
+  type: city
+  population: 53901
+
+ohio_lancaster:
+  title: Lancaster
+  type: city
+  population: 35863
+
+ohio_lebanon:
+  title: Lebanon
+  type: city
+  population: 19422
+
+ohio_lima:
+  title: Lima
+  type: city
+  population: 38830
+
+ohio_lorain:
+  title: Lorain
+  type: city
+  population: 67858
+
+ohio_mansfield:
+  title: Mansfield
+  type: city
+  population: 50795
+
+ohio_maple_heights:
+  title: Maple Heights
+  type: city
+  population: 25035
+
+ohio_marion:
+  title: Marion
+  type: city
+  population: 36998
+
+ohio_marysville:
+  title: Marysville
+  type: city
+  population: 16976
+
+ohio_mason:
+  title: Mason
+  type: city
+  population: 28054
+
+ohio_massillon:
+  title: Massillon
+  type: city
+  population: 31963
+
+ohio_mayfield_heights:
+  title: Mayfield Heights
+  type: city
+  population: 18514
+
+ohio_medina:
+  title: Medina
+  type: city
+  population: 26501
+
+ohio_mentor:
+  title: Mentor
+  type: city
+  population: 51332
+
+ohio_miamisburg:
+  title: Miamisburg
+  type: city
+  population: 19799
+
+ohio_middleburg_heights:
+  title: Middleburg Heights
+  type: city
+  population: 15508
+
+ohio_middletown:
+  title: Middletown
+  type: city
+  population: 51804
+
+ohio_mount_vernon:
+  title: Mount Vernon
+  type: city
+  population: 16001
+
+ohio_newark:
+  title: Newark
+  type: city
+  population: 46835
+
+ohio_new_philadelphia:
+  title: New Philadelphia
+  type: city
+  population: 17440
+
+ohio_niles:
+  title: Niles
+  type: city
+  population: 20203
+
+ohio_north_canton:
+  title: North Canton
+  type: city
+  population: 16803
+
+ohio_north_olmsted:
+  title: North Olmsted
+  type: city
+  population: 33062
+
+ohio_north_ridgeville:
+  title: North Ridgeville
+  type: city
+  population: 25182
+
+ohio_north_royalton:
+  title: North Royalton
+  type: city
+  population: 29458
+
+ohio_norwalk:
+  title: Norwalk
+  type: city
+  population: 16400
+
+ohio_norwood:
+  title: Norwood
+  type: city
+  population: 20384
+
+ohio_oregon:
+  title: Oregon
+  type: city
+  population: 19257
+
+ohio_oxford:
+  title: Oxford
+  type: city
+  population: 22066
+
+ohio_painesville:
+  title: Painesville
+  type: city
+  population: 17601
+
+ohio_parma:
+  title: Parma
+  type: city
+  population: 82565
+
+ohio_parma_heights:
+  title: Parma Heights
+  type: city
+  population: 20927
+
+ohio_perrysburg:
+  title: Perrysburg
+  type: city
+  population: 16922
+
+ohio_piqua:
+  title: Piqua
+  type: city
+  population: 20786
+
+ohio_portsmouth:
+  title: Portsmouth
+  type: city
+  population: 20092
+
+ohio_reynoldsburg:
+  title: Reynoldsburg
+  type: city
+  population: 32914
+
+ohio_riverside:
+  title: Riverside
+  type: city
+  population: 22833
+
+ohio_rocky_river:
+  title: Rocky River
+  type: city
+  population: 19884
+
+ohio_sandusky:
+  title: Sandusky
+  type: city
+  population: 26972
+
+ohio_shaker_heights:
+  title: Shaker Heights
+  type: city
+  population: 28047
+
+ohio_sidney:
+  title: Sidney
+  type: city
+  population: 20147
+
+ohio_solon:
+  title: Solon
+  type: city
+  population: 22280
+
+ohio_south_euclid:
+  title: South Euclid
+  type: city
+  population: 22474
+
+ohio_springboro:
+  title: Springboro
+  type: city
+  population: 15844
+
+ohio_springfield:
+  title: Springfield
+  type: city
+  population: 63532
+
+ohio_steubenville:
+  title: Steubenville
+  type: city
+  population: 19539
+
+ohio_stow:
+  title: Stow
+  type: city
+  population: 34345
+
+ohio_strongsville:
+  title: Strongsville
+  type: city
+  population: 44257
+
+ohio_sylvania:
+  title: Sylvania
+  type: city
+  population: 18965
+
+ohio_tallmadge:
+  title: Tallmadge
+  type: city
+  population: 17155
+
+ohio_tiffin:
+  title: Tiffin
+  type: city
+  population: 17540
+
+ohio_toledo:
+  title: Toledo
+  type: city
+  population: 304734
+
+ohio_trotwood:
+  title: Trotwood
+  type: city
+  population: 26771
+
+ohio_troy:
+  title: Troy
+  type: city
+  population: 22230
+
+ohio_twinsburg:
+  title: Twinsburg
+  type: city
+  population: 17261
+
+ohio_upper_arlington:
+  title: Upper Arlington
+  type: city
+  population: 31821
+
+ohio_wadsworth:
+  title: Wadsworth
+  type: city
+  population: 19686
+
+ohio_warren:
+  title: Warren
+  type: city
+  population: 46223
+
+ohio_westerville:
+  title: Westerville
+  type: city
+  population: 34733
+
+ohio_westlake:
+  title: Westlake
+  type: city
+  population: 31496
+
+ohio_whitehall:
+  title: Whitehall
+  type: city
+  population: 18235
+
+ohio_willoughby:
+  title: Willoughby
+  type: city
+  population: 22489
+
+ohio_wooster:
+  title: Wooster
+  type: city
+  population: 25499
+
+ohio_xenia:
+  title: Xenia
+  type: city
+  population: 23731
+
+ohio_youngstown:
+  title: Youngstown
+  type: city
+  population: 83907
+
+ohio_zanesville:
+  title: Zanesville
+  type: city
+  population: 25270
+

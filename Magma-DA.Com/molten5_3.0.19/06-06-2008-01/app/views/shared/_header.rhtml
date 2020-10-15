@@ -1,0 +1,29 @@
+<span id="logo">
+<%= link_to image_tag('header/magma_logo.gif', :width => 346, :height => 39, :alt => "Magma Design Automation, Inc."),
+ 			'http://www.magma-da.com' %>
+</span>
+
+<ul id="nav">
+	<% if current_contact %>
+	<li class="<%= nav_class('home') %>"><a href='/'>MOLTEN Home</a></li>
+	<li class="<%= nav_class('cases') %>"><%= link_to 'Support Cases', :controller => '/cases',
+	:all => (params[:all] || cookies[:all_cases]) %></li>
+	<li class="<%= nav_class('solutions') %>"><%= link_to 'Solutions', :controller => '/solutions' %></li>
+	<li class="<%= nav_class('user') %>" style="float:right;margin-right:20px">
+		<%= link_to 'Account', :controller => '/contact', :action => 'settings' %>
+	</li>
+	<% if current_contact.privilege?(AppConstants::PRIVILEGE[:support_admin]) %>
+	<li><%= link_to 'Admin', admin_url %></li>
+	<% end %>
+	<% end %>
+</ul>
+
+<noscript>
+<div id="JS" style="background:#ff887a;margin:1em;padding:0.5em;">WARNING: JavaScript is turned off in your web browser. Turn it on to take full advantage of MOLTEN site (see <a href="/FAQ.html#JavaScript" target="_new">FAQ for help</a>), then refresh this page.</div>
+</noscript>
+
+<% if current_contact %>
+<div id="login">
+	Logged in as <%= current_contact.email %> | <%= link_to 'Logout', :controller => '/contact', :action => 'logout' %>
+</div>
+<% end %>

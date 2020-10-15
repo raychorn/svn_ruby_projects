@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:data="com.bigfix.dss.view.data.*" creationComplete="init()">
+	<mx:Script><![CDATA[
+		import mx.managers.CursorManager;
+		import com.bigfix.dss.view.dashboard.events.WidgetNameSpecifiedEvent;
+
+		include 'WidgetWizardFormLib.as';
+
+		[Event(name="widgetNameSpecified", type="com.bigfix.dss.view.dashboard.events.WidgetNameSpecifiedEvent")]
+
+		private function init():void {
+			WidgetWizardFormLib_init()
+			formControlForName.text = model.currentWidget.name;
+			coalesce(model.currentWidget.name, labelField);
+		}
+		
+		private function setValue(event:ValidationResultEvent):void {
+			hideForm();
+			model.currentWidget.name = formControlForName.text;
+			coalesce(model.currentWidget.name, labelField);
+			this.dispatchEvent(new WidgetNameSpecifiedEvent(WidgetNameSpecifiedEvent.TYPE_WIDGET_NAME_SPECIFIED, this.labelField.text));
+		}
+		
+		private function onKeyUpLabelField(event:KeyboardEvent):void {
+			this.submitButton.enabled = (this.formControlForName.text.length > 0);
+			if (event.charCode == 13) {
+				this.submitButton.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+			}
+		}
+		
+		private function onClickShowFormButton():void {
+			this.showForm();
+		}
+	]]></mx:Script>
+	<mx:StringValidator
+		source="{formControlForName}" property="text"
+		required="true"
+		trigger="{submitButton}" triggerEvent="click"
+		valid="setValue(event)"/>
+
+	<mx:HBox>
+		<mx:HBox id="labelBox" click="showForm()" useHandCursor="true"><mx:Label text="Widget Name:" styleName="textLink" useHandCursor="true" toolTip="Click this label to perform an action."/></mx:HBox>
+		<mx:Label id="labelField" creationComplete="coalesce(null, Label(event.currentTarget))"/>
+	</mx:HBox>
+
+	<mx:Panel id="form" title="Widget Name" styleName="wizardFormContainer" width="200" includeInLayout="false" visible="false" show="formControlForName.setFocus()">
+		<mx:TextInput id="formControlForName" width="100%" keyUp="onKeyUpLabelField(event)"/>
+		<mx:ControlBar horizontalAlign="center">
+			<mx:Button label="Cancel" click="hideForm()"/>
+			<mx:Button label="Done" id="submitButton" enabled="false"/>
+		</mx:ControlBar>
+	</mx:Panel>
+</mx:Canvas>

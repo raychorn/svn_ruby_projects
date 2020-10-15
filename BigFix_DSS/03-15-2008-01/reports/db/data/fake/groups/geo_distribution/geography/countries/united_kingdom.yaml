@@ -1,0 +1,90 @@
+united_kingdom:
+  title: United Kingdom
+  abbrev: UK
+  subgroups:
+  - uk_england
+  - uk_scotland
+  - uk_wales
+  - uk_northern_ireland
+
+england:
+  title: England
+  subgroups:
+  - uk_london
+  - uk_west_midlands
+  - uk_manchester
+  - uk_yorkshire
+  - uk_tyneside
+  - uk_liverpool
+
+scotland:
+  title: Scotland
+  subgroups:
+  - uk_glasgow
+
+wales:
+  title: Wales
+  subgroups:
+  - uk_cardiff
+  - uk_swansea
+  - uk_newport
+
+northern_ireland:
+  title: Northern Ireland
+  subgroups:
+  - uk_belfast
+
+uk_london:
+  title: London
+  type: city
+  population: 8278251
+
+uk_west_midlands:
+  title: West Midlands
+  type: city
+  population: 2284093
+
+uk_manchester:
+  title: Manchester
+  type: city
+  population: 2240230
+
+uk_west_yorkshire:
+  title: West Yorkshire
+  type: city
+  population: 1499465
+
+uk_tyneside:
+  title: Tyneside
+  type: city
+  population: 879996
+
+uk_liverpool:
+  title: Liverpool
+  type: city
+  population: 816216
+
+uk_glasgow:
+  title: Glasgow
+  type: city
+  population: 2200000
+
+uk_cardiff:
+  title: Cardiff
+  type: city
+  population: 319700
+
+uk_swansea:
+  title: Swansea
+  type: city
+  population: 226400
+
+uk_newport:
+  title: Newport
+  type: city
+  population: 139600
+
+uk_belfast:
+  title: Belfast
+  type: city
+  population: 579276

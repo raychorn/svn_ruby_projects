@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:data="com.bigfix.dss.view.data.*"
+        xmlns:bfcontrols="com.bigfix.extensions.controls.*"
+        width="100%" height="100%" direction="horizontal"
+        paddingLeft="5" paddingRight="5"
+        creationComplete="onCreationComplete()">
+  <mx:Script>
+    <![CDATA[
+    	import com.bigfix.dss.view.general.Alert.AlertPopUp;
+      import com.bigfix.dss.vo.ComputerGroupVO;
+      import com.bigfix.dss.event.ComputerGroupTreeEvent;
+      import com.bigfix.dss.event.EditorEvent;
+      import mx.binding.utils.BindingUtils;
+      import mx.events.DragEvent;
+      import mx.events.ItemClickEvent;
+      import mx.collections.ArrayCollection;
+      import com.bigfix.dss.view.general.SaveConfirm;
+      import com.bigfix.dss.vo.ComputerGroupVO;
+      import com.bigfix.dss.vo.DatasourceComputerGroupVO;
+      import com.bigfix.dss.vo.SubjectVO;
+      import com.bigfix.dss.event.ComputerGroupEvent;
+      import com.bigfix.dss.util.DSS;
+      import com.bigfix.dss.model.ComputerGroupTree;
+      import mx.controls.Alert;
+      
+      [Bindable]
+      private var editedGroup:ComputerGroupVO;
+      
+      private var allGroups:ArrayCollection;
+      
+      [Bindable]
+      private var tree:ComputerGroupTree;
+      
+      private var nextAction:Function;
+      
+      [Bindable]
+      private var dataFilterProperties:ArrayCollection;
+      
+      [Bindable]
+      private var availableDatasourceGroups:ArrayCollection;
+      
+      [Bindable]
+      private var selectedDatasourceGroups:ArrayCollection;
+      
+      [Bindable]
+      private var editedGroupDSGroupIDs:Array;
+      
+      private var saveConfirmDialog:SaveConfirm;
+      
+      private function onCreationComplete():void
+      {
+        var properties:Array = new Array();
+
+  		  new EditorEvent(EditorEvent.EDITOR_LIST, 'DatasourceComputerGroup').dispatch();
+
+        DSS.svc("EditorService").list({ 'class': 'ComputerGroup' }).onResult(this.gotComputerGroups).onFault(this.svcFault);
+        
+        for each (var subject:SubjectVO in DSS.model.subjects) {
+          if (subject.name != 'Computer Group')
+            properties = properties.concat(subject.properties.source);
+        }
+        
+        dataFilterProperties = new ArrayCollection(properties);
+        deleteButton.enabled = false;
+        
+        BindingUtils.bindSetter(modelDSGroupsChanged, DSS.model,
+                                "datasourceComputerGroups");
+  		  saveConfirmDialog = new SaveConfirm();
+  		  saveConfirmDialog.addEventListener('save', function(event:*):void { applyChanges(nextAction); });
+  		  saveConfirmDialog.addEventListener('dontsave', function(event:*):void { revertChanges(); nextAction(); });
+      }
+      
+      private function modelDSGroupsChanged(value:*):void {
+        updateDatasourceGroups();
+      }
+      
+  		private function gotGroupDSGroups(event:*):void {
+  		  editedGroupDSGroupIDs = new Array();
+  		  
+  		  for each (var dsGroupID:int in event.result) {
+  		    editedGroupDSGroupIDs[dsGroupID] = true;
+  		  }
+  		  updateDatasourceGroups();
+  		}
+
+      private function updateDatasourceGroups():void
+      {
+        availableDatasourceGroups = new ArrayCollection();
+        selectedDatasourceGroups = new ArrayCollection();
+        
+        if (editedGroup == null || editedGroupDSGroupIDs == null)
+          return;
+        
+        for each (var dsGroup:DatasourceComputerGroupVO in DSS.model.datasourceComputerGroups) {
+  		    if (editedGroupDSGroupIDs[dsGroup.id])
+  		      selectedDatasourceGroups.addItem(dsGroup);
+  		    else
+  		      availableDatasourceGroups.addItem(dsGroup);
+  		  }
+      }
+      
+      private function gotComputerGroups(event:*):void
+      {
+        var allGroups:Array = event.result;
+        tree = new ComputerGroupTree(new ArrayCollection(allGroups));
+        tree.addEventListener(ComputerGroupTreeEvent.TREE_REPARENT_GROUP,
+                              this.treeChanged, false, 0, true);
+      }
+      
+      private function svcFault(event:*):void {
+      	AlertPopUp.error(event.message, 'Failed to retrieve computer groups');
+      }
+      
+      
+      private function treeChanged(event:ComputerGroupTreeEvent):void
+      {
+        var group:ComputerGroupVO = event.group;
+        
+        if (group.id != 0) {
+          group.busy = true;
+          changeSelection(null);
+          
+          group.parent_id = tree.getParent(group).id;
+          var edEvent:EditorEvent = new EditorEvent(EditorEvent.EDITOR_UPDATE, 'ComputerGroup', group);
+          edEvent.dispatch();
+        }
+      }
+      
+      private function saveConfirm(nextAction:Function):void
+      {
+        this.nextAction = nextAction;
+        saveConfirmDialog.show(this);
+      }
+      
+      private function createNewGroup(parent:ComputerGroupVO):void
+      {
+        var newGroup:ComputerGroupVO;
+        
+        if (parent != null && parent.id == 0) {
+			AlertPopUp.error('You need to save the current group before you can create a child group for it.', 'Add Computer Group');
+			return;
+        } else if (changesPending()) {
+          saveConfirm(function():void { createNewGroup(parent) });
+          return;
+        } 
+        
+        newGroup = new ComputerGroupVO();
+        newGroup.name = "New Computer Group";
+        
+        if (parent == null)
+          tree.root.children.addItem(newGroup);
+        else {
+          parent.children.addItem(newGroup);
+          if (!cgTree.isItemOpen(parent))
+            cgTree.expandItem(parent, true);
+        }
+
+        changeSelection(newGroup);
+        formDataChanged();
+        
+        nameInput.setFocus();
+        nameInput.setSelection(0, nameInput.text.length);
+      }
+      
+      private function deleteGroups():void
+      {
+        var groupsToDelete:Array = cgTree.selectedItems;
+        
+        if (groupsToDelete.length != 0) {
+          var cgEvent:ComputerGroupEvent =
+            new ComputerGroupEvent(ComputerGroupEvent.DELETE_GROUPS, groupsToDelete, tree);
+          cgEvent.dispatch();
+
+          for each (var group:ComputerGroupVO in groupsToDelete) {
+            group.busy = true;
+          }
+          
+          changeSelection(null);
+        }
+      }
+      
+      public function changesPending():Boolean
+      {
+        return editedGroup != null && applyButton.enabled;
+      }
+      
+      private function selectionChanged():void
+      {
+        var selectedGroup:ComputerGroupVO;
+        
+        if (cgTree.selectedItems.length != 1)
+          selectedGroup = null;
+        else
+          selectedGroup = cgTree.selectedItem as ComputerGroupVO;
+        
+        // Stop the user from throwing away changes.  Instead, show a confirmation
+        // dialog and revert the selection state.
+        if (changesPending()) {
+          saveConfirm(function():void { changeSelection(selectedGroup); });
+          cgTree.selectedItem = editedGroup; // Revert the selection.
+          return;
+        }
+        
+        changeSelection(selectedGroup);
+      }
+      
+      private function changeSelection(selectedGroup:ComputerGroupVO):void
+      {
+        if (selectedGroup != null && selectedGroup.busy)
+          selectedGroup = null;
+        
+        if (cgTree.selectedItem != selectedGroup)
+          cgTree.selectedItem = selectedGroup;
+
+        if (editedGroup != selectedGroup) {
+          editedGroup = selectedGroup;
+          // Enable the apply button iff we have an unsaved group selected.
+          applyButton.enabled = (editedGroup != null && editedGroup.id == 0);
+
+          // Reset the form.
+          nameInput.horizontalScrollPosition = 0;
+
+          if (editedGroup != null && editedGroup.filter != null)
+            dataFilterForm.setDataFilters(new ArrayCollection(editedGroup.filter));
+          else
+            dataFilterForm.reset();
+          
+          if (editedGroup == null)
+            updateDatasourceGroups();
+          else if (editedGroup.id != 0) {
+            DSS.svc('EditorService').get_property({ 'class': 'ComputerGroup',
+                                                    'id': editedGroup.id,
+                                                    'property': 'datasource_computer_group_ids'
+                                                   }).onResult(gotGroupDSGroups);
+          }
+          else {
+            editedGroupDSGroupIDs = new Array();
+            updateDatasourceGroups();
+          }
+        }
+        
+        // Enable the delete button iff we have any selected groups, but we have
+        // not selected an unborn group.        
+        deleteButton.enabled = (cgTree.selectedItems.length != 0 &&
+                                (editedGroup == null || editedGroup.id != 0));
+        
+        // Enable the create button iff we have not selected multiple groups.
+        addButton.enabled = (cgTree.selectedItems.length <= 1);
+        
+        // Enable the form iff we have a selected group.
+        form.enabled = (editedGroup != null);
+        
+        // Change the text of the apply button as appropriate.
+        applyButton.label = (editedGroup != null && editedGroup.id == 0 ? 'Create' : 'Apply');
+      }
+      
+      private function applyChanges(followup:Function = null):void
+      {
+        var edEvent:EditorEvent;
+        
+        editedGroup.name = nameInput.text;
+        editedGroup.filter = dataFilterForm.collectDataFilters().source;
+
+  		  var dsGroupIDs:Array = selectedDatasourceGroups.source.map(function (group:DatasourceComputerGroupVO, idx:int, ary:Array):int { return group.id });
+        
+        if (editedGroup.id != 0)
+          edEvent = new EditorEvent(EditorEvent.EDITOR_UPDATE, 'ComputerGroup', editedGroup, { 'datasource_computer_group_ids': dsGroupIDs });
+        else
+          edEvent = new EditorEvent(EditorEvent.EDITOR_CREATE, 'ComputerGroup', editedGroup, { 'datasource_computer_group_ids': dsGroupIDs });
+        
+        edEvent.followup = followup;
+        edEvent.dispatch();
+
+        editedGroup.busy = true;  
+        changeSelection(null);
+      }
+      
+      private function revertChanges():void
+      {
+        if (editedGroup != null && editedGroup.id == 0) {
+          // This is a not-yet-created group.  We need to remove it from the tree.
+          var parent:ComputerGroupVO = cgTree.getParentItem(editedGroup) as ComputerGroupVO;
+          
+          parent.children.removeItemAt(parent.children.getItemIndex(editedGroup));
+        }
+        
+        changeSelection(null);
+      }
+      
+      private function formDataChanged():void
+      {
+        if (editedGroup != null) {
+          applyButton.enabled = true;
+        }
+      }
+      
+      private function buttonClicked(event:ItemClickEvent):void
+      {
+        switch (event.item.name) {
+          case 'add':
+            createNewGroup(cgTree.selectedItem as ComputerGroupVO);
+            break;
+          case 'delete':
+            deleteGroups();
+            break;
+        }
+      }
+      
+      private function get addButton():Button
+      {
+        return addDeleteButtons.getChildAt(0) as Button;
+      }
+      
+      private function get deleteButton():Button
+      {
+        return addDeleteButtons.getChildAt(1) as Button;
+      }
+    ]]>
+  </mx:Script>
+  
+  <mx:Box direction="vertical" borderStyle="none" minWidth="300">
+    <mx:Tree id="cgTree" width="100%" height="100%" showRoot="false" dataProvider="{tree.root.children}"
+             labelField="name" dragEnabled="true"
+             dragMoveEnabled="true" dropEnabled="true"
+             allowMultipleSelection="true"
+             change="selectionChanged()" borderStyle="solid"/>
+    <mx:ButtonBar id="addDeleteButtons" toolTipField="toolTip" labelField="label" itemClick="buttonClicked(event)">
+      <mx:dataProvider>
+        <mx:Array>
+          <mx:Object label="+" toolTip="Add a new computer group" name="add"/>
+          <mx:Object label="-" toolTip="Delete computer group(s)" name="delete"/>
+        </mx:Array>
+      </mx:dataProvider>
+    </mx:ButtonBar>
+  </mx:Box>
+
+  <mx:Canvas id="form" enabled="false" width="100%"
+             borderStyle="solid" defaultButton="{applyButton}"
+             keyDown="if (event.keyCode == Keyboard.ESCAPE) revertChanges();">
+    <mx:VBox top="10" left="10" right="10">
+      <mx:Grid width="100%">
+        <mx:GridRow>
+          <mx:GridItem width="40">
+            <mx:Label text="Name" />
+          </mx:GridItem>
+          <mx:GridItem>
+            <mx:TextInput id="nameInput" text="{editedGroup.name}" change="formDataChanged()" />
+          </mx:GridItem>
+        </mx:GridRow>
+      </mx:Grid>
+      <mx:Panel width="100%" minWidth="745" height="200"
+                title="Computer selection criteria">
+        <data:DataFilterForm width="100%" id="dataFilterForm" properties="{dataFilterProperties}" change="formDataChanged()"/>
+      </mx:Panel>
+      <mx:Panel width="100%" title="Datasource Computer Groups">
+        <bfcontrols:DoubleList labelField="name" change="formDataChanged()"
+                               leftListDataProvider="{availableDatasourceGroups}"
+                               rightListDataProvider="{selectedDatasourceGroups}" />
+      </mx:Panel>
+    </mx:VBox>
+    <mx:HBox left="10" bottom="10">
+      <mx:Button id="applyButton" label="Apply" enabled="false" click="applyChanges()" />
+      <mx:Button id="revertButton" label="Revert" enabled="{applyButton.enabled}" click="revertChanges()"/>
+    </mx:HBox>
+  </mx:Canvas>    
+</mx:Box>

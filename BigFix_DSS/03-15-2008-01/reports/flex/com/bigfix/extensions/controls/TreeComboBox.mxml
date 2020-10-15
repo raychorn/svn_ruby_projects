@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:ComboBox xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:Script><![CDATA[
+		import mx.events.ListEvent;
+		import mx.controls.Tree;
+		import mx.controls.Alert;
+
+		import com.bigfix.extensions.renderers.DisabledTreeItemRenderer;
+
+		[Bindable]
+		private var _label:String;
+
+		[Bindable]
+		public var treeSelectedItem:Object;
+		public var selectableField:String;
+
+		public var treeHeight:int = 200;
+
+		override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void {
+			super.updateDisplayList(unscaledWidth, unscaledHeight);
+
+			if (dropdown && _label != null) {
+				text = _label;
+			}
+		}
+
+		override public function close(trigger:Event = null):void {
+			trace("ComboBox.close!");
+			if (dropdown) {
+				//trace("dropdown.indexToItemRenderer(dropdown.selectedIndex).enabled = ",dropdown.indexToItemRenderer(dropdown.selectedIndex).enabled);
+				if (!dropdown.indexToItemRenderer(dropdown.selectedIndex).enabled) {
+					return;
+				} else {
+					_label = dropdown.selectedItem[this.labelField];
+					treeSelectedItem = dropdown.selectedItem;
+				}
+			}
+			super.close();
+		}
+	]]></mx:Script>
+
+	<mx:dropdownFactory>
+		<mx:Component>
+			<mx:Tree
+				creationComplete="init()"
+				defaultLeafIcon="{null}"
+				disclosureClosedIcon="{null}"
+				disclosureOpenIcon="{null}"
+				folderClosedIcon="{null}"
+				folderOpenIcon="{null}"
+				itemRenderer="com.bigfix.extensions.renderers.DisabledTreeItemRenderer"
+				height="{outerDocument.treeHeight}">
+				<mx:Script><![CDATA[
+					public var selectableField:String;
+
+					private function init():void {
+						trace("TreeDropDown init!");
+						expandAll();
+						selectableField = outerDocument.selectableField;
+					}
+
+					public function expandAll():void {
+						for each (var item:* in this.dataProvider) {
+							this.expandChildrenOf(item, true);
+						}
+					}
+				]]></mx:Script>
+			</mx:Tree>
+		</mx:Component>
+	</mx:dropdownFactory>
+</mx:ComboBox>

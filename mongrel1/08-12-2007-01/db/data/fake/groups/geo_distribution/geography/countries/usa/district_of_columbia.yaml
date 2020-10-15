@@ -1,0 +1,10 @@
+district_of_columbia:
+  title: District of Columbia
+  subgroups:
+  - district_of_columbia_washington
+
+district_of_columbia_washington:
+  title: Washington
+  type: city
+  population: 554239
+

@@ -1,0 +1,22 @@
+<div id ="footer_links">
+<a href='/'>Home</a>| 
+<%= link_to "Customized Home Page", :controller => '/home', :action => 'custom' %> |
+<%= link_to "Support Cases", :controller => '/cases' %> | 
+<%= link_to "Solutions", :controller => '/solutions' %> |
+<%= link_to "Account", :controller => '/contact', :action => 'settings' %> |
+<%= link_to_faq %> | <%= mail_to "molten_feedback@magma-da.com", 'Report Problems' %>
+</div>
+<%= AppConstants::APP_NAME %>, Version: <a href="/CHANGELOG.txt"><%= AppConstants::MOLTEN_VERSION %></a>, 
+
+<% if current_contact %>
+	<!-- current contact id -->
+	<%= current_contact.id %>
+	<!-- end current contact id -->
+<% end %>
+
+<br/>
+<div id="magma_locations">
+<%= link_to 'Magma China', "http://www.magma-da.com.cn/" %> | 
+<%= link_to 'Magma Japan', 'http://www.magma-da.co.jp/' %> | 
+<%= link_to 'Magma Taiwan', 'http://www.magma-da.com.tw/' %>
+</div>

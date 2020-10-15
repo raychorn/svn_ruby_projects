@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	width="100%" height="100%" 
+	currentState="pdf">
+	<mx:states>
+		<mx:State name="pdf">
+			<mx:SetStyle target="{pdfExportButton}" name="icon" value="@Embed('/assets/pdf-icon_16x16.png')"/>
+		</mx:State>
+	</mx:states>
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.view.general.buttons.events.ClickPDFButtonEvent;
+			[Event(name="clickPDFButton", type="com.bigfix.dss.view.general.buttons.events")]
+
+			private function onClickPDFExportButton():void {
+				this.dispatchEvent(new ClickPDFButtonEvent(ClickPDFButtonEvent.TYPE_CLICK_PDF_BUTTON, ''));
+			}
+		]]>
+	</mx:Script>
+	<mx:Button id="pdfExportButton" label="Export Dashboard as PDF" toolTip="Click this button to export the current dashboard as a PDF file to your local filesystem." enabled="true" click="onClickPDFExportButton()"/>
+</mx:Canvas>

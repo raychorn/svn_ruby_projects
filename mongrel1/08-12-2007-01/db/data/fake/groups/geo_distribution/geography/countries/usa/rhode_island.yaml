@@ -1,0 +1,52 @@
+rhode_island:
+  title: Rhode Island
+  subgroups:
+  - rhode_island_central_falls
+  - rhode_island_cranston
+  - rhode_island_east_providence
+  - rhode_island_newport
+  - rhode_island_pawtucket
+  - rhode_island_providence
+  - rhode_island_warwick
+  - rhode_island_woonsocket
+
+rhode_island_central_falls:
+  title: Central Falls
+  type: city
+  population: 19280
+
+rhode_island_cranston:
+  title: Cranston
+  type: city
+  population: 81990
+
+rhode_island_east_providence:
+  title: East Providence
+  type: city
+  population: 49762
+
+rhode_island_newport:
+  title: Newport
+  type: city
+  population: 25826
+
+rhode_island_pawtucket:
+  title: Pawtucket
+  type: city
+  population: 74255
+
+rhode_island_providence:
+  title: Providence
+  type: city
+  population: 178131
+
+rhode_island_warwick:
+  title: Warwick
+  type: city
+  population: 87439
+
+rhode_island_woonsocket:
+  title: Woonsocket
+  type: city
+  population: 44534
+

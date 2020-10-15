@@ -1,0 +1,8 @@
+russia:
+  title: Russian Federation
+  subgroups:
+    - ru_moscow
+
+ru_moscow:
+  title: Moscow
+  type: city

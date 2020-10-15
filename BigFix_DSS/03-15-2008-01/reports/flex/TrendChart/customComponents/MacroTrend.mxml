@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:LineChart xmlns:mx="http://www.adobe.com/2006/mxml" showDataTips="true" dataTipFunction="dataTipFormatter" width="100%" height="100%" creationComplete="init(event)">
+	<mx:Script source="MacroTrend_as.as"/>
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.view.general.Alert.AlertPopUp;
+		]]>
+	</mx:Script>
+	<mx:RemoteObject id="remoteService" destination="TrendChart" showBusyCursor="true" fault="AlertPopUp.error(event.fault.faultString, 'Error');">
+		<mx:method name="getMacroTrend" result="handleDataLoaded(event)">
+			<mx:arguments>
+				<mx:arg1>{trendChartOptions.valueOf()}</mx:arg1>
+			</mx:arguments>
+		</mx:method>
+	</mx:RemoteObject>
+	<mx:verticalAxisRenderer>
+		<mx:AxisRenderer showLabels="false" tickPlacement="none"/>
+	</mx:verticalAxisRenderer>
+	<mx:horizontalAxis>
+		<mx:DateTimeAxis parseFunction="epochToDate" displayLocalTime="false"/>
+	</mx:horizontalAxis>
+	<mx:series>
+		<mx:LineSeries id="lineSeries" yField="yValue" xField="xValue" displayName="foo" dataProvider="{remoteService.getMacroTrend.lastResult}">
+			<mx:lineStroke><mx:Stroke color="0x5c8a8b" pixelHinting="true"/></mx:lineStroke>
+		</mx:LineSeries>
+	</mx:series>
+	<mx:seriesFilters><mx:Array/></mx:seriesFilters>
+	<mx:annotationElements>
+		<mx:HDividedBox width="100%" height="100%" id="rangeOverlay" liveDragging="true" dividerDrag="rangeOverlayDividerDrag(event)" initialize="initRangeOverlay(event)">
+			<mx:Box name="left" width="100%" height="100%" backgroundColor="#CCCCCC" backgroundAlpha=".5"/>
+			<mx:Box name="selectionWindow" width="0" height="100%" backgroundAlpha="0" mouseDown="rangeOverlayStartDrag(event)" buttonMode="true"/>
+			<mx:Box name="right" width="0" height="100%" backgroundColor="#CCCCCC" backgroundAlpha=".5"/>
+		</mx:HDividedBox>
+	</mx:annotationElements>
+</mx:LineChart>

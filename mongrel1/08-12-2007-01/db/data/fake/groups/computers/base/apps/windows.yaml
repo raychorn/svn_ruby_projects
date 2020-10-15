@@ -1,0 +1,16 @@
+windows_xp_sp2_base:
+  title: Windows XP SP2 Base Applications
+  applications:
+  - Windows XP SP2
+  - Internet Explorer 6.0
+
+windows_vista_base:
+  title: Windows Vista Base Applications
+  applications:
+  - Windows Vista Enterprise
+  - Internet Explorer 7.0
+
+windows_2000_sp4_base:
+  title: Windows 2000 SP4 Base Applications
+  applications:
+  - Windows 2000 SP4

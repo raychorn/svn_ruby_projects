@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+	<mx:Metadata>
+		[Event(name="change", type="mx.events.FlexEvent")]
+	</mx:Metadata>
+	<mx:Script><![CDATA[
+		import mx.core.Application;
+		import mx.core.UIComponent;
+		import mx.rpc.events.ResultEvent;
+		import mx.controls.CheckBox;
+		import mx.controls.Text;
+		import mx.containers.HBox;
+		import flash.events.Event;
+		import mx.events.FlexEvent;
+		import mx.charts.LineChart;
+		import mx.charts.LegendItem;
+		import mx.charts.series.PlotSeries;
+
+		// publicly exported vars
+		public function get unselectedDeltaTypeIDs():Array {
+			return ['i', 'can','haz','cheezburger'];
+		}
+		public var chart:LineChart;
+
+		public function updateLegends():void {
+			// clear out container
+			while (checkboxContainer.numChildren > 0) {
+				checkboxContainer.removeChildAt(0);
+			}
+			for each (var series:* in chart.series) {
+				if (series is PlotSeries) {
+					var box:HBox = new HBox();
+					box.setStyle('verticalAlign','top');
+					box.percentWidth = 100;
+					checkboxContainer.addChild(box);
+
+					var checkbox:CheckBox = new CheckBox();
+					checkbox.name = series.name; // checkbox.name is really the deltaTypeID!
+					checkbox.selected = true; // INCOMPLETE: need to read 'selectedIDs'
+					checkbox.addEventListener(Event.CHANGE, checkboxChangeHandler);
+					box.addChild(checkbox);
+
+					var legendItem:LegendItem = new LegendItem();
+					legendItem.marker = series.legendData[0].marker;
+					box.addChild(legendItem);
+
+					var deltaTypeLabel:Text = new Text();
+					deltaTypeLabel.text = series.displayName;
+					deltaTypeLabel.percentWidth = 100;
+					box.addChild(deltaTypeLabel);
+
+				}
+			}
+		}
+
+		private function checkboxChangeHandler(event:Event):void {
+			dispatchEvent(new FlexEvent("change"));
+		}
+	]]></mx:Script>
+	<mx:Panel title="Points of Interest" id="checkboxContainer" width="100%" height="100%"/>
+</mx:VBox>

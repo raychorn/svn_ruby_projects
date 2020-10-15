@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:states>
+		<mx:State name="RightArrowEnabled">
+			<mx:SetStyle target="{btn}" name="icon" value="@Embed('/assets/blue-right-arrow.gif')"/>
+		</mx:State>
+		<mx:State name="RightArrowDisabled">
+			<mx:SetStyle target="{btn}" name="icon" value="@Embed('/assets/silver-right-arrow.gif')"/>
+		</mx:State>
+		<mx:State name="LeftArrowEnabled">
+			<mx:SetStyle target="{btn}" name="icon" value="@Embed('/assets/blue-left-arrow.gif')"/>
+		</mx:State>
+		<mx:State name="LeftArrowDisabled">
+			<mx:SetStyle target="{btn}" name="icon" value="@Embed('/assets/silver-left-arrow.gif')"/>
+		</mx:State>
+	</mx:states>
+	<mx:Script>
+		<![CDATA[
+			override public function set enabled(enabled:Boolean):void {
+				if ( (this.currentState != null) && (this.currentState is String) ) {
+					this.currentState = ((this.currentState.indexOf("Right") > -1) ? ((enabled) ? "RightArrowEnabled" : "RightArrowDisabled") : ((this.currentState.indexOf("Left") > -1) ? ((enabled) ? "LeftArrowEnabled" : "LeftArrowDisabled") : ""));
+					super.enabled = enabled;
+					this.btn.enabled = enabled;
+				}
+			}
+		]]>
+	</mx:Script>
+	<mx:Button id="btn" enabled="false"/>
+</mx:Canvas>

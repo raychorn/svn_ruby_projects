@@ -1,0 +1,38 @@
+quentin:
+  id: 1
+  login: quentin
+  email: quentin@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 5.days.ago.to_s :db %>
+
+
+aaron:
+  id: 2
+  login: aaron
+  email: aaron@example.com
+  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at: <%= 1.days.ago.to_s :db %>
+
+
+ludwig:
+  id: 3
+  login: ludwig
+  email: lvb@pomodo.com
+  first_name: Ludwig
+  last_name: van Beethoven
+  salt: cf1bc466e9dedd7d687e967ba37947971d44ab6e
+  crypted_password: fc3f2237b0edbeab2c08eecbc7bd6ef9b2124080 # foooo
+  created_at: <%= 5.days.ago.to_s :db %>
+
+
+wolfgang:
+  id: 4
+  login: wolfgang
+  email: wam@pomodo.com
+  first_name: Wolfgang
+  last_name: Mozart
+  salt: 945da846ec9a4f29c10e21789bfb213d62f8fee5
+  crypted_password: 2f6ffa90ee8a87c2121b813eb68265130f9b1410 # barrr
+  created_at: <%= 1.days.ago.to_s :db %>

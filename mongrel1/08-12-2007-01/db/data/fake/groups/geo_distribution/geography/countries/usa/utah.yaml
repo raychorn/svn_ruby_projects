@@ -1,0 +1,214 @@
+utah:
+  title: Utah
+  subgroups:
+  - utah_american_fork
+  - utah_bountiful
+  - utah_brigham_city
+  - utah_cedar_city
+  - utah_clearfield
+  - utah_clinton
+  - utah_draper
+  - utah_holladay
+  - utah_kaysville
+  - utah_layton
+  - utah_lehi
+  - utah_logan
+  - utah_midvale
+  - utah_murray
+  - utah_north_ogden
+  - utah_ogden
+  - utah_orem
+  - utah_payson
+  - utah_pleasant_grove
+  - utah_provo
+  - utah_riverton
+  - utah_roy
+  - utah_st__george
+  - utah_salt_lake_city
+  - utah_sandy
+  - utah_south_jordan
+  - utah_south_ogden
+  - utah_south_salt_lake
+  - utah_spanish_fork
+  - utah_springville
+  - utah_syracuse
+  - utah_taylorsville
+  - utah_tooele
+  - utah_west_jordan
+  - utah_west_valley_city
+
+utah_american_fork:
+  title: American Fork
+  type: city
+  population: 25024
+
+utah_bountiful:
+  title: Bountiful
+  type: city
+  population: 41196
+
+utah_brigham_city:
+  title: Brigham City
+  type: city
+  population: 18279
+
+utah_cedar_city:
+  title: Cedar City
+  type: city
+  population: 22345
+
+utah_clearfield:
+  title: Clearfield
+  type: city
+  population: 27242
+
+utah_clinton:
+  title: Clinton
+  type: city
+  population: 16457
+
+utah_draper:
+  title: Draper
+  type: city
+  population: 33122
+
+utah_holladay:
+  title: Holladay
+  type: city
+  population: 19299
+
+utah_kaysville:
+  title: Kaysville
+  type: city
+  population: 21762
+
+utah_layton:
+  title: Layton
+  type: city
+  population: 61236
+
+utah_lehi:
+  title: Lehi
+  type: city
+  population: 27633
+
+utah_logan:
+  title: Logan
+  type: city
+  population: 45795
+
+utah_midvale:
+  title: Midvale
+  type: city
+  population: 27003
+
+utah_murray:
+  title: Murray
+  type: city
+  population: 44621
+
+utah_north_ogden:
+  title: North Ogden
+  type: city
+  population: 16303
+
+utah_ogden:
+  title: Ogden
+  type: city
+  population: 78429
+
+utah_orem:
+  title: Orem
+  type: city
+  population: 88618
+
+utah_payson:
+  title: Payson
+  type: city
+  population: 15990
+
+utah_pleasant_grove:
+  title: Pleasant Grove
+  type: city
+  population: 27116
+
+utah_provo:
+  title: Provo
+  type: city
+  population: 111718
+
+utah_riverton:
+  title: Riverton
+  type: city
+  population: 30100
+
+utah_roy:
+  title: Roy
+  type: city
+  population: 35235
+
+utah_st__george:
+  title: St. George
+  type: city
+  population: 60077
+
+utah_salt_lake_city:
+  title: Salt Lake City
+  type: city
+  population: 178487
+
+utah_sandy:
+  title: Sandy
+  type: city
+  population: 89906
+
+utah_south_jordan:
+  title: South Jordan
+  type: city
+  population: 36791
+
+utah_south_ogden:
+  title: South Ogden
+  type: city
+  population: 15107
+
+utah_south_salt_lake:
+  title: South Salt Lake
+  type: city
+  population: 21498
+
+utah_spanish_fork:
+  title: Spanish Fork
+  type: city
+  population: 25528
+
+utah_springville:
+  title: Springville
+  type: city
+  population: 24448
+
+utah_syracuse:
+  title: Syracuse
+  type: city
+  population: 16386
+
+utah_taylorsville:
+  title: Taylorsville
+  type: city
+  population: 58142
+
+utah_tooele:
+  title: Tooele
+  type: city
+  population: 27936
+
+utah_west_jordan:
+  title: West Jordan
+  type: city
+  population: 88955
+
+utah_west_valley_city:
+  title: West Valley City
+  type: city
+  population: 112607
+

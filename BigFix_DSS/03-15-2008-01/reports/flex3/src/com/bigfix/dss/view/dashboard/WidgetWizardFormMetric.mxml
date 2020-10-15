@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:data="com.bigfix.dss.view.data.*" creationComplete= "init()">
+	<mx:Script><![CDATA[
+		include 'WidgetWizardFormLib.as';
+		import mx.collections.ArrayCollection;
+		import com.bigfix.dss.vo.SubjectVO;
+		
+		private function init():void {
+			WidgetWizardFormLib_init()
+			formControlForMetric.selectedItem = model.currentWidget.visualization_type_options.metric;
+			formControlForSubject.selectedItem = model.currentWidget.visualization_type_options.subject;
+			if(model.currentWidget.visualization_type_options.metric){
+				coalesce(model.currentWidget.visualization_type_options.metric.name, labelField);
+			}
+		}
+		
+		private function setValue(event:ValidationResultEvent):void {
+			hideForm();
+			model.currentWidget.visualization_type_options.metric = formControlForMetric.selectedItem;
+			model.currentWidget.visualization_type_options.subject = formControlForSubject.selectedItem;
+			coalesce(model.currentWidget.visualization_type_options.metric.name, labelField);
+		}
+
+		/* this method filters our subjects so we only see stuff with metrics.. */
+		private function filterSubjects(subjects:ArrayCollection):ArrayCollection {
+			var rtnArray:ArrayCollection = new ArrayCollection;
+			for each (var subject:SubjectVO in subjects) {
+				if (subject.metrics.length > 0) {
+					rtnArray.addItem(subject);
+				}
+			}
+			return rtnArray;
+		}
+	]]></mx:Script>
+	<mx:NumberValidator
+		source="{formControlForMetric}" property="selectedIndex"
+		required="true" allowNegative="false"
+		trigger="{submitButton}" triggerEvent="click"
+		valid="setValue(event)"/>
+
+	<mx:HBox>
+		<mx:HBox id="labelBox" click="showForm()" useHandCursor="true"><mx:Label text="Metric:" styleName="textLink" useHandCursor="true" toolTip="Click this label to perform an action."/></mx:HBox>
+		<mx:Label id="labelField" creationComplete="coalesce(null, Label(event.currentTarget))"/>
+	</mx:HBox>
+
+	<mx:Panel id="form" title="Metric" styleName="wizardFormContainer" width="600" includeInLayout="false" visible="false">
+		<mx:FormItem label="Choose a Subject">
+			<mx:ComboBox id="formControlForSubject" dataProvider="{filterSubjects(model.subjects)}" labelField="name"/>
+		</mx:FormItem>
+		<mx:FormItem label="Choose a Metric">
+			<mx:ComboBox id="formControlForMetric" dataProvider="{formControlForSubject.selectedItem.metrics}" labelField="name"/>
+		</mx:FormItem>
+		<mx:ControlBar horizontalAlign="right">
+			<mx:Button label="Cancel" click="hideForm()"/>
+			<mx:Button label="Done" id="submitButton"/>
+		</mx:ControlBar>
+	</mx:Panel>
+</mx:Canvas>

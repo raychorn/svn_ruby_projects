@@ -1,0 +1,16 @@
+netherlands:
+  title: The Netherlands
+  subgroups:
+  - nl_amsterdam
+  - nl_utrecht
+
+nl_amsterdam:
+  title: Amsterdam
+  type: city
+  population: 741329
+
+nl_utrecht:
+  title: Utrecht
+  type: city
+  population: 283000
+

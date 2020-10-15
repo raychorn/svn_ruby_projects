@@ -1,0 +1,24 @@
+ie:
+  id: 1
+  name: Microsoft Internet Explorer
+firefox:
+  id: 2
+  name: Mozilla Firefox
+outlook:
+  id: 3
+  name: Microsoft Outlook
+msword:
+  id: 4
+  name: Microsoft Word
+bes_console:
+  id: 5
+  name: BES Console
+win_snmp:
+  id: 6
+  name: Microsoft Windows SNMP Service
+microsoft:
+  id: 7
+  name: Microsoft
+windows:
+  id: 8
+  name: Windows

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="150" height="25" 
+	borderSkin="{FXCDashedBorder}" borderStyle="dashed" backgroundColor="white" borderColor="0x4f4f47"
+	creationComplete="init()">
+	<mx:Script><![CDATA[
+		import nl.fxc.skins.FXCDashedBorder;
+		import com.bigfix.dss.vo.WidgetVO;
+		import com.bigfix.dss.model.Constants;
+		import com.bigfix.dss.model.DSSModelLocator;
+		 
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+		
+		[Bindable]
+		public var widgetData:WidgetVO;
+		
+		[Embed(source="/assets/list_icon.gif")]
+        [Bindable]
+        private var ListIcon:Class;
+		
+		[Embed(source="/assets/line_icon.png")]
+        [Bindable]
+        private var LineIcon:Class;
+
+		[Embed(source="/assets/list_icon.gif")]
+	    [Bindable]
+	    private var ColumnIcon:Class;
+        
+		private function init() :void{
+			switch (widgetData.visualization_type.id) {
+				case Constants.VISUALIZATION_TYPE_LINE:
+					widgetIcon.source=LineIcon
+					break;
+				case Constants.VISUALIZATION_TYPE_LIST:
+					widgetIcon.source=ListIcon
+					break;
+				case Constants.VISUALIZATION_TYPE_COLUMN:
+					widgetIcon.source=ColumnIcon
+			}
+		}
+		
+	]]></mx:Script>
+	<mx:Image id="widgetIcon" mouseEnabled="true" left="3" scaleContent="true" verticalCenter="0"/>
+  	<mx:Text id="widgetName" mouseEnabled="true" text="{widgetData.name}" selectable="false" horizontalCenter="0" verticalCenter="0"/>
+</mx:Canvas>

@@ -1,0 +1,10 @@
+kazaa:
+  title: KaZaA
+  applications:
+    - kazaa_2_6_4
+
+morpheus:
+  title: Morpheus
+  applications:
+    - morpheus_1_3_3
+

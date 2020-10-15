@@ -1,0 +1,27 @@
+<html>
+<head>
+	<title>Computer List Sample</title>
+	<script src="javascripts/swfobject.js"></script>
+	<style type="text/css">
+		#flashcontent {
+			height: 100%;
+		}
+	</style>
+</head>
+<body style="background-color:white">
+	<div id="flashcontent">
+		<strong>You need to upgrade your Flash Player</strong>
+	</div>
+	<script>
+		var so = new SWFObject("swfs/ComputerList.swf", "chart", "100%", "100%", "9");
+		so.addVariable("urlComputerGroups", "http://reports.mluu/computer_groups.xml");
+		so.addVariable("computerGroupID", "10");
+		so.addVariable("subjectID", "2");
+		so.addVariable("groupingType", "1");
+		so.addParam("quality", "best");
+		so.write("flashcontent");
+	</script>
+
+</body>
+</html>
+</html>

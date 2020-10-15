@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:cc="customComponents.*" xmlns:collections="customComponents.collections.*" width="100%" height="100%" creationComplete="init(event)">
+	<mx:Style source="default.css"/>
+	<mx:Style source="ComputerList.css"/>
+	<mx:Script source="ComputerList.as"/>
+	<mx:Script source="dump.as"/>
+
+	<mx:RemoteObject id="computerList" destination="ComputerList" showBusyCursor="true"/>
+	<collections:RemoteObjectCollection id="computers" filter="{computerListOptions}" remoteObject="{computerList}" listMethod="getList" countMethod="getTotalRecords" pageSize="100"/>
+	<mx:ApplicationControlBar width="100%">
+		<mx:Text text="{title}"/>
+		<mx:Spacer width="100%"/>
+		<mx:ButtonBar toolTipField="toolTip" labelField="label" itemClick="showPopUp(event.item)">
+			<mx:dataProvider>
+				<mx:Array>
+					<mx:Object label="Customize Data" layer="dataOptions" toolTip="Click here to change metrics and/or filter data"/>
+					<mx:Object label="Customize Columns" layer="columnOptions" toolTip="Click here to change columns and sorting"/>
+					<mx:Object label="Save" layer="saveOptions" toolTip="Click here to save current list for later inclusion in a custom report"/>
+					<mx:Object label="Print" layer="printOptions" toolTip="Click here to Print current list"/>
+					<mx:Object label="Help" layer="help" toolTip="Click here for instructions on using the list"/>
+				</mx:Array>
+			</mx:dataProvider>
+		</mx:ButtonBar>
+	</mx:ApplicationControlBar>
+	<mx:HDividedBox width="100%" height="100%" liveDragging="true">
+		<mx:VDividedBox width="200" height="100%" liveDragging="true">
+			<cc:GroupTree id="groupTree" width="100%" height="100%" initialComputerGroupID="{Application.application.parameters.computerGroupID}" change="handleTreeChange(event)"/>
+			<cc:ListDistribution id="listDistribution" width="100%" height="100%"/>
+		</mx:VDividedBox>
+		<mx:VBox width="100%" height="100%">
+			<mx:DataGrid id="dataGrid" dataProvider="{computers}" width="100%" height="100%">
+				<!--
+				<mx:columns>
+					<mx:DataGridColumn dataField="computer_id" headerText="ID"/>
+					<mx:DataGridColumn dataField="netbios_name" headerText="NetBIOS Name"/>
+					<mx:DataGridColumn dataField="ip_address" headerText="IP Address"/>
+				</mx:columns>
+				-->
+			</mx:DataGrid>
+		</mx:VBox>
+	</mx:HDividedBox>
+	<mx:Box id="hiddenOptionsContent" visible="false" height="0">
+		<cc:DataOptions id="dataOptions"/>
+		<cc:ColumnOptions id="columnOptions" columnSelectionChange="changeDataGridColumns(event)"/>
+	</mx:Box>
+</mx:Application>
+

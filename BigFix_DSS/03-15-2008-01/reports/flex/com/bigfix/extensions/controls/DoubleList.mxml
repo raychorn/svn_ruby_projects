@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Grid xmlns:mx="http://www.adobe.com/2006/mxml" width="375" height="200"
+         creationComplete="onCreationComplete()">
+	<mx:String id="labelField" />
+	<mx:String id="leftLabelText">Available</mx:String>
+	<mx:String id="rightLabelText">Selected</mx:String>
+	<mx:Object id="leftListDataProvider" />
+	<mx:Object id="rightListDataProvider" />
+	
+	<mx:Script>
+		<![CDATA[
+      import flash.events.Event;
+	    import mx.binding.utils.BindingUtils;
+		  import mx.events.CollectionEvent;
+		  import mx.events.DragEvent;
+		  import mx.managers.DragManager;
+		
+		  private function onCreationComplete():void {
+		    BindingUtils.bindSetter(function(v:*):void { selectionChanged() }, leftList, "selectedItems");
+		    BindingUtils.bindSetter(function(v:*):void { selectionChanged() }, rightList, "selectedItems");
+		    leftList.addEventListener(DragEvent.DRAG_OVER, this.handleDrag, false, 0, true);
+		    rightList.addEventListener(DragEvent.DRAG_OVER, this.handleDrag, false, 0, true);
+		    leftList.addEventListener(DragEvent.DRAG_ENTER, this.handleDrag, false, 0, true);
+		    rightList.addEventListener(DragEvent.DRAG_ENTER, this.handleDrag, false, 0, true);
+		    leftList.addEventListener(DragEvent.DRAG_DROP, this.handleDrag, false, 0, true);
+		    rightList.addEventListener(DragEvent.DRAG_DROP, this.handleDrag, false, 0, true);
+		    leftList.addEventListener(DragEvent.DRAG_COMPLETE, this.handleDragComplete, false, 0, true);
+		    rightList.addEventListener(DragEvent.DRAG_COMPLETE, this.handleDragComplete, false, 0, true);
+		  }
+		  
+		  private function handleDrag(event:DragEvent):void {
+		    if (event.target == event.dragInitiator)
+  		    // Reordering items doesn't make a lot of sense in our case, so prevent it.
+		      event.preventDefault();
+        else
+          // Make sure everything that happens is a "move".
+		      event.action = DragManager.MOVE;
+		  }
+
+		  private function handleDragComplete(event:DragEvent):void {
+		    // Prevent the user from dragging items into nothingness.
+		    if (event.relatedObject != leftList && event.relatedObject != rightList)
+		      event.preventDefault();
+		    
+		    event.action = DragManager.MOVE;
+				listsChanged();
+		  }
+		
+		  private function selectionChanged(event:*=null):void {
+		    shiftLeftButton.enabled = (rightList.selectedItems.length != 0);
+		    shiftRightButton.enabled = (leftList.selectedItems.length != 0);
+		  }
+		
+			private function moveItems(fromList:List, toList:List):void {
+			  var movedItems:Array = fromList.selectedItems;
+				for each (var obj:* in movedItems) {
+					toList.dataProvider.addItem(obj);
+					fromList.dataProvider.removeItemAt(fromList.dataProvider.getItemIndex(obj));
+				}
+				
+				toList.selectedItems = movedItems;
+				listsChanged();
+      }
+      
+      private function listsChanged():void {
+				dispatchEvent(new Event(Event.CHANGE));
+			}
+		]]>
+	</mx:Script>
+
+	<mx:Metadata>
+	  [Event(name='change', type='flash.events.Event')]
+	</mx:Metadata>	
+
+	<mx:GridRow>
+	  <mx:GridItem>
+	    <mx:Label text="{leftLabelText}" />
+	  </mx:GridItem>
+	  <mx:GridItem>
+	  </mx:GridItem>
+	  <mx:GridItem>
+	    <mx:Label text="{rightLabelText}" />
+	  </mx:GridItem>
+	</mx:GridRow>
+	
+	<mx:GridRow>
+	  <mx:GridItem width="150">
+    	<mx:List height="100%" width="100%" id="leftList"
+    	         dataProvider="{leftListDataProvider}" labelField="{labelField}"
+    	         allowMultipleSelection="true" dragEnabled="true"
+    	         dragMoveEnabled="true" dropEnabled="true"
+    	         change="rightList.selectedItems=[]" />
+    </mx:GridItem>
+	
+	  <mx:GridItem>
+    	<mx:VBox height="100%" width="100%">
+    		<mx:Spacer height="50%"/>
+    		<mx:Button id="shiftLeftButton" label="&lt;-" enabled="false" click="moveItems(rightList, leftList)" />
+    		<mx:Button id="shiftRightButton" label="-&gt;" enabled="false" click="moveItems(leftList, rightList)" />
+    		<mx:Spacer height="50%"/>
+    	</mx:VBox>
+    </mx:GridItem>
+	
+	  <mx:GridItem width="150">
+    	<mx:List height="100%" width="100%" id="rightList"
+    	         dataProvider="{rightListDataProvider}" labelField="{labelField}"
+    	         allowMultipleSelection="true" dragEnabled="true"
+    	         dragMoveEnabled="true" dropEnabled="true"
+    	         change="leftList.selectedItems=[]" />
+    </mx:GridItem>
+  </mx:GridRow>
+</mx:Grid>

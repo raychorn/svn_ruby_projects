@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cairngorm:ServiceLocator
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:cairngorm="http://www.adobe.com/2006/cairngorm">
+    <mx:RemoteObject id="taskRO" source="TasksController" destination="rubyamf">
+        <mx:method name="index"/>
+        <mx:method name="create"/>
+        <mx:method name="update"/>
+        <mx:method name="destroy"/>
+    </mx:RemoteObject>
+    <mx:RemoteObject id="projectRO" source="ProjectsController" destination="rubyamf">
+        <mx:method name="index"/>
+        <mx:method name="create"/>
+        <mx:method name="update"/>
+        <mx:method name="destroy"/>
+    </mx:RemoteObject>
+    <mx:RemoteObject id="locationRO" source="LocationsController" destination="rubyamf">
+        <mx:method name="index"/>
+        <mx:method name="create"/>
+        <mx:method name="update"/>
+        <mx:method name="destroy"/>
+    </mx:RemoteObject>
+    <mx:RemoteObject id="noteRO" source="NotesController" destination="rubyamf">
+        <mx:method name="show"/>
+        <mx:method name="update"/>
+    </mx:RemoteObject>
+    <mx:Script>
+    	<![CDATA[
+    		import HAL.utils.URLUtils;
+    		import mx.messaging.channels.AMFChannel;
+    		import mx.rpc.events.InvokeEvent;
+		    import com.pomodo.util.CairngormUtils;
+    		
+    		private function modifyEndPoint(ro:RemoteObject):void {
+    			var i:int;
+    			var amfChannel:AMFChannel;
+    			var appDomain:String = URLUtils.domain(CairngormUtils.parentApp.url).toLowerCase();
+    			var amfDomain:String;
+    			var newAMF:AMFChannel;
+    			if ( (appDomain is String) && (appDomain.length > 0) ) {
+    				try {
+		    			for (i = 0; i < ro.channelSet.channels.length; i++) {
+		    				amfChannel = ro.channelSet.channels[i];
+		    				amfDomain = URLUtils.domain(amfChannel.endpoint).toLowerCase();
+		    				if (amfDomain != appDomain) {
+		    					newAMF = new AMFChannel(amfChannel.id,amfChannel.endpoint.replace(amfDomain,appDomain));
+		    					ro.channelSet.channels[i] = newAMF;
+		    				}
+		    			}
+    				} catch (err:Error) { }
+    			}
+    		}
+
+			public function modifyEndPoints():void {
+				this.modifyEndPoint(this.locationRO);
+				this.modifyEndPoint(this.noteRO);
+				this.modifyEndPoint(this.projectRO);
+				this.modifyEndPoint(this.taskRO);
+			}
+    	]]>
+    </mx:Script>
+</cairngorm:ServiceLocator>

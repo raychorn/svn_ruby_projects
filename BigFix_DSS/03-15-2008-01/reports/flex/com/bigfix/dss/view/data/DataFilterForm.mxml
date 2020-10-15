@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
+	width="100%" height="100%"
+	creationComplete="init()">
+	<mx:Metadata>
+	  [Event('change', 'flash.events.Event')]
+	</mx:Metadata>
+	
+	<mx:Script><![CDATA[
+		import mx.controls.Alert;
+		import mx.controls.Button;
+		import mx.controls.Spacer;
+		import mx.containers.HBox;
+		import mx.collections.ArrayCollection;
+		import mx.events.FlexEvent;
+
+		import com.bigfix.dss.view.data.Criterion;
+		import com.bigfix.dss.vo.DataFilterVO;
+
+		private function init():void {
+		}
+
+		private var _properties:ArrayCollection;
+		public function set properties(value:ArrayCollection):void {
+			// remove all children
+			while (this.numChildren) {
+				this.removeChildAt(0);
+			}
+			_properties = value;
+			addCriterionRow(null)
+		}
+		public function get properties():ArrayCollection {
+			return _properties;
+		}
+		
+		public function reset():void {
+		  this.properties = _properties;
+		}
+		
+		private function criterionChanged(event:Event):void {
+		  dispatchEvent(new Event(Event.CHANGE));
+		}
+
+		private function addCriterionRow(event:FlexEvent):Criterion {
+			// instantiate our row
+			var criterionRow:HBox = new HBox();
+			criterionRow.percentWidth = 100;
+			criterionRow.name = "criterionRow";
+			// add the Criteria
+			var criterion:Criterion = new Criterion();
+			criterion.name = "criterion";
+			criterion.properties = this.properties;
+			// Propagate the change event to the parent.
+			criterion.addEventListener(Event.CHANGE, criterionChanged, false, 0, true);
+			criterionRow.addChild(criterion);
+			// add a spacer to make the buttons go to the right
+			var spacer:Spacer = new Spacer();
+			spacer.percentWidth = 100;
+			criterionRow.addChild(spacer);
+			// add the plus button
+			var plusButton:Button = plusButton();
+			plusButton.addEventListener(FlexEvent.BUTTON_DOWN, addCriterionRow, false, 0, true);
+			criterionRow.addChild(plusButton);
+			// add the minus button
+			var minusButton:Button = minusButton();
+			minusButton.addEventListener(FlexEvent.BUTTON_DOWN, removeCriterionRow, false, 0, true);
+			criterionRow.addChild(minusButton);
+			// add the row
+			this.addChild(criterionRow);
+			adjustAddRemoveOptions();
+			
+			return criterion;
+		}
+
+		private function removeCriterionRow(event:FlexEvent):void {
+			// yes, this path is horrible...
+			event.currentTarget.parent.parent.removeChild(event.currentTarget.parent);
+			adjustAddRemoveOptions();
+			criterionChanged(event);
+		}
+
+		private function adjustAddRemoveOptions():void {
+			// remove the plus sign on all, show the minus sign on all
+			for (var i:int = 0; i < this.numChildren; i++) {
+				var criterionRow:HBox = HBox(this.getChildAt(i));
+				// the plus sign is always visible on the last child
+				Button(criterionRow.getChildByName('plusButton')).visible = (i == this.numChildren - 1);
+				// if there is only one option, remove the minus sign
+				Button(criterionRow.getChildByName('minusButton')).visible = !(this.numChildren == 1);
+			}
+		}
+
+		private function plusButton():Button {
+			var button:Button = new Button();
+			button.name = 'plusButton';
+			button.width = 22;
+			button.toolTip = 'Add additional Criteria';
+			button.label = "+";
+			button.styleName = 'plusButton';
+			return button;
+		}
+
+		private function minusButton():Button {
+			var button:Button = new Button();
+			button.name = 'minusButton';
+			button.width = 22;
+			button.toolTip = 'Remove this Criteria';
+			button.label = "-";
+			button.styleName = 'minusButton';
+			return button;
+		}
+		
+		public function setDataFilters(filters:ArrayCollection):void
+		{
+		  // Remove all controls.
+		  while (numChildren)
+		    removeChildAt(0);
+		    
+		  if (filters.length == 0) {
+		    addCriterionRow(null);
+		  }
+		  else {
+		    for each (var filter:* in filters) {
+		      var criterion:Criterion = addCriterionRow(null);
+		      
+		      criterion.setDataFilter(filter);
+		    }
+		  }
+		  
+		  adjustAddRemoveOptions();
+		}
+
+		public function collectDataFilters():ArrayCollection {
+			var rtnArrayCollection:ArrayCollection = new ArrayCollection();
+			for (var i:int = 0; i < this.numChildren; i++) {
+				if (HBox(this.getChildAt(i)).name == "criterionRow") {
+				  var dataFilter:DataFilterVO;
+				  
+				  dataFilter = Criterion(HBox(this.getChildAt(i)).getChildByName('criterion')).collectDataFilter();
+				  
+				  if (dataFilter != null)
+				    rtnArrayCollection.addItem(dataFilter);
+				}
+			}
+			return rtnArrayCollection;
+		}
+
+	]]></mx:Script>
+</mx:VBox>

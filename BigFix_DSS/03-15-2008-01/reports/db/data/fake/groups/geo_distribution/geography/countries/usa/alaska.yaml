@@ -1,0 +1,22 @@
+alaska:
+  title: Alaska
+  subgroups:
+  - alaska_anchorage
+  - alaska_fairbanks
+  - alaska_juneau_city_and
+
+alaska_anchorage:
+  title: Anchorage
+  type: city
+  population: 274067
+
+alaska_fairbanks:
+  title: Fairbanks
+  type: city
+  population: 31348
+
+alaska_juneau_city_and:
+  title: Juneau city and
+  type: city
+  population: 31111
+

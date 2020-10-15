@@ -1,0 +1,52 @@
+new_hampshire:
+  title: New Hampshire
+  subgroups:
+  - new_hampshire_concord
+  - new_hampshire_dover
+  - new_hampshire_keene
+  - new_hampshire_laconia
+  - new_hampshire_manchester
+  - new_hampshire_nashua
+  - new_hampshire_portsmouth
+  - new_hampshire_rochester
+
+new_hampshire_concord:
+  title: Concord
+  type: city
+  population: 42174
+
+new_hampshire_dover:
+  title: Dover
+  type: city
+  population: 28512
+
+new_hampshire_keene:
+  title: Keene
+  type: city
+  population: 22810
+
+new_hampshire_laconia:
+  title: Laconia
+  type: city
+  population: 17131
+
+new_hampshire_manchester:
+  title: Manchester
+  type: city
+  population: 109150
+
+new_hampshire_nashua:
+  title: Nashua
+  type: city
+  population: 87369
+
+new_hampshire_portsmouth:
+  title: Portsmouth
+  type: city
+  population: 20780
+
+new_hampshire_rochester:
+  title: Rochester
+  type: city
+  population: 29721
+

@@ -1,0 +1,16 @@
+How to install NVD vulns/apps:
+
+Step 1: Install the nvd dictionary apps.
+
+> ../../../../script/runner load_nvd_dictionary.rb nvd_dictionary.txt > nvd_dict.sql
+> mysql reports_developmernt < nvd_dict.sql
+
+Step 2: Crunch the nvd database.
+
+> ../../../../script/runner parse.rb nvdcve-200*
+
+Step 3: Load the tables into the DB.
+
+> mysql reports_development < vulns.sql
+> mysql reports_development < vuln_advisories.sql
+> mysql reports_development < apps_vulns.sql

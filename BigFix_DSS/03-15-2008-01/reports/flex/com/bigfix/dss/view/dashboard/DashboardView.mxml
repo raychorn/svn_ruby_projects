@@ -1,0 +1,700 @@
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:bfcontrols="com.bigfix.extensions.controls.*"
+	xmlns:dashboard="com.bigfix.dss.view.dashboard.*"
+	xmlns:bfstates="com.bigfix.extensions.states.*"
+	xmlns:buttons="com.bigfix.dss.view.general.buttons.*"
+	xmlns:advancedtree="sjd.controls.*"
+	xmlns:busy="com.bigfix.dss.view.general.Busy.*"
+	width="100%" height="100%"
+	verticalGap="0" paddingTop="10"
+	creationComplete="init()"
+	>
+	<mx:Script><![CDATA[
+		import com.bigfix.dss.util.HashUtils;
+		import com.bigfix.dss.vo.DashboardHierarchyVO;
+		import com.bigfix.extensions.controls.advancetree.events.DragMoveCompletedEvent;
+		import mx.events.DragEvent;
+		import com.bigfix.dss.vo.FolderVO;
+		import com.bigfix.dss.vo.WebOrbResultVO;
+		import mx.rpc.events.ResultEvent;
+		import mx.rpc.events.FaultEvent;
+		import com.bigfix.dss.weborb.RemoteWebOrbObject;
+		import mx.events.ListEvent;
+		import com.bigfix.dss.util.Misc;
+		import com.bigfix.dss.view.general.buttons.events.ClickPDFButtonEvent;
+		import com.bigfix.dss.view.general.Alert.AlertPopUp;
+		import com.bigfix.dss.util.ArrayCollectionUtils;
+		import mx.controls.TextInput;
+		import com.bigfix.extensions.controls.events.ClosedDashboardTabEvent;
+		import mx.collections.ArrayCollection;
+		import mx.controls.Alert;
+		import mx.binding.utils.ChangeWatcher;
+		import mx.binding.utils.BindingUtils;
+		import mx.events.PropertyChangeEvent;
+		import mx.events.FlexEvent;
+		import mx.events.PropertyChangeEvent;
+		import mx.events.IndexChangedEvent;
+		import mx.managers.PopUpManager;
+		import flexlib.controls.SuperTabBar;
+		import flexlib.controls.tabBarClasses.SuperTab;
+		import flexlib.events.TabReorderEvent;
+		import mx.rpc.remoting.mxml.RemoteObject;
+		import com.bigfix.dss.command.GetReportsCommand;
+		
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.util.WatcherManager;
+		import com.bigfix.dss.command.GetDashboardsCommand;
+		import com.bigfix.dss.command.MoveDashboardCommand;
+		import com.bigfix.dss.command.SaveDashboardCommand;
+		import com.bigfix.dss.command.RenameDashboardCommand;
+		import com.bigfix.dss.command.GetDashboardLayoutsCommand;
+		import com.bigfix.dss.view.dashboard.Dashboard;
+		import com.bigfix.dss.view.dashboard.WidgetCreation;
+		import com.bigfix.dss.view.general.PopUpTextPrompt;
+		import com.bigfix.dss.vo.DashboardVO;
+		import com.bigfix.extensions.core.DeferredInstance;
+		
+		import com.bigfix.extensions.controls.DashboardSuperTabBar;
+		
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+
+		[Bindable]
+		private var watcherManager:WatcherManager = new WatcherManager();
+
+		private var _dashboardNamePopUp:PopUpTextPrompt;
+		
+		private const tooltipAdvanceTree:String = "Use the context menu to Edit or Delete Dashboard items.";
+		private const tooltipAdvanceTree2:String = " Select an item from the tree view before using the context menu.";
+
+		private var _weborbObj:RemoteWebOrbObject;
+		
+		private var _dashboard_list_updated:Boolean = true;
+		
+		private var _draggedItem:*;
+		
+		public static const const_placeholder_symbol:String = "placeholder";
+
+		/*
+		[Bindable]		
+		public var dashboards:XML =
+				<root>
+					<folder title="Test1" code="100" isBranch="true"/>
+				    <folder title="Finance" code="200" isBranch="true">
+				        <dashboard name="John HcccccccccccccccccccccccccccccccccccccccccccG" />
+				        <dashboard name="Sam K" />
+						<folder title="Sub Finance" code="310" isBranch="true">
+					       <dashboard name="John M 0" />
+					       <dashboard name="Sam B 0aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaG" />
+					       <dashboard name="Sam K 0" />
+					     </folder>
+				    </folder>
+				    <folder title="Engineering" code="300" isBranch="true">
+				       <dashboard name="Erin M" />
+				       <dashboard name="Ann B" />
+				       <folder title="Sub Engineering" code="310" isBranch="true">
+					       <dashboard name="Erin M 2" />
+					       <dashboard name="Ann B 2" />
+					       <dashboard name="Sam K 2bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbG" />
+					       <dashboard name="John H 2" />
+					       <dashboard name="Erin M 3" />
+					       <dashboard name="Ann B 3" />
+					       <dashboard name="Sam K 3" />
+					       <dashboard name="John H 3" />
+					    </folder>
+				    </folder>
+				    <folder title="HR" code="400" isBranch="true"/>
+				    <folder title="Operations" code="500" isBranch="true" >
+				    	<dashboard name="Ann B 4" />
+				    </folder>
+				</root>;
+		*/
+
+		[Bindable]		
+		public var dashboards:XML =
+			<root>
+				<dashboard id="86" name="dash1a" />
+				<dashboard id="240" name="dash2" />
+				<dashboard id="241" name="dash1" />
+				<dashboard id="242" name="dash4" />
+				<dashboard id="243" name="dash5" />
+				<dashboard id="244" name="dash6" />
+				<dashboard id="245" name="dash7" />
+				<dashboard id="246" name="dash8" />
+			</root>;
+
+		private function treeLabel( item:Object ) : String{
+			var node:XML = XML(item);
+			if (node.localName().toLowerCase() == "folder") {
+				return node.@name;
+			} else { 
+				return node.@name;
+			}
+		}
+		
+		private function xmlModel():XMLDocument {
+			var xmlDoc:String = "<root>";
+			var maxWidth:Number = -65535;
+			var folderVO:FolderVO;
+			var folderXMLHash:Object = {};
+			var hierarchyVO:DashboardHierarchyVO;
+			var dashBoardVO:DashboardVO;
+			var foldersInHierarchies:Array = [];
+			var parentedDashboards:Array = []
+			var parentedDashboardsAC:ArrayCollection;
+			var k:int;
+			var _f:int;
+			var ii:int;
+			
+			function folderIntoXML(folderVO:FolderVO):void {
+				var df:Array;
+				var kk:int;
+				var db:DashboardVO;
+				var nodeContent:String = "";
+
+				if (model.dashboard_folders != null) {
+					df = model.dashboard_folders[folderVO.id];
+				}
+				if ( (df != null) && (df is Array) && (df.length > 0) ) {
+					for (kk = 0; kk < df.length; kk++) {
+						ii = ArrayCollectionUtils.findIndexOfItem(model.dashboards, "id", df[kk].dashboard_id.toString());
+						if (ii > -1) {
+							db = DashboardVO(model.dashboards.getItemAt(ii));
+							nodeContent += '<dashboard id="' + db.id + '" name="' + db.name + '" />';
+							parentedDashboards.push(db);
+						}
+					}
+				} else {
+					nodeContent += '<empty name="' + const_placeholder_symbol + '"/>';
+				}
+				folderXMLHash[folderVO.id] = '<folder id="' + folderVO.id + '" name="' + folderVO.name + '" user_id="' + folderVO.user_id + '">' + nodeContent + '</folder>'; 
+			}
+			
+			if ( (this.model.folders != null) && (this.model.folders is ArrayCollection)
+				&& (this.model.dashboard_folders != null) 
+				&& (this.model.dashboard_hierarchies != null) 
+			) {
+				for (k = this.model.dashboard_hierarchies.length - 1; k > -1 ; k--) {
+					hierarchyVO = this.model.dashboard_hierarchies[k];
+					if (hierarchyVO != null) {
+						_f = ArrayCollectionUtils.findIndexOfItem(this.model.folders, "id", hierarchyVO.folder_id.toString());
+						if (_f > -1) {
+							folderVO = FolderVO(this.model.folders.getItemAt(_f));
+							folderIntoXML(folderVO);
+							foldersInHierarchies.push(folderVO);
+						}
+					}
+				}
+				// Which folders are not in any hierarchies ?
+				var foldersNotInHierarchies:Array = [];
+				for (var n:int = 0; n < this.model.folders.length; n++) {
+					folderVO = FolderVO(this.model.folders.getItemAt(n));
+					if ( (folderVO) && (foldersInHierarchies.indexOf(folderVO) == -1) ) {
+						foldersNotInHierarchies.push(folderVO);
+					}
+				}
+				for (n = 0; n < foldersNotInHierarchies.length; n++) {
+					folderVO = FolderVO(foldersNotInHierarchies[n]);
+					folderIntoXML(folderVO);
+				}
+				var xmlNode:String = "";
+				var parentXMLNode:XML;
+				var parents:ArrayCollection;
+				for (k = this.model.dashboard_hierarchies.length - 1; k > -1 ; k--) {
+					hierarchyVO = this.model.dashboard_hierarchies[k];
+					if (hierarchyVO != null) {
+						xmlNode = folderXMLHash[hierarchyVO.folder_id];
+						parents = HashUtils.findItemsMatching(this.model.dashboard_hierarchies, "folder_id", hierarchyVO.parent_id.toString());
+						if (parents.length == 1) {
+							var aParent:DashboardHierarchyVO = parents[0];
+							parentXMLNode = XML(folderXMLHash[aParent.folder_id]);
+							this.removePlaceholderFrom(parentXMLNode);
+							parentXMLNode.appendChild(xmlNode);
+							folderXMLHash[aParent.folder_id] = parentXMLNode;
+							folderXMLHash[hierarchyVO.folder_id] = null;
+						} else {
+							xmlDoc += xmlNode;
+							folderXMLHash[hierarchyVO.folder_id] = null;
+						}
+					}
+				}
+				for (var key:* in folderXMLHash) {
+					xmlNode = folderXMLHash[key];
+					if (xmlNode != null) {
+						xmlDoc += xmlNode;
+					} 
+				}
+			}
+			if ( (this.model.dashboards != null) && (this.model.dashboards is ArrayCollection) ) {
+				parentedDashboardsAC = new ArrayCollection(parentedDashboards);
+				for (var i:int = 0; i < this.model.dashboards.length; i++) {
+					dashBoardVO = DashboardVO(this.model.dashboards.getItemAt(i));
+					ii = ArrayCollectionUtils.findIndexOfItem(parentedDashboardsAC, "id", dashBoardVO.id.toString());
+					if (ii == -1) {
+						xmlDoc += '<dashboard id="' + dashBoardVO.id + '" name="' + dashBoardVO.name + '" />';
+						var m:TextLineMetrics = Misc.computeTextMetricsForString(dashBoardVO.name);
+						maxWidth = Math.max(m.width, maxWidth)
+					}
+				}
+			}
+			xmlDoc += "</root>";
+			var dBox:* = this.dashboardContainer.getDividerAt(0);
+			dBox.x = this.tabsTree.width;
+	//		this.tabsTree.minWidth = (maxWidth * 1.5);
+			var doc:XMLDocument = new XMLDocument(xmlDoc)
+			return doc;
+		}
+
+		private function init():void {
+			watcherManager.manage(BindingUtils.bindProperty(this, 'currentState', model, 'dashboardViewState'));
+			watcherManager.manage(ChangeWatcher.watch(model, 'dashboards', syncViewStackToModelDashboard));
+			watcherManager.manage(ChangeWatcher.watch(model, 'folders', syncViewStackToModelDashboard));
+			watcherManager.manage(ChangeWatcher.watch(model, 'dashboard_folders', syncViewStackToModelDashboard));
+			watcherManager.manage(ChangeWatcher.watch(model, 'dashboard_hierarchies', syncViewStackToModelDashboard));
+			dashboardViewStack.addEventListener(IndexChangedEvent.CHANGE, syncModelCurrentDashboard);
+			this.addEventListener(FlexEvent.REMOVE, _destruct, false, 0, true);
+			new GetDashboardsCommand().execute(null);
+			new GetDashboardLayoutsCommand().execute(null);
+		}
+		
+		private function _destruct(event:FlexEvent):void {
+			watcherManager.removeAll();
+			this.model = null;
+			this.removeEventListener(FlexEvent.REMOVE, _destruct);
+		}
+		
+		private function syncViewStackToModelDashboard(event:Event):void{
+			for each (var dashboard:DashboardVO in model.dashboards){
+				var dashboardToAdd:Dashboard = new Dashboard();
+				dashboardToAdd.dashboardData = dashboard;
+				dashboardViewStack.addChild(dashboardToAdd);
+			}
+			refreshDashboardButtonState();
+			syncModelCurrentDashboard();
+			if (this._dashboard_list_updated == true) {
+				this.tabsTree.dataProvider = this.xmlModel();
+				this._dashboard_list_updated = false;
+			}
+		}
+		
+		private function syncModelCurrentDashboard(event:Event=null):void{
+			trace("syncModelCurrentDashboard");
+			if(dashboardViewStack.selectedChild != null){
+				model.currentDashboard = Dashboard(dashboardViewStack.selectedChild).dashboardData;
+				if(currentState=='EditLayout'){
+					dashboardLayoutSidebar.setSelection();
+				}
+			}
+			else {
+				model.currentDashboard = null;
+				if(currentState=='EditLayout'){
+					layoutButton.selected=false;
+					currentState='Main';
+				}
+			}
+		}
+		
+		private function onKeyUpTextPromptTextField(event:KeyboardEvent):void {
+			var textField:TextInput = TextInput(event.currentTarget);
+			var name:String = textField.text;
+			var views:ArrayCollection = new ArrayCollection(this.dashboardViewStack.getChildren());
+			var i:int = ArrayCollectionUtils.findIndexOfItem(views, "label", name);
+			this._dashboardNamePopUp.TextField.errorString = ((i > -1) ? "The Dashboard Name must be unique." : "");
+			this._dashboardNamePopUp.refreshOkButtonState();
+		}
+		
+		private function onCreationCompletePopUpTextPrompt(event:FlexEvent):void {
+			this._dashboardNamePopUp = PopUpTextPrompt(event.currentTarget);
+			this._dashboardNamePopUp.TextField.addEventListener(KeyboardEvent.KEY_UP, onKeyUpTextPromptTextField);
+		}
+		
+		private function addDashboard():void {
+			
+			var popUp:PopUpTextPrompt = new PopUpTextPrompt;
+			popUp.prompt = "Enter Dashboard Name:";
+			popUp.text = PopUpTextPrompt.const_Untitled_symbol;
+			popUp.okHandler = function (newName:String):void {
+				var dashboard_to_add:DashboardVO = new DashboardVO();
+				dashboard_to_add.user_id = model.user.id;
+/*###*/			dashboard_to_add.dashboard_layout_id = 1;		//this should be smarter
+				dashboard_to_add.name = newName;
+				dashboard_to_add.position = dashboardViewStack.numChildren+1;	//pos in database starts from 1
+				var saveCommand:SaveDashboardCommand = new SaveDashboardCommand();
+				saveCommand.dashboard=dashboard_to_add;
+				saveCommand.resultHandler = function (data:Object) :void{
+					if (data.success){
+						var dashboard_to_add:Dashboard = new Dashboard();
+						dashboard_to_add.dashboardData = data.dashboard_saved;
+						if (data.dashboard_saved.position-1 < dashboardViewStack.numChildren) {
+							dashboardViewStack.addChildAt(dashboard_to_add, data.dashboard_saved.position-1);
+						} else {
+							dashboardViewStack.addChild(dashboard_to_add);
+						}
+						this._dashboard_list_updated = true;
+						 //pos in database starts from 1
+						dashboardViewStack.selectedIndex = data.dashboard_saved.position-1;
+						refreshDashboardButtonState();
+						if (dashboardViewStack.numChildren == 1) {
+							syncModelCurrentDashboard();
+						}
+					} else {
+						AlertPopUp.error("Unable to Add Dashboard: " + data.errors);
+					}
+				}
+				saveCommand.execute(null);
+			}
+			PopUpManager.addPopUp(popUp, addDashboardLink, false);
+			popUp.x = addDashboardLink.x;
+			popUp.y = addDashboardLink.y + popUp.height + 20;
+			popUp.addEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompletePopUpTextPrompt);
+		}
+		
+		private function realignDividers():void {
+			var i:int;
+			var d1:* = dashboardContainer.getDividerAt(0);
+			var d2:* = dashboardContainer.getDividerAt(dashboardContainer.numDividers - 1);
+			if (dashboardContainer.numDividers > 1) {
+				d1.x = 250;
+				d2.x = this.width - d1.x; 
+			}
+		}
+		
+		private function toggleWidgetLibrarySidebar(event:Event):void {
+			if (event.target.selected) {
+				if(dashboardViewStack.selectedChild != null){
+					layoutButton.selected=false;
+					model.dashboardViewState = 'AddWidgets';
+					this.realignDividers();
+				} else {
+					widgetButton.selected=false;
+					AlertPopUp.error("You must first select a Dashboard.");
+				}
+			} else {
+				model.dashboardViewState = 'Main';
+			}
+		}
+		
+		private function toggleLayout(event:Event):void {
+			if (event.target.selected) {
+				if(dashboardViewStack.selectedChild != null){
+					widgetButton.selected=false;
+					model.dashboardViewState = 'EditLayout';
+					dashboardLayoutSidebar.setSelection();
+					this.realignDividers();
+				} else {
+					layoutButton.selected=false;
+					AlertPopUp.error("You must first select a Dashboard.");
+				}
+			} else {
+				model.dashboardViewState = 'Main';
+			}
+		}
+
+		private function refreshDashboardButtonState():void {
+			this.layoutButton.enabled = (dashboardViewStack.selectedChild != null);
+			this.widgetButton.enabled = (dashboardViewStack.selectedChild != null);
+		}
+		
+		private function onCreationCompleteDashboardViewStack():void {
+			this.refreshDashboardButtonState();
+		}
+		
+		private function onClickPDFButton(event:ClickPDFButtonEvent):void {
+	//		if (this.dashboardTabBar.selectedIndex > -1) {
+	//			var vs:ViewStack = ViewStack(this.dashboardTabBar.dataProvider);
+	//			var db:Dashboard = Dashboard(vs.getChildAt(this.dashboardTabBar.selectedIndex));
+	//			AlertPopUp.info("db.label=" + db.label, "onClickPDFButton");
+	//		}
+		}
+		
+		private function onResultWebOrb(event:ResultEvent, _vo:*):void {
+			var ar:Array;
+			if (_vo != null) {
+				var vo:WebOrbResultVO = WebOrbResultVO(_vo);
+				if (vo.info == "DashboardFolderService::insertDashboardFolder") {
+					this._dashboard_list_updated = true;
+					new GetDashboardsCommand().execute(null);
+				} else if (vo.info  == "DashboardFolderService::updateDashboardFolder") {
+					this._dashboard_list_updated = true;
+				} else if (vo.info  == "DashboardFolderService::reparentDashboardFolder") {
+					this._dashboard_list_updated = true;
+				}
+			}
+		}
+		
+		private function onFaultWebOrb(event:FaultEvent):void {
+			AlertPopUp.error(event.fault.toString(),"WebOrb Fault");
+		}
+			
+		private function renameDashboard(node:XML, oldName:String, index:int):void {
+			var popUp:PopUpTextPrompt = new PopUpTextPrompt;
+			popUp.prompt = "Enter Name:";
+			popUp.text = oldName;
+			popUp.unAllowedValue = oldName;
+			popUp.okHandler = function (newName:String):void {
+					var renameCommand:RenameDashboardCommand = new RenameDashboardCommand();
+					renameCommand.new_name= newName;
+					renameCommand.position = index + 1;	//pos in database starts from 1
+					renameCommand.resultHandler = function (data:Object) :void{
+						if (data.success){
+							node.@name = newName;
+						} else {
+							AlertPopUp.error("Unable to Rename Dashboard. Reason: " + data.errors);
+						}
+					}
+					renameCommand.execute(null);
+			}
+			
+			PopUpManager.addPopUp(popUp, DisplayObject(this), false);
+			popUp.x = this.tabsTree.width + 10;
+			popUp.y = this.y + popUp.height - 20;
+			popUp.addEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompletePopUpTextPrompt);
+		}
+		
+		private function getDashboardFolderName(i:int):void {
+			var popUp:PopUpTextPrompt = new PopUpTextPrompt;
+			popUp.prompt = "Enter Folder Name:";
+			popUp.text = "";
+			popUp.unAllowedValue = "";
+			popUp.okHandler = function (newName:String):void {
+				var folder_id:int = -1;
+				if (isSelectedTreeItemFolder()) {
+					var aNode:XML = XML(tabsTree.selectedItem);
+					folder_id = aNode.@id;
+				}
+				_weborbObj = new RemoteWebOrbObject("DashboardFolderService", "insertDashboardFolder", busy, onResultWebOrb, onFaultWebOrb);
+				var svc:RemoteObject = GetReportsCommand.svc.svc;
+				_weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+				_weborbObj.doWebOrbServiceCall(model.user.id, i, newName, folder_id);
+			}
+			
+			PopUpManager.addPopUp(popUp, DisplayObject(this), false);
+			popUp.x = this.tabsTree.width + 10;
+			popUp.y = this.y + popUp.height - 20;
+			popUp.addEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompletePopUpTextPrompt);
+		}
+		
+		private function renameDashboardFolderName(i:int, oldName:String):void {
+			var popUp:PopUpTextPrompt = new PopUpTextPrompt;
+			popUp.prompt = "Enter Folder Name:";
+			popUp.text = oldName;
+			popUp.unAllowedValue = oldName;
+			popUp.okHandler = function (newName:String):void {
+				// +++
+				var folder_id:int = -1;
+				if (isSelectedTreeItemFolder()) {
+					var aNode:XML = XML(tabsTree.selectedItem);
+					folder_id = aNode.@id;
+				}
+				_weborbObj = new RemoteWebOrbObject("DashboardFolderService", "updateDashboardFolder", busy, onResultWebOrb, onFaultWebOrb);
+				var svc:RemoteObject = GetReportsCommand.svc.svc;
+				_weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+				_weborbObj.doWebOrbServiceCall(model.user.id, i, newName, folder_id);
+			}
+			
+			PopUpManager.addPopUp(popUp, DisplayObject(this), false);
+			popUp.x = this.tabsTree.width + 10;
+			popUp.y = this.y + popUp.height - 20;
+			popUp.addEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompletePopUpTextPrompt);
+		}
+		
+		private function onCreationCompletePDFButtonCanvas():void {
+			this.canvas_PDFButton.addEventListener(ClickPDFButtonEvent.TYPE_CLICK_PDF_BUTTON, onClickPDFButton);
+		}
+
+		private function onContextMenuEditDashboard(event:ContextMenuEvent):void {
+			var tree:AdvanceTree = AdvanceTree(event.contextMenuOwner);
+			var node:XML = XML(tree.selectedItem);
+			var name:String = node.@name;
+			if (name.length > 0) {
+				this.renameDashboard(node, name, tree.selectedIndex);
+			} else {
+				AlertPopUp.info("Unable to edit an item unless an item has been selected.  Click on the item to make a selection.", "");
+			}
+		}
+		
+		private function onContextMenuAddDashboard(event:ContextMenuEvent):void {
+			this.addDashboard();
+		}
+		
+		private function onContextMenuInsertDashboardFolder(event:ContextMenuEvent):void {
+			this.getDashboardFolderName(this.tabsTree.selectedIndex);
+		}
+		
+		private function onContextMenuEditDashboardFolder(event:ContextMenuEvent):void {
+			AlertPopUp.info("Not yet implemented.", "onContextMenuEditDashboardFolder");
+		}
+
+		private function getSelectedTreeItem():XML {
+			return XML(this.tabsTree.selectedItem);
+		}
+		
+		private function isSelectedTreeItemFolder():Boolean {
+			var node:XML = this.getSelectedTreeItem();
+			return (String(node.name()).toLowerCase() == 'folder');
+		}
+		
+		private function getContextMenu(isItemSelected:Boolean = false):ContextMenu {
+			var item:ContextMenuItem;
+
+			var menu:ContextMenu = new ContextMenu();
+			
+			menu.customItems = [];
+
+			var isFolder:Boolean = false;
+			var i:int = this.tabsTree.selectedIndex;
+			if (i > -1) {
+				isFolder = this.isSelectedTreeItemFolder();
+			}
+			
+			item = new ContextMenuItem("Insert Dashboard Folder");
+			item.separatorBefore = true;
+			item.addEventListener( ContextMenuEvent.MENU_ITEM_SELECT, onContextMenuInsertDashboardFolder);
+			menu.customItems.push( item);
+			
+			if (isFolder) {
+				item = new ContextMenuItem("Edit Dashboard Folder Name");
+				item.separatorBefore = false;
+				item.addEventListener( ContextMenuEvent.MENU_ITEM_SELECT, onContextMenuEditDashboardFolder);
+				menu.customItems.push( item);
+			} else {
+				if (isItemSelected) {
+					item = new ContextMenuItem("Edit Dashboard Name");
+					item.separatorBefore = false;
+					item.addEventListener( ContextMenuEvent.MENU_ITEM_SELECT, onContextMenuEditDashboard);
+					menu.customItems.push( item);
+				}
+			}
+
+			item = new ContextMenuItem("Add Dashboard");
+			item.separatorBefore = false;
+			item.addEventListener( ContextMenuEvent.MENU_ITEM_SELECT, onContextMenuAddDashboard);
+			menu.customItems.push( item);
+
+			menu.hideBuiltInItems();
+
+			return menu;
+		}
+		
+		private function isThisItemPlaceholder(node:XML):Boolean {
+			return (node.@name.toString().toLowerCase() == const_placeholder_symbol);
+		}
+		
+		private function isSelectedItemPlaceholder():Boolean {
+			return this.isThisItemPlaceholder(this.getSelectedTreeItem());
+		}
+		
+		private function removePlaceholderFrom(node:XML):void {
+			var children:XMLList = node.children();
+			for (var i:int = 0; i < children.length(); i++) {
+				node = children[i];
+				if (this.isThisItemPlaceholder(node)) {
+					delete children[i];
+				}
+			}
+		}
+		
+		private function onDragMoveCompleted(event:DragMoveCompletedEvent):void {
+			var node:XML;
+			var destNode:XML = event.destNode;
+			var sourceNode:XML = event.sourceNode;
+			this.removePlaceholderFrom(destNode);
+
+			_weborbObj = new RemoteWebOrbObject("DashboardFolderService", "reparentDashboardFolder", busy, onResultWebOrb, onFaultWebOrb);
+			var svc:RemoteObject = GetReportsCommand.svc.svc;
+			_weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+			_weborbObj.doWebOrbServiceCall(destNode, sourceNode, sourceNode.localName());
+		}
+		
+		private function onCreationCompleteAdvanceTree():void {
+			this.tabsTree.contextMenu = this.getContextMenu();
+			this.tabsTree.addEventListener(DragMoveCompletedEvent.TYPE_DRAG_MOVE_COMPLETED, onDragMoveCompleted);
+		}
+		// +++
+		private function onChangeAdvanceTree(event:ListEvent):void {
+			var i:int = this.tabsTree.selectedIndex;
+			var isFolder:Boolean = this.isSelectedTreeItemFolder();
+			var aNode:XML = this.getSelectedTreeItem();
+			if (this.isThisItemPlaceholder(aNode) == false) {
+				var views:Array = this.dashboardViewStack.getChildren();
+				var _f:int = ArrayCollectionUtils.findIndexOfItem(views, "label", aNode.@name);
+				if (_f > -1) {
+					this.dashboardViewStack.selectedIndex = _f;
+				}
+			}
+			this.canvas_PDFButton.enabled = ( (isFolder != true) && (this.isSelectedItemPlaceholder() != true) );
+			this.tabsTree.contextMenu = this.getContextMenu(i > -1);
+			this.tabsTree.toolTip = ((i > -1) ? this.tooltipAdvanceTree : this.tooltipAdvanceTree + this.tooltipAdvanceTree2);
+		}
+		
+	]]></mx:Script>
+	<mx:states>
+		<mx:State name="Main">
+			<mx:AddChild>
+				<mx:Canvas width="100%">
+					<mx:HRule width="100%" y="{dashboardTabBarStrip.height - 2}"/>
+					<mx:HBox styleName="dashboardTabs" id="dashboardTabBarStrip" verticalAlign="middle" minHeight="22" left="0" top="0">
+						<mx:VBox verticalAlign="top">
+							<mx:HBox width="100%">
+								<buttons:PDFButtonCanvas id="canvas_PDFButton" width="175" height="30" enabled="false" creationComplete="onCreationCompletePDFButtonCanvas()"/>
+								<mx:Spacer width="5"/>
+								<mx:Button id="addDashboardLink" label="Add Dashboard" icon="@Embed(source='/assets/add-spreadsheet_16x16.gif')" labelPlacement="left" toolTip="Click this button to add a dashboard." click="addDashboard()"/>
+								<mx:Spacer width="5"/>
+								<busy:Busy id="busy"/>
+							</mx:HBox>
+						</mx:VBox>
+					</mx:HBox>
+					<mx:HBox right="5" top="0">
+						<mx:Button id="layoutButton" label="Change Layout"  toggle="true" enabled="false" icon="@Embed(source='/assets/window-spreadsheet.gif')" labelPlacement="left" toolTip="Click this button to choose the layout for your dashboard." change="toggleLayout(event)"/>
+						<mx:Button id="widgetButton" label="Widget Library" toggle="true" enabled="false" icon="@Embed(source='/assets/large-icons_32x32.gif')" labelPlacement="left" toolTip="Click this button to access the Widget Library and create/edit a widget." change="toggleWidgetLibrarySidebar(event)"/>
+					</mx:HBox>
+				</mx:Canvas>
+			</mx:AddChild>
+			<mx:AddChild>
+				<mx:HDividedBox id="dashboardContainer" width="100%" height="100%">
+					<advancedtree:AdvanceTree id="tabsTree" styleName="AdvanceTree" width="250" height="100%" minWidth="100" maxWidth="350" borderStyle="none" showRoot="false" labelFunction="treeLabel" editable="false" creationComplete="onCreationCompleteAdvanceTree()" change="onChangeAdvanceTree(event)"
+						doubleClickEnabled="false"
+						dragEnabled="true"
+						dropEnabled="true"
+						dragMoveEnabled="true"
+						allowMultipleSelection="false"
+						allowOutSideDrag="false"
+						allowChangeHorizontalScroll="true" 
+						toolTip="{this.tooltipAdvanceTree + this.tooltipAdvanceTree2}"
+						dataProvider="{this.xmlModel()}"
+					/>
+					<!--
+					dataProvider="{this.dashboards}"
+					
+					-->
+					<mx:ViewStack id="dashboardViewStack" width="100%" height="100%" backgroundColor="white" creationComplete="onCreationCompleteDashboardViewStack()"/>
+				</mx:HDividedBox>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="AddWidgets" basedOn="Main">
+			<mx:AddChild relativeTo="{dashboardContainer}" position="lastChild">
+				<mx:target>
+					<dashboard:WidgetLibrarySidebar width="200" height="100%" addedEffect="{this.dissolveIn}"/>
+				</mx:target>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="EditLayout" basedOn="Main">
+			<mx:AddChild relativeTo="{dashboardContainer}" position="lastChild">
+				<mx:target>
+					<dashboard:DashboardLayoutSidebar id="dashboardLayoutSidebar" width="200" height="100%" addedEffect="{this.dissolveIn}"/>
+				</mx:target>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="ManageWidgets">
+			<mx:AddChild targetFactory="{new DeferredInstance(WidgetLibraryManager)}"/>
+		</mx:State>
+		<bfstates:StateDestroy name="CreateWidget">
+			<mx:AddChild targetFactory="{new DeferredInstance(WidgetCreation)}"/>
+		</bfstates:StateDestroy>
+		<bfstates:StateDestroy name="EditWidget">
+			<mx:AddChild targetFactory="{new DeferredInstance(WidgetEdit)}"/>
+		</bfstates:StateDestroy>
+	</mx:states>
+	<mx:Dissolve id="dissolveOut" alphaFrom="1.0" alphaTo="0.0" duration="10"/>
+	<mx:Dissolve id="dissolveIn" alphaFrom="0.0" alphaTo="1.0" duration="500"/>
+</mx:Box>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bfcontainers:Panel
+	xmlns:grid="com.bigfix.extensions.controls.grid.*"
+	xmlns:bfcontainers="com.bigfix.extensions.containers.*"
+	xmlns:bfcollections="com.bigfix.extensions.collections.*"
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	width="100%" height="100%"
+	verticalAlign="middle" horizontalAlign="center" verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	currentState="needOptions"
+	creationComplete="init()"
+	>
+
+	<mx:Metadata>
+		[Event(name=WidgetRemoveEvent.EVENT_WIDGET_REMOVE, type='com.bigfix.dss.event.WidgetRemoveEvent')]
+	</mx:Metadata>
+
+	<mx:Script><![CDATA[
+		import mx.core.UIComponent;
+		import com.bigfix.dss.view.general.Alert.AlertPopUp;
+		import com.bigfix.dss.objects.StateStack;
+		import com.bigfix.dss.event.FileDownloadCompleteEvent;
+		import com.bigfix.dss.view.fileio.FileDownload;
+		import com.bigfix.dss.event.CreatePopUpEvent;
+		import com.bigfix.dss.command.CreatePopUpCommand;
+		import mx.messaging.messages.RemotingMessage;
+		import com.bigfix.dss.model.DSSModelLocator;
+		import mx.controls.Button;
+		import flash.utils.*;
+		import mx.controls.Alert;
+		import mx.controls.dataGridClasses.DataGridColumn;
+		import mx.rpc.events.ResultEvent;
+		import mx.rpc.events.FaultEvent;
+		import mx.events.FlexEvent;
+		import mx.events.PropertyChangeEvent;
+		import mx.binding.utils.ChangeWatcher;
+		import mx.binding.PropertyWatcher;
+
+		import com.bigfix.dss.util.DSS;
+		import com.bigfix.dss.model.Constants;
+		import com.bigfix.dss.vo.ListWidgetVO;
+		import com.bigfix.dss.vo.ListColumnVO;
+		import com.bigfix.dss.vo.PropertyVO;
+		import com.bigfix.dss.util.WatcherManager;
+		import com.bigfix.dss.event.WidgetRemoveEvent;
+
+		// public vars
+		public var previewMode:Boolean = true; // this changes the title and hides the 'analyze' button
+
+		[Bindable]
+		public var options:ListWidgetVO; // this stores all info for this list widget
+
+		[Bindable]
+		public var requiredOptionsSet:Boolean = false; // if we have enough options set, this is set to 'true'. Also, bindable for the wizard interface to activate 'Save' button
+
+		[Bindable]
+		private var needOptionsMessage:String; // a string we get back from the remote service about missing arguments
+
+		private var watcherManager:WatcherManager = new WatcherManager();
+
+		private var _stateStack:StateStack;
+		
+		private var _delayedChildren:Array = [];
+		
+		public function delayedChild(child:*):void {
+			this._delayedChildren.push(child);
+		}
+		
+		private function onCreationCompleteAddlHeaderElement():void {
+			var widget:*;
+			while (this._delayedChildren.length > 0) {
+				widget = this._delayedChildren.pop();
+				this.hbox1.addChildAt(widget, 1);
+				this.hbox1.width += widget.width + 10;
+			}
+		}
+		
+		private function init():void {
+			this._stateStack = new StateStack(this);
+			trace("ListWidget.init()");
+			if (previewMode) {
+				this.title = "List Preview";
+				if (this.addlHeaderElement) {
+					this.addlHeaderElement.parent.removeChild(this.addlHeaderElement);
+				}
+				this.options = DSS.model.currentWidget.visualization_type_options;
+				this.styleName = "listBuilderPanel";
+			}
+			// always blank out the user_temp_table_id so we generate the table the first time around
+			this.options.user_temp_table_id = undefined;
+			//ChangeWatcher.watch(this, ['options', 'list_subject'], refreshDataProvider);
+			watcherManager.manage(ChangeWatcher.watch(this.options, 'list_columns', refreshDataProvider));
+			watcherManager.manage(ChangeWatcher.watch(this.options, 'row_limit', refreshDataProvider));
+			watcherManager.manage(ChangeWatcher.watch(this.options, 'sort_columns', refreshDataProvider));
+			refreshDataProvider(null);
+			this.addEventListener(FlexEvent.REMOVE, _destruct, false, 0, true);
+	//		this.titleBar.addChild(btn);
+		}
+
+		private function _destruct(event:FlexEvent):void {
+			trace("ListWidget._destruct()");
+			watcherManager.removeAll();
+			this.remoteObjectCollection = null;
+			if (this.dataGrid) {
+				this.dataGrid = null;
+			}
+			this.options = null;
+			this.service = null;
+			this.removeEventListener(FlexEvent.REMOVE, _destruct);
+		}
+
+		private function refreshDataProvider(event:PropertyChangeEvent):void {
+			trace("ListWidget.refreshDataProvider()");
+			//service.checkListArgs(options).onResult(checkListArgsResultHandler).onFault(faultHandler);
+			var call:Object = service.checkListArgs(options);
+			call.resultHandler = checkListArgsResultHandler;
+			call.faultHandler = faultHandler;
+		}
+
+		private function faultHandler(event:FaultEvent):void {
+			AlertPopUp.error(event.message.toString(), "Service Fault");
+		}
+
+		private function checkListArgsResultHandler(event:ResultEvent):void {
+			trace("ListWidget.checkListArgsResultHandler()");
+			// check for success!
+			if (!event.result.success) {
+				needOptionsMessage = event.result.message;
+				this.currentState = 'needOptions';
+				this.requiredOptionsSet = false;
+				return;
+			}
+			if (this.currentState != 'list') {
+				this.currentState = 'list';
+				if (previewMode) {
+					dataGrid.draggableColumns = false;
+				}
+			}
+			this.requiredOptionsSet = true;
+			if (!this.title) {
+				this.title = "List of " + options.list_subjects[0].subject.name_plural;
+			}
+
+			// populate the DataGrid columns
+			var newCols:Array = [];
+			for each (var property:PropertyVO in this.options.list_columns) {
+				var dataGridColumn:DataGridColumn = new DataGridColumn();
+				dataGridColumn.dataField = property.name;
+				newCols.push(dataGridColumn);
+			}
+			dataGrid.columns = newCols;
+			dataGrid.validateNow();
+
+			//service.generateTable(this.options).onResult(generateTableResultHandler).onFault(faultHandler);
+			var call:Object = service.generateTable(this.options);
+			call.resultHandler = generateTableResultHandler;
+			call.faultHandler = faultHandler;
+		}
+
+		private function generateTableResultHandler(event:ResultEvent):void {
+			trace("ListWidget.generateTableResultHandler()");
+			// store the token
+			if (!event.result.success) {
+				return;
+			} else {
+				this.options.user_temp_table_id = event.result.user_temp_table_id;
+			}
+			trace("this.options = ",this.options);
+			remoteObjectCollection.refresh();
+		}
+
+		/* this function handles changing state to analysis mode */
+		private function analyze():void {
+			DSS.model.workspaceTabNavigatorSelectedIndex = Constants.WORKSPACE_ANALYSIS;
+			DSS.model.currentAnalysisOptions = this.options.toListAnalysis();
+		}
+
+		private function remove():void {
+			dispatchEvent(new WidgetRemoveEvent(this));
+		}
+		
+		public function pushState(state:String):void {
+			this._stateStack.pushState(this.currentState);
+		}
+		
+		public function popState():void {
+			this._stateStack.popState();
+		}
+		
+        private function onDownloadComplete(event:Event):void {
+			this.popState();
+        }
+        
+        private function onFileDownloadComplete(event:FileDownloadCompleteEvent):void {
+        	this.service.deleteCSVFileByName(event.sourceFileName);
+        }
+
+		private function onServiceResult(event:ResultEvent):void {
+			var msg:RemotingMessage = RemotingMessage(event.token.message);
+			if (msg.operation == "getCSVListForWidget") {
+				var fName:String = String(event.result);
+				var fDown:FileDownload = new FileDownload();
+				this.pushState('downloadState');
+				fDown.init(this.progressBar, this.btn_cancelDownload);
+				fDown.fileReference.addEventListener(Event.COMPLETE, onDownloadComplete);
+				fDown.addEventListener(FileDownloadCompleteEvent.FILE_DOWNLOAD_COMPLETE, onFileDownloadComplete);
+				var ar:Array = fName.split("/");
+				ar.splice(0,1);
+				var url:String = this.parentApplication.url;
+				var ar2:Array = url.split("/");
+				ar2.pop();
+				ar2.pop();
+				var url2:String = ar2.join("/") + "/" + ar.join("/");
+				fDown.startDownload(url2);
+			}
+			try { event.token.resultHandler(event); } catch (err:Error) { }
+		}
+		
+		private function onClickCancelDownloadButton():void {
+			this.popState();
+		}
+	]]></mx:Script>
+	<bfcontainers:addlHeaderElement id="headerElement" styleName="addlHeaderElement" height="25" creationComplete="onCreationCompleteAddlHeaderElement()">
+		<mx:VBox width="100%">
+			<mx:Spacer height="0"/>
+			<mx:HBox width="100%">
+				<mx:HBox width="92%">
+				</mx:HBox>
+				<mx:HBox id="hbox1" horizontalAlign="right" width="95" height="15">
+					<mx:Button label="Analyze" height="15" styleName="AnalyzeButton" toolTip="Click this button to perform some analysis." click="analyze()"/>
+					<mx:Button styleName="closeButton" click="remove()" />
+					<mx:Spacer width="5"/>
+				</mx:HBox>
+			</mx:HBox>
+		</mx:VBox>
+	</bfcontainers:addlHeaderElement>
+	<!-- we need a distinct instance of this service here or else multiple instances of ListWidget get confused -->
+	<!-- XXX: Is this really true?  Why?  -Brian -->
+	<mx:RemoteObject id="service" destination="ListService" showBusyCursor="true" result="onServiceResult(event)" fault="try { event.token.faultHandler(event); } catch (err:Error) { }">
+		<mx:method name="checkListArgs"/>
+		<mx:method name="generateTable"/>
+		<mx:method name="getListCount"/>
+		<mx:method name="getListForWidget"/>
+		<mx:method name="getListForAnalysis"/>
+		<mx:method name="getCSVListForWidget"/>
+		<mx:method name="deleteCSVFileByName"/>
+	</mx:RemoteObject>
+	<bfcollections:RemoteObjectCollection id="remoteObjectCollection" listMethod="{service.getListForWidget}" countMethod="{service.getListCount}" remoteMethodArgs="{this.options}" pageSize="100"/>
+	<bfcontainers:states>
+		<mx:State name="list">
+			<mx:AddChild relativeTo="{this.headerElement}" position="after">
+				<grid:SortableDataGrid id="dataGrid" sortableColumns="false" dataProvider="{remoteObjectCollection}" width="100%" height="100%">
+				</grid:SortableDataGrid>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="needOptions">
+			<mx:AddChild>
+				<mx:Panel headerHeight="0" styleName="infoPanel">
+					<mx:Text text="{needOptionsMessage}" width="300"/>
+				</mx:Panel>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="downloadState" basedOn="list">
+			<mx:AddChild relativeTo="{dataGrid}" position="before">
+				<mx:HBox width="100%">
+					<mx:ProgressBar id="progressBar"/>
+					<mx:Button id="btn_cancelDownload" label="Cancel" click="onClickCancelDownloadButton()"/>
+				</mx:HBox>
+			</mx:AddChild>
+		</mx:State>
+	</bfcontainers:states>
+</bfcontainers:Panel>

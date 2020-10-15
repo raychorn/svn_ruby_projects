@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cairngorm:ServiceLocator xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:cairngorm="http://www.adobe.com/2006/cairngorm">
+	<!-- userService manages login/logout, user creation -->
+	<mx:RemoteObject id="userService" destination="Auth" showBusyCursor="true">
+	</mx:RemoteObject>
+	<!-- dashboardService manages individual dashboards -->
+	<mx:RemoteObject id="dashboardService" destination="DashboardService" showBusyCursor="true">
+		<mx:method name="getDashboards"/>
+	</mx:RemoteObject>
+	<!-- widgetService manages individual dashboard widgets -->
+	<mx:RemoteObject id="widgetService" destination="DashboardWidgetService" showBusyCursor="true">
+		<mx:method name="save"/>
+		<mx:method name="destroy"/>
+		<mx:method name="getLibrary"/>
+	</mx:RemoteObject>
+	<!-- reportingCatalogService fetches subjects, metrics, etc... -->
+	<mx:RemoteObject id="reportingCatalogService" destination="ReportingCatalog" showBusyCursor="true">
+		<mx:method name="getCatalog"/>
+	</mx:RemoteObject>
+	<!-- computerGroupService manages computer groups -->
+	<mx:RemoteObject id="computerGroupService" destination="ComputerGroups" showBusyCursor="true">
+		<mx:method name="getTree"/>
+	</mx:RemoteObject>
+	<mx:RemoteObject id="EditorService" destination="Editor" showBusyCursor="true">
+	</mx:RemoteObject>
+	<mx:RemoteObject id="trendChartService" destination="TrendChart" showBusyCursor="true">
+		<mx:method name="getTrendForWidget"/>
+		<mx:method name="getTrendForAnalysis"/>
+		<mx:method name="getMacroTrendForAnalysis"/>
+	</mx:RemoteObject>
+	<mx:RemoteObject id="listService" destination="ListService" showBusyCursor="true">
+		<mx:method name="checkListArgs"/>
+		<mx:method name="generateTable"/>
+		<mx:method name="getListCount"/>
+		<mx:method name="getListForWidget"/>
+		<mx:method name="getListForAnalysis"/>
+	</mx:RemoteObject>
+	<!-- reportService manages stored reports -->
+	<mx:RemoteObject id="reportService" destination="ReportService" showBusyCursor="true">
+		<mx:method name="getReports"/>
+		<mx:method name="setSchedule"/>
+	</mx:RemoteObject>
+	<!-- auto complete for data filters -->
+	<mx:RemoteObject id="searchService" destination="SearchService" showBusyCursor="true">
+		<mx:method name="autoComplete"/>
+	</mx:RemoteObject>
+	<mx:RemoteObject id="columnChartService" destination="ColumnChartService" showBusyCursor="true">
+		<mx:method name="getColumnsForWidget"/>
+	</mx:RemoteObject>
+</cairngorm:ServiceLocator>
+

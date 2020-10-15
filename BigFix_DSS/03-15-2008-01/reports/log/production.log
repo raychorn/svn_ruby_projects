@@ -1,0 +1,104 @@
+# Logfile created on Wed Oct 03 17:39:59 -0700 2007 by /
+INFO: loading WebORB Configuration
+INFO: loading WebORB Configuration
+
+
+Processing WeborbController#index (for 127.0.0.1 at 2007-11-08 15:32:54) [POST]
+  Session ID: 1cb3f0a44f9a2156f00ed701336d82bd
+  Parameters: {"action"=>"index", "controller"=>"weborb"}
+INFO: request service uri: null response uri: /1
+INFO: writing object of type: AckMessage resolved to flex.messaging.messages.AcknowledgeMessage
+INFO: returning response, length: 277
+Completed in 0.18700 (5 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/weborb]
+
+
+Processing WeborbController#index (for 127.0.0.1 at 2007-11-08 15:32:54) [POST]
+  Session ID: 1cb3f0a44f9a2156f00ed701336d82bd
+  Parameters: {"action"=>"index", "controller"=>"weborb"}
+INFO: request service uri: null response uri: /2
+INFO: invoking the checkLogin method of type Auth
+INFO: writing object of type: AckMessage resolved to flex.messaging.messages.AcknowledgeMessage
+INFO: returning response, length: 288
+Completed in 0.06300 (15 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/weborb]
+
+
+Processing WeborbController#index (for 127.0.0.1 at 2007-11-08 15:33:19) [POST]
+  Session ID: 1cb3f0a44f9a2156f00ed701336d82bd
+  Parameters: {"action"=>"index", "controller"=>"weborb"}
+INFO: request service uri: null response uri: /3
+INFO: invoking the login method of type Auth
+ERROR: Exception processing request.  Destination: Auth, operation: login, message: #28000Access denied for user 'root'@'localhost' (using password: NO)
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/vendor/mysql.rb:523:in `read'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/vendor/mysql.rb:153:in `real_connect'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/connection_adapters/mysql_adapter.rb:389:in `connect'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/connection_adapters/mysql_adapter.rb:152:in `initialize'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/connection_adapters/mysql_adapter.rb:82:in `new'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/connection_adapters/mysql_adapter.rb:82:in `mysql_connection'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/connection_adapters/abstract/connection_specification.rb:262:in `send'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/connection_adapters/abstract/connection_specification.rb:262:in `connection_without_query_cache='
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/query_cache.rb:54:in `connection='
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/connection_adapters/abstract/connection_specification.rb:230:in `retrieve_connection'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/connection_adapters/abstract/connection_specification.rb:78:in `connection'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/base.rb:763:in `columns'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/base.rb:776:in `column_names'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/base.rb:789:in `column_methods_hash'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/base.rb:1262:in `all_attributes_exists?'
+c:/ruby/lib/ruby/gems/1.8/gems/activesupport-1.4.2/lib/active_support/inflector.rb:250:in `all?'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/base.rb:1262:in `each'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/base.rb:1262:in `all?'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/base.rb:1262:in `all_attributes_exists?'
+c:/ruby/lib/ruby/gems/1.8/gems/activerecord-1.15.3/lib/active_record/base.rb:1196:in `method_missing'
+Z:/Ruby In Steel/BigFix_DSS/reports/config/../app/models/user.rb:78:in `authenticate'
+Z:/Ruby In Steel/BigFix_DSS/reports/config/../app/services/auth.rb:3:in `login'
+Z:/Ruby In Steel/BigFix_DSS/reports/config/../vendor/plugins/weborb/lib/weborb/handler/object_handler.rb:65:in `call'
+Z:/Ruby In Steel/BigFix_DSS/reports/config/../vendor/plugins/weborb/lib/weborb/handler/object_handler.rb:65:in `handle_invoke'
+Z:/Ruby In Steel/BigFix_DSS/reports/config/../vendor/plugins/weborb/lib/weborb/dispatcher/invoker.rb:66:in `handle_invoke'
+Z:/Ruby In Steel/BigFix_DSS/reports/config/../vendor/plugins/weborb/lib/weborb/v3types/ReqMessage.rb:64:in `execute'
+Z:/Ruby In Steel/BigFix_DSS/reports/config/../vendor/plugins/weborb/lib/weborb/dispatcher/v3dispatcher.rb:36:in `dispatch'
+Z:/Ruby In Steel/BigFix_DSS/reports/config/../vendor/plugins/weborb/lib/weborb/dispatcher/v3dispatcher.rb:32:in `each'
+Z:/Ruby In Steel/BigFix_DSS/reports/config/../vendor/plugins/weborb/lib/weborb/dispatcher/v3dispatcher.rb:32:in `dispatch'
+Z:/Ruby In Steel/BigFix_DSS/reports/config/../vendor/plugins/weborb/lib/weborb/dispatcher/weborb_dispatcher.rb:41:in `dispatch'
+Z:/Ruby In Steel/BigFix_DSS/reports/config/../vendor/plugins/weborb/lib/weborb/dispatcher/weborb_dispatcher.rb:40:in `each'
+Z:/Ruby In Steel/BigFix_DSS/reports/config/../vendor/plugins/weborb/lib/weborb/dispatcher/weborb_dispatcher.rb:40:in `dispatch'
+Z:/Ruby In Steel/BigFix_DSS/reports/config/../app/controllers/weborb_controller.rb:48:in `index'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:1095:in `send'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:1095:in `perform_action_without_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:632:in `call_filter'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:638:in `call_filter'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:438:in `call'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:637:in `call_filter'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:619:in `perform_action_without_benchmark'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/benchmarking.rb:66:in `perform_action_without_rescue'
+c:/ruby/lib/ruby/1.8/benchmark.rb:293:in `measure'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/benchmarking.rb:66:in `perform_action_without_rescue'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/rescue.rb:83:in `perform_action'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:430:in `send'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:430:in `process_without_filters'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/filters.rb:624:in `process_without_session_management_support'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/session_management.rb:114:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/actionpack-1.13.3/lib/action_controller/base.rb:330:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/rails-1.2.3/lib/dispatcher.rb:41:in `dispatch'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:78:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:76:in `synchronize'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/rails.rb:76:in `process'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:618:in `process_client'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:617:in `each'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:617:in `process_client'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `run'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `initialize'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `new'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:736:in `run'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `initialize'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `new'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel.rb:720:in `run'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:271:in `run'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:270:in `each'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/configurator.rb:270:in `run'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/bin/mongrel_rails:127:in `run'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/lib/mongrel/command.rb:211:in `run'
+c:/ruby/lib/ruby/gems/1.8/gems/mongrel-1.0.1-mswin32/bin/mongrel_rails:243
+c:/ruby/bin/mongrel_rails:16:in `load'
+c:/ruby/bin/mongrel_rails:16
+INFO: writing object of type: ErrMessage resolved to flex.messaging.messages.ErrorMessage
+INFO: returning response, length: 443
+Completed in 0.28100 (3 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/weborb]

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:data="com.bigfix.dss.view.data.*" creationComplete="init()">
+	<mx:Script><![CDATA[
+		include 'WidgetWizardFormLib.as';
+		import com.bigfix.dss.vo.VisualizationTypeVO;
+		
+		private function init():void {
+			WidgetWizardFormLib_init();
+			VisualizationTypeVO(formControlForVisualizationType.selectedValue) = model.currentWidget.visualization_type;
+			if(model.currentWidget.visualization_type){
+				coalesce(model.currentWidget.visualization_type.name, labelField);
+			}
+		}
+		
+		private function setValue(event:ValidationResultEvent):void {
+			hideForm();
+			model.currentWidget.visualization_type = VisualizationTypeVO(formControlForVisualizationType.selectedValue);
+			coalesce(model.currentWidget.visualization_type.name, labelField);
+		}
+	]]></mx:Script>
+	<mx:NumberValidator
+		source="{formControlForVisualizationType.selectedValue}" property="id"
+		required="true"
+		trigger="{submitButton}" triggerEvent="click"
+		valid="setValue(event)"/>
+
+	<mx:HBox>
+		<mx:HBox id="labelBox" click="showForm()"><mx:Label text="Display Type:" styleName="textLink"/></mx:HBox>
+		<mx:Label id="labelField" creationComplete="coalesce(null, Label(event.currentTarget))"/>
+	</mx:HBox>
+
+	<mx:Panel id="form" title="Display Type" styleName="wizardFormContainer" width="200" includeInLayout="false" visible="false">
+		<mx:RadioButtonGroup id="formControlForVisualizationType"/>
+		<mx:Repeater id="visualizationTypeRepeater" dataProvider="{model.visualization_types}">
+			<mx:RadioButton groupName="formControlForVisualizationType" value="{visualizationTypeRepeater.currentItem}" label="{visualizationTypeRepeater.currentItem.name}"/>
+		</mx:Repeater>
+		<mx:ControlBar horizontalAlign="right">
+			<mx:Button label="Cancel" click="hideForm()"/>
+			<mx:Button label="Done" id="submitButton"/>
+		</mx:ControlBar>
+	</mx:Panel>
+</mx:Canvas>

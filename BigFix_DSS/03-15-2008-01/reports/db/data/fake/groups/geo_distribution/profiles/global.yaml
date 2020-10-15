@@ -1,0 +1,43 @@
+global_1:
+  title: Global Cities
+  pick: city
+  weight_by: population
+  proportions:
+    TOP:
+      noram: 0.70
+      latam: 0.02
+      emea: 0.13
+      apac: 0.10
+    noram:
+      usa: 0.85
+      canada: 0.10
+      mexico: 0.05
+    usa:
+      usa_pacific: 0.35
+      usa_northeast: 0.18
+      usa_midwest: 0.21
+      usa_south: 0.20
+      usa_mountain: 0.04
+      usa_territories: 0.02
+    usa_northeast:
+      new_york_new_york: 0.75
+      OTHER: 0.25
+    usa_midwest:
+      illinois_chicago: 0.60
+      wisconsin_milwaukee: 0.20
+      ohio_columbus: 0.10
+      OTHER: 0.10
+    usa_pacific:
+      california: 0.80
+      oregon: 0.05
+      washington: 0.15
+    usa_territories:
+      puerto_rico: 0.8
+      us_virgin_islands: 0.2
+    canada:
+      canada_ontario: 1.0
+  fuzz: 0.05
+  min_cluster_size: 20
+  max_cluster_size: 2500
+  group_by:
+    - world_by_na_business_groupings

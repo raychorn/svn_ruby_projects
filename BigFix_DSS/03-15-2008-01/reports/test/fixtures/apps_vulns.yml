@@ -1,0 +1,6 @@
+ie_vuln1:
+  app_id: 1
+  vuln_id: 1
+snmp_vuln2:
+  app_id: 6
+  vuln_id: 2

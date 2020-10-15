@@ -1,0 +1,112 @@
+louisiana:
+  title: Louisiana
+  subgroups:
+  - louisiana_alexandria
+  - louisiana_baton_rouge
+  - louisiana_bossier_city
+  - louisiana_gretna
+  - louisiana_hammond
+  - louisiana_houma
+  - louisiana_kenner
+  - louisiana_lafayette
+  - louisiana_lake_charles
+  - louisiana_monroe
+  - louisiana_natchitoches
+  - louisiana_new_iberia
+  - louisiana_new_orleans
+  - louisiana_opelousas
+  - louisiana_ruston
+  - louisiana_shreveport
+  - louisiana_slidell
+  - louisiana_sulphur
+
+louisiana_alexandria:
+  title: Alexandria
+  type: city
+  population: 45829
+
+louisiana_baton_rouge:
+  title: Baton Rouge
+  type: city
+  population: 223187
+
+louisiana_bossier_city:
+  title: Bossier City
+  type: city
+  population: 59432
+
+louisiana_gretna:
+  title: Gretna
+  type: city
+  population: 17162
+
+louisiana_hammond:
+  title: Hammond
+  type: city
+  population: 18017
+
+louisiana_houma:
+  title: Houma
+  type: city
+  population: 32001
+
+louisiana_kenner:
+  title: Kenner
+  type: city
+  population: 70183
+
+louisiana_lafayette:
+  title: Lafayette
+  type: city
+  population: 111914
+
+louisiana_lake_charles:
+  title: Lake Charles
+  type: city
+  population: 70661
+
+louisiana_monroe:
+  title: Monroe
+  type: city
+  population: 52145
+
+louisiana_natchitoches:
+  title: Natchitoches
+  type: city
+  population: 17641
+
+louisiana_new_iberia:
+  title: New Iberia
+  type: city
+  population: 32387
+
+louisiana_new_orleans:
+  title: New Orleans
+  type: city
+  population: 461115
+
+louisiana_opelousas:
+  title: Opelousas
+  type: city
+  population: 22788
+
+louisiana_ruston:
+  title: Ruston
+  type: city
+  population: 20470
+
+louisiana_shreveport:
+  title: Shreveport
+  type: city
+  population: 198591
+
+louisiana_slidell:
+  title: Slidell
+  type: city
+  population: 26871
+
+louisiana_sulphur:
+  title: Sulphur
+  type: city
+  population: 19716
+

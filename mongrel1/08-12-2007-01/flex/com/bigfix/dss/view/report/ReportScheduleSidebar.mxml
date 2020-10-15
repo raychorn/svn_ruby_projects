@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Box 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:dssgeneral="com.bigfix.dss.view.general.*"
+	width="100%" height="100%"
+	creationComplete="init()"
+	>
+	<mx:Script><![CDATA[
+		import mx.controls.Alert;
+		import mx.states.State;
+		import mx.events.ItemClickEvent;
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.vo.ReportVO;
+		import com.bigfix.dss.event.SetReportScheduleEvent;
+		//import com.bigfix.dss.view.general.TimeSelection	//if we want multiple run times
+	
+		//these represent iCalender accepted values
+		private static var FREQ_HOURLY:String = "HOURLY";
+		private static var FREQ_DAILY:String = "DAILY";
+		private static var FREQ_WEEKLY:String = "WEEKLY";
+		private static var FREQ_YEARLY:String = "YEARLY";
+		private static var WEEKDAY_MONDAY:String = "MO";
+		private static var WEEKDAY_TUESDAY:String = "TU";
+		private static var WEEKDAY_WEDNESDAY:String = "WE";
+		private static var WEEKDAY_THURSDAY:String = "TH";
+		private static var WEEKDAY_FRIDAY:String = "FR";
+		private static var WEEKDAY_SATURDAY:String = "SA";
+		private static var WEEKDAY_SUNDAY:String = "SU";
+		
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+		
+		private function translateToICal(freq:String):String{
+			switch (freq){
+				case "Hourly":
+					return FREQ_HOURLY;
+				case "Daily":
+					return FREQ_DAILY;
+				case "Weekly":
+					return FREQ_WEEKLY;
+				case "Monthly":
+					return FREQ_WEEKLY;
+				case "Monday":
+					return WEEKDAY_MONDAY;
+				case "Tuesday":
+					return WEEKDAY_TUESDAY;
+				case "Wednesday":
+					return WEEKDAY_WEDNESDAY;
+				case "Thursday":
+					return WEEKDAY_THURSDAY;
+				case "Friday":
+					return WEEKDAY_FRIDAY;
+				case "Saturday":
+					return WEEKDAY_SATURDAY;
+				case "Sunday":
+					return WEEKDAY_SUNDAY;
+				case "First":
+					return "1";
+				case "Second":
+					return "2";
+				case "Third":
+					return "3";
+				case "Fourth":
+					return "4";
+				case "Last":
+					return "-1";
+				case "Second to Last":
+					return "-2";
+				default:
+					throw new ArgumentError("given string is not translatable into iCAL format");
+			}
+		}
+		
+		public function populateFields():void{
+			//read in iCal data
+		}
+	
+		private function init(): void{
+			currentState="One Time";
+			setDateSelectPrompt();
+			//addTimeSelection();	//if we want multiple run times
+		}
+		
+		private function selectStartDateInit():void{
+			//set selectable range to date equal or after current day
+			var startDate:Date = new Date();
+			startDate.setDate(startDate.getDate()-1);
+			selectStartDate.selectableRange={"rangeStart": startDate};
+		}
+		
+		private function applyClick():void {
+			switch (currentState){
+				case "One Time":
+					//setNextRunTimeCommand
+					break;
+				default:
+					for each(var report:ReportVO in model.currentReports){
+						var iCalOutput:String = new String();
+						
+						var startDate:Date=selectStartDate.selectedDate;
+						if(!startDate){
+							Alert.show("Please Select a start date first");
+							return;
+						}
+						trace(startDate.toDateString());
+						trace(startDate.toLocaleDateString());
+						iCalOutput += "DTSTART;TZID=US-Eastern"+":"+startDate.getFullYear()+startDate.getMonth()+startDate.getDate()
+							+"T" + selectStartTime.getHour24()+selectStartTime.getMinute()+"00"; // this is not the correct iCal format
+						iCalOutput += "RRULE:FREQ=" + translateToICal(selectFrequency.text) + ";INTERVAL="+selectInterval.value+";";
+						trace(iCalOutput);
+						new SetReportScheduleEvent(report.id, iCalOutput).dispatch();
+					}
+			}
+		}
+		
+		private function onSelectFrequency():void{
+			currentState=selectFrequency.text;
+			setIntervalMetric();
+			setDateSelectPrompt();
+		}
+		
+		private function setIntervalMetric():void{
+			switch (selectFrequency.text){
+				case "One Time":
+					break;
+				case "Hourly":
+					intervalMetric.text="hour(s)";
+					break;
+				case "Daily":
+					intervalMetric.text="day(s)";
+					break;
+				case "Weekly":
+					intervalMetric.text="week(s) on:";
+					break;
+				case "Monthly":
+					intervalMetric.text="month(s) on the:";
+					break;
+				default:
+					throw new Error("Unable to set Interval metric");
+			}
+		}
+		private function setDateSelectPrompt():void{
+			switch (selectFrequency.text){
+				case "One Time":
+					dateSelectPrompt.text="This Scheduled Report runs on:";
+					break;
+				case "Hourly":
+					dateSelectPrompt.text="This Scheduled Report starts on:";
+					break;
+				case "Daily":
+					dateSelectPrompt.text="This Scheduled Report starts on:";
+					break;
+				case "Weekly":
+					dateSelectPrompt.text="This Scheduled Report starts on:";
+					break;
+				case "Monthly":
+					dateSelectPrompt.text="This Scheduled Report starts on:";
+					break;
+				default:
+					throw new Error("Unable to set DateSelectPrompt");
+			}
+		}
+		private function setMonthlyMetric(event:ItemClickEvent):void{
+			switch (event.target.selection.id){
+				case "selectMonthlyMetric_Calender":
+					selectMultipleDays.enabled=true;
+					selectOneDay.enabled=false;
+					break;
+				case "selectMonthlyMetric_Day":
+					selectMultipleDays.enabled=false;
+					selectOneDay.enabled=true;
+					break;
+				default:
+					throw new Error("Unable to set MonthlyMetric");
+			}
+		}
+
+		/* these are if we want users to set multiple run times, but is not supported by iCal
+		private function addTimeSelection() :void{
+			timeFields.addChild(new TimeSelection());
+		}
+		private function getSelectedTimes() :Array{
+			var toReturn:Array = new Array();
+			for each ( var time:TimeSelection in timeFields.getChildren()){
+				//toReturn.push(time.
+			}
+			return toReturn;
+		}*/
+		
+	]]></mx:Script>
+	<mx:ComboBox id="selectFrequency" dataProvider="[One Time, Hourly, Daily, Weekly, Monthly]" change="onSelectFrequency()"></mx:ComboBox>
+	<mx:Text id="dateSelectPrompt"/>
+	<mx:DateChooser id="selectStartDate" showToday="false" creationComplete="selectStartDateInit()"/>
+	<!-- //if we want multiple run times 
+	<mx:VBox width="100%" id="timeFields"/>
+	<mx:Button label="(+)" buttonDown="addTimeSelection()"/>-->
+	<dssgeneral:TimeSelection id="selectStartTime"/>
+	<mx:states>
+		<mx:State name="One Time"/>
+		<mx:State name="Recurence">
+			<mx:AddChild relativeTo="{selectStartTime}" position="after">
+				<mx:Spacer id="recurrenceSpace" height="10"/>
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{recurrenceSpace}" position="after">
+				<mx:HBox id="selectIntervalBox" width="100%">
+					<mx:Text text="Every"/>
+					<mx:NumericStepper id="selectInterval"  minimum="1" maximum="12"/>
+					<mx:Text id="intervalMetric"/>
+				</mx:HBox>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="Hourly" basedOn="Recurence">
+		</mx:State>
+		<mx:State name="Daily" basedOn="Recurence">
+		</mx:State>
+		<mx:State name="Weekly" basedOn="Recurence">
+			<mx:AddChild relativeTo="{selectIntervalBox}" position="after">
+				<mx:ToggleButtonBar dataProvider="[M,T,W,Th,F,Sa,Su]"/>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="Monthly" basedOn="Recurence">
+			<mx:AddChild relativeTo="{selectIntervalBox}" position="after">
+				<mx:VBox>
+					<mx:RadioButtonGroup id="selectMonthlyMetric" itemClick="setMonthlyMetric(event)"/>
+					<mx:HBox>
+						<mx:RadioButton id="selectMonthlyMetric_Calender" groupName="selectMonthlyMetric"/>
+						<dssgeneral:CalenderSelect id="selectMultipleDays"/>
+					</mx:HBox>
+					<mx:HBox>
+						<mx:RadioButton id="selectMonthlyMetric_Day" groupName="selectMonthlyMetric"/>
+						<mx:HBox id="selectOneDay" width="100%">
+							<mx:ComboBox dataProvider="[First,Second,Third,Fourth,Second to Last,Last]"></mx:ComboBox>
+							<mx:ComboBox dataProvider="[Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday]"></mx:ComboBox>
+						</mx:HBox>
+					</mx:HBox>
+				</mx:VBox>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+	<mx:Spacer height="10"/>
+	<mx:Button label="Apply Changes" buttonDown="applyClick()"/>
+</mx:Box>

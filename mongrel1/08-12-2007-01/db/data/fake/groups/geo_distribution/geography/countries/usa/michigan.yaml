@@ -1,0 +1,400 @@
+michigan:
+  title: Michigan
+  subgroups:
+  - michigan_adrian
+  - michigan_allen_park
+  - michigan_ann_arbor
+  - michigan_auburn_hills
+  - michigan_battle_creek
+  - michigan_bay_city
+  - michigan_berkley
+  - michigan_birmingham
+  - michigan_burton
+  - michigan_dearborn
+  - michigan_dearborn_heights
+  - michigan_detroit
+  - michigan_east_lansing
+  - michigan_eastpointe
+  - michigan_farmington_hills
+  - michigan_ferndale
+  - michigan_flint
+  - michigan_fraser
+  - michigan_garden_city
+  - michigan_grand_rapids
+  - michigan_grandville
+  - michigan_grosse_pointe_woods
+  - michigan_hamtramck
+  - michigan_hazel_park
+  - michigan_highland_park
+  - michigan_holland
+  - michigan_inkster
+  - michigan_jackson
+  - michigan_kalamazoo
+  - michigan_kentwood
+  - michigan_lansing
+  - michigan_lincoln_park
+  - michigan_livonia
+  - michigan_madison_heights
+  - michigan_marquette
+  - michigan_midland
+  - michigan_monroe
+  - michigan_mount_clemens
+  - michigan_mount_pleasant
+  - michigan_muskegon
+  - michigan_norton_shores
+  - michigan_novi
+  - michigan_oak_park
+  - michigan_owosso
+  - michigan_pontiac
+  - michigan_portage
+  - michigan_port_huron
+  - michigan_rochester_hills
+  - michigan_romulus
+  - michigan_roseville
+  - michigan_royal_oak
+  - michigan_saginaw
+  - michigan_st__clair_shores
+  - michigan_southfield
+  - michigan_southgate
+  - michigan_sterling_heights
+  - michigan_taylor
+  - michigan_trenton
+  - michigan_troy
+  - michigan_walker
+  - michigan_warren
+  - michigan_wayne
+  - michigan_westland
+  - michigan_wyandotte
+  - michigan_wyoming
+  - michigan_ypsilanti
+
+michigan_adrian:
+  title: Adrian
+  type: city
+  population: 21976
+
+michigan_allen_park:
+  title: Allen Park
+  type: city
+  population: 28446
+
+michigan_ann_arbor:
+  title: Ann Arbor
+  type: city
+  population: 114015
+
+michigan_auburn_hills:
+  title: Auburn Hills
+  type: city
+  population: 20816
+
+michigan_battle_creek:
+  title: Battle Creek
+  type: city
+  population: 53483
+
+michigan_bay_city:
+  title: Bay City
+  type: city
+  population: 35207
+
+michigan_berkley:
+  title: Berkley
+  type: city
+  population: 15218
+
+michigan_birmingham:
+  title: Birmingham
+  type: city
+  population: 19196
+
+michigan_burton:
+  title: Burton
+  type: city
+  population: 30895
+
+michigan_dearborn:
+  title: Dearborn
+  type: city
+  population: 95355
+
+michigan_dearborn_heights:
+  title: Dearborn Heights
+  type: city
+  population: 56759
+
+michigan_detroit:
+  title: Detroit
+  type: city
+  population: 899122
+
+michigan_east_lansing:
+  title: East Lansing
+  type: city
+  population: 46817
+
+michigan_eastpointe:
+  title: Eastpointe
+  type: city
+  population: 33397
+
+michigan_farmington_hills:
+  title: Farmington Hills
+  type: city
+  population: 80698
+
+michigan_ferndale:
+  title: Ferndale
+  type: city
+  population: 21642
+
+michigan_flint:
+  title: Flint
+  type: city
+  population: 119596
+
+michigan_fraser:
+  title: Fraser
+  type: city
+  population: 15136
+
+michigan_garden_city:
+  title: Garden City
+  type: city
+  population: 29274
+
+michigan_grand_rapids:
+  title: Grand Rapids
+  type: city
+  population: 194689
+
+michigan_grandville:
+  title: Grandville
+  type: city
+  population: 16660
+
+michigan_grosse_pointe_woods:
+  title: Grosse Pointe Woods
+  type: city
+  population: 16526
+
+michigan_hamtramck:
+  title: Hamtramck
+  type: city
+  population: 22215
+
+michigan_hazel_park:
+  title: Hazel Park
+  type: city
+  population: 18532
+
+michigan_highland_park:
+  title: Highland Park
+  type: city
+  population: 15658
+
+michigan_holland:
+  title: Holland
+  type: city
+  population: 34637
+
+michigan_inkster:
+  title: Inkster
+  type: city
+  population: 29204
+
+michigan_jackson:
+  title: Jackson
+  type: city
+  population: 35051
+
+michigan_kalamazoo:
+  title: Kalamazoo
+  type: city
+  population: 73014
+
+michigan_kentwood:
+  title: Kentwood
+  type: city
+  population: 46483
+
+michigan_lansing:
+  title: Lansing
+  type: city
+  population: 116862
+
+michigan_lincoln_park:
+  title: Lincoln Park
+  type: city
+  population: 38695
+
+michigan_livonia:
+  title: Livonia
+  type: city
+  population: 98818
+
+michigan_madison_heights:
+  title: Madison Heights
+  type: city
+  population: 30476
+
+michigan_marquette:
+  title: Marquette
+  type: city
+  population: 20703
+
+michigan_midland:
+  title: Midland
+  type: city
+  population: 41927
+
+michigan_monroe:
+  title: Monroe
+  type: city
+  population: 21764
+
+michigan_mount_clemens:
+  title: Mount Clemens
+  type: city
+  population: 17114
+
+michigan_mount_pleasant:
+  title: Mount Pleasant
+  type: city
+  population: 26568
+
+michigan_muskegon:
+  title: Muskegon
+  type: city
+  population: 39892
+
+michigan_norton_shores:
+  title: Norton Shores
+  type: city
+  population: 23254
+
+michigan_novi:
+  title: Novi
+  type: city
+  population: 51876
+
+michigan_oak_park:
+  title: Oak Park
+  type: city
+  population: 31571
+
+michigan_owosso:
+  title: Owosso
+  type: city
+  population: 15512
+
+michigan_pontiac:
+  title: Pontiac
+  type: city
+  population: 67509
+
+michigan_portage:
+  title: Portage
+  type: city
+  population: 45201
+
+michigan_port_huron:
+  title: Port Huron
+  type: city
+  population: 31719
+
+michigan_rochester_hills:
+  title: Rochester Hills
+  type: city
+  population: 69406
+
+michigan_romulus:
+  title: Romulus
+  type: city
+  population: 23580
+
+michigan_roseville:
+  title: Roseville
+  type: city
+  population: 47979
+
+michigan_royal_oak:
+  title: Royal Oak
+  type: city
+  population: 58508
+
+michigan_saginaw:
+  title: Saginaw
+  type: city
+  population: 59023
+
+michigan_st__clair_shores:
+  title: St. Clair Shores
+  type: city
+  population: 61888
+
+michigan_southfield:
+  title: Southfield
+  type: city
+  population: 77405
+
+michigan_southgate:
+  title: Southgate
+  type: city
+  population: 29880
+
+michigan_sterling_heights:
+  title: Sterling Heights
+  type: city
+  population: 127524
+
+michigan_taylor:
+  title: Taylor
+  type: city
+  population: 65305
+
+michigan_trenton:
+  title: Trenton
+  type: city
+  population: 19444
+
+michigan_troy:
+  title: Troy
+  type: city
+  population: 81342
+
+michigan_walker:
+  title: Walker
+  type: city
+  population: 23287
+
+michigan_warren:
+  title: Warren
+  type: city
+  population: 136169
+
+michigan_wayne:
+  title: Wayne
+  type: city
+  population: 18758
+
+michigan_westland:
+  title: Westland
+  type: city
+  population: 86216
+
+michigan_wyandotte:
+  title: Wyandotte
+  type: city
+  population: 27218
+
+michigan_wyoming:
+  title: Wyoming
+  type: city
+  population: 70222
+
+michigan_ypsilanti:
+  title: Ypsilanti
+  type: city
+  population: 21688
+

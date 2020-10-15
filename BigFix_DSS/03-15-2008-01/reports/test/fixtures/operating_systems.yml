@@ -1,0 +1,68 @@
+windows:
+  id: 1
+  name: Windows
+osx:
+  id: 2
+  name: MacOS X
+freebsd:
+  id: 3
+  name: FreeBSD
+linux:
+  id: 4
+  name: Linux
+windows_2000:
+  id: 5
+  name: Windows 2000
+  parent_id: 1
+windows_2000_sp1:
+  id: 6
+  name: Windows 2000 SP1
+  parent_id: 5
+windows_2000_sp2:
+  id: 7
+  name: Windows 2000 SP2
+  parent_id: 5
+windows_2000_sp3:
+  id: 8
+  name: Windows 2000 SP3
+  parent_id: 5
+windows_2000_sp4:
+  id: 9
+  name: Windows 2000 SP4
+  parent_id: 5
+windows_xp:
+  id: 10
+  name: Windows XP
+  parent_id: 1
+windows_xp_sp1:
+  id: 11
+  name: Windows XP SP1
+  parent_id: 10
+windows_xp_sp2:
+  id: 12
+  name: Windows XP SP2
+  parent_id: 10
+osx_10_4:
+  id: 13
+  name: MacOS X 10.4
+  parent_id: 2
+osx_10_4_ppc:
+  id: 14
+  name: MacOS X 10.4 (PowerPC)
+  parent_id: 13
+osx_10_4_intel:
+  id: 15
+  name: MacOS X 10.4 (Intel)
+  parent_id: 13
+windows_vista:
+  id: 61
+  name: Windows Vista
+  parent_id: 1
+windows_2003:
+  id: 62
+  name: Windows 2003
+  parent_id: 1
+windows_nt4:
+  id: 63
+  name: Windows NT 4
+  parent_id: 1

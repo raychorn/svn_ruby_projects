@@ -1,0 +1,35 @@
+mike:
+  id: 1
+  username: mluu
+  name: Mike Luu
+  email: mike_luu@bigfix.com
+  salt: NaCL
+  hashed_password: <%= User.encrypt('foobar', 'NaCl') %>
+brian:
+  id: 2
+  username: brian
+  name: Brian Buchanan
+  email: brian_buchanan@bigfix.com
+  salt: NaCL
+  hashed_password: <%= User.encrypt('foobar', 'NaCl') %>
+ray:
+  id: 3
+  username: rhorn
+  name: Ray Horn
+  email: ray_horn@bigfix.com
+  salt: NaCL
+  hashed_password: <%= User.encrypt('foobar', 'NaCL') %>
+jerry:
+    id: 4
+    username: zzhang
+    name: Jerry Zhang
+    email: zhihui_zhang@bigfix.com
+    salt: NaCL
+    hashed_password: <%= User.encrypt('foobar', 'NaCl') %>
+jim:
+    id: 5
+    username: jhansen
+    name: Jim Hansen 
+    email: jim_hansen@bigfix.com
+    salt: NaCL
+    hashed_password: <%= User.encrypt('foobar', 'NaCl') %>

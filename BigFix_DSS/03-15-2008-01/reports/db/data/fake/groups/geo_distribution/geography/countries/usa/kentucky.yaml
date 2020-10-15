@@ -1,0 +1,166 @@
+kentucky:
+  title: Kentucky
+  subgroups:
+  - kentucky_ashland
+  - kentucky_bowling_green
+  - kentucky_covington
+  - kentucky_danville
+  - kentucky_elizabethtown
+  - kentucky_erlanger
+  - kentucky_florence
+  - kentucky_fort_thomas
+  - kentucky_frankfort
+  - kentucky_georgetown
+  - kentucky_henderson
+  - kentucky_hopkinsville
+  - kentucky_independence
+  - kentucky_jeffersontown
+  - kentucky_lexington_fayette
+  - kentucky_louisville_jefferson_county
+  - kentucky_madisonville
+  - kentucky_murray
+  - kentucky_newport
+  - kentucky_nicholasville
+  - kentucky_owensboro
+  - kentucky_paducah
+  - kentucky_radcliff
+  - kentucky_richmond
+  - kentucky_st__matthews
+  - kentucky_shively
+  - kentucky_winchester
+
+kentucky_ashland:
+  title: Ashland
+  type: city
+  population: 21552
+
+kentucky_bowling_green:
+  title: Bowling Green
+  type: city
+  population: 51329
+
+kentucky_covington:
+  title: Covington
+  type: city
+  population: 43047
+
+kentucky_danville:
+  title: Danville
+  type: city
+  population: 15415
+
+kentucky_elizabethtown:
+  title: Elizabethtown
+  type: city
+  population: 23140
+
+kentucky_erlanger:
+  title: Erlanger
+  type: city
+  population: 16760
+
+kentucky_florence:
+  title: Florence
+  type: city
+  population: 25565
+
+kentucky_fort_thomas:
+  title: Fort Thomas
+  type: city
+  population: 15738
+
+kentucky_frankfort:
+  title: Frankfort
+  type: city
+  population: 27300
+
+kentucky_georgetown:
+  title: Georgetown
+  type: city
+  population: 19667
+
+kentucky_henderson:
+  title: Henderson
+  type: city
+  population: 27542
+
+kentucky_hopkinsville:
+  title: Hopkinsville
+  type: city
+  population: 28830
+
+kentucky_independence:
+  title: Independence
+  type: city
+  population: 17958
+
+kentucky_jeffersontown:
+  title: Jeffersontown
+  type: city
+  population: 26255
+
+kentucky_lexington_fayette:
+  title: Lexington-Fayette
+  type: city
+  population: 266451
+
+kentucky_louisville_jefferson_county:
+  title: Louisville/Jefferson County
+  type: city
+  population: 555366
+
+kentucky_madisonville:
+  title: Madisonville
+  type: city
+  population: 19303
+
+kentucky_murray:
+  title: Murray
+  type: city
+  population: 15327
+
+kentucky_newport:
+  title: Newport
+  type: city
+  population: 16094
+
+kentucky_nicholasville:
+  title: Nicholasville
+  type: city
+  population: 22838
+
+kentucky_owensboro:
+  title: Owensboro
+  type: city
+  population: 55000
+
+kentucky_paducah:
+  title: Paducah
+  type: city
+  population: 25478
+
+kentucky_radcliff:
+  title: Radcliff
+  type: city
+  population: 21553
+
+kentucky_richmond:
+  title: Richmond
+  type: city
+  population: 30103
+
+kentucky_st__matthews:
+  title: St. Matthews
+  type: city
+  population: 17346
+
+kentucky_shively:
+  title: Shively
+  type: city
+  population: 15234
+
+kentucky_winchester:
+  title: Winchester
+  type: city
+  population: 16427
+

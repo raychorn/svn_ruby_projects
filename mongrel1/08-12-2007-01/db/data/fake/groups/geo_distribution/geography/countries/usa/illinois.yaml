@@ -1,0 +1,934 @@
+illinois:
+  title: Illinois
+  subgroups:
+  - illinois_addison
+  - illinois_algonquin
+  - illinois_alsip
+  - illinois_alton
+  - illinois_arlington_heights
+  - illinois_aurora
+  - illinois_bartlett
+  - illinois_batavia
+  - illinois_belleville
+  - illinois_bellwood
+  - illinois_belvidere
+  - illinois_bensenville
+  - illinois_berwyn
+  - illinois_bloomingdale
+  - illinois_bloomington
+  - illinois_blue_island
+  - illinois_bolingbrook
+  - illinois_bourbonnais
+  - illinois_bridgeview
+  - illinois_brookfield
+  - illinois_buffalo_grove
+  - illinois_burbank
+  - illinois_cahokia
+  - illinois_calumet_city
+  - illinois_carbondale
+  - illinois_carol_stream
+  - illinois_carpentersville
+  - illinois_cary
+  - illinois_champaign
+  - illinois_charleston
+  - illinois_chicago
+  - illinois_chicago_heights
+  - illinois_cicero
+  - illinois_collinsville
+  - illinois_country_club_hills
+  - illinois_crest_hill
+  - illinois_crystal_lake
+  - illinois_danville
+  - illinois_darien
+  - illinois_decatur
+  - illinois_deerfield
+  - illinois_dekalb
+  - illinois_des_plaines
+  - illinois_dixon
+  - illinois_dolton
+  - illinois_downers_grove
+  - illinois_east_moline
+  - illinois_east_peoria
+  - illinois_east_st__louis
+  - illinois_edwardsville
+  - illinois_elgin
+  - illinois_elk_grove_village
+  - illinois_elmhurst
+  - illinois_elmwood_park
+  - illinois_evanston
+  - illinois_evergreen_park
+  - illinois_fairview_heights
+  - illinois_forest_park
+  - illinois_franklin_park
+  - illinois_freeport
+  - illinois_galesburg
+  - illinois_geneva
+  - illinois_glendale_heights
+  - illinois_glen_ellyn
+  - illinois_glenview
+  - illinois_godfrey
+  - illinois_granite_city
+  - illinois_grayslake
+  - illinois_gurnee
+  - illinois_hanover_park
+  - illinois_harvey
+  - illinois_highland_park
+  - illinois_hinsdale
+  - illinois_hoffman_estates
+  - illinois_homer_glen
+  - illinois_homewood
+  - illinois_huntley
+  - illinois_jacksonville
+  - illinois_joliet
+  - illinois_kankakee
+  - illinois_la_grange
+  - illinois_lake_forest
+  - illinois_lake_in_the_hills
+  - illinois_lake_zurich
+  - illinois_lansing
+  - illinois_libertyville
+  - illinois_lincoln
+  - illinois_lisle
+  - illinois_lockport
+  - illinois_lombard
+  - illinois_loves_park
+  - illinois_mchenry
+  - illinois_machesney_park
+  - illinois_macomb
+  - illinois_marion
+  - illinois_mattoon
+  - illinois_maywood
+  - illinois_melrose_park
+  - illinois_mokena
+  - illinois_moline
+  - illinois_morton
+  - illinois_morton_grove
+  - illinois_mount_prospect
+  - illinois_mount_vernon
+  - illinois_mundelein
+  - illinois_naperville
+  - illinois_new_lenox
+  - illinois_niles
+  - illinois_normal
+  - illinois_northbrook
+  - illinois_north_chicago
+  - illinois_oak_forest
+  - illinois_oak_lawn
+  - illinois_oak_park
+  - illinois_o_fallon
+  - illinois_orland_park
+  - illinois_oswego
+  - illinois_ottawa
+  - illinois_palatine
+  - illinois_palos_hills
+  - illinois_park_forest
+  - illinois_park_ridge
+  - illinois_pekin
+  - illinois_peoria
+  - illinois_plainfield
+  - illinois_prospect_heights
+  - illinois_quincy
+  - illinois_rockford
+  - illinois_rock_island
+  - illinois_rolling_meadows
+  - illinois_romeoville
+  - illinois_roselle
+  - illinois_round_lake_beach
+  - illinois_st__charles
+  - illinois_schaumburg
+  - illinois_skokie
+  - illinois_south_elgin
+  - illinois_south_holland
+  - illinois_springfield
+  - illinois_sterling
+  - illinois_streamwood
+  - illinois_tinley_park
+  - illinois_urbana
+  - illinois_vernon_hills
+  - illinois_villa_park
+  - illinois_waukegan
+  - illinois_westchester
+  - illinois_west_chicago
+  - illinois_westmont
+  - illinois_wheaton
+  - illinois_wheeling
+  - illinois_wilmette
+  - illinois_woodridge
+  - illinois_woodstock
+  - illinois_zion
+
+illinois_addison:
+  title: Addison
+  type: city
+  population: 36967
+
+illinois_algonquin:
+  title: Algonquin
+  type: city
+  population: 28223
+
+illinois_alsip:
+  title: Alsip
+  type: city
+  population: 19230
+
+illinois_alton:
+  title: Alton
+  type: city
+  population: 29677
+
+illinois_arlington_heights:
+  title: Arlington Heights
+  type: city
+  population: 75149
+
+illinois_aurora:
+  title: Aurora
+  type: city
+  population: 166767
+
+illinois_bartlett:
+  title: Bartlett
+  type: city
+  population: 37756
+
+illinois_batavia:
+  title: Batavia
+  type: city
+  population: 26984
+
+illinois_belleville:
+  title: Belleville
+  type: city
+  population: 41448
+
+illinois_bellwood:
+  title: Bellwood
+  type: city
+  population: 19745
+
+illinois_belvidere:
+  title: Belvidere
+  type: city
+  population: 23781
+
+illinois_bensenville:
+  title: Bensenville
+  type: city
+  population: 20609
+
+illinois_berwyn:
+  title: Berwyn
+  type: city
+  population: 51978
+
+illinois_bloomingdale:
+  title: Bloomingdale
+  type: city
+  population: 21861
+
+illinois_bloomington:
+  title: Bloomington
+  type: city
+  population: 69225
+
+illinois_blue_island:
+  title: Blue Island
+  type: city
+  population: 23000
+
+illinois_bolingbrook:
+  title: Bolingbrook
+  type: city
+  population: 66206
+
+illinois_bourbonnais:
+  title: Bourbonnais
+  type: city
+  population: 16627
+
+illinois_bridgeview:
+  title: Bridgeview
+  type: city
+  population: 15055
+
+illinois_brookfield:
+  title: Brookfield
+  type: city
+  population: 18670
+
+illinois_buffalo_grove:
+  title: Buffalo Grove
+  type: city
+  population: 43338
+
+illinois_burbank:
+  title: Burbank
+  type: city
+  population: 27729
+
+illinois_cahokia:
+  title: Cahokia
+  type: city
+  population: 15794
+
+illinois_calumet_city:
+  title: Calumet City
+  type: city
+  population: 38155
+
+illinois_carbondale:
+  title: Carbondale
+  type: city
+  population: 24849
+
+illinois_carol_stream:
+  title: Carol Stream
+  type: city
+  population: 40280
+
+illinois_carpentersville:
+  title: Carpentersville
+  type: city
+  population: 36013
+
+illinois_cary:
+  title: Cary
+  type: city
+  population: 18691
+
+illinois_champaign:
+  title: Champaign
+  type: city
+  population: 71629
+
+illinois_charleston:
+  title: Charleston
+  type: city
+  population: 20180
+
+illinois_chicago:
+  title: Chicago
+  type: city
+  population: 2861037
+
+illinois_chicago_heights:
+  title: Chicago Heights
+  type: city
+  population: 31680
+
+illinois_cicero:
+  title: Cicero
+  type: city
+  population: 83072
+
+illinois_collinsville:
+  title: Collinsville
+  type: city
+  population: 25415
+
+illinois_country_club_hills:
+  title: Country Club Hills
+  type: city
+  population: 16276
+
+illinois_crest_hill:
+  title: Crest Hill
+  type: city
+  population: 18176
+
+illinois_crystal_lake:
+  title: Crystal Lake
+  type: city
+  population: 40581
+
+illinois_danville:
+  title: Danville
+  type: city
+  population: 33016
+
+illinois_darien:
+  title: Darien
+  type: city
+  population: 22881
+
+illinois_decatur:
+  title: Decatur
+  type: city
+  population: 78401
+
+illinois_deerfield:
+  title: Deerfield
+  type: city
+  population: 19424
+
+illinois_dekalb:
+  title: DeKalb
+  type: city
+  population: 41469
+
+illinois_des_plaines:
+  title: Des Plaines
+  type: city
+  population: 56140
+
+illinois_dixon:
+  title: Dixon
+  type: city
+  population: 15429
+
+illinois_dolton:
+  title: Dolton
+  type: city
+  population: 24754
+
+illinois_downers_grove:
+  title: Downers Grove
+  type: city
+  population: 49255
+
+illinois_east_moline:
+  title: East Moline
+  type: city
+  population: 21098
+
+illinois_east_peoria:
+  title: East Peoria
+  type: city
+  population: 22479
+
+illinois_east_st__louis:
+  title: East St. Louis
+  type: city
+  population: 30265
+
+illinois_edwardsville:
+  title: Edwardsville
+  type: city
+  population: 23858
+
+illinois_elgin:
+  title: Elgin
+  type: city
+  population: 97886
+
+illinois_elk_grove_village:
+  title: Elk Grove Village
+  type: city
+  population: 34120
+
+illinois_elmhurst:
+  title: Elmhurst
+  type: city
+  population: 44327
+
+illinois_elmwood_park:
+  title: Elmwood Park
+  type: city
+  population: 24643
+
+illinois_evanston:
+  title: Evanston
+  type: city
+  population: 74782
+
+illinois_evergreen_park:
+  title: Evergreen Park
+  type: city
+  population: 20078
+
+illinois_fairview_heights:
+  title: Fairview Heights
+  type: city
+  population: 15805
+
+illinois_forest_park:
+  title: Forest Park
+  type: city
+  population: 15245
+
+illinois_franklin_park:
+  title: Franklin Park
+  type: city
+  population: 18693
+
+illinois_freeport:
+  title: Freeport
+  type: city
+  population: 25760
+
+illinois_galesburg:
+  title: Galesburg
+  type: city
+  population: 32362
+
+illinois_geneva:
+  title: Geneva
+  type: city
+  population: 22942
+
+illinois_glendale_heights:
+  title: Glendale Heights
+  type: city
+  population: 32725
+
+illinois_glen_ellyn:
+  title: Glen Ellyn
+  type: city
+  population: 27293
+
+illinois_glenview:
+  title: Glenview
+  type: city
+  population: 45825
+
+illinois_godfrey:
+  title: Godfrey
+  type: city
+  population: 16919
+
+illinois_granite_city:
+  title: Granite City
+  type: city
+  population: 31069
+
+illinois_grayslake:
+  title: Grayslake
+  type: city
+  population: 20459
+
+illinois_gurnee:
+  title: Gurnee
+  type: city
+  population: 30706
+
+illinois_hanover_park:
+  title: Hanover Park
+  type: city
+  population: 37372
+
+illinois_harvey:
+  title: Harvey
+  type: city
+  population: 29018
+
+illinois_highland_park:
+  title: Highland Park
+  type: city
+  population: 31212
+
+illinois_hinsdale:
+  title: Hinsdale
+  type: city
+  population: 17632
+
+illinois_hoffman_estates:
+  title: Hoffman Estates
+  type: city
+  population: 51499
+
+illinois_homer_glen:
+  title: Homer Glen
+  type: city
+  population: 23970
+
+illinois_homewood:
+  title: Homewood
+  type: city
+  population: 19103
+
+illinois_huntley:
+  title: Huntley
+  type: city
+  population: 15069
+
+illinois_jacksonville:
+  title: Jacksonville
+  type: city
+  population: 19631
+
+illinois_joliet:
+  title: Joliet
+  type: city
+  population: 130904
+
+illinois_kankakee:
+  title: Kankakee
+  type: city
+  population: 26812
+
+illinois_la_grange:
+  title: La Grange
+  type: city
+  population: 15551
+
+illinois_lake_forest:
+  title: Lake Forest
+  type: city
+  population: 20944
+
+illinois_lake_in_the_hills:
+  title: Lake in the Hills
+  type: city
+  population: 28221
+
+illinois_lake_zurich:
+  title: Lake Zurich
+  type: city
+  population: 19321
+
+illinois_lansing:
+  title: Lansing
+  type: city
+  population: 27562
+
+illinois_libertyville:
+  title: Libertyville
+  type: city
+  population: 21663
+
+illinois_lincoln:
+  title: Lincoln
+  type: city
+  population: 15065
+
+illinois_lisle:
+  title: Lisle
+  type: city
+  population: 23021
+
+illinois_lockport:
+  title: Lockport
+  type: city
+  population: 20682
+
+illinois_lombard:
+  title: Lombard
+  type: city
+  population: 43034
+
+illinois_loves_park:
+  title: Loves Park
+  type: city
+  population: 22535
+
+illinois_mchenry:
+  title: McHenry
+  type: city
+  population: 24120
+
+illinois_machesney_park:
+  title: Machesney Park
+  type: city
+  population: 21388
+
+illinois_macomb:
+  title: Macomb
+  type: city
+  population: 18750
+
+illinois_marion:
+  title: Marion
+  type: city
+  population: 16869
+
+illinois_mattoon:
+  title: Mattoon
+  type: city
+  population: 17646
+
+illinois_maywood:
+  title: Maywood
+  type: city
+  population: 26070
+
+illinois_melrose_park:
+  title: Melrose Park
+  type: city
+  population: 22724
+
+illinois_mokena:
+  title: Mokena
+  type: city
+  population: 16529
+
+illinois_moline:
+  title: Moline
+  type: city
+  population: 42921
+
+illinois_morton:
+  title: Morton
+  type: city
+  population: 15593
+
+illinois_morton_grove:
+  title: Morton Grove
+  type: city
+  population: 22373
+
+illinois_mount_prospect:
+  title: Mount Prospect
+  type: city
+  population: 55004
+
+illinois_mount_vernon:
+  title: Mount Vernon
+  type: city
+  population: 16307
+
+illinois_mundelein:
+  title: Mundelein
+  type: city
+  population: 32719
+
+illinois_naperville:
+  title: Naperville
+  type: city
+  population: 140537
+
+illinois_new_lenox:
+  title: New Lenox
+  type: city
+  population: 22528
+
+illinois_niles:
+  title: Niles
+  type: city
+  population: 29604
+
+illinois_normal:
+  title: Normal
+  type: city
+  population: 49237
+
+illinois_northbrook:
+  title: Northbrook
+  type: city
+  population: 34197
+
+illinois_north_chicago:
+  title: North Chicago
+  type: city
+  population: 33380
+
+illinois_oak_forest:
+  title: Oak Forest
+  type: city
+  population: 28066
+
+illinois_oak_lawn:
+  title: Oak Lawn
+  type: city
+  population: 54234
+
+illinois_oak_park:
+  title: Oak Park
+  type: city
+  population: 50975
+
+illinois_o_fallon:
+  title: O'Fallon
+  type: city
+  population: 24614
+
+illinois_orland_park:
+  title: Orland Park
+  type: city
+  population: 54752
+
+illinois_oswego:
+  title: Oswego
+  type: city
+  population: 21019
+
+illinois_ottawa:
+  title: Ottawa
+  type: city
+  population: 18663
+
+illinois_palatine:
+  title: Palatine
+  type: city
+  population: 66574
+
+illinois_palos_hills:
+  title: Palos Hills
+  type: city
+  population: 17392
+
+illinois_park_forest:
+  title: Park Forest
+  type: city
+  population: 23213
+
+illinois_park_ridge:
+  title: Park Ridge
+  type: city
+  population: 37169
+
+illinois_pekin:
+  title: Pekin
+  type: city
+  population: 33272
+
+illinois_peoria:
+  title: Peoria
+  type: city
+  population: 112508
+
+illinois_plainfield:
+  title: Plainfield
+  type: city
+  population: 24601
+
+illinois_prospect_heights:
+  title: Prospect Heights
+  type: city
+  population: 16537
+
+illinois_quincy:
+  title: Quincy
+  type: city
+  population: 39797
+
+illinois_rockford:
+  title: Rockford
+  type: city
+  population: 152457
+
+illinois_rock_island:
+  title: Rock Island
+  type: city
+  population: 38795
+
+illinois_rolling_meadows:
+  title: Rolling Meadows
+  type: city
+  population: 24019
+
+illinois_romeoville:
+  title: Romeoville
+  type: city
+  population: 35021
+
+illinois_roselle:
+  title: Roselle
+  type: city
+  population: 23335
+
+illinois_round_lake_beach:
+  title: Round Lake Beach
+  type: city
+  population: 28238
+
+illinois_st__charles:
+  title: St. Charles
+  type: city
+  population: 32134
+
+illinois_schaumburg:
+  title: Schaumburg
+  type: city
+  population: 73309
+
+illinois_skokie:
+  title: Skokie
+  type: city
+  population: 63965
+
+illinois_south_elgin:
+  title: South Elgin
+  type: city
+  population: 20779
+
+illinois_south_holland:
+  title: South Holland
+  type: city
+  population: 21722
+
+illinois_springfield:
+  title: Springfield
+  type: city
+  population: 114740
+
+illinois_sterling:
+  title: Sterling
+  type: city
+  population: 15448
+
+illinois_streamwood:
+  title: Streamwood
+  type: city
+  population: 37109
+
+illinois_tinley_park:
+  title: Tinley Park
+  type: city
+  population: 56274
+
+illinois_urbana:
+  title: Urbana
+  type: city
+  population: 38313
+
+illinois_vernon_hills:
+  title: Vernon Hills
+  type: city
+  population: 23443
+
+illinois_villa_park:
+  title: Villa Park
+  type: city
+  population: 22783
+
+illinois_waukegan:
+  title: Waukegan
+  type: city
+  population: 91552
+
+illinois_westchester:
+  title: Westchester
+  type: city
+  population: 16360
+
+illinois_west_chicago:
+  title: West Chicago
+  type: city
+  population: 26125
+
+illinois_westmont:
+  title: Westmont
+  type: city
+  population: 24818
+
+illinois_wheaton:
+  title: Wheaton
+  type: city
+  population: 54877
+
+illinois_wheeling:
+  title: Wheeling
+  type: city
+  population: 36750
+
+illinois_wilmette:
+  title: Wilmette
+  type: city
+  population: 27093
+
+illinois_woodridge:
+  title: Woodridge
+  type: city
+  population: 33912
+
+illinois_woodstock:
+  title: Woodstock
+  type: city
+  population: 21554
+
+illinois_zion:
+  title: Zion
+  type: city
+  population: 24083
+

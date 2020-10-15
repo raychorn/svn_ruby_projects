@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" height="100%" creationComplete="onCreationComplete()">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Label;
+			import flash.geom.*
+			import flash.display.*
+			
+			private var _isLabelDrawn:Boolean = false;
+			
+			private function drawLabel():void {
+				if (this._isLabelDrawn == false) {
+					var label:Label = new Label();
+					label.x = this.width / 2;
+					label.y = this.height / 2
+					label.text = "Missing Image";
+					label.rotation = 45;
+					label.percentWidth = 100;
+					label.percentHeight = 100;
+					this.addChild(label);
+					
+					this._isLabelDrawn = true;
+				}
+			}
+			
+			private function drawRect():void {
+				var fillType:String = GradientType.LINEAR;
+				var colors:Array = [0x1F0000, 0xFF0000];
+				var alphas:Array = [10, 50];
+				var ratios:Array = [0x00, 0xFF];
+				var matr:Matrix = new Matrix();
+				matr.createGradientBox(20, 20, 0, 0, 0);
+				var spreadMethod:String = SpreadMethod.PAD;
+				this.graphics.beginGradientFill(fillType, colors, alphas, ratios, matr, spreadMethod);  
+				this.graphics.drawRect(0,0,this.width,this.height);
+				this.graphics.endFill();
+			}
+			
+			private function drawGraphic():void {
+				try {
+					this.graphics.clear();
+	//				this.drawRect();
+					this.graphics.lineStyle(1, 0xff0000, 1);
+					this.graphics.drawRect(0, 0, this.width, this.height);
+					var deltaX:Number = this.width / 10;
+					var x:Number;
+					var y:Number = this.height;
+					this.graphics.lineStyle(0.5, 0xff0000, 0.5);
+					for (x = this.width; x > 0; x -= deltaX) {
+						this.graphics.moveTo(x - deltaX, this.height);
+						this.graphics.lineTo(this.width, y - deltaX);
+						y -= deltaX;
+					}
+
+					y = 0;
+					for (x = 0; x < this.width; x += deltaX) {
+						this.graphics.moveTo(0, y + deltaX);
+						this.graphics.lineTo(x + deltaX, 0);
+						y += deltaX;
+					}
+				} catch (err:Error) { }
+			}
+			
+			private function onCreationComplete():void {
+	//			this.drawLabel();
+				this.drawGraphic();
+			}
+			
+			override public function invalidateDisplayList():void {
+				super.invalidateDisplayList();
+	//			this.drawLabel();
+				this.drawGraphic();
+			}
+		]]>
+	</mx:Script>
+</mx:Canvas>

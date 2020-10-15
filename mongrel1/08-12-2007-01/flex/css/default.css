@@ -1,0 +1,259 @@
+
+/*
+dark Grey: 4f4f47
+Green: b0b631
+Orange: e4b61b
+Blue: 7c94b7
+
+chart colors
+Dark Green: 5c8a8b
+Purple: 8f56a2
+Brown: b18467
+
+Light Grey: f8f7f5
+middle grey?? 81807c
+Deep Blue: 5970A4
+*/
+
+Application {
+	backgroundColor: #4f4f47;
+	backgroundGradientColors: #4f4f47, #4f4f47;
+	color: #4f4f47;
+	themeColor: #b0b631;
+	paddingLeft: 0;
+	paddingRight: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	horizontalAlign: center;
+	verticalAlign: middle;
+}
+
+.applicationControlBar {
+	borderStyle: solid;
+	borderThickness: 0;
+	cornerRadius: 7;
+	color: #FFFFFF;
+	fontWeight: bold;
+	fontSize: 16;
+}
+
+ButtonBar {
+   buttonStyleName: "mybuttonBarButtonStyle";
+}
+
+.mybuttonBarButtonStyle {
+   fontSize: 9;
+   highlightAlphas: 0, 0;
+   fillAlphas: 0, 0, 1, 1;
+   fillColors: #000000, #000000, #b0b631, #b0b631;
+   textRollOverColor: #ffffff;
+   borderColor: #ffffff;
+}
+
+Panel, TitleWindow {
+   borderStyle: solid;
+   borderColor: #d2d2d2;
+   borderAlpha: 1;
+   borderThickness: 1;
+   roundedBottomCorners: true;
+   cornerRadius: 7;
+   backgroundColor: #f8f7f5;
+   dropShadowEnabled: false;
+   titleStyleName: "mypanelTitle";
+   modalTransparencyColor: #4f4f47;
+   modalTransparency: 0.75;
+}
+
+.mypanelTitle {
+   color: #5970a4;
+   fontSize: 12;
+   fontWeight: bold;
+}
+
+ToolTip {
+   backgroundColor: #e4b61b;
+   color: #4f4f47;
+}
+
+HScrollBar {
+   cornerRadius: 0;
+}
+
+VScrollBar {
+   cornerRadius: 0;
+}
+
+SuperTabBar {
+	/*
+	paddingBottom: -1;
+	verticalAlign: bottom;
+	*/
+	horizontalGap: 3;
+	tabStyleName: firefoxLikeTabs;
+}
+
+.firefoxLikeTabs {
+	indicatorClass: Embed("/assets/assets.swf#indicator");    
+	
+	tabCloseButtonStyleName: 'closeButton';
+}
+
+.closeButton {
+	upSkin: Embed("../assets/assets.swf#firefox_close_up");
+	downSkin: Embed("../assets/assets.swf#firefox_close_down");
+	overSkin: Embed("../assets/assets.swf#firefox_close_over");
+	disabledSkin: Embed("../assets/assets.swf#firefox_close_disabled");
+}
+
+TabNavigator {
+	tabStyleName: tabNavigatorTabStyle;
+	horizontalGap: 3;
+	backgroundColor: #f8f7f5;
+}
+
+.tabNavigatorTabStyle {
+	fontSize: 16;
+}
+
+Tree {
+	useRollOver: false;
+	borderStyle: none;
+	selectionColor: #b0b631;
+	backgroundAlpha: 0;
+}
+
+PieSeries {
+	fills: #8f56a2, #5970A4, #b18467, #b0b631, #e4b61b;
+}
+
+.textLink {
+	color: #b0b631;
+	textDecoration: underline;
+}
+
+.dashboardTabs {
+	fontSize: 12;
+	verticalAlign: bottom;
+	paddingBottom: 0;
+}
+
+HRule {
+	strokeWidth: 1;
+}
+
+Panel.wizardFormContainer {
+	borderStyle: default;
+	borderColor: #7c94b7;
+	borderAlpha: 1;
+	roundedBottomCorners: true;
+	cornerRadius: 7;
+	backgroundColor: #dee4ea;
+	dropShadowEnabled: false;
+	titleStyleName: "wizardFormContainerTitle";
+	color: #262626;
+	/*
+	borderStyle: none;
+	borderColor: #e4b61b;
+	borderAlpha: 1;
+	borderThickness: 1;
+	roundedBottomCorners: true;
+	cornerRadius: 7;
+	backgroundColor: #e4b61b;
+	dropShadowEnabled: false;
+	titleStyleName: "wizardFormContainerTitle";
+	*/
+}
+
+.wizardFormContainerTitle {
+   color: #FFFFFF;
+   fontSize: 12;
+   fontWeight: bold;
+}
+
+HBox.wizardFormLabelActive {
+	borderStyle: 'solid';
+	borderColor: #7c94b7;
+	borderThickness: 3;
+	cornerRadius: 3;
+}
+
+HBox.wizardFormLabelInactive {
+	borderStyle: 'none';
+}
+
+.infoText {
+	color: #e4b61b;
+	fontSize: 14;
+}
+
+Panel.infoPanel {
+	backgroundColor: #e4b61b;
+	color: #000000;
+	fontSize: 14;
+}
+
+Panel.listBuilderSelectedSubject {
+	backgroundColor: white;
+	backgroundAlpha: .1;
+	borderColor: #4f4f47;
+	borderThickness: 2;
+	borderStyle: solid;
+	borderAlpha: 1;
+	color: #000000;
+	titleStyleName: "listBuilderSelectedSubjectTitle";
+}
+
+.listBuilderSelectedSubjectTitle {
+	color: #7c94b7;
+	fontWeight: bold;
+}
+
+Panel.listBuilderPanel {
+	borderStyle: default;
+	borderColor: #81807c;
+	borderAlpha: 1;
+	roundedBottomCorners: true;
+	cornerRadius: 7;
+	backgroundColor: red;
+	backgroundAlpha: 0;
+	dropShadowEnabled: false;
+	titleStyleName: "listBuilderPanelTitle";
+}
+
+.listBuilderPanelTitle {
+   color: #FFFFFF;
+   fontSize: 11;
+   fontWeight: bold;
+}
+
+ComboBox {
+	themeColor: #b0b631;
+}
+
+.bigFormHeading {
+	color: #4f4f47;
+	fontSize: 14;
+	fontWeight: bold;
+}
+/* Styles for DataFilterForm */
+Button.plusButton {
+	fontSize: 12;
+	paddingRight: 0;
+	paddingLeft: 0;
+}
+Button.minusButton {
+	fontSize: 16;
+	paddingRight: 0;
+	paddingLeft: 0;
+}
+PopUpMenuButtonDataGridItemRenderer {	
+	cornerRadius: 0;
+	highlightAlphas: 0, 0;
+	fillAlphas: 0, 0, 0, 0;
+	textRollOverColor: #0000FF;
+	textSelectedColor: #0000FF;
+	color: #0000FF;
+	fontWeight: 'normal';
+	skin: ClassReference('com.bigfix.extensions.skins.PopUpButtonSkinClear');
+	popUpIcon: Embed('/assets/assets.swf#down_arrow');
+}

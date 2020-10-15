@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel title="Trend Chart"
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:data="com.bigfix.dss.view.data.*"
+	xmlns:analysis="com.bigfix.dss.view.analysis.*"
+	width="100%" height="100%"
+	verticalAlign="middle" horizontalAlign="center"
+	verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	creationComplete="init()"
+	>
+	<mx:Script><![CDATA[
+		import mx.controls.Alert;
+		import mx.rpc.events.ResultEvent;
+		import mx.rpc.events.FaultEvent;
+		import mx.events.FlexEvent;
+		import mx.events.ListEvent;
+		import mx.events.PropertyChangeEvent;
+		import mx.charts.HitData;
+		import mx.charts.series.LineSeries;
+		import mx.charts.chartClasses.NumericAxis;
+		import mx.charts.DateTimeAxis;
+		import mx.charts.series.LineSeries;
+		import mx.charts.series.renderData.LineSeriesRenderData;
+		import mx.charts.series.PlotSeries;
+		import mx.graphics.Stroke;
+		import mx.binding.utils.ChangeWatcher;
+
+		import com.bigfix.dss.util.DSS;
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.model.Constants;
+		import com.bigfix.dss.vo.TrendAnalysisVO;
+		import com.bigfix.dss.vo.ComputerGroupVO;
+
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+		private var service:Object = DSS.svc("trendChartService");
+
+		[Bindable]
+		public var options:TrendAnalysisVO; // this stores all info for this trend widget
+
+		// color wheel for line series
+		private var colorWheel:Array = [0x8f56a2, 0x5970A4, 0xb18467, 0xb0b631, 0xe4b61b];
+		// threshold for this trend
+		private var threshold:Number;
+
+		private function init():void {
+			//refreshDataProvider(null);
+			//trace("TrendAnalysis.init() computerGroupTreeLegend.selectedItem = ",computerGroupTreeLegend.selectedItem);
+			/*
+			if (computerGroupTreeLegend.selectedItem) {
+				handleTreeChange(null);
+			}
+			*/
+			//ChangeWatcher.watch(macroChart, 'startEpoch', handleRangeChange);
+			//ChangeWatcher.watch(macroChart, 'endEpoch', handleRangeChange);
+		}
+
+		private function handleTreeChange(event:*):void {
+			if (computerGroupTreeLegend.selectedItem is ComputerGroupVO) {
+				this.options.computer_group = ComputerGroupVO(computerGroupTreeLegend.selectedItem);
+				refreshDataProvider();
+				macroChart.refreshDataProvider(this.options);
+			}
+		}
+
+		private function handleRangeChange(event:*):void {
+			this.options.filterStartEpoch = macroChart.startEpoch;
+			this.options.filterEndEpoch = macroChart.endEpoch;
+			for each (var series:* in chart.series) {
+				series.dataProvider.refresh();
+			}
+		}
+
+		private function handleVisibleDeltaTypeChange(event:*):void {
+			trace("change in visible delta types ", deltaTypeLegend.unselectedDeltaTypeIDs);
+		}
+
+		private function refreshDataProvider():void {
+			service.getTrendForAnalysis(this.options).onResult(resultHandler).onFault(faultHandler);
+		}
+
+		private function faultHandler(event:FaultEvent):void {
+			Alert.show(event.message.toString(), "Unable to retrieve trend data");
+		}
+
+		private function resultHandler(event:ResultEvent):void {
+			// check for success!
+			this.title = options.metric.name + ' for ' + options.computer_group.name;
+			// blank stuff out
+			chart.series = [];
+
+			var trendSeries:LineSeries;
+			var colorCounter:int = 0;
+			for each (var trend:Object in event.result.trend_data) {
+				trendSeries = new LineSeries();
+				trendSeries.name = trend.id; // dataSeries.name will be the computer group ID!
+				trendSeries.displayName = trend.name;
+				trendSeries.xField = "xValue";
+				trendSeries.yField = "yValue";
+				trendSeries.dataProvider = trend.data;
+				trendSeries.dataProvider.filterFunction = limitTrendToDateRange;
+				trendSeries.setStyle('lineStroke',new Stroke(colorWheel[colorCounter % colorWheel.length], 1));
+				chart.series.push(trendSeries);
+				colorCounter++;
+			}
+			chart.series = chart.series;
+			chart.validateNow(); // this is so "DateTimeAxis(chart.horizontalAxis).minimum" returns the proper value
+
+			// now make a new LineSeries which will represent the threshold
+			// this may not be the best way to handle this because I would eventually want the user to drag this thing around and base additional
+			// detail displays off this thing
+			trendSeries = new LineSeries();
+			trendSeries.name = "threshold";
+			trendSeries.displayName = "Threshold";
+			trendSeries.interactive = false;
+			trendSeries.xField = "xValue";
+			trendSeries.yField = "yValue";
+			trendSeries.dataProvider = [
+				{
+					xValue: DateTimeAxis(chart.horizontalAxis).minimum,
+					yValue: event.result.threshold
+				},
+				{
+					xValue: DateTimeAxis(chart.horizontalAxis).maximum,
+					yValue: event.result.threshold
+				}
+			];
+			trendSeries.dataProvider.filterFunction = limitTrendToDateRange;
+			trendSeries.setStyle('lineStroke',new Stroke(0xFF0000, 2, 0.65));
+			chart.series.push(trendSeries);
+
+			chart.series = chart.series;
+			chart.validateNow();
+
+			/*******************************
+			 now create the PlotSeries
+			*******************************/
+			// first build a cache of render data for each computer group
+			var chartRenderData:Object = {};
+			for (var i:int = 0; i < chart.series.length; i++) {
+				if (chart.series[i].name != 'threshold') {
+					chartRenderData[chart.series[i].name] = chart.series[i].getRenderDataForTransition('foo');
+				}
+				//trace("computer group ID: " + this.series[0].series[i].name + " has cache of " + areaSeriesRenderData[this.series[0].series[i].name].cache);
+			}
+
+			// clean up our datasource by adding the attribute 'yValue' to each <dataPoint> element.
+			var deltaEventSeries:PlotSeries;
+			//var tmpDeltaTypes:Array = [];
+			for each (var deltaType:Object in event.result.delta_data) {
+				for each (var deltaEvent:Object in deltaType.events) {
+					// set a default value for the property 'yValue'
+					deltaEvent.yValue = -1;
+					if (deltaEvent.computer_group_id == null) {
+						deltaEvent.yValue = 0;
+						continue;
+					}
+					deltaEvent.xValue = parseInt(deltaEvent.xValue);
+
+					// binary search for this xValue in the corresponding trend series data
+					var renderData:LineSeriesRenderData = chartRenderData[deltaEvent.computer_group_id];
+					var low:int = 0;
+					var high:int = renderData.cache.length - 1;
+					var mid:int;
+					var yNumber:int = -1;
+
+					// make sure we're not out of bounds for this given X point for this computer group trend
+					if (deltaEvent.xValue < renderData.cache[low].xValue || deltaEvent.xValue > renderData.cache[high].xValue) {
+						//trace("deltaEvent.xValue (",deltaEvent.xValue,") is outside of the range:",renderData.cache[low].xValue," - ",renderData.cache[high].xValue);
+						//delete event;
+						continue;
+					}
+
+					while (low <= high) {
+						mid = (low + high) >>> 1;
+
+						if (renderData.cache[mid].xNumber < deltaEvent.xValue) {
+							low = mid + 1;
+						} else if (renderData.cache[mid].xNumber > deltaEvent.xValue) {
+							high = mid - 1;
+						} else {
+							yNumber = renderData.cache[mid].yNumber;
+							break;
+						}
+					}
+					// if we didn't find an exact match, yNumber will be -1. We'll find the mid point between the last searched point and the next to call it good
+					if (yNumber == -1) {
+						yNumber = (renderData.cache[low].yNumber + renderData.cache[high].yNumber)/2;
+						//trace("didn't find an exact match for xValue of " + deltaEvent.xValue + " ! setting yNumber to " + yNumber);
+					}
+					deltaEvent.yValue = yNumber;
+				}
+
+				// now we can represent this delta type as a plot series
+				//addPlotSeries(deltaType);
+				//trace("creating a plotseries for delta type ",deltaType.name, " with ", deltaType.events.length ," events");
+				var plotSeries:PlotSeries = new PlotSeries();
+				plotSeries.name = deltaType.name;
+				plotSeries.xField = "xValue";
+				plotSeries.yField = "yValue";
+				plotSeries.displayName = deltaType.name;
+				plotSeries.dataProvider = deltaType.events;
+				plotSeries.dataProvider.filterFunction = limitDeltaEventsToDateRange;
+				plotSeries.setStyle('fill', colorWheel[colorCounter % colorWheel.length]);
+				plotSeries.setStyle('stroke', new Stroke(colorWheel[colorCounter % colorWheel.length], 2));
+				colorCounter++;
+				chart.series.push(plotSeries);
+				//tmpDeltaTypes.push({id: deltaType.id, name: deltaType.name});
+			}
+			chart.series = chart.series;
+			chart.validateNow();
+			chart.visible = true;
+
+			// update legend components
+			computerGroupTreeLegend.updateLegends();
+			deltaTypeLegend.updateLegends();
+		}
+
+		/* GRAPH HELPER METHODS */
+		private function epochToDate(epoch:Number):Date {
+			return new Date(epoch);
+		}
+
+		private function dataTipFormatter(hitData:HitData):String {
+			var date:Date = epochToDate(hitData.item.xValue);
+			if (hitData.element is PlotSeries) {
+				return '<b>' + hitData.element['displayName'] + '</b><br/>Date: ' + date.toUTCString() + '<br/>' + hitData.item.value;
+			} else {
+				return '<b>' + hitData.element['displayName'] + '</b><br/>Date: ' + date.toUTCString() + '<br/>' + options.metric.name + ': ' + hitData.item.yValue;
+			}
+		}
+
+		// filter function to limit trend AreaSeries to the selected dateRange
+		private function limitTrendToDateRange(item:Object):Boolean {
+			return (parseInt(item.xValue) >= this.options.filterStartEpoch && parseInt(item.xValue) <= this.options.filterEndEpoch);
+		}
+
+		// filter function to limit deltaEvent PlotSeries to the selected dateRange
+		private function limitDeltaEventsToDateRange(item:Object):Boolean {
+			// special hack here for deltaPoints with a yValue of -1
+			if (item.yValue == -1) return false;
+			return (item.xValue >= this.options.filterStartEpoch && item.xValue <= this.options.filterEndEpoch);
+		}
+
+	]]></mx:Script>
+	<mx:VBox width="100%" height="100%">
+		<mx:HDividedBox width="100%" height="100%" liveDragging="true">
+			<mx:VDividedBox width="330" height="100%" liveDragging="true">
+				<analysis:ComputerGroupTreeLegend id="computerGroupTreeLegend" chart="{chart}" initialSelectedID="{options.computer_group.id}" change="handleTreeChange(event)"/>
+				<analysis:TrendDeltaTypes id="deltaTypeLegend" chart="{chart}" height="150" change="handleVisibleDeltaTypeChange(event)"/>
+			</mx:VDividedBox>
+			<mx:Panel headerHeight="0" width="100%" height="100%">
+				<!-- Detail trend -->
+				<mx:LineChart id="chart" width="100%" height="100%" showDataTips="true" dataTipFunction="dataTipFormatter" visible="false">
+					<mx:horizontalAxis>
+						<mx:DateTimeAxis parseFunction="epochToDate" displayLocalTime="false"/>
+					</mx:horizontalAxis>
+					<!-- no drop shadows! -->
+					<mx:seriesFilters><mx:Array/></mx:seriesFilters>
+				</mx:LineChart>
+				<mx:ControlBar width="100%">
+					<!-- macro trend -->
+					<analysis:TrendAnalysisMacro id="macroChart" width="100%" height="100" change="handleRangeChange(event)"/>
+				</mx:ControlBar>
+			</mx:Panel>
+		</mx:HDividedBox>
+	</mx:VBox>
+</mx:Panel>

@@ -1,0 +1,51 @@
+argentina:
+  title: Argentina
+  subgroups:
+  - ar_buenos_aires
+  - ar_cordoba
+  - ar_rosario
+  - ar_mendoza
+  - ar_la_plata
+  - ar_san_miguel_de_tucuman
+  - ar_mar_del_plata
+  - ar_salta
+
+ar_buenos_aires:
+  title: Buenos Aires
+  type: city
+  population: 19251433
+
+ar_cordoba:
+  title: Cordoba
+  type: city
+  population: 1513200
+
+ar_rosario:
+  title: Rosario
+  type: city
+  population: 1295100
+
+ar_mendoza:
+  title: Mendoza
+  type: city
+  population: 1009100
+
+ar_la_plata:
+  title: La Plata
+  type: city
+  population: 857800
+
+ar_san_miguel_de_tucuman:
+  title: San Miguel de Tucuman
+  type: city
+  population: 833100
+
+ar_mar_del_plata:
+  title: Mar del Plata
+  type: city
+  population: 699600
+
+ar_salta:
+  title: Salta
+  type: city
+  population: 531400

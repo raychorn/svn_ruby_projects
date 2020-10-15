@@ -1,0 +1,394 @@
+minnesota:
+  title: Minnesota
+  subgroups:
+  - minnesota_albert_lea
+  - minnesota_andover
+  - minnesota_anoka
+  - minnesota_apple_valley
+  - minnesota_austin
+  - minnesota_blaine
+  - minnesota_bloomington
+  - minnesota_brooklyn_center
+  - minnesota_brooklyn_park
+  - minnesota_burnsville
+  - minnesota_champlin
+  - minnesota_chanhassen
+  - minnesota_chaska
+  - minnesota_columbia_heights
+  - minnesota_coon_rapids
+  - minnesota_cottage_grove
+  - minnesota_crystal
+  - minnesota_duluth
+  - minnesota_eagan
+  - minnesota_eden_prairie
+  - minnesota_edina
+  - minnesota_elk_river
+  - minnesota_faribault
+  - minnesota_farmington
+  - minnesota_forest_lake
+  - minnesota_fridley
+  - minnesota_golden_valley
+  - minnesota_hastings
+  - minnesota_hibbing
+  - minnesota_hopkins
+  - minnesota_inver_grove_heights
+  - minnesota_lakeville
+  - minnesota_lino_lakes
+  - minnesota_mankato
+  - minnesota_maple_grove
+  - minnesota_maplewood
+  - minnesota_minneapolis
+  - minnesota_minnetonka
+  - minnesota_moorhead
+  - minnesota_new_brighton
+  - minnesota_new_hope
+  - minnesota_northfield
+  - minnesota_oakdale
+  - minnesota_owatonna
+  - minnesota_plymouth
+  - minnesota_prior_lake
+  - minnesota_ramsey
+  - minnesota_red_wing
+  - minnesota_richfield
+  - minnesota_rochester
+  - minnesota_rosemount
+  - minnesota_roseville
+  - minnesota_st__cloud
+  - minnesota_st__louis_park
+  - minnesota_st__paul
+  - minnesota_savage
+  - minnesota_shakopee
+  - minnesota_shoreview
+  - minnesota_south_st__paul
+  - minnesota_stillwater
+  - minnesota_west_st__paul
+  - minnesota_white_bear_lake
+  - minnesota_willmar
+  - minnesota_winona
+  - minnesota_woodbury
+
+minnesota_albert_lea:
+  title: Albert Lea
+  type: city
+  population: 17913
+
+minnesota_andover:
+  title: Andover
+  type: city
+  population: 29411
+
+minnesota_anoka:
+  title: Anoka
+  type: city
+  population: 17777
+
+minnesota_apple_valley:
+  title: Apple Valley
+  type: city
+  population: 49514
+
+minnesota_austin:
+  title: Austin
+  type: city
+  population: 23606
+
+minnesota_blaine:
+  title: Blaine
+  type: city
+  population: 52067
+
+minnesota_bloomington:
+  title: Bloomington
+  type: city
+  population: 81809
+
+minnesota_brooklyn_center:
+  title: Brooklyn Center
+  type: city
+  population: 27821
+
+minnesota_brooklyn_park:
+  title: Brooklyn Park
+  type: city
+  population: 67852
+
+minnesota_burnsville:
+  title: Burnsville
+  type: city
+  population: 59274
+
+minnesota_champlin:
+  title: Champlin
+  type: city
+  population: 23267
+
+minnesota_chanhassen:
+  title: Chanhassen
+  type: city
+  population: 22911
+
+minnesota_chaska:
+  title: Chaska
+  type: city
+  population: 21632
+
+minnesota_columbia_heights:
+  title: Columbia Heights
+  type: city
+  population: 18234
+
+minnesota_coon_rapids:
+  title: Coon Rapids
+  type: city
+  population: 62638
+
+minnesota_cottage_grove:
+  title: Cottage Grove
+  type: city
+  population: 32056
+
+minnesota_crystal:
+  title: Crystal
+  type: city
+  population: 21860
+
+minnesota_duluth:
+  title: Duluth
+  type: city
+  population: 85375
+
+minnesota_eagan:
+  title: Eagan
+  type: city
+  population: 63987
+
+minnesota_eden_prairie:
+  title: Eden Prairie
+  type: city
+  population: 60363
+
+minnesota_edina:
+  title: Edina
+  type: city
+  population: 46030
+
+minnesota_elk_river:
+  title: Elk River
+  type: city
+  population: 20203
+
+minnesota_faribault:
+  title: Faribault
+  type: city
+  population: 21880
+
+minnesota_farmington:
+  title: Farmington
+  type: city
+  population: 17312
+
+minnesota_forest_lake:
+  title: Forest Lake
+  type: city
+  population: 16901
+
+minnesota_fridley:
+  title: Fridley
+  type: city
+  population: 26907
+
+minnesota_golden_valley:
+  title: Golden Valley
+  type: city
+  population: 20178
+
+minnesota_hastings:
+  title: Hastings
+  type: city
+  population: 20306
+
+minnesota_hibbing:
+  title: Hibbing
+  type: city
+  population: 16708
+
+minnesota_hopkins:
+  title: Hopkins
+  type: city
+  population: 16939
+
+minnesota_inver_grove_heights:
+  title: Inver Grove Heights
+  type: city
+  population: 32278
+
+minnesota_lakeville:
+  title: Lakeville
+  type: city
+  population: 49347
+
+minnesota_lino_lakes:
+  title: Lino Lakes
+  type: city
+  population: 19118
+
+minnesota_mankato:
+  title: Mankato
+  type: city
+  population: 34466
+
+minnesota_maple_grove:
+  title: Maple Grove
+  type: city
+  population: 58564
+
+minnesota_maplewood:
+  title: Maplewood
+  type: city
+  population: 35489
+
+minnesota_minneapolis:
+  title: Minneapolis
+  type: city
+  population: 373708
+
+minnesota_minnetonka:
+  title: Minnetonka
+  type: city
+  population: 50023
+
+minnesota_moorhead:
+  title: Moorhead
+  type: city
+  population: 33546
+
+minnesota_new_brighton:
+  title: New Brighton
+  type: city
+  population: 21165
+
+minnesota_new_hope:
+  title: New Hope
+  type: city
+  population: 19962
+
+minnesota_northfield:
+  title: Northfield
+  type: city
+  population: 18474
+
+minnesota_oakdale:
+  title: Oakdale
+  type: city
+  population: 27481
+
+minnesota_owatonna:
+  title: Owatonna
+  type: city
+  population: 23772
+
+minnesota_plymouth:
+  title: Plymouth
+  type: city
+  population: 69721
+
+minnesota_prior_lake:
+  title: Prior Lake
+  type: city
+  population: 21429
+
+minnesota_ramsey:
+  title: Ramsey
+  type: city
+  population: 20707
+
+minnesota_red_wing:
+  title: Red Wing
+  type: city
+  population: 15949
+
+minnesota_richfield:
+  title: Richfield
+  type: city
+  population: 33874
+
+minnesota_rochester:
+  title: Rochester
+  type: city
+  population: 93302
+
+minnesota_rosemount:
+  title: Rosemount
+  type: city
+  population: 17963
+
+minnesota_roseville:
+  title: Roseville
+  type: city
+  population: 32662
+
+minnesota_st__cloud:
+  title: St. Cloud
+  type: city
+  population: 64951
+
+minnesota_st__louis_park:
+  title: St. Louis Park
+  type: city
+  population: 43560
+
+minnesota_st__paul:
+  title: St. Paul
+  type: city
+  population: 276523
+
+minnesota_savage:
+  title: Savage
+  type: city
+  population: 25702
+
+minnesota_shakopee:
+  title: Shakopee
+  type: city
+  population: 29361
+
+minnesota_shoreview:
+  title: Shoreview
+  type: city
+  population: 26960
+
+minnesota_south_st__paul:
+  title: South St. Paul
+  type: city
+  population: 19442
+
+minnesota_stillwater:
+  title: Stillwater
+  type: city
+  population: 17124
+
+minnesota_west_st__paul:
+  title: West St. Paul
+  type: city
+  population: 19148
+
+minnesota_white_bear_lake:
+  title: White Bear Lake
+  type: city
+  population: 24023
+
+minnesota_willmar:
+  title: Willmar
+  type: city
+  population: 18229
+
+minnesota_winona:
+  title: Winona
+  type: city
+  population: 26604
+
+minnesota_woodbury:
+  title: Woodbury
+  type: city
+  population: 49881
+

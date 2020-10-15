@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" height="100%"
+	>
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.vo.ReportDistributionVO;
+			import com.bigfix.dss.vo.ReportVO;
+			import com.bigfix.dss.view.general.Busy.Busy;
+			import com.bigfix.dss.view.general.Alert.AlertPopUp;
+			import com.bigfix.dss.vo.WebOrbResultVO;
+			import mx.rpc.events.ResultEvent;
+			import mx.rpc.events.FaultEvent;
+			import mx.events.ValidationResultEvent;
+			import com.bigfix.dss.util.ArrayCollectionUtils;
+			import mx.collections.ArrayCollection;
+			import com.bigfix.dss.weborb.RemoteWebOrbObject;
+			import mx.rpc.remoting.mxml.RemoteObject;
+			import com.bigfix.dss.command.GetReportsCommand;
+
+			private var _weborbObj:RemoteWebOrbObject;
+			
+			private var _reportVO:ReportVO;
+			
+			private var _busy:Busy;
+			
+			public function set busy(busy:Busy):void {
+				this._busy = busy;
+			}
+			
+			public function get busy():Busy {
+				return this._busy;
+			}
+			
+			public function set reportVO(vo:ReportVO):void {
+				this._reportVO = vo;
+
+				_weborbObj = new RemoteWebOrbObject("ReportWriter", "getEmailAddresses", busy, onResultWebOrb, onFaultWebOrb);
+				var svc:RemoteObject = GetReportsCommand.svc.svc;
+				_weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+				_weborbObj.doWebOrbServiceCall(this._reportVO.id);
+			}
+			
+			public function get reportVO():ReportVO {
+				return this._reportVO;
+			}
+			
+			private function onCreationCompleteSelectedEmailAddressesList():void {
+				this.list_SelectedEmailAddresses.dataProvider = new ArrayCollection()
+			}
+			
+			private function onCreationCompleteNotSelectedEmailAddressesList():void {
+				this.list_NotSelectedEmailAddresses.dataProvider = new ArrayCollection()
+			}
+			
+			private function populateListsFrom(datum:*):void {
+				var repDistVO:ReportDistributionVO = new ReportDistributionVO();
+				if (datum is Array) {
+					var ac1:ArrayCollection = ArrayCollection(this.list_SelectedEmailAddresses.dataProvider);
+					var ac2:ArrayCollection = ArrayCollection(this.list_NotSelectedEmailAddresses.dataProvider);
+					
+					ac1.removeAll();
+					ac2.removeAll();
+					
+					var ar:Array = datum as Array;
+					for (var i:int = 0; i < ar.length; i++) {
+						repDistVO = ReportDistributionVO(ar[i]);
+						if (repDistVO.selected == 1) {
+							ac1.addItem(repDistVO);
+						} else {
+							ac2.addItem(repDistVO);
+						}
+					}
+				}
+			}
+			
+			private function onResultWebOrb(event:ResultEvent, _vo:*):void {
+				var ar:Array;
+				var repDistVO:ReportDistributionVO = new ReportDistributionVO();
+				if (_vo != null) {
+					var vo:WebOrbResultVO = WebOrbResultVO(_vo);
+					if ( (vo.info == "ReportWriter::addEmailAddress") 
+							|| (vo.info == "ReportWriter::getEmailAddresses") 
+							|| (vo.info == "ReportWriter::updateEmailAddress")
+							|| (vo.info == "ReportWriter::deleteEmailAddress") ) {
+						this.populateListsFrom(vo.data);
+					}
+				}
+			}
+		
+			private function onFaultWebOrb(event:FaultEvent):void {
+				AlertPopUp.error(event.fault.toString(),"WebOrb Fault");
+			}
+			
+			private function onClickAddEmailAddressButton():void {
+				var ac:ArrayCollection = ArrayCollection(this.list_SelectedEmailAddresses.dataProvider);
+				var repDistVO:ReportDistributionVO = new ReportDistributionVO();
+				repDistVO.id = -1;
+				repDistVO.report_id = this._reportVO.id;
+				repDistVO.selected = 1;
+				repDistVO.email_address = this.txt_EMailAddress.text;
+
+				ac.addItem(repDistVO);
+
+				_weborbObj = new RemoteWebOrbObject("ReportWriter", "addEmailAddress", busy, onResultWebOrb, onFaultWebOrb);
+				var svc:RemoteObject = GetReportsCommand.svc.svc;
+				_weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+				_weborbObj.doWebOrbServiceCall(this._reportVO.id,this.txt_EMailAddress.text,true);
+
+				this.txt_EMailAddress.text = '';
+				this.validator_EmailAddress.validate(this.txt_EMailAddress.text);
+			}
+			
+			private function migrateItemFromListToList(sourceList:List, destList:List):void {
+				if (sourceList != null) {
+					var obj:Object = sourceList.selectedItem;
+					var ac:ArrayCollection = ArrayCollection(sourceList.dataProvider);
+					var i:int = ArrayCollectionUtils.findIndexOfItem(ac, "label", obj.label)
+					if (i > -1) {
+						ac.removeItemAt(i);
+						if (destList != null) {
+							var ac2:ArrayCollection = ArrayCollection(destList.dataProvider);
+							var obj2:Object = new Object();
+							obj2.label = obj.label;
+							obj2.data = obj.data;
+							ac2.addItem(obj2);
+						}
+					}
+				}
+			}
+			
+			private function updateReportDistributionVO(repDistVO:ReportDistributionVO):void {
+				if (repDistVO != null) {
+					_weborbObj = new RemoteWebOrbObject("ReportWriter", "updateEmailAddress", busy, onResultWebOrb, onFaultWebOrb);
+					var svc:RemoteObject = GetReportsCommand.svc.svc;
+					_weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+					_weborbObj.doWebOrbServiceCall(repDistVO);
+				}
+			}
+			
+			private function onClickDeselectEmailAddressButton():void {
+	//			this.migrateItemFromListToList(this.list_SelectedEmailAddresses, this.list_NotSelectedEmailAddresses);
+				this.btn_deselectEmailAddress.enabled = false;
+				var repDistVO:ReportDistributionVO = ReportDistributionVO(this.list_SelectedEmailAddresses.selectedItem);
+				repDistVO.selected = 0;
+				this.updateReportDistributionVO(repDistVO);
+			}
+			
+			private function onClickSelectEmailAddressButton():void {
+	//			this.migrateItemFromListToList(this.list_NotSelectedEmailAddresses,this.list_SelectedEmailAddresses);
+				this.btn_selectEmailAddress.enabled = false;
+				var repDistVO:ReportDistributionVO = ReportDistributionVO(this.list_NotSelectedEmailAddresses.selectedItem);
+				repDistVO.selected = 1;
+				this.updateReportDistributionVO(repDistVO);
+			}
+			
+			private function onClickRemoveEmailAddressButton():void {
+	//			this.migrateItemFromListToList(this.list_NotSelectedEmailAddresses,null);
+				this.btn_removeEmailAddress.enabled = false;
+				var repDistVO:ReportDistributionVO = ReportDistributionVO(this.list_NotSelectedEmailAddresses.selectedItem);
+
+				_weborbObj = new RemoteWebOrbObject("ReportWriter", "deleteEmailAddress", busy, onResultWebOrb, onFaultWebOrb);
+				var svc:RemoteObject = GetReportsCommand.svc.svc;
+				_weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+				_weborbObj.doWebOrbServiceCall(repDistVO);
+			}
+			
+			private function onKeyUpEMailAddressTextInput(event:KeyboardEvent):void {
+				this.validator_EmailAddress.validate(this.txt_EMailAddress.text);
+				if ( (this.btn_AddEMailAddress.enabled) && (event.charCode == 13) ) {
+					this.btn_AddEMailAddress.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+				}
+			}
+			
+			private function onInvalidEmailAddressValidator(event:ValidationResultEvent):void {
+				this.btn_AddEMailAddress.enabled = false;
+				this.txt_EMailAddress.errorString = ((event.message == 'This field is required.') ? '' : event.message);
+			}
+			
+			private function onValidEmailAddressValidator(event:ValidationResultEvent):void {
+				this.btn_AddEMailAddress.enabled = true;
+				this.txt_EMailAddress.errorString = '';
+			}
+			
+			private function labelReportDistributionVO(item:ReportDistributionVO):String {
+				return item.email_address;
+			}
+		]]>
+	</mx:Script>
+	<mx:EmailValidator id="validator_EmailAddress" invalid="onInvalidEmailAddressValidator(event)" valid="onValidEmailAddressValidator(event)"/>
+	<mx:VBox width="100%" height="100%">
+		<mx:HBox width="100%">
+			<mx:Label text="EMail Address:"/>
+			<mx:TextInput id="txt_EMailAddress" maxChars="128" editable="true" keyUp="onKeyUpEMailAddressTextInput(event)"/>
+		</mx:HBox>
+		<mx:HBox width="100%">
+			<mx:Button enabled="false" label="Add Email Address" id="btn_AddEMailAddress" icon="@Embed('/assets/down_16x16.gif')" click="onClickAddEmailAddressButton()"/>
+		</mx:HBox>
+		<mx:HBox width="100%">
+			<mx:VBox height="100%">
+				<mx:Label styleName="selectedEMailAddresses" text="Selected EMail Addresses:"/>
+				<mx:List id="list_SelectedEmailAddresses" labelFunction="labelReportDistributionVO" rowHeight="17" height="170" creationComplete="onCreationCompleteSelectedEmailAddressesList()"/>
+			</mx:VBox>
+		</mx:HBox>
+		<mx:HBox width="100%">
+			<mx:VBox height="100%" verticalAlign="middle">
+				<mx:Button enabled="{this.list_SelectedEmailAddresses.selectedIndex > -1}" label="Deselect Email Address" id="btn_deselectEmailAddress" icon="@Embed('/assets/down_16x16.gif')" click="onClickDeselectEmailAddressButton()"/>
+				<mx:Button enabled="{this.list_NotSelectedEmailAddresses.selectedIndex > -1}" label="Select Email Address" id="btn_selectEmailAddress" icon="@Embed('/assets/up_16x16.gif')" click="onClickSelectEmailAddressButton()"/>
+			</mx:VBox>
+		</mx:HBox>
+		<mx:HBox width="100%">
+			<mx:VBox height="100%">
+				<mx:Label styleName="availableEMailAddresses" text="Available EMail Addresses:"/>
+				<mx:List id="list_NotSelectedEmailAddresses" labelFunction="labelReportDistributionVO" rowHeight="17" height="170" creationComplete="onCreationCompleteNotSelectedEmailAddressesList()"/>
+			</mx:VBox>
+		</mx:HBox>
+		<mx:HBox width="100%">
+			<mx:VBox height="100%" verticalAlign="middle">
+				<mx:Button enabled="{this.list_NotSelectedEmailAddresses.selectedIndex > -1}" label="Remove Email Address" id="btn_removeEmailAddress" icon="@Embed('/assets/down_16x16.gif')" click="onClickRemoveEmailAddressButton()"/>
+			</mx:VBox>
+		</mx:HBox>
+		
+	</mx:VBox>
+</mx:Canvas>

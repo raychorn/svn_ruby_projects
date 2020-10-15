@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:FileIoView="com.bigfix.dss.view.fileio.view.*"
+	width="100%" height="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off"
+	creationComplete="onCreationComplete()" 
+	>
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.util.ArrayCollectionUtils;
+			import com.bigfix.dss.view.fileio.view.events.ToggleImageBrowserButtonEvent;
+			import mx.utils.URLUtil;
+			import com.bigfix.dss.util.URLUtils;
+			import mx.collections.ArrayCollection;
+			import com.bigfix.dss.vo.WebOrbResultVO;
+			import com.bigfix.dss.command.GetReportsCommand;
+			import mx.rpc.remoting.mxml.RemoteObject;
+			import com.bigfix.dss.view.general.Alert.AlertPopUp;
+			import com.bigfix.dss.model.DSSModelLocator;
+			import com.bigfix.dss.weborb.RemoteWebOrbObject;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			[Bindable]
+			private var model:DSSModelLocator = DSSModelLocator.getInstance();
+
+			private var _weborbObj:RemoteWebOrbObject;
+
+			[Bindable]
+			private var _busy:*;
+			
+			[Bindable]
+			private var _dp:ArrayCollection = new ArrayCollection();
+
+			public function set busy(busy:*):void {
+				this._busy = busy;
+			}
+			
+			public function get busy():* {
+				return this._busy;
+			}
+			
+			private function onResultWebOrb(event:ResultEvent, _vo:*):void {
+				if (_vo != null) {
+					var vo:WebOrbResultVO = WebOrbResultVO(_vo);
+					if (vo.info == "ReportWriter::getImages") {
+						var protocol:String = URLUtil.getProtocol(event.currentTarget.service.endpoint);
+						var domain:String = URLUtil.getServerNameWithPort(event.currentTarget.service.endpoint);
+						var data:Array = vo.data as Array;
+						this._dp.removeAll();
+						var obj:Object;
+						var path:String = data[0];
+						var i:int;
+						for (i = 1; i < data.length; i++) {
+							obj = new Object();
+							obj.label = data[i];
+							obj.image = protocol + "://" + domain + "/" + path + "/" + data[i];
+							this._dp.addItem(obj);
+						}
+						this.tiles.dataProvider = this._dp;
+					}
+				}
+			}
+			
+			private function onFaultWebOrb(event:FaultEvent):void {
+				AlertPopUp.error(event.fault.toString(),"WebOrb Fault");
+			}
+
+			private function onToggleImageBrowserButton(event:ToggleImageBrowserButtonEvent):void {
+				var ac:ArrayCollection = new ArrayCollection(this.vbox_buttons.getChildren());
+				var i:int = ArrayCollectionUtils.findIndexOfItem(ac, "id", event.buttonID);
+				if (i > -1) {
+					var btn:Button = Button(ac.getItemAt(i));
+					if (btn != null) {
+						btn.enabled = event.enabled;
+					}
+				}
+			}
+			
+			private function onCreationComplete():void {
+				this.addEventListener(ToggleImageBrowserButtonEvent.TYPE_TOGGLE_IMAGE_BROWSER_BUTTON, onToggleImageBrowserButton);
+			}
+			
+			private function onClickBrowseUpButton():void {
+				this.tiles.browseUp();
+			}
+
+			private function onClickBrowseDnButton():void {
+				this.tiles.browseDown();
+			}
+		]]>
+	</mx:Script>
+	<mx:VBox width="100%">
+		<mx:Label text="Or, Choose a previously uploaded image from the server."/>
+		<mx:HBox width="100%" height="100%">
+			<FileIoView:ImageTileList x="0" y="0" id="tiles" direction="horizontal" allowMultipleSelection="false" labelField="label" width="100%" height="100%"/>
+			<mx:VBox id="vbox_buttons" height="100%">
+				<mx:Button id="btn_browseUp" enabled="false" toolTip="Click this button to browse previous images." icon="@Embed('/assets/up_16x16.gif')" width="20" click="onClickBrowseUpButton()"/>
+				<mx:Spacer height="10"/>
+				<mx:Button id="btn_browseDn" enabled="false" toolTip="Click this button to browse previous images." icon="@Embed('/assets/down_16x16.gif')" width="20" click="onClickBrowseDnButton()"/>
+			</mx:VBox>
+		</mx:HBox>
+	</mx:VBox>
+</mx:Canvas>

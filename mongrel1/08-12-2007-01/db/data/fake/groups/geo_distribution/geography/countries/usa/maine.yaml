@@ -1,0 +1,64 @@
+maine:
+  title: Maine
+  subgroups:
+  - maine_auburn
+  - maine_augusta
+  - maine_bangor
+  - maine_biddeford
+  - maine_lewiston
+  - maine_portland
+  - maine_saco
+  - maine_south_portland
+  - maine_waterville
+  - maine_westbrook
+
+maine_auburn:
+  title: Auburn
+  type: city
+  population: 23530
+
+maine_augusta:
+  title: Augusta
+  type: city
+  population: 18595
+
+maine_bangor:
+  title: Bangor
+  type: city
+  population: 31159
+
+maine_biddeford:
+  title: Biddeford
+  type: city
+  population: 22169
+
+maine_lewiston:
+  title: Lewiston
+  type: city
+  population: 35941
+
+maine_portland:
+  title: Portland
+  type: city
+  population: 64115
+
+maine_saco:
+  title: Saco
+  type: city
+  population: 18071
+
+maine_south_portland:
+  title: South Portland
+  type: city
+  population: 23575
+
+maine_waterville:
+  title: Waterville
+  type: city
+  population: 15510
+
+maine_westbrook:
+  title: Westbrook
+  type: city
+  population: 16007
+

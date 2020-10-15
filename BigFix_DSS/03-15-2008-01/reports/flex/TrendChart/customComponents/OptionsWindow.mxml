@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" showCloseButton="true" close="handleClose()" creationComplete="init()">
+	<mx:Script>
+	<![CDATA[
+		import mx.managers.PopUpManager;
+
+		private var movedChildren:Array = [];
+
+		private function init():void {
+			for (var i:int = 0; i < movedChildren.length; i++) {
+				childContainer.addChild(movedChildren[i]);
+			}
+			PopUpManager.centerPopUp(this);
+		}
+
+		public function moveObject(element:DisplayObject):void {
+			movedChildren.push(element);
+		}
+
+		private function submit():void {
+			trace("childContainer.getChildAt(0) = ",childContainer.getChildAt(0));
+			if (childContainer.getChildAt(0)['submit']()) {
+				handleClose();
+			}
+		}
+
+		private function handleClose():void {
+			PopUpManager.removePopUp(this);
+		}
+	]]>
+	</mx:Script>
+	<mx:Box id="childContainer" width="100%"/>
+	<mx:ControlBar horizontalAlign="right">
+		<mx:Button label="Submit" click="submit()"/>
+		<mx:Button label="Cancel" click="handleClose()"/>
+	</mx:ControlBar>
+</mx:TitleWindow>
+

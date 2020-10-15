@@ -1,0 +1,44 @@
+factory:
+  title: Factory
+  pick: computer
+  proportions:
+    TOP:
+      management: 0.20
+      servers: 0.20
+      industrial: 0.45
+      infrastructure: 0.15
+    servers:
+      external_web_server: 0
+      OTHER: 1
+
+headquarters:
+  title: Headquarters
+  pick: computer
+  proportions:
+    TOP:
+      management: 0.05
+      desktops: 0.50
+      servers: 0.10
+      laptops: 0.25
+      infrastructure: 0.10
+
+satellite_office:
+  title: Satellite Office
+  pick: computer
+  proportions:
+    TOP:
+      servers: 0.05
+      infrastructure: 0.03
+      desktops: 0.58
+      laptops: 0.34
+
+datacenter:
+  title: Datacenter
+  pick: computer
+  proportions:
+    TOP:
+      management: 0.05
+      infrastructure: 0.08
+      terminals: 0.05
+      laptops: 0.02
+      servers: 0.80

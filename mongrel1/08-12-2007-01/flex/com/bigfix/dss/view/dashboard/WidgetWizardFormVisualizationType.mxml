@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:data="com.bigfix.dss.view.data.*" creationComplete="WidgetWizardFormLib_init()">
+	<mx:Script><![CDATA[
+		include 'WidgetWizardFormLib.as';
+		import com.bigfix.dss.model.Constants;
+		import com.bigfix.dss.vo.VisualizationTypeVO;
+		import com.bigfix.dss.vo.TrendWidgetVO;
+		import com.bigfix.dss.vo.ListWidgetVO;
+		import com.bigfix.dss.vo.ColumnWidgetVO;
+
+		private function setValue(event:ValidationResultEvent):void {
+			hideForm();
+			model.currentWidget.visualization_type = VisualizationTypeVO(formControlForVisualizationType.selectedValue);
+			switch (model.currentWidget.visualization_type.id) {
+				case Constants.VISUALIZATION_TYPE_LINE:
+					model.currentWidget.visualization_type_options = new TrendWidgetVO();
+					break;
+				case Constants.VISUALIZATION_TYPE_LIST:
+					model.currentWidget.visualization_type_options = new ListWidgetVO();
+					break;
+				case Constants.VISUALIZATION_TYPE_COLUMN:
+					model.currentWidget.visualization_type_options = new ColumnWidgetVO();
+					break;
+				case Constants.VISUALIZATION_TYPE_PIE:
+					trace("WidgetVO setting pie stuff!");
+					break;
+			}
+			coalesce(model.currentWidget.visualization_type.name, labelField);
+		}
+		
+		private function onClickedRadioButton(event:MouseEvent):void {
+			this.submitButton.enabled = true;	// RCH - this is required to avoid an exception from no radio buttons being selected when the done button is clicked because the validation has nothing to validate other than a null...
+		}
+	]]></mx:Script>
+	<mx:NumberValidator
+		source="{(formControlForVisualizationType.selectedValue == null) ? -1 : formControlForVisualizationType.selectedValue}" property="id"
+		required="true"
+		trigger="{submitButton}" triggerEvent="click"
+		valid="setValue(event)"/>
+
+	<mx:HBox>
+		<mx:HBox id="labelBox" click="showForm()"><mx:Label text="Visualization Type:" styleName="textLink"/></mx:HBox>
+		<mx:Label id="labelField" creationComplete="coalesce(null, Label(event.currentTarget))"/>
+	</mx:HBox>
+
+	<mx:Panel id="form" title="Visualization Type" styleName="wizardFormContainer" width="200" includeInLayout="false" visible="false">
+		<mx:RadioButtonGroup id="formControlForVisualizationType"/>
+		<mx:Repeater id="visualizationTypeRepeater" dataProvider="{model.visualization_types}">
+			<mx:RadioButton groupName="formControlForVisualizationType" value="{visualizationTypeRepeater.currentItem}" label="{visualizationTypeRepeater.currentItem.name}" click="onClickedRadioButton(event)"/>
+		</mx:Repeater>
+		<mx:ControlBar horizontalAlign="center">
+			<mx:Button label="Cancel" click="hideForm()"/>
+			<mx:Button label="Done" id="submitButton" enabled="false"/>
+		</mx:ControlBar>
+	</mx:Panel>
+</mx:Canvas>

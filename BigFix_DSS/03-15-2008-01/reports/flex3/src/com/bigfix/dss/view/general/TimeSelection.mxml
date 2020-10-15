@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:Script><![CDATA[
+		public function getHour24():int{
+			var hour:int=int(selectHour.value);
+			switch(selectMeridiem.value){
+				case "AM":
+					break;
+				case "PM":
+					hour += 12;
+					break;
+				default:
+					throw new Error("Bad Time Selection");
+			}
+			return hour;
+		}
+
+		public function getHour():int{
+			var hour:int=int(selectHour.value);
+			return hour;
+		}
+
+		public function getMinute():int{
+			return int(selectMinute.value);
+		}
+
+		public function getMeridiem():String{
+			return String(selectMeridiem.value);
+			return
+		}
+	
+		public function populateFrom(aDate:Date):void {
+			if (aDate == null) {
+				this.selectHour.selectedIndex = 0;
+				this.selectMeridiem.selectedIndex = 0;
+				this.selectMinute.selectedIndex = 0;
+				return;
+			}
+			var isAM:Boolean = (aDate.hours <= 11);
+			if (!isAM) {
+				this.selectHour.selectedIndex = (aDate.hours - ((aDate.hours > 12) ? 12 : 0)) - 1;
+			}
+			this.selectMeridiem.selectedIndex = ((isAM) ? 0 : 1);
+			if ( (aDate.minutes >= 0) && ( (aDate.minutes < 8) || (aDate.minutes > 37) ) ) {
+				this.selectMinute.selectedIndex = 0;
+			} else if ( (aDate.minutes > 8) && (aDate.minutes < 23) ) {
+				this.selectMinute.selectedIndex = 1;
+			} else if ( (aDate.minutes > 23) && (aDate.minutes < 37) ) {
+				this.selectMinute.selectedIndex = 2;
+			}
+		}
+	]]></mx:Script>
+	<!-- DO NOT CHANGE THE dataProviders for these widgets or bad evil things may happen such as the GUI ceases to function. -->
+	<mx:ComboBox id="selectHour" dataProvider="[1,2,3,4,5,6,7,8,9,10,11,12]"/>
+	<mx:Text text=":"/>
+	<mx:ComboBox id="selectMinute" dataProvider="[00,15,30,45]"/>
+	<mx:ComboBox id="selectMeridiem" dataProvider="[AM,PM]"/>
+</mx:HBox>

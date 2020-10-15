@@ -1,0 +1,256 @@
+/* Scrawl CSS file */
+@font-face {
+	fontFamily: scrawlFont;
+	src: url("../assets/aescrawl.ttf");
+	font-weight: normal;
+}
+
+.Scrawl { fontFamily: scrawlFont; }
+
+Application {
+	backgroundImage: Embed('../assets/napkin.jpg');
+	color: #4f4f47;
+	themeColor: #b0b631;
+	fontSize: 14;
+	paddingLeft: 0;
+	paddingRight: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+	horizontalAlign: center;
+	verticalAlign: middle;
+}
+
+ComboBox
+{
+	themeColor: #b0b631;
+	backgroundSize: '100%';
+	border-color: #888888;
+	border-thickness: 4;
+	fill-alphas: 0.0, 0.0;
+	fontFamily: scrawlFont;
+	font-size: 14;
+	font-weight: normal;
+	roll-over-color: #E4E444;
+	selection-color: #C0C022;
+	down-skin: ClassReference('skins.scrawl.ComboBoxSkin');
+	over-skin: ClassReference('skins.scrawl.ComboBoxSkin');
+	up-skin: ClassReference('skins.scrawl.ComboBoxSkin');
+}
+
+DataGrid
+{
+	alternating-item-colors: ClassReference(null);
+	backgroundImage: Embed('../assets/napkin.jpg');
+	backgroundSize: '100%';
+	border-color: #333333;
+	border-thickness: 7;
+	color: #222222;
+	fontFamily: scrawlFont;
+	font-size: 14;
+	header-drag-proxy-style-name: Scrawl;
+	header-separator-skin: Embed('../assets/header_separator.gif');  /* transparent */
+	header-style-name: Scrawl;
+	roll-over-color: #D3D3D3;
+	selection-color: #C0C0C0;
+	sort-arrow-skin: Embed('../assets/sort_arrow.gif');
+	theme-color: #111111;
+	vertical-grid-line-color: #333333;
+	border-skin: ClassReference('skins.scrawl.ScrawlBorder');
+}
+
+HDividedBox { divider-skin: Embed('../assets/box_divider.gif'); }
+
+Label, Text { fontFamily: scrawlFont; }
+
+ScrollBar
+{
+	down-arrow-down-skin: ClassReference('skins.scrawl.ScrollArrowSkin');
+	down-arrow-over-skin: ClassReference('skins.scrawl.ScrollArrowSkin');
+	down-arrow-up-skin: ClassReference('skins.scrawl.ScrollArrowSkin');
+	thumb-down-skin: ClassReference('skins.scrawl.ScrollThumbSkin');
+	thumb-over-skin: ClassReference('skins.scrawl.ScrollThumbSkin');
+	thumb-up-skin: ClassReference('skins.scrawl.ScrollThumbSkin');
+	track-skin: ClassReference('skins.scrawl.ScrollTrackSkin');
+	up-arrow-down-skin: ClassReference('skins.scrawl.ScrollArrowSkin');
+	up-arrow-over-skin: ClassReference('skins.scrawl.ScrollArrowSkin');
+	up-arrow-up-skin: ClassReference('skins.scrawl.ScrollArrowSkin');
+}
+
+ScrawlComboBoxDropdown { backgroundImage: Embed('../assets/postit.jpg'); }
+
+VDividedBox { divider-skin: Embed('../assets/box_divider.gif'); }
+
+
+
+
+/*
+dark Grey: 4f4f47
+Green: b0b631
+Orange: e4b61b
+Blue: 7c94b7
+
+chart colors
+Dark Green: 5c8a8b
+Purple: 8f56a2
+Brown: b18467
+
+
+Light Grey: f8f7f5
+Deep Blue: 5970A4
+*/
+
+.applicationControlBar {
+	backgroundImage: Embed('../assets/napkin.jpg');
+	backgroundSize: '100%';
+	borderStyle: solid;
+	borderThickness: 0;
+	cornerRadius: 7;
+	color: #000000;
+	fontWeight: 'normal';
+	fontSize: 16;
+}
+
+ButtonBar {
+   buttonStyleName: "mybuttonBarButtonStyle";
+}
+
+.mybuttonBarButtonStyle {
+   fontSize: 9;
+   highlightAlphas: 0, 0;
+   fillAlphas: 0, 0, 1, 1;
+   fillColors: #000000, #000000, #b0b631, #b0b631;
+   textRollOverColor: #ffffff;
+   borderColor: #ffffff;
+   fontFamily: scrawlFont;
+}
+
+Panel, TitleWindow {
+	borderSkin: ClassReference('skins.scrawl.ScrawlBorder');
+	borderStyle: 'solid';
+	borderThickness: 7;
+	borderColor: #000000;
+	fontFamily: scrawlFont;
+	titleBackgroundSkin: ClassReference('skins.scrawl.ScrawlBorder');
+   dropShadowEnabled: false;
+   titleStyleName: "mypanelTitle";
+   modalTransparencyColor: #000000;
+   modalTransparency: 1;
+}
+
+.mypanelTitle {
+   color: #5970a4;
+   /* fontWeight: bold; */
+   fontFamily: scrawlFont;
+   fontSize: 18;
+}
+
+ToolTip {
+   backgroundColor: #e4b61b;
+   color: #4f4f47;
+   fontFamily: scrawlFont;
+}
+
+SuperTabBar {
+	horizontalGap: 3;
+	tabStyleName: firefoxLikeTabs;
+	fontFamily: scrawlFont;
+	fontWeight: 'normal';
+	selectedTabTextStyleName: 'firefoxLikeTabs'
+}
+
+.firefoxLikeTabs {
+	fontFamily: scrawlFont;
+	fontWeight: 'normal';
+	closeButtonStyleName: closeButton;
+}
+
+.closeButton {
+	upSkin: Embed("../assets/assets.swf#firefox_close_up");
+	downSkin: Embed("../assets/assets.swf#firefox_close_down");
+	overSkin: Embed("../assets/assets.swf#firefox_close_over");
+	disabledSkin: Embed("../assets/assets.swf#firefox_close_disabled");
+}
+
+TabNavigator {
+	fontSize: 16;
+	fontFamily: scrawlFont;
+	fontWeight: 'normal';
+	horizontalGap: 3;
+	backgroundColor: #f8f7f5;
+	selectedTabTextStyleName: 'Tab'
+}
+
+Tab {
+	fontFamily: scrawlFont;
+	fontWeight: 'normal';
+}
+
+.Tab {
+	fontFamily: scrawlFont;
+	fontWeight: 'normal';
+}
+
+Tree {
+	useRollOver: false;
+	borderStyle: none;
+	selectionColor: #b0b631;
+	backgroundAlpha: 0;
+	fontFamily: scrawlFont;
+}
+
+PieSeries {
+	fills: #8f56a2, #5970A4, #b18467, #b0b631, #e4b61b;
+}
+
+.textLink {
+	color: #b0b631;
+	textDecoration: underline;
+}
+
+.dashboardTabs {
+	fontFamily: scrawlFont;
+	fontSize: 12;
+	verticalAlign: bottom;
+	paddingBottom: 0;
+}
+
+HRule {
+	strokeWidth: 1;
+}
+
+HBox.wizardFormLabelActive {
+	/*
+	borderStyle: 'solid';
+	borderColor: #7c94b7;
+	borderThickness: 3;
+	cornerRadius: 3;
+	*/
+	borderSkin: ClassReference('skins.scrawl.ScrawlBorder');
+	backgroundImage: Embed('../assets/napkin.jpg');
+	backgroundSize: '100%';
+}
+
+HBox.wizardFormLabelInactive {
+	borderStyle: 'none';
+}
+
+.infoText {
+	color: #e4b61b;
+	fontSize: 14;
+}
+
+Panel.infoPanel {
+	color: #000000;
+	fontSize: 14;
+}
+
+Button {
+	fontFamily: scrawlFont;
+	fontWeight: 'normal';
+}
+
+LegendItem {
+	fontFamily: scrawlFont;
+	fontWeight: 'normal';
+}
+

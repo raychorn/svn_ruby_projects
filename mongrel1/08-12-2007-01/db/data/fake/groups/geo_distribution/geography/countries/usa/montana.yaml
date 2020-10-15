@@ -1,0 +1,46 @@
+montana:
+  title: Montana
+  subgroups:
+  - montana_billings
+  - montana_bozeman
+  - montana_butte_silver_bow
+  - montana_great_falls
+  - montana_helena
+  - montana_kalispell
+  - montana_missoula
+
+montana_billings:
+  title: Billings
+  type: city
+  population: 97041
+
+montana_bozeman:
+  title: Bozeman
+  type: city
+  population: 32412
+
+montana_butte_silver_bow:
+  title: Butte-Silver Bow
+  type: city
+  population: 32368
+
+montana_great_falls:
+  title: Great Falls
+  type: city
+  population: 56535
+
+montana_helena:
+  title: Helena
+  type: city
+  population: 27162
+
+montana_kalispell:
+  title: Kalispell
+  type: city
+  population: 17423
+
+montana_missoula:
+  title: Missoula
+  type: city
+  population: 61843
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:cc="customComponents.*" width="100%" height="100%" creationComplete="init(event)">
+	<mx:Style source="default.css"/>
+	<mx:Style source="TrendChart.css"/>
+	<mx:Script source="TrendChart.as"/>
+	<mx:Script source="dump.as"/>
+	<mx:ApplicationControlBar width="100%">
+		<mx:Text text="Trend Chart"/>
+		<mx:Spacer width="100%"/>
+		<!--
+		<mx:Button label="Customize Data" click="showDataOptions()"/>
+		<mx:Button label="Print" click="showPrintOptions()"/>
+		<mx:Button label="Help" click="showHelp()"/>
+		-->
+		<mx:ButtonBar toolTipField="toolTip" labelField="label" itemClick="showPopUp(event.item)">
+			<mx:dataProvider>
+				<mx:Array>
+					<mx:Object label="Customize Data" layer="dataOptions" toolTip="Click here to change metrics and/or filter data"/>
+					<mx:Object label="Save" layer="saveOptions" toolTip="Click here to save current Trend for later inclusion in a custom report"/>
+					<mx:Object label="Print" layer="printOptions" toolTip="Click here to Print current Trend"/>
+					<mx:Object label="Help" layer="help" toolTip="Click here for instructions on using the Trend Explorer"/>
+				</mx:Array>
+			</mx:dataProvider>
+		</mx:ButtonBar>
+	</mx:ApplicationControlBar>
+	<mx:VBox width="100%" height="100%">
+		<mx:HDividedBox width="100%" height="100%" liveDragging="true">
+			<mx:VDividedBox width="270" height="100%" liveDragging="true">
+				<cc:GroupTree id="groupTree" trendChartOptions="{trendChartOptions}"/>
+				<cc:DeltaTypes id="deltaTypeLegend" height="120" deltaTypes="{detailTrend.deltaTypes}"/>
+			</mx:VDividedBox>
+			<mx:Panel headerHeight="0" width="100%" height="100%">
+				<cc:DetailTrend id="detailTrend" width="100%" height="100%" trendChartOptions="{trendChartOptions}" unselectedDeltaTypeIDs="{deltaTypeLegend.unselectedDeltaTypeIDs}"/>
+				<mx:ControlBar width="100%">
+					<cc:MacroTrend id="macroTrend" width="100%" height="100" trendChartOptions="{trendChartOptions}"/>
+				</mx:ControlBar>
+			</mx:Panel>
+		</mx:HDividedBox>
+	</mx:VBox>
+	<mx:Box id="hiddenOptionsContent" visible="false" height="0">
+		<cc:DataOptions id="dataOptions" trendChartOptions="{trendChartOptions}"/>
+	</mx:Box>
+</mx:Application>

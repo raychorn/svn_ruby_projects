@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:dashboard="com.bigfix.dss.view.dashboard.*"
+	xmlns:flexlib="http://code.google.com/p/flexlib/"
+	showCloseButton="true" title="Choose a Widget from the list below."
+	creationComplete="onCreationComplete()" 
+	close="onClose()"
+	width="100%" height="100%">
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.view.dashboard.events.ClosedWidgetChooserEvent;
+			import com.bigfix.dss.model.DSSModelLocator;
+			import com.bigfix.dss.command.GetWidgetsCommand;
+
+			include 'WidgetLibraryLib.as';
+
+			[Bindable]
+			private var model:DSSModelLocator = DSSModelLocator.getInstance();
+
+			[Bindable]
+			private var watcherManager:WatcherManager = new WatcherManager();
+			
+			[Event(name="closedWidgetChooser", type="com.bigfix.dss.view.dashboard.events.ClosedWidgetChooserEvent")]
+
+			private function onCreationComplete():void {
+				new GetWidgetsCommand().execute(null);
+				watcherManager.manage(BindingUtils.bindProperty(searchText, 'text', model, 'currentSearchText'));
+				watcherManager.manage(BindingUtils.bindProperty(model, 'currentSearchText', searchText, 'text'));
+			}
+			
+			private function onClose():void {
+				this.dispatchEvent(new ClosedWidgetChooserEvent(ClosedWidgetChooserEvent.TYPE_CLOSED_WIDGET_CHOOSER, null));
+			}
+			
+			private function onClickWidgetTemplate(event:MouseEvent):void {
+				var t:WidgetTemplate = WidgetTemplate(event.currentTarget);
+				this.dispatchEvent(new ClosedWidgetChooserEvent(ClosedWidgetChooserEvent.TYPE_CLOSED_WIDGET_CHOOSER, t.widgetData));
+			}
+		]]>
+	</mx:Script>
+	<mx:VBox width="100%" height="100%" minHeight="0" horizontalAlign="center">
+		<flexlib:PromptingTextInput prompt="Search" change="filterWidgets()" id="searchText" width="100%" textAlign="left"/>
+		<mx:Repeater id="widgetRepeater" dataProvider="{model.widgets}">
+			<dashboard:WidgetTemplate widgetData="{widgetRepeater.currentItem}" click="onClickWidgetTemplate(event)"/>
+		</mx:Repeater>
+	</mx:VBox>
+</mx:TitleWindow>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+	<mx:Metadata>
+		[Event(name="sortOrderChanged", type="com.bigfix.dss.event.SortOrderChangedEvent")]
+    </mx:Metadata>
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.event.SortOrderChangedEvent;
+			import com.bigfix.dss.util.ArrayCollectionUtils;
+			import mx.events.ListEvent;
+			import com.adobe.utils.ArrayUtil;
+			import com.bigfix.dss.util.ArrayUtils;
+			import mx.collections.ArrayCollection;
+			
+			private var _dataProvider:ArrayCollection = new ArrayCollection();
+
+			private var _labelField:String = "";
+
+			private var _sortOrder:Array = [{label: "ASC"}, {label: "DESC"}];
+			
+			private var _subordinate:SortOrderChooserCanvas;
+			
+			private var _controller:SortOrderChooserCanvas;
+
+			private var _selection:*;
+
+			public function set dataProvider(dataProvider:ArrayCollection):void {
+				var ar:Array = ArrayUtils.deepCopyFrom(dataProvider.source);
+				var i:int = ArrayCollectionUtils.findIndexOfItem(new ArrayCollection(ar), this._labelField, "");
+				var newAR:Array = [];
+				if (i == -1) {
+					var obj:Object = new Object();
+					obj[this._labelField] = "";
+					newAR.push(obj);
+				}
+				ArrayUtils.addAllInto(newAR, ar);
+				this._dataProvider = new ArrayCollection(newAR);
+				this.cmbo_subject.dataProvider = this._dataProvider;
+				this.refreshSubordinate(this._selection);
+			}
+			
+			public function get dataProvider():ArrayCollection {
+				return this._dataProvider;
+			}
+			
+			public function set labelField(labelField:String):void {
+				this._labelField = labelField;
+				try { this.cmbo_subject.labelField = this._labelField; } catch (err:Error) { }
+			}
+			
+			public function get labelField():String {
+				return this._labelField;
+			}
+			
+			public function set subordinate(subordinate:SortOrderChooserCanvas):void {
+				this._subordinate = subordinate;
+			}
+			
+			public function get subordinate():SortOrderChooserCanvas {
+				return this._subordinate;
+			}
+			
+			public function set controller(controller:SortOrderChooserCanvas):void {
+				this._controller = controller;
+			}
+			
+			public function get controller():SortOrderChooserCanvas {
+				return this._controller;
+			}
+			
+			private function refreshSubordinate(selection:*):void {
+				if (this._subordinate != null) {
+					this._subordinate.dataProvider = this._dataProvider;
+					var ac:ArrayCollection = ArrayCollection(this._subordinate.dataProvider);
+					var pat:String = "";
+					try { pat = selection[this._labelField]; } catch (err:Error) { }
+					var i:int = ArrayCollectionUtils.findIndexOfItem(ac, this._labelField, pat);
+					if (i > -1) {
+						ac.removeItemAt(i);
+					}
+					this._subordinate.dataProvider = ac;
+					this._subordinate.selection = selection;
+				}
+			}
+			
+			public function set selection(selection:*):void {
+				this._selection = selection;
+				var value:String = "";
+				try { value = selection[this._labelField]; } catch (err:Error) { }
+				this.enabled = ( (selection != null) && (value != null) && (value is String) && (value.length > 0) );
+				this.refreshSubordinate(this._selection);
+			}
+			
+			public function get selection():* {
+				return this._selection;
+			}
+			
+			private function onCreationCompleteSortOrderComboBox():void {
+				this.cmbo_sortOrder.dataProvider = new ArrayCollection(this._sortOrder);
+			}
+			
+			private function onCreationCompleteSubjectComboBox():void {
+				this.cmbo_subject.labelField = this._labelField;
+				if (this._subordinate != null) {
+					try { this._subordinate.selection = ArrayCollection(this.cmbo_subject.dataProvider).getItemAt(0); } catch (err:Error) { }
+					this.refreshSubordinate(this._subordinate.selection);
+				}
+				if (this.controller != null) {
+					var parentSelection:* = this.controller.cmbo_subject.selectedItem;
+				}
+			}
+			
+			private function _dispatchEvent():void {
+				this.dispatchEvent(new SortOrderChangedEvent(SortOrderChangedEvent.SORT_ORDER_CHANGED, "`" + this.cmbo_subject.selectedLabel + "` " + this.cmbo_sortOrder.selectedLabel));
+			}
+			
+			private function onChangeSubjectComboBox(event:ListEvent):void {
+				if (this._subordinate != null) {
+					this._subordinate.selection = this.cmbo_subject.selectedItem;
+					this.refreshSubordinate(this._subordinate.selection);
+				}
+				this._dispatchEvent();
+			}
+			
+			private function onChangeSortOrderComboBox(event:ListEvent):void {
+				this._dispatchEvent();
+			}
+		]]>
+	</mx:Script>
+	<mx:ComboBox x="0" y="0" id="cmbo_subject" width="{this.width - (this.cmbo_sortOrder.width + 5)}" minWidth="120" change="onChangeSubjectComboBox(event)" creationComplete="onCreationCompleteSubjectComboBox()"/>
+	<mx:ComboBox x="{this.cmbo_subject.width + 5}" y="0" id="cmbo_sortOrder" width="65" creationComplete="onCreationCompleteSortOrderComboBox()" change="onChangeSortOrderComboBox(event)"/>
+</mx:Canvas>

@@ -1,0 +1,29 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+#ludwig's projects
+  
+ludwig_project_one:
+  id: 1
+  user_id: 3
+  name: Music
+  notes: I don't need any notes; I'm Beethoven!
+
+ludwig_project_two:
+  id: 2
+  user_id: 3
+  name: Health
+  notes: Figure out what's wrong with mine!
+
+#wolfgang's projects
+
+wolfgang_project_one:
+  id: 3
+  user_id: 4
+  name: Music
+  notes: All my music is good copy; I don't take notes either!!
+
+wolfgang_project_two:
+  id: 4
+  user_id: 4
+  name: Fashion
+  notes: Set the wig trend...

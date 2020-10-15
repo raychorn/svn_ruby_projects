@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"  creationComplete="init()"
+		horizontalScrollPolicy="off" verticalScrollPolicy="off"
+		width="200" height="105" styleName="popUpTextPromptPanel" titleStyleName="popUpTextPromptPanelTitle">
+	<mx:states>
+		<mx:State name="ImageTypeState">
+			<mx:SetProperty name="height" value="135"/>
+			<mx:AddChild relativeTo="{controlbar1}" position="before">
+				<mx:HBox width="100%" horizontalAlign="center">
+					<mx:RadioButton label=".{BitmapUtils.const_JPG_image_type}" id="radio_JPG" name="radioImageType"/>
+					<mx:Spacer/>
+					<mx:RadioButton label=".{BitmapUtils.const_PNG_image_type}" id="radio_PNG" name="radioImageType"/>
+				</mx:HBox>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+	<mx:Script><![CDATA[
+		import com.bigfix.dss.util.StringUtils;
+		import com.bigfix.dss.util.BitmapUtils;
+		import com.bigfix.dss.view.general.Alert.AlertPopUp;
+		import mx.events.FlexMouseEvent;
+		import mx.managers.PopUpManager;
+		
+		public static const const_Untitled_symbol:String = "Untitled";
+		
+		[Bindable]
+		public var prompt:String;
+
+		[Bindable]
+		private var _text:String;
+		
+		[Bindable]
+		private var _unAllowedValue:String;
+		
+		[Bindable]
+		public var okHandler:Function;
+		
+		[Bindable]
+		public var cancelHandler:Function;
+
+		[Bindable]
+		public var errorHandler:Function;
+
+		[Bindable]
+		private var _filterOnlyAlphaNumeric:Boolean = false;
+
+		public function set filterOnlyAlphaNumeric(filterOnlyAlphaNumeric:Boolean):void {
+			this._filterOnlyAlphaNumeric = filterOnlyAlphaNumeric;
+		}
+		
+		public function get filterOnlyAlphaNumeric():Boolean {
+			return this._filterOnlyAlphaNumeric;
+		}
+		
+		public function set text(text:String):void {
+			this._text = text;
+		}
+		
+		public function get text():String {
+			return this.TextField.text;
+		}
+		
+		public function get unAllowedValue():String {
+			return this._unAllowedValue;
+		}
+		
+		public function set unAllowedValue(value:String):void {
+			this._unAllowedValue = value;
+		}
+		
+		public function get hasBeenEdited():Boolean {
+			return (this._text != this.text);
+		}
+		
+		private function init():void {
+			this.title = this.prompt;
+			TextField.text = this._text;
+			TextField.setFocus();
+			TextField.setSelection(0, TextField.text.length);
+			addEventListener(FlexMouseEvent.MOUSE_DOWN_OUTSIDE, outsideClickHandler);
+			this.refreshOkButtonState();
+		}
+		
+		private function outsideClickHandler(event:FlexMouseEvent):void {
+			PopUpManager.removePopUp(this);
+		}
+		
+		private function simpleErrorHandler(err:Error):void {
+			AlertPopUp.error(err.toString(), "Generic Error Handler :: PopUpTextPrompt");
+		}
+		
+		private function okClick():void {
+			this.enabled = false;
+			PopUpManager.removePopUp(this);
+			if ( (okHandler != null) && (okHandler is Function) ) {
+				try { okHandler(TextField.text); } 
+					catch (err:Error) {
+						if (this.errorHandler is Function) {
+							try { this.errorHandler(err); } catch (err:Error) { this.simpleErrorHandler(err); }
+						} else {
+							this.simpleErrorHandler(err);
+						}
+					}
+			}
+		}
+		
+		private function cancelClick(): void{
+			PopUpManager.removePopUp(this);
+			if ( (this.cancelHandler != null) && (this.cancelHandler is Function) ) {
+				try { this.cancelHandler(this); } 
+					catch (err:Error) {
+						if (this.errorHandler is Function) {
+							try { this.errorHandler(err); } catch (err:Error) { this.simpleErrorHandler(err); }
+						} else {
+							this.simpleErrorHandler(err);
+						}
+					}
+			}
+		}
+		
+		private function onKeyUpTextInput(event:KeyboardEvent):void {
+			this.okButton.enabled = (this.TextField.text.length > 0);
+			if (this._filterOnlyAlphaNumeric) {
+				this.TextField.text = StringUtils.filterIn(this.TextField.text, StringUtils.isLegalFileNameSymbol);
+			}
+		}
+		
+		public function refreshOkButtonState():void {
+			this.okButton.enabled = ( 	(this.TextField.errorString.length == 0) && 
+										(this.TextField.text.length > 0) && 
+									  	(this.TextField.text != const_Untitled_symbol) &&
+									  	((this.unAllowedValue == null) ||
+									  	 (TextField.text != this.unAllowedValue)) );
+		}
+	]]></mx:Script>
+	<mx:VBox id="vbox1" width="100%" height="100%">
+		<mx:Spacer height="20"/>	
+		<mx:FormItem width="100%" defaultButton="{okButton}">
+			<mx:TextInput id="TextField" width="95%" keyUp="onKeyUpTextInput(event)"/>
+		</mx:FormItem>
+		<mx:ControlBar width="100%" horizontalAlign="center" id="controlbar1">
+			<mx:Button label="Cancel" click="cancelClick()"/>
+			<mx:Button label="OK" id="okButton" enabled="false" click="okClick()"/>
+		</mx:ControlBar>
+	</mx:VBox>
+</mx:Panel>

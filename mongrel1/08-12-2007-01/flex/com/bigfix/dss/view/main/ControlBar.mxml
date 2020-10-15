@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:flexlib="http://code.google.com/p/flexlib/" width="100%" styleName="applicationControlBar">
+	<mx:Script><![CDATA[
+		import mx.controls.Button;
+		import mx.events.ItemClickEvent;
+		import com.bigfix.dss.event.LogoutEvent;
+		import com.bigfix.dss.util.DSS;
+
+		private function handleButtonClick(event:ItemClickEvent):void {
+			switch (event.item.name) {
+				case "logout":
+					new LogoutEvent(DSS.model.sessionID).dispatch();
+					break;
+				case "help":
+				  if (DSS.model.workspaceViewState == 'Help')
+				    DSS.model.workspaceViewState = 'Default';
+				  else
+					  DSS.model.workspaceViewState = 'Help';
+					break;
+				case "myAccount":
+				  DSS.model.workspaceViewState = 'My Account';
+				  break;
+			}
+		}
+
+		public function signalAbilityToLogout(bool:Boolean):void {
+			var btn:Button = Button(this.btnBar.getChildAt(1));
+			btn.enabled = bool;
+		}
+	]]></mx:Script>
+	<mx:VBox width="100%">
+		<mx:HBox width="100%">
+			<mx:Text text="BigFix Decision Support System"/>
+			<mx:Spacer width="100%"/>
+			<flexlib:PromptingTextInput prompt="Search" fontSize="9"/>
+			<mx:ButtonBar id="btnBar" toolTipField="toolTip" labelField="label" itemClick="handleButtonClick(event)">
+				<mx:dataProvider>
+					<mx:Array>
+					  <mx:Object label="My Account" toolTip="Change your password, etc." name="myAccount"/>
+						<mx:Object label="Logout" toolTip="Log out of DSS" name="logout"/>
+						<mx:Object label="Help" toolTip="Click here for instructions on using DSS" name="help"/>
+					</mx:Array>
+				</mx:dataProvider>
+			</mx:ButtonBar>
+		</mx:HBox>
+	</mx:VBox>
+</mx:Box>

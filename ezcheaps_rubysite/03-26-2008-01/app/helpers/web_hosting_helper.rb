@@ -1,0 +1,2 @@
+module WebHostingHelper
+end

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:dashboard="com.bigfix.dss.view.dashboard.*"
+	xmlns:data="com.bigfix.dss.view.data.*"
+	xmlns:bfcontainers="com.bigfix.extensions.containers.*"
+	height="100%"
+	verticalScrollPolicy="off"
+	verticalAlign="middle"
+	horizontalGap="0"
+	creationComplete="init()"
+	>
+	<mx:Script><![CDATA[
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.vo.ListSubjectVO;
+		import com.bigfix.dss.vo.PropertyVO;
+		import com.bigfix.dss.vo.SubjectVO;
+		import com.bigfix.dss.event.ListBuilderEvent;
+		import com.bigfix.dss.util.Utils;
+
+		import mx.managers.DragManager;
+		import mx.core.DragSource;
+		import mx.core.IUIComponent;
+		import mx.collections.ArrayCollection;
+		import mx.containers.Canvas;
+		import mx.containers.Panel;
+		import mx.events.DragEvent;
+		import mx.events.FlexEvent;
+
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+
+    [Bindable]
+		public var list_subject:ListSubjectVO = new ListSubjectVO();
+
+		private var _allow_aggregate:Boolean = false; // this means there will be no aggregate checkbox...
+		private var parentCanvas:Canvas; // a pointer to the parent canvas so we can overlay the data filters panel
+
+		private function init():void {
+			parentCanvas = Canvas(Utils.findAncestorOfType(this, Canvas));
+		}
+
+		public function set allow_aggregate(value:Boolean):void {
+			_allow_aggregate = value;
+			aggregateCheckbox.visible = aggregateCheckbox.includeInLayout = _allow_aggregate;
+		}
+		public function get allow_aggregate():Boolean {
+			return _allow_aggregate;
+		}
+
+		private function toggleIsAggregate():void {
+			this.list_subject.is_aggregate = aggregateCheckbox.selected;
+			// INCOMPLETE: blank out data filters
+			this.dispatchEvent(new ListBuilderEvent(ListBuilderEvent.SUBJECT_CHANGED, this.list_subject));
+		}
+
+		// called when someone wants to remove this subject
+		public function remove():void {
+			this.owner.removeChild(this);
+		}
+
+		// data filters methods
+		private function showDataFilters(event:Event):void {
+			if (dataFilterPanel.visible) return;
+			// set the data filer component's properties
+			var dataFilterProperties:ArrayCollection = new ArrayCollection();
+			for each (var property:PropertyVO in this.list_subject.subject.properties) {
+				if (property.is_aggregate && !this.list_subject.is_aggregate) continue; // only show aggregate if the current value of this.list_subject.is_aggregate is true
+				dataFilterProperties.addItem(property);
+			}
+			dataFilterForm.properties = dataFilterProperties;
+			// set the panel title
+			dataFilterPanel.title = "Data Filters for " + this.list_subject.subject.name;
+
+			// draw the arrow
+			var triangleSize:int = 10;
+			var baseX:int = dataFilterButton.measuredWidth/2;
+			var baseY:int = dataFilterButton.measuredHeight;
+			with (dataFilterButton.graphics) {
+				moveTo(baseX, baseY);
+				beginFill(0x7c94b7);
+				lineTo(baseX + triangleSize/2, baseY + triangleSize);
+				lineTo(baseX - triangleSize/2, baseY + triangleSize);
+				lineTo(baseX, baseY);
+			}
+			// show the panel
+			dataFilterPanel = mx.containers.Panel(parentCanvas.addChild(this.removeChild(dataFilterPanel)));
+			dataFilterPanel.visible = true;
+			// position the panel. use global space as common denominator
+			var dataFilterButtonGlobalPoint:Point = dataFilterButton.localToGlobal(new Point(baseX, baseY + triangleSize));
+			dataFilterPanel.y = parentCanvas.globalToLocal(dataFilterButtonGlobalPoint).y;
+			/*
+			// move the panel down if the bottom of the panel is above the label
+			if (parentCanvas.localToGlobal(new Point(0, 0)).y + form.height < labelBoxGlobalPoint.y + labelBox.height) {
+				form.y = parentCanvas.globalToLocal(labelBoxGlobalPoint).y - 5;
+			} else {
+				form.y = 0;
+			}
+			*/
+		}
+
+		private function hideDataFilters():void {
+			dataFilterButton.graphics.clear()
+			if (dataFilterPanel.visible) {
+				dataFilterPanel.visible = false;
+				dataFilterPanel = mx.containers.Panel(this.addChild(parentCanvas.removeChild(dataFilterPanel)));
+			}
+		}
+
+		private function commitDataFilters():void {
+			this.list_subject.data_filters = dataFilterForm.collectDataFilters().source;
+			this.hideDataFilters();
+			this.dispatchEvent(new ListBuilderEvent(ListBuilderEvent.SUBJECT_CHANGED, this.list_subject));
+		}
+
+	]]></mx:Script>
+	<bfcontainers:Panel id="mainSubject" height="100" styleName="listBuilderSelectedSubject" title="{this.list_subject.subject.name}">
+		<bfcontainers:addlHeaderElement>
+			<mx:Button width="10" height="10" click="remove()" styleName="closeButton"/>
+		</bfcontainers:addlHeaderElement>
+		<mx:Button id="dataFilterButton" label="Data Filters" click="showDataFilters(event)"/>
+		<mx:CheckBox label="Aggregate?" id="aggregateCheckbox" click="toggleIsAggregate()"/>
+	</bfcontainers:Panel>
+	<mx:Panel id="dataFilterPanel" title="Data Filters" styleName="wizardFormContainer" width="800" minHeight="200" maxHeight="500" includeInLayout="false" visible="false">
+		<data:DataFilterForm id="dataFilterForm"/>
+		<mx:ControlBar horizontalAlign="right">
+			<mx:Button label="Cancel" click="hideDataFilters()"/>
+			<mx:Button label="Done" click="commitDataFilters()"/>
+		</mx:ControlBar>
+	</mx:Panel>
+</mx:HBox>

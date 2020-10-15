@@ -1,0 +1,5 @@
+one:
+  id: 1
+  vuln_id: 1
+  vuln_advisory_publisher_id: 1
+  advisory_id: CVE-2006-4687

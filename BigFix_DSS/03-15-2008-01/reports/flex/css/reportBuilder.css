@@ -1,0 +1,126 @@
+/* CSS file */
+@font-face {
+	src: url("/assets/fonts/NeoSansIntel.ttf");
+	fontFamily: NeoSansIntel;
+}
+
+TextField {
+	fontFamily: NeoSansIntel;
+	fontSize: 12pt;
+}
+
+.ReportManagementTitle {
+	fontFamily: NeoSansIntel;
+	fontSize: 16pt;
+	font-weight :bold;
+}
+
+.ContextMenuLabel {
+	fontFamily: NeoSansIntel;
+	fontSize: 9pt;
+	font-weight :bold;
+}
+
+.ErrorAlert {
+	fontFamily: NeoSansIntel;
+	fontSize: 11pt;
+	backgroundAlpha: .5;
+	shadowDistance: 7;
+	backgroundColor: #ff0000;
+	borderColor: #ff0000;
+	cornerRadius: 10;
+}	
+
+ComboBox {
+	dropShadowEnabled: true;
+	fontFamily: NeoSansIntel;
+	fontSize: 11pt;
+}
+
+ImageWidget {
+	dropShadowEnabled: true;
+	borderColor: #0000ff;
+	borderStyle: solid;
+}
+
+.ImageMouseOver {
+	dropShadowEnabled: true;
+	borderColor: #ff0000;
+	borderStyle: solid;
+}
+
+.FileUploader {
+	borderColor: #ffff99;
+	borderAlpha: 0.7;
+	borderThicknessLeft: 10;
+	borderThicknessTop: 3;
+	borderThicknessBottom: 2;
+	borderThicknessRight: 10;
+	roundedBottomCorners: true;
+	cornerRadius: 10;
+	backgroundAlpha: 1;
+	backgroundColor: #ffff99;
+	shadowDistance: 7;
+	shadowDirection: right;
+	titleStyleName: "mypanelTitle";
+}
+
+.mypanelTitle {
+	fontFamily:NeoSansIntel;
+	font-size: 14;	
+	font-weight :bold;
+}
+
+.ReportBuilderCanvasStyle {
+   backgroundColor: #ffffff;
+}
+
+.ImageTile {
+	dropShadowEnabled: false;
+	borderColor: #0000ff;
+	borderStyle: solid;
+}
+
+.ImageTileList {
+	backgroundAlpha: 1;
+	backgroundColor: #ffff99;
+	dropShadowEnabled: false;
+	borderColor: #ffff99;
+	borderStyle: none;
+}
+
+.ReportBuilderAppControlBar {
+	borderStyle: none;
+	backgroundColor: #cccccc;
+	cornerRadius: 10;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+	backgroundAlpha: 0.8;
+}
+
+.ImageEditor {
+	borderColor: #00ff00;
+	borderAlpha: 0.4;
+	borderThicknessLeft: 0;
+	borderThicknessTop: 0;
+	borderThicknessBottom: 0;
+	borderThicknessRight: 0;
+	roundedBottomCorners: true;
+	cornerRadius: 10;
+	headerHeight: 26;
+	backgroundAlpha: 1;
+	headerColors: #ffff99, #ffff99;
+	backgroundColor: #ffff99;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+}
+
+.IconCanvasButton {
+	cornerRadius: 5;
+	paddingTop: 10;
+	fontFamily: NeoSansIntel;
+	fontSize: 10;
+	fontWeight: bold;
+	dropShadowEnabled: true;
+	shadowDirection: right;
+}

@@ -1,0 +1,13 @@
+italy:
+  title: Italy
+  subgroups:
+  - it_rome
+  - it_turin
+
+it_rome:
+  title: Rome
+  type: city
+
+it_turin:
+  title: Turin
+  type: city

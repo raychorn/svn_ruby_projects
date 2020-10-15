@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel title="Computer Groups" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="remoteService.getTree.send()">
+	<mx:Script><![CDATA[
+		import mx.controls.Alert;
+		import mx.events.ListEvent;
+		import customComponents.objects.TrendChartOptions;
+		import com.bigfix.dss.view.general.Alert.AlertPopUp;
+
+		public var trendChartOptions:TrendChartOptions;
+
+		private function setSelectedItem():void {
+			trendChartOptions.computer_group_id = tree.selectedItem.id;
+		}
+
+		private var _openItems:Array;
+
+		private function setOpenItems():void {
+			_openItems = new Array();
+			if (trendChartOptions.computer_group_id) {
+				for (var i:int = 0; i < remoteService.getTree.lastResult.length; i++) {
+					appendOpenItems(remoteService.getTree.lastResult[i]);
+				}
+			} else {
+				_openItems.push(remoteService.getTree.lastResult[0]);
+			}
+			tree.openItems = _openItems;
+			tree.selectedItem = _openItems[_openItems.length - 1];
+			dispatchEvent(new ListEvent('change'));
+		}
+
+		private function appendOpenItems(node:Object):Boolean {
+			_openItems.push(node);
+			if (node.id == trendChartOptions.computer_group_id) {
+				return true;
+			}
+			if (node.children) {
+				for (var i:int = 0; i < node.children.length; i++) {
+					if (appendOpenItems(node.children[i])) {
+						return true;
+					}
+				}
+			}
+			_openItems.pop();
+			return false;
+		}
+
+	]]></mx:Script>
+
+	<mx:Metadata>
+		[Event(name='change', type='mx.events.ListEvent')]
+	</mx:Metadata>
+
+	<mx:RemoteObject id="remoteService" destination="ComputerGroups" showBusyCursor="true" fault="AlertPopUp.error(event.fault.faultString, 'Error');">
+		<mx:method name="getTree" result="setOpenItems()"/>
+	</mx:RemoteObject>
+	<mx:Tree id="tree" width="100%" height="100%"
+		showRoot="false"
+		dataProvider="{remoteService.getTree.lastResult}"
+		labelField="name"
+		change="setSelectedItem()"
+	/>
+</mx:Panel>

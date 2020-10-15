@@ -1,0 +1,80 @@
+management:
+  title: Management workstations
+  subgroups:
+  - high_end_windows_workstations
+
+laptops:
+  title: Laptops (Windows)
+  subgroups:
+  - windows_laptops
+
+mixed_laptops:
+  title: Laptops (mixed)
+  subgrops:
+  - windows_laptops
+  - mac_laptops
+
+desktops:
+  title: Desktops (Windows)
+  subgroups:
+  - high_end_windows_workstations
+  - midgrade_windows_workstations
+
+mixed_desktops:
+  title: Desktops (mixed)
+  subgroups:
+  - high_end_windows_workstations
+  - midgrade_windowss_workstations
+  - mac_workstations
+
+terminals:
+  title: Terminals
+  subgroups:
+  - low_end_windows_workstations
+  - midgrade_windows_workstations
+
+infrastructure:
+  title: Network infrastructure
+  subgroups:
+  - routers
+  - switches
+  - security_appliances
+  - nas_appliances
+
+switches:
+  title: Ethernet Switches
+
+nas_appliances:
+  title: NAS Appliances
+
+security_appliances:
+  title: Security Appliances
+  subgroups:
+  - firewalls
+  - ids_appliances
+  - ips_appliances
+  - va_appliances
+
+telephones:
+  title: IP Telephones
+  subgroups:
+  - cisco_ip_phone
+
+industrial:
+  title: Industrial control
+
+servers:
+  title: Servers
+  subgroups:
+  - external_web_servers
+  - internal_web_servers
+  - mail_servers
+  - business_servers
+
+business_servers:
+  title: Business servers
+  subgroups:
+  - accounting_servers
+  - payroll_servers
+  - hr_servers
+  - operations_servers

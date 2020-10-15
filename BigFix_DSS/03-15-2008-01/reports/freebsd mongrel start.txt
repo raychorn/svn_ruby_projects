@@ -1,0 +1,9 @@
+mongrel_rails start -p 3000 -d
+
+http://192.168.105.67:3000/dss/dss.html
+
+mongrel_rails mongrel::stop -f
+
+http://svn.bigfix.com/repos/katamari/trunk/reports
+
+rm -rf reports

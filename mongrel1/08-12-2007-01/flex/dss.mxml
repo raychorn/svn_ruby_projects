@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:reflector="com.rictus.reflector.*"
+	xmlns:control="com.bigfix.dss.control.*"
+	xmlns:business="com.bigfix.dss.business.*"
+	xmlns:login="com.bigfix.dss.view.login.*"
+	xmlns:main="com.bigfix.dss.view.main.*"
+	xmlns:mxeffects="com.adobe.ac.mxeffects.*"
+	xmlns:bfcontainers="com.bigfix.extensions.containers.*"
+
+	currentState="{model.viewState}"
+	creationComplete="checkLogin()"
+	width="100%"
+	height="100%"
+	>
+
+	<mx:Style source="css/default.css"/>
+	<mx:Style source="css/reportBuilder.css"/>
+	<mx:Script><![CDATA[
+		import com.bigfix.dss.view.report.events.SignalCurrentReportEvent;
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.event.LoginEvent;
+
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+		
+		private function checkLogin():void {
+			new LoginEvent(null, null).dispatch();
+		}
+		
+		private function onSignalCurrentReport(event:SignalCurrentReportEvent):void {
+			this.mainControlBar.signalAbilityToLogout(event.canLogout);
+		}
+		
+		private function onCreationCompleteWorkspace():void {
+			this.mainWorkspace.addEventListener(SignalCurrentReportEvent.TYPE_SIGNAL_CURRENT_REPORT, onSignalCurrentReport);
+		}
+	]]></mx:Script>
+
+	<mx:states>
+	  <mx:State name="Init">
+  	  <mx:AddChild>
+  	    <bfcontainers:GradientBox id="initView" width="100%" height="100%" gradientAngle="90" gradientColors="[0x4f4f47, 0x000000]" horizontalAlign="center" verticalAlign="middle">
+  	      <mx:Panel title="Decision Support System">
+  	        <mx:Label text="Please wait..." />
+  	      </mx:Panel>
+  	    </bfcontainers:GradientBox>
+	    </mx:AddChild>
+	  </mx:State>
+		<mx:State name="Login">
+			<mx:AddChild>
+				<bfcontainers:GradientBox id="loginView" width="100%" height="100%" gradientAngle="90" gradientColors="[0x4f4f47, 0x000000]" horizontalAlign="center" verticalAlign="middle">
+					<login:LoginView id="loginPanel" verticalCenter="0" horizontalCenter="0"/>
+					<reflector:Reflector target="{loginPanel}" alpha="0.6" falloff="0.7" blurAmount="0.4"/>
+				</bfcontainers:GradientBox>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="Main">
+			<!--
+			<mx:AddChild>
+				<mx:Box id="mainView" width="100%" height="100%" horizontalGap="0" verticalGap="0" paddingTop="0" paddingBottom="0" paddingLeft="0" paddingRight="0">
+					<main:ControlBar id="mainControlBar"/>
+					<main:Workspace id="mainWorkspace"/>
+				</mx:Box>
+			</mx:AddChild>
+			-->
+			<mx:AddChild>
+				<main:ControlBar id="mainControlBar"/>
+			</mx:AddChild>
+			<mx:AddChild>
+				<main:Workspace id="mainWorkspace" creationComplete="onCreationCompleteWorkspace()"/>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="Logout">
+			<mx:AddChild>
+				<bfcontainers:GradientBox id="logoutView" width="100%" height="100%" gradientAngle="90" gradientColors="[0x4f4f47, 0x000000]" horizontalAlign="center" verticalAlign="middle">
+					<login:LogoutView id="logoutPanel" verticalCenter="0" horizontalCenter="0"/>
+					<reflector:Reflector target="{logoutPanel}" alpha="0.6" falloff="0.7" blurAmount="0.4"/>
+				</bfcontainers:GradientBox>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+
+	<!--
+	<mx:transitions>
+		<mx:Transition fromState="Login" toState="Main">
+			<mx:Sequence>
+				<mxeffects:CubeRotate target="{loginView}" siblings="{[mainView]}" direction="LEFT" duration="1500" smooth="false"/>
+				<mx:RemoveChildAction target="{loginView}"/>
+				<mx:AddChildAction target="{mainView}"/>
+			</mx:Sequence>
+		</mx:Transition>
+		<mx:Transition fromState="Main" toState="Logout">
+			<mx:Sequence>
+				<mxeffects:CubeRotate target="{mainView}" siblings="{[logoutView]}" direction="RIGHT" duration="1500" smooth="false"/>
+				<mx:RemoveChildAction target="{mainView}"/>
+				<mx:AddChildAction target="{logoutView}"/>
+			</mx:Sequence>
+		</mx:Transition>
+		<mx:Transition fromState="Logout" toState="Login">
+			<mx:Sequence>
+				<mxeffects:CubeRotate target="{logoutView}" siblings="{[loginView]}" direction="TOP" duration="1500" smooth="false"/>
+				<mx:RemoveChildAction target="{logoutView}"/>
+				<mx:AddChildAction target="{loginView}"/>
+			</mx:Sequence>
+		</mx:Transition>
+	</mx:transitions>
+	-->
+
+	<business:Services id="services" />
+	<control:DSSController id="controller" />
+</mx:Application>

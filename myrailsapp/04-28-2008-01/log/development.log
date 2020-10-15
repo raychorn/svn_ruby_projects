@@ -1,0 +1,84 @@
+WeborbController: missing default helper path weborb_helper
+
+
+Processing WeborbController#index (for 127.0.0.1 at 2007-06-30 22:50:04) [POST]
+  Session ID: 38c1d8cf587d779fe94d9cebba1e2347
+  Parameters: {"action"=>"index", "controller"=>"weborb"}
+Completed in 0.16400 (6 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/weborb]
+WeborbController: missing default helper path weborb_helper
+
+
+Processing WeborbController#index (for 127.0.0.1 at 2007-06-30 22:50:04) [POST]
+  Session ID: 38c1d8cf587d779fe94d9cebba1e2347
+  Parameters: {"action"=>"index", "controller"=>"weborb"}
+Completed in 0.05300 (18 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/weborb]
+WeborbController: missing default helper path weborb_helper
+
+
+Processing WeborbController#index (for 127.0.0.1 at 2007-06-30 22:50:07) [POST]
+  Session ID: 38c1d8cf587d779fe94d9cebba1e2347
+  Parameters: {"action"=>"index", "controller"=>"weborb"}
+Completed in 0.11300 (8 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/weborb]
+WeborbController: missing default helper path weborb_helper
+
+
+Processing WeborbController#index (for 127.0.0.1 at 2007-06-30 22:50:08) [POST]
+  Session ID: 38c1d8cf587d779fe94d9cebba1e2347
+  Parameters: {"action"=>"index", "controller"=>"weborb"}
+Completed in 0.30600 (3 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/weborb]
+WeborbController: missing default helper path weborb_helper
+
+
+Processing WeborbController#index (for 127.0.0.1 at 2007-06-30 22:50:10) [POST]
+  Session ID: 38c1d8cf587d779fe94d9cebba1e2347
+  Parameters: {"action"=>"index", "controller"=>"weborb"}
+Completed in 0.08900 (11 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/weborb]
+WeborbController: missing default helper path weborb_helper
+
+
+Processing WeborbController#index (for 127.0.0.1 at 2007-06-30 22:50:11) [POST]
+  Session ID: 38c1d8cf587d779fe94d9cebba1e2347
+  Parameters: {"action"=>"index", "controller"=>"weborb"}
+Completed in 0.08500 (11 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/weborb]
+WeborbController: missing default helper path weborb_helper
+
+
+Processing WeborbController#index (for 127.0.0.1 at 2007-06-30 22:50:12) [POST]
+  Session ID: 38c1d8cf587d779fe94d9cebba1e2347
+  Parameters: {"action"=>"index", "controller"=>"weborb"}
+Completed in 0.04100 (24 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/weborb]
+WeborbController: missing default helper path weborb_helper
+
+
+Processing WeborbController#index (for 127.0.0.1 at 2007-06-30 22:50:13) [POST]
+  Session ID: 38c1d8cf587d779fe94d9cebba1e2347
+  Parameters: {"action"=>"index", "controller"=>"weborb"}
+Completed in 0.40400 (2 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/weborb]
+WeborbController: missing default helper path weborb_helper
+
+
+Processing WeborbController#index (for 127.0.0.1 at 2007-06-30 22:50:14) [POST]
+  Session ID: 38c1d8cf587d779fe94d9cebba1e2347
+  Parameters: {"action"=>"index", "controller"=>"weborb"}
+Completed in 0.29300 (3 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/weborb]
+WeborbController: missing default helper path weborb_helper
+
+
+Processing WeborbController#index (for 127.0.0.1 at 2007-06-30 22:50:15) [POST]
+  Session ID: 38c1d8cf587d779fe94d9cebba1e2347
+  Parameters: {"action"=>"index", "controller"=>"weborb"}
+Completed in 0.08900 (11 reqs/sec) | Rendering: 0.00100 (1%) | 200 OK [http://localhost/weborb]
+WeborbController: missing default helper path weborb_helper
+
+
+Processing WeborbController#index (for 127.0.0.1 at 2007-06-30 22:50:17) [POST]
+  Session ID: 38c1d8cf587d779fe94d9cebba1e2347
+  Parameters: {"action"=>"index", "controller"=>"weborb"}
+Completed in 0.06400 (15 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/weborb]
+WeborbController: missing default helper path weborb_helper
+
+
+Processing WeborbController#index (for 127.0.0.1 at 2007-06-30 22:50:18) [POST]
+  Session ID: 38c1d8cf587d779fe94d9cebba1e2347
+  Parameters: {"action"=>"index", "controller"=>"weborb"}
+Completed in 0.38900 (2 reqs/sec) | Rendering: 0.00000 (0%) | 200 OK [http://localhost/weborb]

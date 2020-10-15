@@ -1,0 +1,15 @@
+patch:
+  id: 1
+  name: Software Patch
+
+config_change:
+  id: 2
+  name: Configuration Change
+
+disable:
+  id: 3
+  name: Disable
+
+block:
+  id: 4
+  name: Block

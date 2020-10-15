@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:dashboard="com.bigfix.dss.view.dashboard.*"
+	xmlns:flexlib="flexlib.controls.*"
+	xmlns:editors="com.bigfix.dss.view.editors.*"
+	showCloseButton="true" title="Choose a Widget from the list below."
+	creationComplete="onCreationComplete()" 
+	close="onClose()"
+	width="100%" height="100%">
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.view.editors.events.TextChangedEvent;
+			import com.bigfix.dss.view.dashboard.events.ClosedWidgetChooserEvent;
+			import com.bigfix.dss.model.DSSModelLocator;
+			import com.bigfix.dss.command.GetWidgetsCommand;
+
+			include 'WidgetLibraryLib.as';
+
+			[Bindable]
+			private var model:DSSModelLocator = DSSModelLocator.getInstance();
+
+			[Bindable]
+			private var watcherManager:WatcherManager = new WatcherManager();
+			
+			[Event(name="closedWidgetChooser", type="com.bigfix.dss.view.dashboard.events.ClosedWidgetChooserEvent")]
+
+			private function onCreationComplete():void {
+				new GetWidgetsCommand().execute(null);
+				watcherManager.manage(BindingUtils.bindProperty(searchText, 'text', model, 'currentSearchText'));
+				watcherManager.manage(BindingUtils.bindProperty(model, 'currentSearchText', searchText, 'text'));
+			}
+			
+			private function onClose():void {
+				this.dispatchEvent(new ClosedWidgetChooserEvent(ClosedWidgetChooserEvent.TYPE_CLOSED_WIDGET_CHOOSER, null));
+			}
+			
+			private function onClickWidgetTemplate(event:MouseEvent):void {
+				var t:WidgetTemplate = WidgetTemplate(event.currentTarget);
+				this.dispatchEvent(new ClosedWidgetChooserEvent(ClosedWidgetChooserEvent.TYPE_CLOSED_WIDGET_CHOOSER, t.widgetData));
+			}
+
+			private function onTextChangedPromptingTextInputCanvas(event:TextChangedEvent):void {
+				filterWidgets(this.searchText.text, this.model);
+			}
+			
+			private function onCreationCompletePromptingTextInputCanvas():void {
+				this.searchText.addEventListener(TextChangedEvent.TYPE_TEXT_CHANGED, onTextChangedPromptingTextInputCanvas);
+			}
+		]]>
+	</mx:Script>
+	<mx:VBox width="100%" height="100%" minHeight="0" horizontalAlign="center">
+		<editors:PromptingTextInputCanvas id="searchText" prompt="Search" creationComplete="onCreationCompletePromptingTextInputCanvas()"/>
+		<mx:Repeater id="widgetRepeater" dataProvider="{model.widgets}">
+			<dashboard:WidgetTemplate widgetData="{widgetRepeater.currentItem}" click="onClickWidgetTemplate(event)"/>
+		</mx:Repeater>
+	</mx:VBox>
+</mx:TitleWindow>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" height="100%" 
+	creationComplete="onCreationComplete()" 
+	resize="onResize(event)">
+	<mx:Script>
+		<![CDATA[
+			import mx.events.ResizeEvent;
+			import mx.collections.ArrayCollection;
+			
+			[Bindable]
+			public var dataProvider:ArrayCollection = new ArrayCollection();
+			
+			private static var _count:Number = 0;
+			
+			public static function get count():Number {
+				_count++;
+				return (_count - 1);
+			}
+			
+			private function onCreationComplete():void {
+				this.dp();
+			}
+			
+			private function onResize(event:ResizeEvent):void {
+				try {
+					this.width = event.currentTarget.parent.width;
+					this.height = event.currentTarget.parent.height;
+				} catch (err:Error) { }
+			}
+			
+			private function dp():ArrayCollection {
+				var ar:Array = [];
+				var obj:Object;
+				var i:int;
+				for (i = 0; i < 100; i++) {
+					obj = new Object();
+					obj.col1 = "Column 1" + "." + i.toString();
+					obj.col2 = "Column 2" + "." + i.toString();
+					obj.col3 = "Column 3" + "." + i.toString();
+					ar.push(obj);
+				}
+				this.dataProvider = new ArrayCollection(ar);
+				return this.dataProvider;
+			}
+		]]>
+	</mx:Script>
+	<mx:DataGrid x="0" y="0" width="{this.width}" height="{this.height}" id="grid" dataProvider="{this.dataProvider}">
+		<mx:columns>
+			<mx:DataGridColumn headerText="Column 1" dataField="col1"/>
+			<mx:DataGridColumn headerText="Column 2" dataField="col2"/>
+			<mx:DataGridColumn headerText="Column 3" dataField="col3"/>
+		</mx:columns>
+	</mx:DataGrid>
+</mx:Canvas>

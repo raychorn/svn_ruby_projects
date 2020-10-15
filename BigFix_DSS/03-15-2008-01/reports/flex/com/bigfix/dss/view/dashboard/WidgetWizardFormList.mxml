@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:buttons="com.bigfix.dss.view.general.buttons.*"
+	xmlns:sorting="com.bigfix.dss.view.general.sorting.*"
+	xmlns:data="com.bigfix.dss.view.data.*"
+	xmlns:dashboard="com.bigfix.dss.view.dashboard.*"
+	width="100%" height="450"
+	creationComplete="init()"
+	>
+	<mx:Script><![CDATA[
+		import com.bigfix.dss.event.SortOrderChangedEvent;
+		import mx.events.CollectionEvent;
+		import com.bigfix.dss.util.ArrayCollectionUtils;
+		import mx.events.ListEvent;
+		import mx.collections.ArrayCollection;
+		import mx.events.FlexEvent;
+		import mx.events.DragEvent;
+		import mx.utils.ObjectUtil;
+
+		import com.bigfix.dss.vo.ListSubjectVO;
+		import com.bigfix.dss.vo.ListWidgetVO;
+		import com.bigfix.dss.vo.PropertyVO;
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.event.ListBuilderEvent;
+		import com.bigfix.dss.util.WatcherManager;
+
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+		// column selection variables
+		[Bindable]
+		private var selected_columns:ArrayCollection = new ArrayCollection();
+		[Bindable]
+		private var available_columns:ArrayCollection = new ArrayCollection();
+		private var watcherManager:WatcherManager = new WatcherManager();
+
+		private function init():void {
+			// subject events
+			listBuilderWorkspace.addEventListener(ListBuilderEvent.SUBJECT_ADDED, handleSubjectAdded);
+			listBuilderWorkspace.addEventListener(ListBuilderEvent.SUBJECT_REMOVED, handleSubjectRemoved);
+			listBuilderWorkspace.addEventListener(ListBuilderEvent.SUBJECT_CHANGED, handleSubjectChanged);
+			// column events
+			availableColumnsList.addEventListener(DragEvent.DRAG_COMPLETE, handleColumnDragDrop, false, -100);
+			selectedColumnsList.addEventListener(DragEvent.DRAG_COMPLETE, handleColumnDragDrop, false, -100);
+			this.addEventListener(FlexEvent.REMOVE, _destruct, false, 0, true);
+			this.selected_columns.addEventListener(CollectionEvent.COLLECTION_CHANGE, onCollectionChangeSelectedColumns);
+		}
+
+		private function _destruct(event:FlexEvent):void {
+			trace("WidgetWizardFormList._destruct()");
+			// subject events
+			listBuilderWorkspace.removeEventListener(ListBuilderEvent.SUBJECT_ADDED, handleSubjectAdded);
+			listBuilderWorkspace.removeEventListener(ListBuilderEvent.SUBJECT_REMOVED, handleSubjectRemoved);
+			listBuilderWorkspace.removeEventListener(ListBuilderEvent.SUBJECT_CHANGED, handleSubjectChanged);
+			// column events
+			availableColumnsList.removeEventListener(DragEvent.DRAG_COMPLETE, handleColumnDragDrop);
+			selectedColumnsList.removeEventListener(DragEvent.DRAG_COMPLETE, handleColumnDragDrop);
+			this.model = null;
+			selected_columns = null;
+			available_columns = null;
+			this.removeEventListener(FlexEvent.REMOVE, _destruct);
+		}
+
+		private function onCollectionChangeSelectedColumns(event:CollectionEvent):void {
+			this.sortOrderChooser1.dataProvider = ArrayCollection(event.currentTarget);
+		}
+		
+		// these next two methods handle events of adding and removing subjects to the workspace
+		private function handleSubjectAdded(event:ListBuilderEvent):void {
+			availableSubjectsContainer.hideSubject(event.list_subject.subject);
+			setListSubjects();
+			addColumnsForListSubject(event.list_subject);
+			setListColumns();
+		}
+
+		private function handleSubjectRemoved(event:ListBuilderEvent):void {
+			availableSubjectsContainer.showSubject(event.list_subject.subject);
+			setListSubjects();
+			removeColumnsForListSubject(event.list_subject);
+			setListColumns();
+		}
+
+		private function handleSubjectChanged(event:ListBuilderEvent):void {
+			setListSubjects();
+			removeColumnsForListSubject(event.list_subject);
+			addColumnsForListSubject(event.list_subject);
+			setListColumns();
+		}
+
+		private function onSortOrderChanged(event:SortOrderChangedEvent):void {
+			var target:SortOrderChooserCanvas = SortOrderChooserCanvas(event.currentTarget);
+			var sortOrder:String = event.sortOrder;
+			var ar:Array = ListWidgetVO(model.currentWidget.visualization_type_options).sort_columns;
+			if ( (ar == null) || (target.id.indexOf("1") > -1) ) {
+				ar = [];
+			}
+			var i:int = ArrayCollectionUtils.findIndexOfItem(new ArrayCollection(ar), null, sortOrder);
+			if (i == -1) {
+				ar.push(sortOrder);
+				ListWidgetVO(model.currentWidget.visualization_type_options).sort_columns = ar;
+			}
+		}
+		
+		private function handleColumnDragDrop(event:DragEvent):void {
+			if (event.currentTarget == availableColumnsList && event.relatedObject == event.currentTarget)
+				return;
+			setListColumns();
+		}
+
+		private function setListSubjects():void {
+			model.currentWidget.visualization_type_options.list_subjects = listBuilderWorkspace.collectListSubjects();
+		}
+
+		private function setListColumns():void {
+			model.currentWidget.visualization_type_options.list_columns = ObjectUtil.copy(selected_columns.source);
+			this.sortOrderChooser1.dataProvider = selected_columns;
+		}
+
+		private function addColumnsForListSubject(list_subject:ListSubjectVO):void {
+			for each (var property:PropertyVO in list_subject.subject.properties) {
+				// don't include properties with property_type_id 1 (which is an ID)
+				if (property.property_type_id == 1) { continue; }
+				// only include aggregate columns if the list_subject is set to aggregate
+				if (property.is_aggregate != list_subject.is_aggregate) { continue; }
+				// automatically move over 'default columns'
+				if (property.is_default) {
+					selected_columns.addItem(ObjectUtil.copy(property));
+				} else {
+					available_columns.addItem(ObjectUtil.copy(property));
+				}
+			}
+		}
+
+		private function removeColumnsForListSubject(list_subject:ListSubjectVO):void {
+			var tmpLength:int = selected_columns.length;
+			for (var i:int = tmpLength - 1; i >= 0; i--) {
+				if (selected_columns[i].report_subject_id == list_subject.subject.id) {
+					selected_columns.removeItemAt(i);
+				}
+			}
+			tmpLength = available_columns.length;
+			for (var n:int = tmpLength - 1; n >= 0; n--) {
+				if (available_columns[n].report_subject_id == list_subject.subject.id) {
+					available_columns.removeItemAt(n);
+				}
+			}
+		}
+		
+		private function onClickSelectColumnButton():void {
+			var i:int;
+			var ar:Array = this.availableColumnsList.selectedItems;
+			for (var j:int = 0; j < ar.length; j++) {
+				this.selected_columns.addItem(ar[j]);
+				i = ArrayCollectionUtils.findIndexOfItem(this.available_columns, "name", ar[j].name);
+				if (i > -1) {
+					this.available_columns.removeItemAt(i);
+				}
+			}
+			this.refreshDeselectButtonState();
+			this.refreshSelectButtonState();
+		}
+		
+		private function onClickDeselectColumnButton():void {
+			var i:int;
+			var ar:Array = this.selectedColumnsList.selectedItems;
+			for (var j:int = 0; j < ar.length; j++) {
+				i = ArrayCollectionUtils.findIndexOfItem(this.selected_columns, "name", ar[j].name);
+				if (i > -1) {
+					this.selected_columns.removeItemAt(i);
+					this.setListColumns();
+					this.available_columns.addItem(ar[j]);
+				}
+			}
+			this.refreshDeselectButtonState();
+			this.refreshSelectButtonState();
+		}
+		
+		private function refreshDeselectButtonState():void {
+			this.btn_deselectColumn.enabled = (this.selectedColumnsList.selectedItems.length > 0);
+		}
+		
+		private function refreshSelectButtonState():void {
+			this.btn_selectColumn.enabled = (this.availableColumnsList.selectedItems.length > 0);
+		}
+		
+		private function onItemClickSelectedColumnsList(event:ListEvent):void {
+			this.refreshDeselectButtonState();
+		}
+		
+		private function onItemClickAvailableColumnsList(event:ListEvent):void {
+			this.refreshSelectButtonState();
+		}
+	]]></mx:Script>
+
+	<mx:Panel title="Available Subjects" height="100%" width="200" minHeight="0" styleName="listBuilderPanel">
+		<dashboard:ListBuilderAvailableSubjects id="availableSubjectsContainer"/>
+	</mx:Panel>
+	<mx:VBox width="100%" height="100%">
+		<mx:Panel title="Selected Subjects" width="100%" minHeight="100" styleName="listBuilderPanel">
+			<dashboard:ListBuilderWorkspace id="listBuilderWorkspace" width="100%"/>
+		</mx:Panel>
+		<mx:HBox width="100%" height="100%">
+			<mx:HBox width="100%" id="hbox1" height="100%">
+				<mx:Panel title="Available Columns" width="100%" height="100%" styleName="listBuilderPanel" id="panel2">
+					<mx:List id="availableColumnsList" labelField="name" width="100%" height="100%" dragMoveEnabled="true" dragEnabled="true" dropEnabled="true" dataProvider="{available_columns}" backgroundColor="red" backgroundAlpha="0" itemClick="onItemClickAvailableColumnsList(event)"/>
+				</mx:Panel>
+				<mx:VBox height="100%" verticalAlign="middle">
+					<buttons:ArrowButtonCanvas id="btn_selectColumn" currentState="RightArrowEnabled" click="onClickSelectColumnButton()" enabled="false"/>
+					<buttons:ArrowButtonCanvas id="btn_deselectColumn" currentState="LeftArrowEnabled" click="onClickDeselectColumnButton()" enabled="false"/>
+				</mx:VBox>
+				<mx:Panel title="Selected Columns" width="100%" height="100%" styleName="listBuilderPanel" id="panel1">
+					<mx:List id="selectedColumnsList" labelField="name" width="100%" height="100%" dragMoveEnabled="true" dragEnabled="true" dropEnabled="true" dataProvider="{selected_columns}" backgroundColor="red" backgroundAlpha="0" itemClick="onItemClickSelectedColumnsList(event)"/>
+				</mx:Panel>
+			</mx:HBox>
+			<mx:Panel title="Column Sorting Order" width="33%" height="100%" styleName="listBuilderPanel" id="panel3">
+				<sorting:SortOrderChooserCanvas id="sortOrderChooser1" width="100%" labelField="name" subordinate="{this.sortOrderChooser2}" sortOrderChanged="onSortOrderChanged(event)"/>
+				<sorting:SortOrderChooserCanvas id="sortOrderChooser2" enabled="false" width="100%" labelField="name" subordinate="{this.sortOrderChooser3}" controller="{this.sortOrderChooser1}" sortOrderChanged="onSortOrderChanged(event)"/>
+				<sorting:SortOrderChooserCanvas id="sortOrderChooser3" enabled="false" width="100%" labelField="name" controller="{this.sortOrderChooser2}" sortOrderChanged="onSortOrderChanged(event)"/>
+			</mx:Panel>
+		</mx:HBox>
+	</mx:VBox>
+</mx:HBox>

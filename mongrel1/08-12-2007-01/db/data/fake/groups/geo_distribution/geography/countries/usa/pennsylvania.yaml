@@ -1,0 +1,232 @@
+pennsylvania:
+  title: Pennsylvania
+  subgroups:
+  - pennsylvania_allentown
+  - pennsylvania_altoona
+  - pennsylvania_baldwin
+  - pennsylvania_bethel_park
+  - pennsylvania_bethlehem
+  - pennsylvania_carlisle
+  - pennsylvania_chambersburg
+  - pennsylvania_chester
+  - pennsylvania_easton
+  - pennsylvania_erie
+  - pennsylvania_greensburg
+  - pennsylvania_harrisburg
+  - pennsylvania_hazleton
+  - pennsylvania_hermitage
+  - pennsylvania_johnstown
+  - pennsylvania_lancaster
+  - pennsylvania_lansdale
+  - pennsylvania_lebanon
+  - pennsylvania_mckeesport
+  - pennsylvania_municipality_of_monroeville
+  - pennsylvania_municipality_of_murrysville
+  - pennsylvania_new_castle
+  - pennsylvania_norristown
+  - pennsylvania_philadelphia
+  - pennsylvania_pittsburgh
+  - pennsylvania_plum
+  - pennsylvania_pottstown
+  - pennsylvania_reading
+  - pennsylvania_scranton
+  - pennsylvania_sharon
+  - pennsylvania_state_college
+  - pennsylvania_washington
+  - pennsylvania_west_chester
+  - pennsylvania_west_mifflin
+  - pennsylvania_wilkes_barre
+  - pennsylvania_wilkinsburg
+  - pennsylvania_williamsport
+  - pennsylvania_york
+
+pennsylvania_allentown:
+  title: Allentown
+  type: city
+  population: 106578
+
+pennsylvania_altoona:
+  title: Altoona
+  type: city
+  population: 47724
+
+pennsylvania_baldwin:
+  title: Baldwin
+  type: city
+  population: 19101
+
+pennsylvania_bethel_park:
+  title: Bethel Park
+  type: city
+  population: 32608
+
+pennsylvania_bethlehem:
+  title: Bethlehem
+  type: city
+  population: 72815
+
+pennsylvania_carlisle:
+  title: Carlisle
+  type: city
+  population: 18071
+
+pennsylvania_chambersburg:
+  title: Chambersburg
+  type: city
+  population: 17969
+
+pennsylvania_chester:
+  title: Chester
+  type: city
+  population: 37075
+
+pennsylvania_easton:
+  title: Easton
+  type: city
+  population: 26297
+
+pennsylvania_erie:
+  title: Erie
+  type: city
+  population: 102739
+
+pennsylvania_greensburg:
+  title: Greensburg
+  type: city
+  population: 15621
+
+pennsylvania_harrisburg:
+  title: Harrisburg
+  type: city
+  population: 47597
+
+pennsylvania_hazleton:
+  title: Hazleton
+  type: city
+  population: 22283
+
+pennsylvania_hermitage:
+  title: Hermitage
+  type: city
+  population: 16532
+
+pennsylvania_johnstown:
+  title: Johnstown
+  type: city
+  population: 22754
+
+pennsylvania_lancaster:
+  title: Lancaster
+  type: city
+  population: 55039
+
+pennsylvania_lansdale:
+  title: Lansdale
+  type: city
+  population: 16002
+
+pennsylvania_lebanon:
+  title: Lebanon
+  type: city
+  population: 23845
+
+pennsylvania_mckeesport:
+  title: McKeesport
+  type: city
+  population: 23011
+
+pennsylvania_municipality_of_monroeville:
+  title: Municipality of Monroeville
+  type: city
+  population: 28434
+
+pennsylvania_municipality_of_murrysville:
+  title: Municipality of Murrysville
+  type: city
+  population: 19297
+
+pennsylvania_new_castle:
+  title: New Castle
+  type: city
+  population: 25243
+
+pennsylvania_norristown:
+  title: Norristown
+  type: city
+  population: 30844
+
+pennsylvania_philadelphia:
+  title: Philadelphia
+  type: city
+  population: 1471255
+
+pennsylvania_pittsburgh:
+  title: Pittsburgh
+  type: city
+  population: 320828
+
+pennsylvania_plum:
+  title: Plum
+  type: city
+  population: 26634
+
+pennsylvania_pottstown:
+  title: Pottstown
+  type: city
+  population: 21649
+
+pennsylvania_reading:
+  title: Reading
+  type: city
+  population: 80701
+
+pennsylvania_scranton:
+  title: Scranton
+  type: city
+  population: 73629
+
+pennsylvania_sharon:
+  title: Sharon
+  type: city
+  population: 15636
+
+pennsylvania_state_college:
+  title: State College
+  type: city
+  population: 38900
+
+pennsylvania_washington:
+  title: Washington
+  type: city
+  population: 15212
+
+pennsylvania_west_chester:
+  title: West Chester
+  type: city
+  population: 18100
+
+pennsylvania_west_mifflin:
+  title: West Mifflin
+  type: city
+  population: 21522
+
+pennsylvania_wilkes_barre:
+  title: Wilkes-Barre
+  type: city
+  population: 41607
+
+pennsylvania_wilkinsburg:
+  title: Wilkinsburg
+  type: city
+  population: 18267
+
+pennsylvania_williamsport:
+  title: Williamsport
+  type: city
+  population: 30274
+
+pennsylvania_york:
+  title: York
+  type: city
+  population: 40407
+

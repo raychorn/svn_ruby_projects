@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Button xmlns:mx="http://www.adobe.com/2006/mxml" click="onClick()">
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.view.general.buttons.events.ClickToggleButtonEvent;
+			
+			private var _siblings:Array = [];
+			
+			[Event(name="clickToggleButton", type="com.bigfix.dss.view.graphics.canvas.events.ClickToggleButtonEvent")]
+
+			public function set sibling(sibling:ToggleButton):void {
+				if (sibling != this) {
+					this._siblings.push(sibling);
+				}
+			}
+			
+			public function initSiblings():void {
+				while (this._siblings.length > 0) {
+					this._siblings.pop();
+				}
+			}
+			
+			private function enableSiblings():void {
+				var i:int;
+				var aBtn:ToggleButton;
+				for (i = 0; i < this._siblings.length; i++) {
+					aBtn = ToggleButton(this._siblings[i]);
+					aBtn.enabled = true;
+				}
+			}
+			
+			public function clickButtonWithoutEvent():void {
+				this.enabled = false;
+				this.enableSiblings();
+			}
+			
+			private function onClick():void {
+				this.clickButtonWithoutEvent();
+				this.dispatchEvent(new ClickToggleButtonEvent(ClickToggleButtonEvent.TYPE_CLICK_TOGGLE_BUTTON));
+			}
+		]]>
+	</mx:Script>
+</mx:Button>

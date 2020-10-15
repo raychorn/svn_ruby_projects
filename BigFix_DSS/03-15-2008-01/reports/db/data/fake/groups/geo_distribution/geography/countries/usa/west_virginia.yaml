@@ -1,0 +1,64 @@
+west_virginia:
+  title: West Virginia
+  subgroups:
+  - west_virginia_beckley
+  - west_virginia_charleston
+  - west_virginia_clarksburg
+  - west_virginia_fairmont
+  - west_virginia_huntington
+  - west_virginia_martinsburg
+  - west_virginia_morgantown
+  - west_virginia_parkersburg
+  - west_virginia_weirton
+  - west_virginia_wheeling
+
+west_virginia_beckley:
+  title: Beckley
+  type: city
+  population: 17027
+
+west_virginia_charleston:
+  title: Charleston
+  type: city
+  population: 51637
+
+west_virginia_clarksburg:
+  title: Clarksburg
+  type: city
+  population: 16517
+
+west_virginia_fairmont:
+  title: Fairmont
+  type: city
+  population: 19076
+
+west_virginia_huntington:
+  title: Huntington
+  type: city
+  population: 49698
+
+west_virginia_martinsburg:
+  title: Martinsburg
+  type: city
+  population: 15621
+
+west_virginia_morgantown:
+  title: Morgantown
+  type: city
+  population: 28145
+
+west_virginia_parkersburg:
+  title: Parkersburg
+  type: city
+  population: 32120
+
+west_virginia_weirton:
+  title: Weirton
+  type: city
+  population: 19633
+
+west_virginia_wheeling:
+  title: Wheeling
+  type: city
+  population: 29859
+

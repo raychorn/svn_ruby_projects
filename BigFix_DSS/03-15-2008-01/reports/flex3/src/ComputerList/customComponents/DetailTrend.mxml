@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:CartesianChart xmlns:mx="http://www.adobe.com/2006/mxml" showDataTips="true" width="100%" height="100%" dataTipFunction="dataTipFormatter">
+	<mx:Script source="DetailTrend_as.as"/>
+	<mx:String id="dataSourceURLTrend"/>
+	<mx:String id="dataSourceURLDeltaEvents"/>
+
+	<mx:HTTPService id="dataServiceTrend"
+		resultFormat="e4x"
+		result="loadTrendData(event);"
+		fault="Application.application.HTTPServiceFaultHandler(event);"
+		showBusyCursor="true"
+	/>
+	<mx:HTTPService id="dataServiceDeltaEvents"
+		resultFormat="e4x"
+		result="loadDeltaEvents(event);"
+		fault="Application.application.HTTPServiceFaultHandler(event);"
+		showBusyCursor="true"
+	/>
+	<mx:horizontalAxis>
+		<mx:DateTimeAxis parseFunction="epochToDate" displayLocalTime="false"/>
+	</mx:horizontalAxis>
+	<mx:series>
+		<mx:AreaSet type="stacked" id="areaSet"/>
+	</mx:series>
+</mx:CartesianChart>

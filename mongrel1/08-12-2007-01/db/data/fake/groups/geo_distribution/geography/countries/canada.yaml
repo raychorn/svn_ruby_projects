@@ -1,0 +1,31 @@
+canada:
+  title: Canada
+  subgroups:
+  - canada_alberta
+  - canada_bc
+  - canada_manitoba
+  - canada_new_brunswick
+  - canada_newfoundland
+  - canada_nova_scotia
+  - canada_ontario
+  - canada_pei
+  - canada_quebec
+  - canada_saskatchewan
+  - canada_nwt
+  - canada_nunavut
+  - canada_yukon
+
+canada_ontario:
+  title: Ontario
+  subgroups:
+  - canada_toronto
+  - canada_ottawa
+
+canada_toronto:
+  title: Toronto
+  type: city
+
+canada_ottawa:
+  title: Ottawa
+  type: city
+

@@ -1,0 +1,15 @@
+brazil:
+  title: Brazil
+  subgroups:
+    - br_brasilia
+    - br_rio_de_janiero
+
+br_brasilia:
+  title: Brasilia
+  type: city
+  population: 2383784
+
+br_rio_de_janiero:
+  title: Rio de Janiero
+  type: city
+  population: 5613000

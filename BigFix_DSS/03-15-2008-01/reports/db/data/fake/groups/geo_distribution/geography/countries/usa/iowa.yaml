@@ -1,0 +1,148 @@
+iowa:
+  title: Iowa
+  subgroups:
+  - iowa_ames
+  - iowa_ankeny
+  - iowa_bettendorf
+  - iowa_burlington
+  - iowa_cedar_falls
+  - iowa_cedar_rapids
+  - iowa_clinton
+  - iowa_coralville
+  - iowa_council_bluffs
+  - iowa_davenport
+  - iowa_des_moines
+  - iowa_dubuque
+  - iowa_fort_dodge
+  - iowa_iowa_city
+  - iowa_marion
+  - iowa_marshalltown
+  - iowa_mason_city
+  - iowa_muscatine
+  - iowa_newton
+  - iowa_ottumwa
+  - iowa_sioux_city
+  - iowa_urbandale
+  - iowa_waterloo
+  - iowa_west_des_moines
+
+iowa_ames:
+  title: Ames
+  type: city
+  population: 52240
+
+iowa_ankeny:
+  title: Ankeny
+  type: city
+  population: 34443
+
+iowa_bettendorf:
+  title: Bettendorf
+  type: city
+  population: 31605
+
+iowa_burlington:
+  title: Burlington
+  type: city
+  population: 25556
+
+iowa_cedar_falls:
+  title: Cedar Falls
+  type: city
+  population: 36229
+
+iowa_cedar_rapids:
+  title: Cedar Rapids
+  type: city
+  population: 122115
+
+iowa_clinton:
+  title: Clinton
+  type: city
+  population: 27236
+
+iowa_coralville:
+  title: Coralville
+  type: city
+  population: 17569
+
+iowa_council_bluffs:
+  title: Council Bluffs
+  type: city
+  population: 59344
+
+iowa_davenport:
+  title: Davenport
+  type: city
+  population: 98363
+
+iowa_des_moines:
+  title: Des Moines
+  type: city
+  population: 194157
+
+iowa_dubuque:
+  title: Dubuque
+  type: city
+  population: 57596
+
+iowa_fort_dodge:
+  title: Fort Dodge
+  type: city
+  population: 25645
+
+iowa_iowa_city:
+  title: Iowa City
+  type: city
+  population: 63078
+
+iowa_marion:
+  title: Marion
+  type: city
+  population: 29790
+
+iowa_marshalltown:
+  title: Marshalltown
+  type: city
+  population: 26023
+
+iowa_mason_city:
+  title: Mason City
+  type: city
+  population: 28042
+
+iowa_muscatine:
+  title: Muscatine
+  type: city
+  population: 22611
+
+iowa_newton:
+  title: Newton
+  type: city
+  population: 15690
+
+iowa_ottumwa:
+  title: Ottumwa
+  type: city
+  population: 24669
+
+iowa_sioux_city:
+  title: Sioux City
+  type: city
+  population: 83798
+
+iowa_urbandale:
+  title: Urbandale
+  type: city
+  population: 33353
+
+iowa_waterloo:
+  title: Waterloo
+  type: city
+  population: 66620
+
+iowa_west_des_moines:
+  title: West Des Moines
+  type: city
+  population: 51896
+

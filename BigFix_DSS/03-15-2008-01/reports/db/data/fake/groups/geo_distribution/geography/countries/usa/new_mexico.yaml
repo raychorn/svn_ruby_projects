@@ -1,0 +1,70 @@
+new_mexico:
+  title: New Mexico
+  subgroups:
+  - new_mexico_alamogordo
+  - new_mexico_albuquerque
+  - new_mexico_carlsbad
+  - new_mexico_clovis
+  - new_mexico_farmington
+  - new_mexico_gallup
+  - new_mexico_hobbs
+  - new_mexico_las_cruces
+  - new_mexico_rio_rancho
+  - new_mexico_roswell
+  - new_mexico_santa_fe
+
+new_mexico_alamogordo:
+  title: Alamogordo
+  type: city
+  population: 36081
+
+new_mexico_albuquerque:
+  title: Albuquerque
+  type: city
+  population: 483844
+
+new_mexico_carlsbad:
+  title: Carlsbad
+  type: city
+  population: 25406
+
+new_mexico_clovis:
+  title: Clovis
+  type: city
+  population: 33170
+
+new_mexico_farmington:
+  title: Farmington
+  type: city
+  population: 42252
+
+new_mexico_gallup:
+  title: Gallup
+  type: city
+  population: 19556
+
+new_mexico_hobbs:
+  title: Hobbs
+  type: city
+  population: 28635
+
+new_mexico_las_cruces:
+  title: Las Cruces
+  type: city
+  population: 80127
+
+new_mexico_rio_rancho:
+  title: Rio Rancho
+  type: city
+  population: 62550
+
+new_mexico_roswell:
+  title: Roswell
+  type: city
+  population: 44990
+
+new_mexico_santa_fe:
+  title: Santa Fe
+  type: city
+  population: 69305
+

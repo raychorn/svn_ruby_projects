@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"  creationComplete="init()"
+		horizontalScrollPolicy="off" verticalScrollPolicy="off"
+		width="200" height="100">
+	<mx:Script><![CDATA[
+		import com.bigfix.dss.view.general.Alert.AlertPopUp;
+		import mx.events.FlexMouseEvent;
+		import mx.managers.PopUpManager;
+		
+		//propmt text
+		public var prompt:String;
+		//default textField text
+		private var _text:String;
+		
+		//function accepting single String argument
+		public var okHandler:Function;
+		
+		public var cancelHandler:Function;
+
+		public var errorHandler:Function;
+
+		public function set text(text:String):void {
+			this._text = text;
+		}
+		
+		public function get text():String {
+			return this.TextField.text;
+		}
+		
+		public function get hasBeenEdited():Boolean {
+			return (this._text != this.text);
+		}
+		
+		private function init():void {
+			this.title = this.prompt;
+			TextField.text = this._text;
+			TextField.setFocus();
+			TextField.setSelection(0, TextField.text.length);
+			addEventListener(FlexMouseEvent.MOUSE_DOWN_OUTSIDE, outsideClickHandler);
+			this.okButton.enabled = false;
+		}
+		
+		//closes window if user clicks outside this
+		private function outsideClickHandler(event:FlexMouseEvent):void {
+			PopUpManager.removePopUp(this);
+		}
+		
+		private function simpleErrorHandler(err:Error):void {
+			AlertPopUp.error(err.toString(), "Generic Error Handler :: PopUpTextPrompt");
+		}
+		
+		private function okClick():void {
+			PopUpManager.removePopUp(this);
+			if (okHandler is Function) {
+				try { okHandler(TextField.text); } 
+					catch (err:Error) {
+						if (this.errorHandler is Function) {
+							try { this.errorHandler(err); } catch (err:Error) { this.simpleErrorHandler(err); }
+						} else {
+							this.simpleErrorHandler(err);
+						}
+					}
+			}
+		}
+		
+		private function cancelClick(): void{
+			PopUpManager.removePopUp(this);
+			if (this.cancelHandler is Function) {
+				try { this.cancelHandler(this); } 
+					catch (err:Error) {
+						if (this.errorHandler is Function) {
+							try { this.errorHandler(err); } catch (err:Error) { this.simpleErrorHandler(err); }
+						} else {
+							this.simpleErrorHandler(err);
+						}
+					}
+			}
+		}
+		
+		private function onKeyUpTextInput(event:KeyboardEvent):void {
+			this.okButton.enabled = (this.TextField.text.length > 0);
+		}
+		
+		public function refreshOkButtonState():void {
+			this.okButton.enabled = ( (this.TextField.errorString.length == 0) && (this.TextField.text.length > 0) );
+		}
+	]]></mx:Script>
+	<mx:FormItem defaultButton="{okButton}">
+		<mx:TextInput id="TextField" width="100%" keyUp="onKeyUpTextInput(event)"/>
+	</mx:FormItem>
+	<mx:ControlBar horizontalAlign="center">
+		<mx:Button label="Cancel" click="cancelClick()"/>
+		<mx:Button label="OK" id="okButton" enabled="false" click="okClick()"/>
+	</mx:ControlBar>
+</mx:Panel>

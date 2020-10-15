@@ -1,0 +1,12 @@
+<div class="comment_container" id="<%= tag_for_comment(comment) %>">
+	<div class="small gray">
+		<% if author = comment.author_name %>
+			On <%= format_time ct(comment.created_date) %> <%= comment.author_name %> said...
+		<% else %>
+			<%= format_time ct(comment.created_date) %>
+		<% end %>
+	</div>
+	<pre>
+	<%= simple_format(comment.comment_body) if comment.comment_body %>
+	</pre>
+</div>

@@ -1,0 +1,619 @@
+Mammals (currently 617  listed)
+
+Aardvark
+Aardwolf
+Addax
+Addra
+African Elephant  
+African Lion 
+African Wild Cat
+African Wild Dog  
+Agile Antechinus
+Agile Wallaby
+Agouti
+Agrant Shrew
+Alaska Vole
+Allied Rock-Wallaby
+Alpaca
+American Badger  
+American Bison
+American Mink 
+American Porcupine  
+Ampurta
+Amur Tiger
+Andrew's Beaked Whale
+Anteater
+Antelope 
+Ape
+Arctic Fox
+Arctic Ground Squirrel
+Arctic Hare  
+Arctic Wolf  
+Armadillo
+Arnoux's Beaked Whale
+Arsinoitherium
+Artiodactyls
+Asian Elephant  
+Asian Lion  
+Asiatic Black Bear
+Atherton Antechinus 
+Atlantic White sided Dolphin
+Aye-Aye
+Babirusa
+Baboon  
+Bactrian Camel
+Badger
+Bahamonde's Beaked Whale
+Baiji
+Baleen Whale
+Banded Duiker
+Banded Hare-Wallaby
+Banded Mongoose
+Bandicoot
+Bat
+Bay Duiker
+Bearded seal
+Beaver  
+Beluga Whale
+Bengal tiger
+Bennett's Tree-Kangaroo
+Big Brown Bat  
+Bighorn Sheep
+Bilby
+Binturong
+Bison 
+Black Bear  
+Black Bear Hamster
+Black Footed Rock Wallaby
+Black Lemur  
+Black Rat
+Black Tailed Jack Rabbit
+Black Wallaroo
+Blackbuck
+Black-footed Ferret  
+Black-striped Wallaby
+Black-tailed Jack Rabbit
+Blue Whale  
+Bobcat  
+Bongo
+Boto
+Bottle-nosed Dolphin
+Bowhead Whale  
+Brazilian Free-Tailed Bat
+Bridled nailtail wallaby
+Broad Faced Potoroo
+Brown Antechinus
+Brown Bear
+Brown Rat  
+Brush Tailed Rock Wallaby
+Brush-tailed Bettong
+Brush-tailed Phascogale
+Bryde's Whale
+Buffalo
+Burmeister's Porpoise
+Burmese Cat
+Burrowing Bettong
+Bush Dog
+Bush Pig
+Bushy-tailed Woodrat
+Butler's Dunnart
+California Myotis
+California Sea Lion
+Camel  
+Canyon Mouse
+Cape Buffalo  
+Cape Hunting Dog
+Cape York Rock Wallaby
+Capuchin
+Capybara
+Caracal
+Caribou
+Carpentarian Pseudantechinus
+Cat
+Chamois
+Cheetah 
+Chestnut Dunnart
+Chevrotain
+Chilean Dolphin
+Chimpanzee  
+Chinchilla
+Chipmunk
+Cinnamon Antechinus
+Civet
+Cliff Chipmunk
+Clouded Leopard
+Clymene Dolphin
+Coati
+Collared Lemming
+Collared Peccary
+Commerson's Dolphin
+Common Brushtail Possum
+Common Duiker
+Common Dunnart
+Common Planigale
+Common Ringtail Possum
+Common Spotted Cuscus
+Common Wallaroo
+Common Wombat
+Cougar  
+Cow
+Coyote  
+Coypu
+Crabeater Seal
+Cuvier's Beaked Whale
+Daintree River Ringtail Possum
+Dall Sheep
+Dark Kangaroo Mouse
+Deer
+Deer Mouse
+Dense-beaked Whale
+Desert Cottontail
+Desert rat-kangaroo
+Desert Woodrat
+Dhole
+Dingo
+Dog
+Dolphin
+Donkey
+Dromedary Camel
+Duck-billed Platypus 
+Dugong
+Dusky Antechinus
+Dusky Dolphin
+Eastern Barred Bandicoot
+Eastern Chipmunk  
+Eastern Cougar  
+Eastern Grey Kangaroo
+Eastern Grey Squirrel
+Eastern Mole
+Eastern Pipistrelle
+Eastern Pygmy Possum
+Eastern Quoll
+Eastern Small-footed Bat
+Eastern Tarsier  
+Echidna
+Egyptian Mongoose
+Ekaltadeta
+Eland  
+Elephant
+Elephant seal
+Elk  
+Ermine  
+Eurasian Otter
+European Hare
+European Hedgehog
+European Mole
+European Rabbot
+Evening Bat
+Fallow Deer
+False Killer Whale
+Fanaloka
+Fat-tailed Dunnart
+Fat-Tailed Pseudantechinus
+Fawn Antechinus
+Feathertail Glider
+Fennec Fox
+Feral pig
+Ferret
+Fin Whale 
+Finless Porpoise
+Fisher
+Florida Manatee 
+Florida Mastiff Bat
+Flying Squirrel  
+Fossa
+Fox
+Franciscana
+Fraser's Dolphin
+Free-Tailed Bat
+Fruit Bat
+Ganges River Dolphin
+Gaur  
+Gazelle
+Gemsbok
+Genet
+Gerbil
+Gerenuk
+Gervais' Beaked Whale
+Giant Anteater  
+Giant Armadillo 
+Giant Otter
+Giant Panda 
+Gibbon 
+Gilbert's Dunnart 
+Giles' Planigale
+Ginkgo-toothed Beaked Whale
+Giraffe 
+Gnu
+Goat
+Godman's Rock Wallaby
+Golden Bandicoot
+Golden Lion Tamarin
+Golden-manteled Ground Squirrel
+Goose-beaked Whale
+Gopher
+Goral
+Gorilla 
+Grant's Gazelle
+Gray Fox
+Gray seal
+Gray Whale
+Gray's Beaked Whale
+Great Basin Kangaroo Rat
+Great Basin Pocket Mouse
+Greater Glider
+Green Ringtail Possum
+Grey Bellied Dunnart
+Grey Whale 
+Grison
+Grizzly Bear 
+Groundhog
+Guadalupe fur seal
+Guanaco
+Hairy Footed Dunnart
+Hairy-tailed Mole
+Hamsters
+Harbor Porpoise
+Harbor seal
+Hare
+Harp Seal 
+Hartebeest
+Heaviside's Dolphin
+Hector's Beaked Whale
+Hector's Dolphin
+Hedgehog
+Herbert River Ringtail Possum
+Herbert's Rock Wallaby
+Hippopotamus 
+Hoary Bat
+Hoary Marmot 
+Hog Badger
+Honey Badger
+Honey Possum
+Hooded Seal 
+Horse
+Hourglass Dolphin
+House Cat
+House Mouse
+Howler Monkey
+Hubbs' Beaked Whale
+Humpback Whale
+Hyena 
+Ibex
+Impala
+Indian Rhinoceros 
+Indiana Bat
+Indo-Pacific Humpbacked Dolphin
+Indus River Dolphin
+Irrawaddy Dolphin
+Jaguar 
+Jaguarundi
+Javelina
+Julia Creek Dunnart
+Kakadu Dunnart
+Kangaroo 
+Kangaroo Island Dunnart
+Kangaroo Rat 
+Karakul
+Killer Whale
+Kinkajou
+Kirk's Dik-dik
+Kit fox
+Klipspringer
+Koala 
+Kowari
+Kudu 
+Kultarr
+Leadbeater's Possum
+Least Chipmunk
+Least Weasel  
+Lechwe
+Lemming
+Lemur 
+Lemuroid Ringtail Possum
+Leopard
+Lesser Hairy Footed  Dunnart
+Linsang
+Lion
+Little Pocket Mouse
+Little Pygmy Possum
+Little-Long tailed Dunnart
+Llama
+Long Footed Potoroo
+Long Nosed Potoroo
+Long-beaked Common Dolphin
+Long-eared Myotis
+Long-Finned Pilot Whale
+Longman's Beaked Whale
+Long-tailed Dunnart
+Long-tailed Planigale
+Long-tailed Pocket Mouse
+Long-tailed Pygmy Possum
+Long-tailed Vole
+Long-tailed weasel
+Loris
+Lumholtz's Tree-kangaroo
+Lynx  
+Manatee
+Maned Wolf
+Manul
+Markhor
+Marmot 
+Marsupial Mole
+Marten 
+Meadow Vole
+Mediterranean Monk 
+Meerkat
+Melon-Headed Whale
+Merriam's Shrew
+Mink
+Minke Whale
+Mole
+Mongoose 
+Monjon
+Monkey
+Montane Shrew
+Montane Vole
+Moose 
+Mouflon
+Mountain Brushtail Possum
+Mountain Goat 
+Mountain Gorilla 
+Mountain Hare
+Mountain Lion
+Mountain Pygmy Possum
+Mouse
+Mouse Deer
+Mule
+Mule Deer
+Mulgara
+Musk Ox 
+Muskrat
+Musky Rat-kangaroo
+Mustang
+Nabarlek
+Naked Mole-rat
+Narbalek
+Narwhal
+New England Cottontail
+Nine Banded Armadillo
+Ningbing Pseudantechinus
+Norrow-nosed Planigale
+North Atlantic Beaked Whale
+Norther Dibbler
+Northern Atlantic Bottle-nosed Whale
+Northern Bettong
+Northern Black Right Whale
+Northern Brown Bandicoot
+Northern Elephant Seal
+Northern Flying Squirrel
+Northern Fur Seal
+Northern Grasshopper Mouse
+Northern Hairy-nosed Wombat
+Northern Nailtail Wallaby
+Northern Quoll
+Northern Rightwhale Dolphin
+Northern Short-tailed shrew
+Northern Yellow Bat
+Norway Rat
+Numbat
+Nutall Cottontail
+Nutria
+Ocelot 
+Okapi
+Old World Badger
+Ooldea Dunnart
+Opossum
+Orangutan 
+Orca
+Ord Kangaroo Rat
+Oribi
+Oryx 
+Otter
+Pacific Water Shrew
+Pacific White-Sided Dolphin
+Pallid Bat
+Palm Civet
+Panda
+Pangolin
+Panther
+Pantropical Spotted Dolphin
+Paraguayan Fox
+Parma Wallaby
+Peale's Dolphin
+Peary Caribou 
+Persian Cat
+Pig
+Pika 
+Pilbara Ningaui
+Pine Marten
+Pinyon Mouse
+Platypus
+Polar Bear
+Polecat
+Porcupine
+Prairie dog
+Preble's Shrew
+Pronghorn 
+Pronghorn Antelope
+Proserpine Rock-Wallaby
+Przewalski's Horse 
+Puma
+Pygmy Cottontail
+Pygmy Hippopotamus 
+Pygmy Sperm Whale
+Quokka
+Quoll
+Rabbit
+Raccoon  
+Raccoon-Dog
+Rat
+Red Bat
+Red Bellied Pademelon
+Red Fox  
+Red Kangaroo
+Red Legged Pademelon
+Red Necked Pademelon
+Red Panda
+Red Squirrel 
+Red Wolf
+Red-cheeked Dunnart
+Red-Necked Wallaby
+Red-tailed Phascogale
+Reedbuck
+Reindeer
+Rhinoceros
+Ribbon seal
+Richardson Ground
+Right Whale
+Ringtail Cat
+Ringtail Possum
+Ring-tailed Lemur
+Risso's Dolphin
+River Otter
+Rock Ringtail Possum
+Rock Squirrel
+Roe Deer
+Rough-toothed Dolphin
+Royal Antelope
+Rufous Bettong
+Rufous Hare Wallaby
+Rufous Spiny Bandicoot
+Sable Antelope 
+Saddle-backed Dolphin
+Sagebrush Vole
+Saiga Antelope
+Salt's Dik-dik
+Sandhill Dunnart
+Scaly-tailed Possum
+Scrub Hare
+Sea Otter 
+Seal 
+Sei Whale 
+Seminole Bat
+Serow
+Serval
+Sheep
+Shepherd's Beaked Whale
+Short Earned Rock Wallaby
+Short-Finned Pilot Whale
+Siamang
+Siberian Tiger
+Sika Deer
+Simian Jackal
+Siver-naired Bat
+Skunk
+Sloth
+Sloth Bear
+Smoky Shrew
+Snow Leopard 
+Snowshoe Hare
+Southeastern Bat
+Southern Bog Lemming
+Southern Brown Bandicoot
+Southern Common Cuscus
+Southern Dibbler
+Southern Flying Squirrel
+Southern Hairy-nosed Wombat
+Southern Ningaui
+Southern Pocket Gopher
+Sowerby's Beaked Whale
+Spectacled Hare-Wallaby
+Spectacled Porpoise
+Sperm Whale 
+Spider Monkey
+Spinner Dolphin
+Spotted Hyena
+Spotted Skunk
+Spotted-tailed Quoll
+Springbok
+Squirrel 
+Squirrel Glider
+Squirrel Monkey
+Star-nosed Mole
+Steenbok
+Stejneger's Beaked Whale
+Steller Sea Lion
+Straptoothed Whale
+Striped Dolphin
+Striped Possum
+Striped Skunk
+Stripe-faced Dunnart
+Sugar Glider
+Sun Bear
+Swamp Antechinus
+Swamp Wallaby
+Takin
+Tammar Wallaby
+Tapir 
+Tarsier
+Tasmanian Bettong
+Tasmanian Devil 
+Tasmanian Tiger
+Tetra
+Thomson's Gazelle
+Three-toed Sloth
+Thylacine
+Tiger 
+Topi
+Townsend's Ground Squirrel
+Trowbridge's Shrew
+True's Beaked Whale
+Tucuxi
+Tundra Hare
+Tundra Red-back vole
+Twilight Bats
+Uinta Chipmunk
+Unadorned Rock Wallaby
+Vagrant Shrew
+Vampire Bat
+Vancouver Island
+Vaquita
+Vicuna
+Virginia Opossum
+Wallaby
+Walrus 
+Warthog
+Water Shrew
+Waterbuck
+Weasel
+Weddell Seal
+Wester Quoll
+Western Barred Bandicoot
+Western Brush Wallaby
+Western Grey Kangaroo
+Western Havest Mouse
+Western Jumping Mouse
+Western Pygmy Possum
+Western Ringtail Possum
+Western small-footed Myotis
+Whale
+Whiptail Wallaby
+White Rhinoceros  
+White Tailed Antelope
+White Whale
+White-footed Dunnart
+White-footed Mouse
+White-tailed Deer
+White-tailed Dunnart
+Wild Ass 
+Wild Boar
+Wild dog
+Wild horse
+Wild Yak 
+Wildebeest 
+Wolf
+Wolverine  
+Wombat
+Wongai Ningaui
+Woodland Caribou
+Woodland Vole
+Woolleys' Pseudantechinus
+Yak
+Yellow Footed Rock Wallaby
+Yellow-bellied glider
+Yellow-bellied Marmot
+Yellow-footed Antechinus
+Zebra 
+Zorilla
+Zorro

@@ -1,0 +1,16 @@
+one:
+  id: 1
+  name: SOX
+  description: The Sarbanes-Oxley Act of 2002 (Pub. L. No. 107-204, 116 Stat. 745, also known as the Public Company Accounting Reform and Investor Protection Act of 2002
+two:
+  id: 2
+  name: PCI
+  description: PCI DSS stands for Payment Card Industry (PCI) Data Security Standard (DSS). It was developed by the major credit card companies as a guideline to help organizations that process card payments prevent credit card fraud, hacking and various other security issues. A company processing, storing, or transmitting credit card numbers must be PCI DSS compliant or they risk losing the ability to process credit card payments.
+three:
+  id: 3
+  name: DISA Gold
+  description: .gov FTW
+four:
+  id: 4
+  name: NIST 800-68 Enterprise Low
+  description: .gov FTW

@@ -1,0 +1,310 @@
+indiana:
+  title: Indiana
+  subgroups:
+  - indiana_anderson
+  - indiana_bloomington
+  - indiana_brownsburg
+  - indiana_carmel
+  - indiana_clarksville
+  - indiana_columbus
+  - indiana_crawfordsville
+  - indiana_crown_point
+  - indiana_east_chicago
+  - indiana_elkhart
+  - indiana_evansville
+  - indiana_fishers
+  - indiana_fort_wayne
+  - indiana_frankfort
+  - indiana_franklin
+  - indiana_gary
+  - indiana_goshen
+  - indiana_greenfield
+  - indiana_greenwood
+  - indiana_griffith
+  - indiana_hammond
+  - indiana_highland
+  - indiana_hobart
+  - indiana_huntington
+  - indiana_indianapolis_city
+  - indiana_jeffersonville
+  - indiana_kokomo
+  - indiana_lafayette
+  - indiana_la_porte
+  - indiana_lawrence
+  - indiana_logansport
+  - indiana_marion
+  - indiana_merrillville
+  - indiana_michigan_city
+  - indiana_mishawaka
+  - indiana_muncie
+  - indiana_munster
+  - indiana_new_albany
+  - indiana_new_castle
+  - indiana_noblesville
+  - indiana_plainfield
+  - indiana_portage
+  - indiana_richmond
+  - indiana_schererville
+  - indiana_seymour
+  - indiana_shelbyville
+  - indiana_south_bend
+  - indiana_terre_haute
+  - indiana_valparaiso
+  - indiana_vincennes
+  - indiana_west_lafayette
+
+indiana_anderson:
+  title: Anderson
+  type: city
+  population: 57899
+
+indiana_bloomington:
+  title: Bloomington
+  type: city
+  population: 69320
+
+indiana_brownsburg:
+  title: Brownsburg
+  type: city
+  population: 17652
+
+indiana_carmel:
+  title: Carmel
+  type: city
+  population: 57321
+
+indiana_clarksville:
+  title: Clarksville
+  type: city
+  population: 21086
+
+indiana_columbus:
+  title: Columbus
+  type: city
+  population: 39178
+
+indiana_crawfordsville:
+  title: Crawfordsville
+  type: city
+  population: 15076
+
+indiana_crown_point:
+  title: Crown Point
+  type: city
+  population: 21789
+
+indiana_east_chicago:
+  title: East Chicago
+  type: city
+  population: 31188
+
+indiana_elkhart:
+  title: Elkhart
+  type: city
+  population: 51985
+
+indiana_evansville:
+  title: Evansville
+  type: city
+  population: 116981
+
+indiana_fishers:
+  title: Fishers
+  type: city
+  population: 54328
+
+indiana_fort_wayne:
+  title: Fort Wayne
+  type: city
+  population: 223365
+
+indiana_frankfort:
+  title: Frankfort
+  type: city
+  population: 16472
+
+indiana_franklin:
+  title: Franklin
+  type: city
+  population: 21228
+
+indiana_gary:
+  title: Gary
+  type: city
+  population: 99363
+
+indiana_goshen:
+  title: Goshen
+  type: city
+  population: 30661
+
+indiana_greenfield:
+  title: Greenfield
+  type: city
+  population: 16061
+
+indiana_greenwood:
+  title: Greenwood
+  type: city
+  population: 40888
+
+indiana_griffith:
+  title: Griffith
+  type: city
+  population: 16780
+
+indiana_hammond:
+  title: Hammond
+  type: city
+  population: 79861
+
+indiana_highland:
+  title: Highland
+  type: city
+  population: 23254
+
+indiana_hobart:
+  title: Hobart
+  type: city
+  population: 27467
+
+indiana_huntington:
+  title: Huntington
+  type: city
+  population: 17034
+
+indiana_indianapolis_city:
+  title: Indianapolis city
+  type: city
+  population: 782656
+
+indiana_jeffersonville:
+  title: Jeffersonville
+  type: city
+  population: 28591
+
+indiana_kokomo:
+  title: Kokomo
+  type: city
+  population: 46066
+
+indiana_lafayette:
+  title: Lafayette
+  type: city
+  population: 60357
+
+indiana_la_porte:
+  title: La Porte
+  type: city
+  population: 20947
+
+indiana_lawrence:
+  title: Lawrence
+  type: city
+  population: 40794
+
+indiana_logansport:
+  title: Logansport
+  type: city
+  population: 19306
+
+indiana_marion:
+  title: Marion
+  type: city
+  population: 30968
+
+indiana_merrillville:
+  title: Merrillville
+  type: city
+  population: 31210
+
+indiana_michigan_city:
+  title: Michigan City
+  type: city
+  population: 32128
+
+indiana_mishawaka:
+  title: Mishawaka
+  type: city
+  population: 48253
+
+indiana_muncie:
+  title: Muncie
+  type: city
+  population: 67016
+
+indiana_munster:
+  title: Munster
+  type: city
+  population: 22206
+
+indiana_new_albany:
+  title: New Albany
+  type: city
+  population: 36862
+
+indiana_new_castle:
+  title: New Castle
+  type: city
+  population: 18891
+
+indiana_noblesville:
+  title: Noblesville
+  type: city
+  population: 36633
+
+indiana_plainfield:
+  title: Plainfield
+  type: city
+  population: 22558
+
+indiana_portage:
+  title: Portage
+  type: city
+  population: 35237
+
+indiana_richmond:
+  title: Richmond
+  type: city
+  population: 37920
+
+indiana_schererville:
+  title: Schererville
+  type: city
+  population: 27427
+
+indiana_seymour:
+  title: Seymour
+  type: city
+  population: 18654
+
+indiana_shelbyville:
+  title: Shelbyville
+  type: city
+  population: 17867
+
+indiana_south_bend:
+  title: South Bend
+  type: city
+  population: 105614
+
+indiana_terre_haute:
+  title: Terre Haute
+  type: city
+  population: 57052
+
+indiana_valparaiso:
+  title: Valparaiso
+  type: city
+  population: 28743
+
+indiana_vincennes:
+  title: Vincennes
+  type: city
+  population: 18138
+
+indiana_west_lafayette:
+  title: West Lafayette
+  type: city
+  population: 28605
+

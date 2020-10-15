@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:data="com.bigfix.dss.view.data.*" creationComplete= "init()">
+	<mx:Script><![CDATA[
+		include 'WidgetWizardFormLib.as';
+		import mx.collections.ArrayCollection;
+		import com.bigfix.dss.model.Constants;
+		import com.bigfix.dss.vo.SubjectVO;
+		import com.bigfix.dss.vo.PropertyVO;
+		
+		[Bindable]
+		private var subDistributionProperties:ArrayCollection = new ArrayCollection();
+		
+		private function init():void {
+			WidgetWizardFormLib_init()
+			/* commented out for now, will implement later...
+			formControlForAggregateFunction.selectedItem = model.currentWidget.visualization_type_options.aggregate_function;
+			formControlForComputerGroupDistribution.selectedItem = model.currentWidget.visualization_type_options.computer_group_distribution;
+			if (model.currentWidget.visualization_type_options.computer_group_distribution) {
+				coalesce(model.currentWidget.visualization_type_options.aggregate_function.name + ' ' + model.currentWidget.visualization_type_options.computer_group_distribution.name, labelField);
+			}
+			*/
+			if (!model.currentWidget.visualization_type_options.sub_distribution_property) {
+				handleDistributionChange();
+			}
+		}
+		
+		private function setValue():void {
+			hideForm();
+			model.currentWidget.visualization_type_options.aggregate_function = formControlForAggregateFunction.selectedItem;
+			if (formControlForSubDistribution.selectedItem.id != null) {
+				model.currentWidget.visualization_type_options.sub_distribution_property = formControlForSubDistribution.selectedItem;
+			} else {
+				model.currentWidget.visualization_type_options.sub_distribution_property = null;
+			}
+			// this next line sets computer_group_distribution which will change/reset data_filters too!
+			model.currentWidget.visualization_type_options.computer_group_distribution = formControlForComputerGroupDistribution.selectedItem;
+			model.currentWidget.visualization_type_options.options_changed = !model.currentWidget.visualization_type_options.options_changed;
+			coalesce(model.currentWidget.visualization_type_options.aggregate_function.name + ' ' + model.currentWidget.visualization_type_options.computer_group_distribution.name, labelField);
+		}
+		
+		private function handleDistributionChange():void {
+			var subject_id:int = formControlForComputerGroupDistribution.selectedItem.report_subject_id;
+			subDistributionProperties.removeAll();
+			subDistributionProperties.addItem({id:null, name:'Choose a property'});
+			for each (var subject:SubjectVO in model.subjects) {
+				if (subject.id == subject_id || subject.id == Constants.SUBJECT_ID_COMPUTER) {
+					for each (var property:PropertyVO in subject.properties) {
+						if (property.is_enum) {
+							subDistributionProperties.addItem(property);
+						}
+					}
+				}
+			}
+			formControlForSubDistribution.validateNow();
+			formControlForSubDistribution.selectedIndex = 0;
+		}
+	]]></mx:Script>
+	<mx:HBox>
+		<mx:HBox id="labelBox" click="showForm()" useHandCursor="true"><mx:Label text="Distribution:" styleName="textLink" useHandCursor="true" toolTip="Click this label to perform an action."/></mx:HBox>
+		<mx:Label id="labelField" creationComplete="coalesce(null, Label(event.currentTarget))"/>
+	</mx:HBox>
+
+	<mx:Panel id="form" title="Distribution" styleName="wizardFormContainer" width="600" includeInLayout="false" visible="false">
+		<mx:FormItem label="Choose a Distribution">
+			<mx:HBox>
+				<mx:ComboBox id="formControlForAggregateFunction" dataProvider="{model.aggregate_functions}" labelField="name"/>
+				<mx:ComboBox id="formControlForComputerGroupDistribution" dataProvider="{model.computer_group_distributions}" labelField="name" change="handleDistributionChange()"/>
+			</mx:HBox>
+		</mx:FormItem>
+		<mx:FormItem label="Choose a Sub-Distribution (optional)">
+			<mx:ComboBox id="formControlForSubDistribution" dataProvider="{subDistributionProperties}" labelField="name"/>
+		</mx:FormItem>
+		<mx:ControlBar horizontalAlign="right">
+			<mx:Button label="Cancel" click="hideForm()"/>
+			<mx:Button label="Done" id="submitButton" click="setValue()"/>
+		</mx:ControlBar>
+	</mx:Panel>
+</mx:Canvas>

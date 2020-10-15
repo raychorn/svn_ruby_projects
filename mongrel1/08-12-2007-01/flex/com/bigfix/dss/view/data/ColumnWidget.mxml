@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bfcontainers:Panel
+	xmlns:bfcontainers="com.bigfix.extensions.containers.*"
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	width="100%" height="100%"
+	verticalAlign="middle" horizontalAlign="center" verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	currentState="needOptions"
+	creationComplete="init()"
+	>
+
+	<mx:Metadata>
+	  [Event(name=WidgetRemoveEvent.EVENT_WIDGET_REMOVE, type='com.bigfix.dss.event.WidgetRemoveEvent')]
+  </mx:Metadata>
+
+	<mx:Script><![CDATA[
+		import mx.controls.Alert;
+		import mx.rpc.events.ResultEvent;
+		import mx.rpc.events.FaultEvent;
+		import mx.events.FlexEvent;
+		import mx.events.PropertyChangeEvent;
+		import mx.charts.HitData;
+		import mx.charts.series.ColumnSeries;
+		import mx.binding.utils.ChangeWatcher;
+
+		import com.bigfix.dss.util.DSS;
+		import com.bigfix.dss.model.Constants;
+		import com.bigfix.dss.vo.ColumnWidgetVO;
+		import com.bigfix.dss.util.WatcherManager;
+		import com.bigfix.dss.event.WidgetRemoveEvent;
+
+		// public vars
+		public var previewMode:Boolean = true; // this changes the title and hides the 'analyze' button
+		[Bindable]
+		public var options:ColumnWidgetVO; // this stores all info for this trend widget
+		[Bindable]
+		public var requiredOptionsSet:Boolean = false; // if we have enough options set, this is set to 'true'. Also, bindable for the wizard interface to activate 'Save' button
+
+		[Bindable]
+		private var needOptionsMessage:String; // a string we get back from the remote service about missing arguments
+
+		// color wheel for column series
+		private var colorWheel:Array = [0x8f56a2, 0x5970A4, 0xb18467, 0xb0b631, 0xe4b61b];
+
+		private var watcherManager:WatcherManager = new WatcherManager();
+
+		private function init():void {
+			if (previewMode) {
+				this.title = "Column Chart Preview";
+				if (this.addlHeaderElement) {
+					this.addlHeaderElement.parent.removeChild(this.addlHeaderElement);
+				}
+				options = DSS.model.currentWidget.visualization_type_options;
+				this.styleName = "listBuilderPanel";
+			}
+			watcherManager.manage(ChangeWatcher.watch(this, ['options', 'computer_groups'], refreshDataProvider));
+			/*
+			watcherManager.manage(ChangeWatcher.watch(this, ['options', 'aggregate_function'], refreshDataProvider));
+			watcherManager.manage(ChangeWatcher.watch(this, ['options', 'computer_group_distribution'], refreshDataProvider));
+			watcherManager.manage(ChangeWatcher.watch(this, ['options', 'sub_distribution_property'], refreshDataProvider));
+			*/
+			watcherManager.manage(ChangeWatcher.watch(this, ['options', 'options_changed'], refreshDataProvider));
+			watcherManager.manage(ChangeWatcher.watch(this, ['options', 'data_filters'], refreshDataProvider));
+			refreshDataProvider(null);
+			this.addEventListener(FlexEvent.REMOVE, _destruct, false, 0, true);
+		}
+
+		private function _destruct(event:FlexEvent):void {
+			watcherManager.removeAll();
+			this.options = null;
+			this.removeEventListener(FlexEvent.REMOVE, _destruct);
+		}
+
+		private function refreshDataProvider(event:PropertyChangeEvent):void {
+			if (!options || !(options is ColumnWidgetVO)) return;
+			DSS.svc("columnChartService").getColumnsForWidget(options).onResult(resultHandler).onFault(faultHandler);
+		}
+
+		private function faultHandler(event:FaultEvent):void {
+			Alert.show(event.message.toString(), "Service Fault");
+		}
+
+		private function resultHandler(event:ResultEvent):void {
+			// check for success!
+			if (!event.result.success) {
+				needOptionsMessage = event.result.message;
+				this.currentState = 'needOptions';
+				this.requiredOptionsSet = false;
+				return;
+			}
+			this.currentState = 'chart';
+			this.requiredOptionsSet = true;
+			if (!this.title) {
+				this.title = options.aggregate_function.name + ' ' + options.computer_group_distribution.name;
+			}
+			// set the column series dataprovider, we have to deal with multiple series here if the user select a sub-distribution
+			var newSeries:Array = [];
+			var newChartType:String;
+			if (event.result.has_sub_distribution) {
+				newChartType = "stacked";
+				var colorCounter:int = 0;
+				for each (var sub_distribution_value:String in event.result.unique_sub_distribution_values) {
+					var stackedColumnSeries:ColumnSeries = new ColumnSeries();
+					stackedColumnSeries.displayName = stackedColumnSeries.yField = sub_distribution_value;
+					stackedColumnSeries.setStyle('fill', Constants.COLOR_WHEEL[colorCounter % Constants.COLOR_WHEEL.length])
+					newSeries.push(stackedColumnSeries);
+					colorCounter++;
+				}
+				legendContainer.visible = true;
+				legendContainer.includeInLayout = true;
+				legendLabel.text = event.result.sub_distribution_name;
+			} else {
+				newChartType = "clustered";
+				var singleColumnSeries:ColumnSeries = new ColumnSeries();
+				singleColumnSeries.yField = 'yValue';
+				newSeries.push(singleColumnSeries);
+				legendContainer.visible = false;
+				legendContainer.includeInLayout = false;
+			}
+			// warning, the order of the next few lines are very important in order for the min/max values of the yAxis to adjust properly
+			chart.dataProvider = [];
+			chart.type = newChartType;
+			chart.validateNow();
+			chart.series = newSeries;
+			chart.dataProvider = event.result.data;
+		}
+
+		/* this function handles changing state to analysis mode */
+		private function analyze():void {
+			DSS.model.workspaceTabNavigatorSelectedIndex = Constants.WORKSPACE_ANALYSIS;
+			// setting model.currentAnalysisOptions makes AnalysisView.mxml instantiate the appropiate analysis component
+			DSS.model.currentAnalysisOptions = this.options.toColumnAnalysis();
+		}
+
+		private function remove():void {
+		  dispatchEvent(new WidgetRemoveEvent(this));
+		}
+
+		/* GRAPH HELPER METHODS */
+	]]></mx:Script>
+	<bfcontainers:addlHeaderElement>
+	  <mx:HBox width="80" height="15">
+		<mx:Button label="Analyze" width="60" height="15" fontSize="9" click="analyze()"/>
+		<mx:Button styleName="closeButton" click="remove()" />
+		</mx:HBox>
+	</bfcontainers:addlHeaderElement>
+	<bfcontainers:states>
+		<mx:State name="chart">
+			<mx:AddChild>
+				<mx:VBox width="100%" height="100%">
+					<mx:ColumnChart id="chart" width="100%" height="100%" showDataTips="true" >
+						<mx:horizontalAxis>
+							<mx:CategoryAxis categoryField="name"/>
+						</mx:horizontalAxis>
+					</mx:ColumnChart>
+					<mx:HBox id="legendContainer" visible="false" includeInLayout="false">
+						<mx:Text id="legendLabel"/>
+						<mx:Legend id="legend" dataProvider="{chart}" direction="horizontal"/>
+					</mx:HBox>
+				</mx:VBox>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="needOptions">
+			<mx:AddChild>
+				<mx:Panel headerHeight="0" styleName="infoPanel">
+					<mx:Text text="{needOptionsMessage}" width="300"/>
+				</mx:Panel>
+			</mx:AddChild>
+		</mx:State>
+	</bfcontainers:states>
+</bfcontainers:Panel>

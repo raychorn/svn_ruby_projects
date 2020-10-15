@@ -1,0 +1,1888 @@
+california:
+  title: California
+  subgroups:
+  - california_adelanto
+  - california_agoura_hills
+  - california_alameda
+  - california_albany
+  - california_alhambra
+  - california_aliso_viejo
+  - california_anaheim
+  - california_antioch
+  - california_apple_valley
+  - california_arcadia
+  - california_arcata
+  - california_arroyo_grande
+  - california_artesia
+  - california_atascadero
+  - california_atwater
+  - california_avenal
+  - california_azusa
+  - california_bakersfield
+  - california_baldwin_park
+  - california_banning
+  - california_barstow
+  - california_beaumont
+  - california_bell
+  - california_bellflower
+  - california_bell_gardens
+  - california_belmont
+  - california_benicia
+  - california_berkeley
+  - california_beverly_hills
+  - california_blythe
+  - california_brawley
+  - california_brea
+  - california_brentwood
+  - california_buena_park
+  - california_burbank
+  - california_burlingame
+  - california_calabasas
+  - california_calexico
+  - california_camarillo
+  - california_campbell
+  - california_carlsbad
+  - california_carson
+  - california_cathedral_city
+  - california_ceres
+  - california_cerritos
+  - california_chico
+  - california_chino
+  - california_chino_hills
+  - california_chowchilla
+  - california_chula_vista
+  - california_citrus_heights
+  - california_claremont
+  - california_clovis
+  - california_coachella
+  - california_coalinga
+  - california_colton
+  - california_compton
+  - california_concord
+  - california_corcoran
+  - california_corona
+  - california_coronado
+  - california_costa_mesa
+  - california_covina
+  - california_cudahy
+  - california_culver_city
+  - california_cupertino
+  - california_cypress
+  - california_daly_city
+  - california_dana_point
+  - california_danville
+  - california_davis
+  - california_delano
+  - california_desert_hot_springs
+  - california_diamond_bar
+  - california_dinuba
+  - california_dixon
+  - california_downey
+  - california_duarte
+  - california_dublin
+  - california_east_palo_alto
+  - california_el_cajon
+  - california_el_centro
+  - california_el_cerrito
+  - california_elk_grove
+  - california_el_monte
+  - california_el_paso_de_robles__paso_robles_
+  - california_el_segundo
+  - california_encinitas
+  - california_escondido
+  - california_eureka
+  - california_fairfield
+  - california_folsom
+  - california_fontana
+  - california_foster_city
+  - california_fountain_valley
+  - california_fremont
+  - california_fresno
+  - california_fullerton
+  - california_galt
+  - california_gardena
+  - california_garden_grove
+  - california_gilroy
+  - california_glendale
+  - california_glendora
+  - california_goleta
+  - california_hanford
+  - california_hawaiian_gardens
+  - california_hawthorne
+  - california_hayward
+  - california_hemet
+  - california_hercules
+  - california_hermosa_beach
+  - california_hesperia
+  - california_highland
+  - california_hollister
+  - california_huntington_beach
+  - california_huntington_park
+  - california_imperial_beach
+  - california_indio
+  - california_inglewood
+  - california_irvine
+  - california_la_canada_flintridge
+  - california_lafayette
+  - california_laguna_beach
+  - california_laguna_hills
+  - california_laguna_niguel
+  - california_laguna_woods
+  - california_la_habra
+  - california_lake_elsinore
+  - california_lake_forest
+  - california_lakewood
+  - california_la_mesa
+  - california_la_mirada
+  - california_lancaster
+  - california_la_palma
+  - california_la_puente
+  - california_la_quinta
+  - california_la_verne
+  - california_lawndale
+  - california_lemon_grove
+  - california_lemoore
+  - california_lincoln
+  - california_livermore
+  - california_lodi
+  - california_loma_linda
+  - california_lomita
+  - california_lompoc
+  - california_long_beach
+  - california_los_altos
+  - california_los_angeles
+  - california_los_banos
+  - california_los_gatos
+  - california_lynwood
+  - california_madera
+  - california_manhattan_beach
+  - california_manteca
+  - california_marina
+  - california_martinez
+  - california_maywood
+  - california_menlo_park
+  - california_merced
+  - california_millbrae
+  - california_milpitas
+  - california_mission_viejo
+  - california_modesto
+  - california_monrovia
+  - california_montclair
+  - california_montebello
+  - california_monterey
+  - california_monterey_park
+  - california_moorpark
+  - california_moraga
+  - california_moreno_valley
+  - california_morgan_hill
+  - california_mountain_view
+  - california_murrieta
+  - california_napa
+  - california_national_city
+  - california_newark
+  - california_newport_beach
+  - california_norco
+  - california_norwalk
+  - california_novato
+  - california_oakdale
+  - california_oakland
+  - california_oakley
+  - california_oceanside
+  - california_ontario
+  - california_orange
+  - california_orinda
+  - california_oxnard
+  - california_pacifica
+  - california_pacific_grove
+  - california_palmdale
+  - california_palm_desert
+  - california_palm_springs
+  - california_palo_alto
+  - california_paradise
+  - california_paramount
+  - california_pasadena
+  - california_perris
+  - california_petaluma
+  - california_pico_rivera
+  - california_pinole
+  - california_pittsburg
+  - california_placentia
+  - california_pleasant_hill
+  - california_pleasanton
+  - california_pomona
+  - california_porterville
+  - california_port_hueneme
+  - california_poway
+  - california_rancho_cordova
+  - california_rancho_cucamonga
+  - california_rancho_mirage
+  - california_rancho_palos_verdes
+  - california_rancho_santa_margarita
+  - california_redding
+  - california_redlands
+  - california_redondo_beach
+  - california_redwood_city
+  - california_reedley
+  - california_rialto
+  - california_richmond
+  - california_ridgecrest
+  - california_riverbank
+  - california_riverside
+  - california_rocklin
+  - california_rohnert_park
+  - california_rosemead
+  - california_roseville
+  - california_sacramento
+  - california_salinas
+  - california_san_bernardino
+  - california_san_bruno
+  - california_san_buenaventura__ventura_
+  - california_san_carlos
+  - california_san_clemente
+  - california_san_diego
+  - california_san_dimas
+  - california_san_fernando
+  - california_san_francisco
+  - california_san_gabriel
+  - california_sanger
+  - california_san_jacinto
+  - california_san_jose
+  - california_san_juan_capistrano
+  - california_san_leandro
+  - california_san_luis_obispo
+  - california_san_marcos
+  - california_san_mateo
+  - california_san_pablo
+  - california_san_rafael
+  - california_san_ramon
+  - california_santa_ana
+  - california_santa_barbara
+  - california_santa_clara
+  - california_santa_clarita
+  - california_santa_cruz
+  - california_santa_fe_springs
+  - california_santa_maria
+  - california_santa_monica
+  - california_santa_paula
+  - california_santa_rosa
+  - california_santee
+  - california_saratoga
+  - california_seal_beach
+  - california_seaside
+  - california_selma
+  - california_simi_valley
+  - california_soledad
+  - california_south_el_monte
+  - california_south_gate
+  - california_south_lake_tahoe
+  - california_south_pasadena
+  - california_south_san_francisco
+  - california_stanton
+  - california_stockton
+  - california_suisun_city
+  - california_sunnyvale
+  - california_susanville
+  - california_temecula
+  - california_temple_city
+  - california_thousand_oaks
+  - california_torrance
+  - california_tracy
+  - california_truckee
+  - california_tulare
+  - california_turlock
+  - california_tustin
+  - california_twentynine_palms
+  - california_ukiah
+  - california_union_city
+  - california_upland
+  - california_vacaville
+  - california_vallejo
+  - california_victorville
+  - california_visalia
+  - california_vista
+  - california_walnut
+  - california_walnut_creek
+  - california_wasco
+  - california_watsonville
+  - california_west_covina
+  - california_west_hollywood
+  - california_westminster
+  - california_west_sacramento
+  - california_whittier
+  - california_windsor
+  - california_woodland
+  - california_yorba_linda
+  - california_yuba_city
+  - california_yucaipa
+  - california_yucca_valley
+
+california_adelanto:
+  title: Adelanto
+  type: city
+  population: 21612
+
+california_agoura_hills:
+  title: Agoura Hills
+  type: city
+  population: 22801
+
+california_alameda:
+  title: Alameda
+  type: city
+  population: 70981
+
+california_albany:
+  title: Albany
+  type: city
+  population: 16180
+
+california_alhambra:
+  title: Alhambra
+  type: city
+  population: 87826
+
+california_aliso_viejo:
+  title: Aliso Viejo
+  type: city
+  population: 41387
+
+california_anaheim:
+  title: Anaheim
+  type: city
+  population: 333150
+
+california_antioch:
+  title: Antioch
+  type: city
+  population: 100386
+
+california_apple_valley:
+  title: Apple Valley
+  type: city
+  population: 62544
+
+california_arcadia:
+  title: Arcadia
+  type: city
+  population: 55875
+
+california_arcata:
+  title: Arcata
+  type: city
+  population: 16900
+
+california_arroyo_grande:
+  title: Arroyo Grande
+  type: city
+  population: 16177
+
+california_artesia:
+  title: Artesia
+  type: city
+  population: 16748
+
+california_atascadero:
+  title: Atascadero
+  type: city
+  population: 27144
+
+california_atwater:
+  title: Atwater
+  type: city
+  population: 26397
+
+california_avenal:
+  title: Avenal
+  type: city
+  population: 16660
+
+california_azusa:
+  title: Azusa
+  type: city
+  population: 47292
+
+california_bakersfield:
+  title: Bakersfield
+  type: city
+  population: 283010
+
+california_baldwin_park:
+  title: Baldwin Park
+  type: city
+  population: 78722
+
+california_banning:
+  title: Banning
+  type: city
+  population: 28681
+
+california_barstow:
+  title: Barstow
+  type: city
+  population: 23555
+
+california_beaumont:
+  title: Beaumont
+  type: city
+  population: 18355
+
+california_bell:
+  title: Bell
+  type: city
+  population: 37701
+
+california_bellflower:
+  title: Bellflower
+  type: city
+  population: 74807
+
+california_bell_gardens:
+  title: Bell Gardens
+  type: city
+  population: 45277
+
+california_belmont:
+  title: Belmont
+  type: city
+  population: 24413
+
+california_benicia:
+  title: Benicia
+  type: city
+  population: 26754
+
+california_berkeley:
+  title: Berkeley
+  type: city
+  population: 101307
+
+california_beverly_hills:
+  title: Beverly Hills
+  type: city
+  population: 35014
+
+california_blythe:
+  title: Blythe
+  type: city
+  population: 22303
+
+california_brawley:
+  title: Brawley
+  type: city
+  population: 22244
+
+california_brea:
+  title: Brea
+  type: city
+  population: 38450
+
+california_brentwood:
+  title: Brentwood
+  type: city
+  population: 39624
+
+california_buena_park:
+  title: Buena Park
+  type: city
+  population: 79211
+
+california_burbank:
+  title: Burbank
+  type: city
+  population: 103896
+
+california_burlingame:
+  title: Burlingame
+  type: city
+  population: 27379
+
+california_calabasas:
+  title: Calabasas
+  type: city
+  population: 21583
+
+california_calexico:
+  title: Calexico
+  type: city
+  population: 34309
+
+california_camarillo:
+  title: Camarillo
+  type: city
+  population: 60778
+
+california_campbell:
+  title: Campbell
+  type: city
+  population: 36943
+
+california_carlsbad:
+  title: Carlsbad
+  type: city
+  population: 88878
+
+california_carson:
+  title: Carson
+  type: city
+  population: 93538
+
+california_cathedral_city:
+  title: Cathedral City
+  type: city
+  population: 50805
+
+california_ceres:
+  title: Ceres
+  type: city
+  population: 38621
+
+california_cerritos:
+  title: Cerritos
+  type: city
+  population: 52786
+
+california_chico:
+  title: Chico
+  type: city
+  population: 70514
+
+california_chino:
+  title: Chino
+  type: city
+  population: 75697
+
+california_chino_hills:
+  title: Chino Hills
+  type: city
+  population: 75508
+
+california_chowchilla:
+  title: Chowchilla
+  type: city
+  population: 15689
+
+california_chula_vista:
+  title: Chula Vista
+  type: city
+  population: 204499
+
+california_citrus_heights:
+  title: Citrus Heights
+  type: city
+  population: 87319
+
+california_claremont:
+  title: Claremont
+  type: city
+  population: 35034
+
+california_clovis:
+  title: Clovis
+  type: city
+  population: 82357
+
+california_coachella:
+  title: Coachella
+  type: city
+  population: 30138
+
+california_coalinga:
+  title: Coalinga
+  type: city
+  population: 17086
+
+california_colton:
+  title: Colton
+  type: city
+  population: 51305
+
+california_compton:
+  title: Compton
+  type: city
+  population: 96033
+
+california_concord:
+  title: Concord
+  type: city
+  population: 123674
+
+california_corcoran:
+  title: Corcoran
+  type: city
+  population: 22445
+
+california_corona:
+  title: Corona
+  type: city
+  population: 148001
+
+california_coronado:
+  title: Coronado
+  type: city
+  population: 26639
+
+california_costa_mesa:
+  title: Costa Mesa
+  type: city
+  population: 110392
+
+california_covina:
+  title: Covina
+  type: city
+  population: 47991
+
+california_cudahy:
+  title: Cudahy
+  type: city
+  population: 25138
+
+california_culver_city:
+  title: Culver City
+  type: city
+  population: 39813
+
+california_cupertino:
+  title: Cupertino
+  type: city
+  population: 51892
+
+california_cypress:
+  title: Cypress
+  type: city
+  population: 47581
+
+california_daly_city:
+  title: Daly City
+  type: city
+  population: 100470
+
+california_dana_point:
+  title: Dana Point
+  type: city
+  population: 35952
+
+california_danville:
+  title: Danville
+  type: city
+  population: 41973
+
+california_davis:
+  title: Davis
+  type: city
+  population: 62051
+
+california_delano:
+  title: Delano
+  type: city
+  population: 43869
+
+california_desert_hot_springs:
+  title: Desert Hot Springs
+  type: city
+  population: 19132
+
+california_diamond_bar:
+  title: Diamond Bar
+  type: city
+  population: 58203
+
+california_dinuba:
+  title: Dinuba
+  type: city
+  population: 19040
+
+california_dixon:
+  title: Dixon
+  type: city
+  population: 16664
+
+california_downey:
+  title: Downey
+  type: city
+  population: 110089
+
+california_duarte:
+  title: Duarte
+  type: city
+  population: 22227
+
+california_dublin:
+  title: Dublin
+  type: city
+  population: 36925
+
+california_east_palo_alto:
+  title: East Palo Alto
+  type: city
+  population: 31994
+
+california_el_cajon:
+  title: El Cajon
+  type: city
+  population: 93850
+
+california_el_centro:
+  title: El Centro
+  type: city
+  population: 38330
+
+california_el_cerrito:
+  title: El Cerrito
+  type: city
+  population: 23016
+
+california_elk_grove:
+  title: Elk Grove
+  type: city
+  population: 100686
+
+california_el_monte:
+  title: El Monte
+  type: city
+  population: 121868
+
+california_el_paso_de_robles__paso_robles_:
+  title: El Paso de Robles (Paso Robles)
+  type: city
+  population: 26909
+
+california_el_segundo:
+  title: El Segundo
+  type: city
+  population: 16458
+
+california_encinitas:
+  title: Encinitas
+  type: city
+  population: 59946
+
+california_escondido:
+  title: Escondido
+  type: city
+  population: 135247
+
+california_eureka:
+  title: Eureka
+  type: city
+  population: 25759
+
+california_fairfield:
+  title: Fairfield
+  type: city
+  population: 103658
+
+california_folsom:
+  title: Folsom
+  type: city
+  population: 63917
+
+california_fontana:
+  title: Fontana
+  type: city
+  population: 158702
+
+california_foster_city:
+  title: Foster City
+  type: city
+  population: 28803
+
+california_fountain_valley:
+  title: Fountain Valley
+  type: city
+  population: 56248
+
+california_fremont:
+  title: Fremont
+  type: city
+  population: 201932
+
+california_fresno:
+  title: Fresno
+  type: city
+  population: 457160
+
+california_fullerton:
+  title: Fullerton
+  type: city
+  population: 133476
+
+california_galt:
+  title: Galt
+  type: city
+  population: 22957
+
+california_gardena:
+  title: Gardena
+  type: city
+  population: 59876
+
+california_garden_grove:
+  title: Garden Grove
+  type: city
+  population: 167038
+
+california_gilroy:
+  title: Gilroy
+  type: city
+  population: 44281
+
+california_glendale:
+  title: Glendale
+  type: city
+  population: 200908
+
+california_glendora:
+  title: Glendora
+  type: city
+  population: 50762
+
+california_goleta:
+  title: Goleta
+  type: city
+  population: 29761
+
+california_hanford:
+  title: Hanford
+  type: city
+  population: 46735
+
+california_hawaiian_gardens:
+  title: Hawaiian Gardens
+  type: city
+  population: 15373
+
+california_hawthorne:
+  title: Hawthorne
+  type: city
+  population: 86099
+
+california_hayward:
+  title: Hayward
+  type: city
+  population: 140490
+
+california_hemet:
+  title: Hemet
+  type: city
+  population: 66639
+
+california_hercules:
+  title: Hercules
+  type: city
+  population: 23300
+
+california_hermosa_beach:
+  title: Hermosa Beach
+  type: city
+  population: 19496
+
+california_hesperia:
+  title: Hesperia
+  type: city
+  population: 73384
+
+california_highland:
+  title: Highland
+  type: city
+  population: 50160
+
+california_hollister:
+  title: Hollister
+  type: city
+  population: 36164
+
+california_huntington_beach:
+  title: Huntington Beach
+  type: city
+  population: 194942
+
+california_huntington_park:
+  title: Huntington Park
+  type: city
+  population: 62847
+
+california_imperial_beach:
+  title: Imperial Beach
+  type: city
+  population: 26662
+
+california_indio:
+  title: Indio
+  type: city
+  population: 63315
+
+california_inglewood:
+  title: Inglewood
+  type: city
+  population: 115064
+
+california_irvine:
+  title: Irvine
+  type: city
+  population: 178085
+
+california_la_canada_flintridge:
+  title: La Canada Flintridge
+  type: city
+  population: 21019
+
+california_lafayette:
+  title: Lafayette
+  type: city
+  population: 24535
+
+california_laguna_beach:
+  title: Laguna Beach
+  type: city
+  population: 24205
+
+california_laguna_hills:
+  title: Laguna Hills
+  type: city
+  population: 32320
+
+california_laguna_niguel:
+  title: Laguna Niguel
+  type: city
+  population: 64826
+
+california_laguna_woods:
+  title: Laguna Woods
+  type: city
+  population: 18255
+
+california_la_habra:
+  title: La Habra
+  type: city
+  population: 59692
+
+california_lake_elsinore:
+  title: Lake Elsinore
+  type: city
+  population: 37002
+
+california_lake_forest:
+  title: Lake Forest
+  type: city
+  population: 76836
+
+california_lakewood:
+  title: Lakewood
+  type: city
+  population: 80918
+
+california_la_mesa:
+  title: La Mesa
+  type: city
+  population: 53759
+
+california_la_mirada:
+  title: La Mirada
+  type: city
+  population: 49536
+
+california_lancaster:
+  title: Lancaster
+  type: city
+  population: 128672
+
+california_la_palma:
+  title: La Palma
+  type: city
+  population: 15905
+
+california_la_puente:
+  title: La Puente
+  type: city
+  population: 41970
+
+california_la_quinta:
+  title: La Quinta
+  type: city
+  population: 35365
+
+california_la_verne:
+  title: La Verne
+  type: city
+  population: 33077
+
+california_lawndale:
+  title: Lawndale
+  type: city
+  population: 32368
+
+california_lemon_grove:
+  title: Lemon Grove
+  type: city
+  population: 24492
+
+california_lemoore:
+  title: Lemoore
+  type: city
+  population: 22181
+
+california_lincoln:
+  title: Lincoln
+  type: city
+  population: 28866
+
+california_livermore:
+  title: Livermore
+  type: city
+  population: 77812
+
+california_lodi:
+  title: Lodi
+  type: city
+  population: 61948
+
+california_loma_linda:
+  title: Loma Linda
+  type: city
+  population: 20302
+
+california_lomita:
+  title: Lomita
+  type: city
+  population: 20505
+
+california_lompoc:
+  title: Lompoc
+  type: city
+  population: 40637
+
+california_long_beach:
+  title: Long Beach
+  type: city
+  population: 475753
+
+california_los_altos:
+  title: Los Altos
+  type: city
+  population: 26941
+
+california_los_angeles:
+  title: Los Angeles
+  type: city
+  population: 3837399
+
+california_los_banos:
+  title: Los Banos
+  type: city
+  population: 31830
+
+california_los_gatos:
+  title: Los Gatos
+  type: city
+  population: 27889
+
+california_lynwood:
+  title: Lynwood
+  type: city
+  population: 71485
+
+california_madera:
+  title: Madera
+  type: city
+  population: 50021
+
+california_manhattan_beach:
+  title: Manhattan Beach
+  type: city
+  population: 36245
+
+california_manteca:
+  title: Manteca
+  type: city
+  population: 61353
+
+california_marina:
+  title: Marina
+  type: city
+  population: 19320
+
+california_martinez:
+  title: Martinez
+  type: city
+  population: 36119
+
+california_maywood:
+  title: Maywood
+  type: city
+  population: 28755
+
+california_menlo_park:
+  title: Menlo Park
+  type: city
+  population: 29715
+
+california_merced:
+  title: Merced
+  type: city
+  population: 72534
+
+california_millbrae:
+  title: Millbrae
+  type: city
+  population: 20389
+
+california_milpitas:
+  title: Milpitas
+  type: city
+  population: 62584
+
+california_mission_viejo:
+  title: Mission Viejo
+  type: city
+  population: 95539
+
+california_modesto:
+  title: Modesto
+  type: city
+  population: 207068
+
+california_monrovia:
+  title: Monrovia
+  type: city
+  population: 38094
+
+california_montclair:
+  title: Montclair
+  type: city
+  population: 35181
+
+california_montebello:
+  title: Montebello
+  type: city
+  population: 63566
+
+california_monterey:
+  title: Monterey
+  type: city
+  population: 29664
+
+california_monterey_park:
+  title: Monterey Park
+  type: city
+  population: 62267
+
+california_moorpark:
+  title: Moorpark
+  type: city
+  population: 35829
+
+california_moraga:
+  title: Moraga
+  type: city
+  population: 16717
+
+california_moreno_valley:
+  title: Moreno Valley
+  type: city
+  population: 166261
+
+california_morgan_hill:
+  title: Morgan Hill
+  type: city
+  population: 34118
+
+california_mountain_view:
+  title: Mountain View
+  type: city
+  population: 68880
+
+california_murrieta:
+  title: Murrieta
+  type: city
+  population: 74027
+
+california_napa:
+  title: Napa
+  type: city
+  population: 75508
+
+california_national_city:
+  title: National City
+  type: city
+  population: 57982
+
+california_newark:
+  title: Newark
+  type: city
+  population: 42418
+
+california_newport_beach:
+  title: Newport Beach
+  type: city
+  population: 79722
+
+california_norco:
+  title: Norco
+  type: city
+  population: 26664
+
+california_norwalk:
+  title: Norwalk
+  type: city
+  population: 106462
+
+california_novato:
+  title: Novato
+  type: city
+  population: 49215
+
+california_oakdale:
+  title: Oakdale
+  type: city
+  population: 17701
+
+california_oakland:
+  title: Oakland
+  type: city
+  population: 397116
+
+california_oakley:
+  title: Oakley
+  type: city
+  population: 26669
+
+california_oceanside:
+  title: Oceanside
+  type: city
+  population: 167128
+
+california_ontario:
+  title: Ontario
+  type: city
+  population: 169800
+
+california_orange:
+  title: Orange
+  type: city
+  population: 133331
+
+california_orinda:
+  title: Orinda
+  type: city
+  population: 18080
+
+california_oxnard:
+  title: Oxnard
+  type: city
+  population: 183529
+
+california_pacifica:
+  title: Pacifica
+  type: city
+  population: 37126
+
+california_pacific_grove:
+  title: Pacific Grove
+  type: city
+  population: 15277
+
+california_palmdale:
+  title: Palmdale
+  type: city
+  population: 130876
+
+california_palm_desert:
+  title: Palm Desert
+  type: city
+  population: 46610
+
+california_palm_springs:
+  title: Palm Springs
+  type: city
+  population: 46374
+
+california_palo_alto:
+  title: Palo Alto
+  type: city
+  population: 56723
+
+california_paradise:
+  title: Paradise
+  type: city
+  population: 26637
+
+california_paramount:
+  title: Paramount
+  type: city
+  population: 56780
+
+california_pasadena:
+  title: Pasadena
+  type: city
+  population: 143845
+
+california_perris:
+  title: Perris
+  type: city
+  population: 44349
+
+california_petaluma:
+  title: Petaluma
+  type: city
+  population: 55385
+
+california_pico_rivera:
+  title: Pico Rivera
+  type: city
+  population: 65061
+
+california_pinole:
+  title: Pinole
+  type: city
+  population: 19171
+
+california_pittsburg:
+  title: Pittsburg
+  type: city
+  population: 62270
+
+california_placentia:
+  title: Placentia
+  type: city
+  population: 49856
+
+california_pleasant_hill:
+  title: Pleasant Hill
+  type: city
+  population: 33353
+
+california_pleasanton:
+  title: Pleasanton
+  type: city
+  population: 65778
+
+california_pomona:
+  title: Pomona
+  type: city
+  population: 153565
+
+california_porterville:
+  title: Porterville
+  type: city
+  population: 43892
+
+california_port_hueneme:
+  title: Port Hueneme
+  type: city
+  population: 22003
+
+california_poway:
+  title: Poway
+  type: city
+  population: 48886
+
+california_rancho_cordova:
+  title: Rancho Cordova
+  type: city
+  population: 56414
+
+california_rancho_cucamonga:
+  title: Rancho Cucamonga
+  type: city
+  population: 159110
+
+california_rancho_mirage:
+  title: Rancho Mirage
+  type: city
+  population: 16083
+
+california_rancho_palos_verdes:
+  title: Rancho Palos Verdes
+  type: city
+  population: 42100
+
+california_rancho_santa_margarita:
+  title: Rancho Santa Margarita
+  type: city
+  population: 50477
+
+california_redding:
+  title: Redding
+  type: city
+  population: 88598
+
+california_redlands:
+  title: Redlands
+  type: city
+  population: 69579
+
+california_redondo_beach:
+  title: Redondo Beach
+  type: city
+  population: 66543
+
+california_redwood_city:
+  title: Redwood City
+  type: city
+  population: 73237
+
+california_reedley:
+  title: Reedley
+  type: city
+  population: 22243
+
+california_rialto:
+  title: Rialto
+  type: city
+  population: 99509
+
+california_richmond:
+  title: Richmond
+  type: city
+  population: 101783
+
+california_ridgecrest:
+  title: Ridgecrest
+  type: city
+  population: 25830
+
+california_riverbank:
+  title: Riverbank
+  type: city
+  population: 19143
+
+california_riverside:
+  title: Riverside
+  type: city
+  population: 288351
+
+california_rocklin:
+  title: Rocklin
+  type: city
+  population: 48274
+
+california_rohnert_park:
+  title: Rohnert Park
+  type: city
+  population: 40990
+
+california_rosemead:
+  title: Rosemead
+  type: city
+  population: 55181
+
+california_roseville:
+  title: Roseville
+  type: city
+  population: 103098
+
+california_sacramento:
+  title: Sacramento
+  type: city
+  population: 454003
+
+california_salinas:
+  title: Salinas
+  type: city
+  population: 148163
+
+california_san_bernardino:
+  title: San Bernardino
+  type: city
+  population: 198886
+
+california_san_bruno:
+  title: San Bruno
+  type: city
+  population: 39601
+
+california_san_buenaventura__ventura_:
+  title: San Buenaventura (Ventura)
+  type: city
+  population: 103882
+
+california_san_carlos:
+  title: San Carlos
+  type: city
+  population: 26872
+
+california_san_clemente:
+  title: San Clemente
+  type: city
+  population: 59440
+
+california_san_diego:
+  title: San Diego
+  type: city
+  population: 1263816
+
+california_san_dimas:
+  title: San Dimas
+  type: city
+  population: 35994
+
+california_san_fernando:
+  title: San Fernando
+  type: city
+  population: 24304
+
+california_san_francisco:
+  title: San Francisco
+  type: city
+  population: 743193
+
+california_san_gabriel:
+  title: San Gabriel
+  type: city
+  population: 41174
+
+california_sanger:
+  title: Sanger
+  type: city
+  population: 21018
+
+california_san_jacinto:
+  title: San Jacinto
+  type: city
+  population: 28035
+
+california_san_jose:
+  title: San Jose
+  type: city
+  population: 902760
+
+california_san_juan_capistrano:
+  title: San Juan Capistrano
+  type: city
+  population: 34818
+
+california_san_leandro:
+  title: San Leandro
+  type: city
+  population: 79011
+
+california_san_luis_obispo:
+  title: San Luis Obispo
+  type: city
+  population: 44009
+
+california_san_marcos:
+  title: San Marcos
+  type: city
+  population: 68220
+
+california_san_mateo:
+  title: San Mateo
+  type: city
+  population: 91138
+
+california_san_pablo:
+  title: San Pablo
+  type: city
+  population: 30878
+
+california_san_rafael:
+  title: San Rafael
+  type: city
+  population: 55535
+
+california_san_ramon:
+  title: San Ramon
+  type: city
+  population: 49148
+
+california_santa_ana:
+  title: Santa Ana
+  type: city
+  population: 342084
+
+california_santa_barbara:
+  title: Santa Barbara
+  type: city
+  population: 86753
+
+california_santa_clara:
+  title: Santa Clara
+  type: city
+  population: 103807
+
+california_santa_clarita:
+  title: Santa Clarita
+  type: city
+  population: 164455
+
+california_santa_cruz:
+  title: Santa Cruz
+  type: city
+  population: 55517
+
+california_santa_fe_springs:
+  title: Santa Fe Springs
+  type: city
+  population: 17025
+
+california_santa_maria:
+  title: Santa Maria
+  type: city
+  population: 83188
+
+california_santa_monica:
+  title: Santa Monica
+  type: city
+  population: 87643
+
+california_santa_paula:
+  title: Santa Paula
+  type: city
+  population: 28680
+
+california_santa_rosa:
+  title: Santa Rosa
+  type: city
+  population: 153674
+
+california_santee:
+  title: Santee
+  type: city
+  population: 52481
+
+california_saratoga:
+  title: Saratoga
+  type: city
+  population: 29576
+
+california_seal_beach:
+  title: Seal Beach
+  type: city
+  population: 24414
+
+california_seaside:
+  title: Seaside
+  type: city
+  population: 34124
+
+california_selma:
+  title: Selma
+  type: city
+  population: 21895
+
+california_simi_valley:
+  title: Simi Valley
+  type: city
+  population: 118677
+
+california_soledad:
+  title: Soledad
+  type: city
+  population: 26334
+
+california_south_el_monte:
+  title: South El Monte
+  type: city
+  population: 21755
+
+california_south_gate:
+  title: South Gate
+  type: city
+  population: 99417
+
+california_south_lake_tahoe:
+  title: South Lake Tahoe
+  type: city
+  population: 23904
+
+california_south_pasadena:
+  title: South Pasadena
+  type: city
+  population: 24997
+
+california_south_san_francisco:
+  title: South San Francisco
+  type: city
+  population: 59807
+
+california_stanton:
+  title: Stanton
+  type: city
+  population: 37862
+
+california_stockton:
+  title: Stockton
+  type: city
+  population: 279818
+
+california_suisun_city:
+  title: Suisun City
+  type: city
+  population: 26871
+
+california_sunnyvale:
+  title: Sunnyvale
+  type: city
+  population: 127769
+
+california_susanville:
+  title: Susanville
+  type: city
+  population: 17997
+
+california_temecula:
+  title: Temecula
+  type: city
+  population: 82069
+
+california_temple_city:
+  title: Temple City
+  type: city
+  population: 36834
+
+california_thousand_oaks:
+  title: Thousand Oaks
+  type: city
+  population: 124828
+
+california_torrance:
+  title: Torrance
+  type: city
+  population: 142326
+
+california_tracy:
+  title: Tracy
+  type: city
+  population: 76828
+
+california_truckee:
+  title: Truckee
+  type: city
+  population: 15417
+
+california_tulare:
+  title: Tulare
+  type: city
+  population: 48643
+
+california_turlock:
+  title: Turlock
+  type: city
+  population: 65648
+
+california_tustin:
+  title: Tustin
+  type: city
+  population: 68611
+
+california_twentynine_palms:
+  title: Twentynine Palms
+  type: city
+  population: 28127
+
+california_ukiah:
+  title: Ukiah
+  type: city
+  population: 15556
+
+california_union_city:
+  title: Union City
+  type: city
+  population: 68787
+
+california_upland:
+  title: Upland
+  type: city
+  population: 73582
+
+california_vacaville:
+  title: Vacaville
+  type: city
+  population: 94078
+
+california_vallejo:
+  title: Vallejo
+  type: city
+  population: 118090
+
+california_victorville:
+  title: Victorville
+  type: city
+  population: 82668
+
+california_visalia:
+  title: Visalia
+  type: city
+  population: 104479
+
+california_vista:
+  title: Vista
+  type: city
+  population: 91418
+
+california_walnut:
+  title: Walnut
+  type: city
+  population: 31540
+
+california_walnut_creek:
+  title: Walnut Creek
+  type: city
+  population: 64482
+
+california_wasco:
+  title: Wasco
+  type: city
+  population: 23179
+
+california_watsonville:
+  title: Watsonville
+  type: city
+  population: 47192
+
+california_west_covina:
+  title: West Covina
+  type: city
+  population: 108440
+
+california_west_hollywood:
+  title: West Hollywood
+  type: city
+  population: 36855
+
+california_westminster:
+  title: Westminster
+  type: city
+  population: 89689
+
+california_west_sacramento:
+  title: West Sacramento
+  type: city
+  population: 39301
+
+california_whittier:
+  title: Whittier
+  type: city
+  population: 85334
+
+california_windsor:
+  title: Windsor
+  type: city
+  population: 24723
+
+california_woodland:
+  title: Woodland
+  type: city
+  population: 51634
+
+california_yorba_linda:
+  title: Yorba Linda
+  type: city
+  population: 63541
+
+california_yuba_city:
+  title: Yuba City
+  type: city
+  population: 56811
+
+california_yucaipa:
+  title: Yucaipa
+  type: city
+  population: 47792
+
+california_yucca_valley:
+  title: Yucca Valley
+  type: city
+  population: 19003
+

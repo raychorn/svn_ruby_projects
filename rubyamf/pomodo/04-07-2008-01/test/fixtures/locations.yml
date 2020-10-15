@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+#ludwig's locations
+  
+ludwig_home:
+  id: 1
+  user_id: 3
+  name: Home
+
+ludwig_opera_house:
+  id: 2
+  user_id: 3
+  name: Opera House
+
+#wolfgang's locations
+
+wolfgang_home:
+  id: 3
+  user_id: 4
+  name: Home
+
+wolfgang_opera_house:
+  id: 4
+  user_id: 4
+  name: Opera House

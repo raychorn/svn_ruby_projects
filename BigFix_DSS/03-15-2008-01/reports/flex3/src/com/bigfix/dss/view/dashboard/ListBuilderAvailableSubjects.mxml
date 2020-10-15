@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:dashboard="com.bigfix.dss.view.dashboard.*"
+	height="100%"
+	width="100%"
+	verticalScrollPolicy="off"
+	horizontalScrollPolicy="off"
+	creationComplete="init()"
+	horizontalAlign="center"
+	>
+	<mx:Script><![CDATA[
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.vo.SubjectVO;
+		import com.bigfix.dss.view.dashboard.ListBuilderSubject;
+
+		import nl.fxc.skins.FXCDashedBorder;
+		import mx.core.UIComponent;
+		import mx.events.FlexEvent;
+
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+
+		private function init():void {
+			this.addEventListener(FlexEvent.REMOVE, _destruct, false, 0, true);
+		}
+
+		private function _destruct(event:FlexEvent):void {
+			trace("ListBuilderAvailableSubjects._destruct()");
+			this.model = null;
+			this.removeEventListener(FlexEvent.REMOVE, _destruct);
+		}
+
+		public function hideSubject(subject:SubjectVO):void {
+			for (var i:int = 0; i < this.numChildren; i++) {
+				if (this.getChildAt(i) is ListBuilderSubject) {
+					if (ListBuilderSubject(this.getChildAt(i)).subject.id == subject.id) {
+						this.getChildAt(i).visible = false;
+						UIComponent(this.getChildAt(i)).includeInLayout = false;
+						return;
+					}
+				}
+			}
+		}
+
+		public function showSubject(subject:SubjectVO):void {
+			for (var i:int = 0; i < this.numChildren; i++) {
+				if (this.getChildAt(i) is ListBuilderSubject) {
+					if (ListBuilderSubject(this.getChildAt(i)).subject.id == subject.id) {
+						this.getChildAt(i).visible = true;
+						UIComponent(this.getChildAt(i)).includeInLayout = true;
+						return;
+					}
+				}
+			}
+		}
+	]]></mx:Script>
+	<mx:Repeater id="availableSubjectsRepeater" dataProvider="{model.subjects}">
+		<dashboard:ListBuilderSubject subject="{availableSubjectsRepeater.currentItem}"/>
+	</mx:Repeater>
+</mx:VBox>

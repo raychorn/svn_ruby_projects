@@ -1,0 +1,273 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Ruby Include="app\controllers\application.rb" />
+    <Ruby Include="app\controllers\my_controller.rb" />
+    <Ruby Include="app\controllers\rubyamf_controller.rb" />
+    <Ruby Include="app\helpers\application_helper.rb" />
+    <Ruby Include="app\helpers\rubyamf_helper.rb" />
+    <Ruby Include="config\environments\development.rb" />
+    <Ruby Include="config\environments\production.rb" />
+    <Ruby Include="config\environments\test.rb" />
+    <Ruby Include="config\boot.rb" />
+    <None Include="config\database.yml" />
+    <Ruby Include="config\environment.rb" />
+    <None Include="config\lighttpd.conf" />
+    <None Include="config\mongrel.yaml" />
+    <Ruby Include="config\routes.rb" />
+    <None Include="config\scgi.yaml" />
+    <None Include="doc\README_FOR_APP" />
+    <None Include="public\images\rails.png" />
+    <None Include="public\javascripts\application.js" />
+    <None Include="public\javascripts\controls.js" />
+    <None Include="public\javascripts\dragdrop.js" />
+    <None Include="public\javascripts\effects.js" />
+    <None Include="public\javascripts\prototype.js" />
+    <None Include="public\.htaccess" />
+    <None Include="public\404.html" />
+    <None Include="public\500.html" />
+    <None Include="public\dispatch.cgi" />
+    <None Include="public\dispatch.fcgi" />
+    <Ruby Include="public\dispatch.rb" />
+    <None Include="public\favicon.ico" />
+    <None Include="public\index.html" />
+    <None Include="public\robots.txt" />
+    <None Include="script\performance\benchmarker" />
+    <None Include="script\performance\profiler" />
+    <None Include="script\process\inspector" />
+    <None Include="script\process\reaper" />
+    <None Include="script\process\spawner" />
+    <None Include="script\about" />
+    <None Include="script\breakpointer" />
+    <None Include="script\console" />
+    <None Include="script\destroy" />
+    <None Include="script\generate" />
+    <None Include="script\plugin" />
+    <None Include="script\runner" />
+    <None Include="script\server" />
+    <Ruby Include="script\steelserver.rb" />
+    <Ruby Include="test\test_helper.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\public\gateway.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\adapters\active_record_adapter.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\adapters\firebird_fireruby_adapter.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\adapters\hypersonic_adapter.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\adapters\lafcadio_adapter.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\adapters\lore_adapter.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\adapters\mysql_adapter.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\adapters\object_graph_adapter.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\adapters\oracle_oci8_adapter.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\adapters\postgres_adapter.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\adapters\ruby_dbi_adapter.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\adapters\sequel_adapter.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\adapters\sqlite_adapter.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\adapter_settings.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\app\actions.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\app\amf.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\app\filters.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\app\gateway.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\app\rails_gateway.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\app\request_store.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\dispatcher.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\exception\exception_handler.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\exception\rubyamf_exception.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\io\amf_deserializer.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\io\amf_serializer.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\io\read_write.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\util\action_controller_run_target.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\util\log.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\util\net_debug.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\util\session.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\rubyamf_core\util\string_util.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\server\lighttpd\start.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\server\mongrel\mongrel_servlet.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\server\mongrel\start.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\server\support\marshal_startup.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\server\support\optparser.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\server\support\silencer.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\server\support\token_parser.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\server\webrick\start.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\server\webrick\webrick_servlet.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\services\org\rubyamf\amf\AMFTesting.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\services\org\rubyamf\amf\models\datas.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\services\org\rubyamf\amf\models\persons.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\services\org\rubyamf\amf\TestEmptyString.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\services\org\rubyamf\amf\TestObject.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\services\org\rubyamf\amf\vo\person.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\services\service_helpers\active_record_connector.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\services\service_helpers\db_error_logger.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\services\service_helpers\error_notifier.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\services\service_helpers\fault_object.rb" />
+    <Ruby Include="vendor\plugins\rubyamf\services\service_vos\vo_base.rb" />
+    <None Include="Rakefile" />
+    <None Include="README" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="app\" />
+    <Folder Include="app\controllers\" />
+    <Folder Include="app\helpers\" />
+    <Folder Include="app\models\" />
+    <Folder Include="app\views\" />
+    <Folder Include="app\views\layouts\" />
+    <Folder Include="components\" />
+    <Folder Include="config\" />
+    <Folder Include="config\environments\" />
+    <Folder Include="db\" />
+    <Folder Include="doc\" />
+    <Folder Include="lib\" />
+    <Folder Include="lib\tasks\" />
+    <Folder Include="log\" />
+    <Folder Include="public\" />
+    <Folder Include="public\images\" />
+    <Folder Include="public\javascripts\" />
+    <Folder Include="public\stylesheets\" />
+    <Folder Include="script\" />
+    <Folder Include="script\performance\" />
+    <Folder Include="script\process\" />
+    <Folder Include="test\" />
+    <Folder Include="test\fixtures\" />
+    <Folder Include="test\functional\" />
+    <Folder Include="test\integration\" />
+    <Folder Include="test\mocks\" />
+    <Folder Include="test\mocks\development\" />
+    <Folder Include="test\mocks\test\" />
+    <Folder Include="test\unit\" />
+    <Folder Include="tmp\" />
+    <Folder Include="tmp\cache\" />
+    <Folder Include="tmp\pids\" />
+    <Folder Include="tmp\sessions\" />
+    <Folder Include="tmp\sockets\" />
+    <Folder Include="vendor\" />
+    <Folder Include="vendor\plugins\" />
+    <Folder Include="vendor\plugins\rubyamf" />
+    <Folder Include="vendor\plugins\rubyamf\public" />
+    <Folder Include="vendor\plugins\rubyamf\rubyamf_core" />
+    <Folder Include="vendor\plugins\rubyamf\rubyamf_core\adapters" />
+    <Folder Include="vendor\plugins\rubyamf\rubyamf_core\app" />
+    <Folder Include="vendor\plugins\rubyamf\rubyamf_core\exception" />
+    <Folder Include="vendor\plugins\rubyamf\rubyamf_core\io" />
+    <Folder Include="vendor\plugins\rubyamf\rubyamf_core\logs" />
+    <Folder Include="vendor\plugins\rubyamf\rubyamf_core\logs\db_errors" />
+    <Folder Include="vendor\plugins\rubyamf\rubyamf_core\tmp" />
+    <Folder Include="vendor\plugins\rubyamf\rubyamf_core\tmp\configs" />
+    <Folder Include="vendor\plugins\rubyamf\rubyamf_core\tmp\configs\lighttpd" />
+    <Folder Include="vendor\plugins\rubyamf\rubyamf_core\tmp\pids" />
+    <Folder Include="vendor\plugins\rubyamf\rubyamf_core\tmp\sockets" />
+    <Folder Include="vendor\plugins\rubyamf\rubyamf_core\util" />
+    <Folder Include="vendor\plugins\rubyamf\server" />
+    <Folder Include="vendor\plugins\rubyamf\server\lighttpd" />
+    <Folder Include="vendor\plugins\rubyamf\server\mongrel" />
+    <Folder Include="vendor\plugins\rubyamf\server\startup" />
+    <Folder Include="vendor\plugins\rubyamf\server\support" />
+    <Folder Include="vendor\plugins\rubyamf\server\webrick" />
+    <Folder Include="vendor\plugins\rubyamf\services" />
+    <Folder Include="vendor\plugins\rubyamf\services\org" />
+    <Folder Include="vendor\plugins\rubyamf\services\org\rubyamf" />
+    <Folder Include="vendor\plugins\rubyamf\services\org\rubyamf\amf" />
+    <Folder Include="vendor\plugins\rubyamf\services\org\rubyamf\amf\models" />
+    <Folder Include="vendor\plugins\rubyamf\services\org\rubyamf\amf\vo" />
+    <Folder Include="vendor\plugins\rubyamf\services\service_helpers" />
+    <Folder Include="vendor\plugins\rubyamf\services\service_vos" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="log\development.log" />
+    <Content Include="log\production.log" />
+    <Content Include="log\server.log" />
+    <Content Include="log\test.log" />
+    <Content Include="tmp\sessions\ruby_sess.00c63a761be7022b" />
+    <Content Include="tmp\sessions\ruby_sess.05f034c0447f6365" />
+    <Content Include="tmp\sessions\ruby_sess.1963e5b23848f491" />
+    <Content Include="tmp\sessions\ruby_sess.1e3a41e45b9947be" />
+    <Content Include="tmp\sessions\ruby_sess.1fd473d8671736a2" />
+    <Content Include="tmp\sessions\ruby_sess.20ec281e8d0c39b9" />
+    <Content Include="tmp\sessions\ruby_sess.280ee6baef7334d3" />
+    <Content Include="tmp\sessions\ruby_sess.35b8875bc0e06fc4" />
+    <Content Include="tmp\sessions\ruby_sess.558c58bd2e4405d8" />
+    <Content Include="tmp\sessions\ruby_sess.6200f83cc85cfd62" />
+    <Content Include="tmp\sessions\ruby_sess.82becaa3aa7278cd" />
+    <Content Include="tmp\sessions\ruby_sess.89d11c7ccadfaa82" />
+    <Content Include="tmp\sessions\ruby_sess.905aca79ed5d03e9" />
+    <Content Include="tmp\sessions\ruby_sess.a25eb08bb042b123" />
+    <Content Include="tmp\sessions\ruby_sess.a8604d7d5d34912d" />
+    <Content Include="tmp\sessions\ruby_sess.ad9ca3db90505b5e" />
+    <Content Include="tmp\sessions\ruby_sess.b7e00befd91180d0" />
+    <Content Include="tmp\sessions\ruby_sess.b860a34fc0c122ab" />
+    <Content Include="tmp\sessions\ruby_sess.bf0d72a6adfe7321" />
+    <Content Include="tmp\sessions\ruby_sess.ce2fba695e3647f7" />
+    <Content Include="tmp\sessions\ruby_sess.ddfd2bf5d0a0b927" />
+    <Content Include="tmp\sessions\ruby_sess.eb0f26d2eec47d7b" />
+    <Content Include="vendor\plugins\rubyamf\LICENSE" />
+    <Content Include="vendor\plugins\rubyamf\public\crossdomain.xml" />
+    <Content Include="vendor\plugins\rubyamf\public\gateway.fcgi" />
+    <Content Include="vendor\plugins\rubyamf\README" />
+    <Content Include="vendor\plugins\rubyamf\rubyamf_core\logs\db_errors\all_services.log" />
+    <Content Include="vendor\plugins\rubyamf\rubyamf_core\logs\lighttpd.access.log" />
+    <Content Include="vendor\plugins\rubyamf\rubyamf_core\logs\lighttpd.error.log" />
+    <Content Include="vendor\plugins\rubyamf\rubyamf_core\logs\mongrel.log" />
+    <Content Include="vendor\plugins\rubyamf\rubyamf_core\logs\rubyamf.log" />
+    <Content Include="vendor\plugins\rubyamf\rubyamf_core\tmp\configs\lighttpd\aspawn.conf" />
+    <Content Include="vendor\plugins\rubyamf\server\lighttpd\aspawn.conf" />
+    <Content Include="vendor\plugins\rubyamf\server\lighttpd\forward.conf" />
+    <Content Include="vendor\plugins\rubyamf\server\start" />
+    <Content Include="vendor\plugins\rubyamf\server\startup\options" />
+    <Content Include="vendor\plugins\rubyamf\services\org\rubyamf\amf\test.yaml" />
+    <Content Include="vendor\plugins\rubyamf\services\org\rubyamf\rubyamf_create_populate.sql" />
+    <Content Include="vendor\plugins\rubyamf\services\place_services_here.txt" />
+    <Content Include="vendor\plugins\rubyamf\services\predefined_variables.txt" />
+    <Content Include="vendor\plugins\rubyamf\services\rails_integration.txt" />
+  </ItemGroup>
+  <PropertyGroup>
+    <RailsProject>True</RailsProject>
+    <SynchronizationExcludeHiddenFiles>True</SynchronizationExcludeHiddenFiles>
+    <SynchronizeExcludeNoExtension>False</SynchronizeExcludeNoExtension>
+    <RubyTimeout>60</RubyTimeout>
+    <ERBTimeout>60</ERBTimeout>
+    <ProjectGuid>{63b0a23f-8f31-458a-ad55-0e5d3bd43199}</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <Name>Debug</Name>
+    <OutputPath>Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <Name>Release</Name>
+    <OutputPath>Release\</OutputPath>
+  </PropertyGroup>
+  <UsingTask TaskName="RML.Steel.SteelRubyBuild" AssemblyName="SteelBuild, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8a42f26dbbcba2be, processorArchitecture=x86" />
+  <UsingTask TaskName="RML.Steel.SteelRailsBuild" AssemblyName="SteelBuild, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8a42f26dbbcba2be, processorArchitecture=x86" />
+  <Target Name="BuildRails" Inputs="@(EmbeddedRuby)" Outputs="$(MSBuildProjectDirectory)\SyntaxCheck\%(Identity)">
+    <MakeDir Directories="SyntaxCheck" />
+    <SteelRailsBuild ERBFile="@(EmbeddedRuby)" ProjectDirectory="$(MSBuildProjectDirectory)" ERBProcessor="$(ERBProcessor)" ERBFlags="$(ERBFlags)" ERBLibraryFiles="$(ERBLibraryFiles)" ERBTimeout="$(ERBTimeout)" />
+  </Target>
+  <Target Name="BuildRuby" Inputs="@(Ruby)" Outputs="$(MSBuildProjectDirectory)\SyntaxCheck\%(Identity)">
+    <MakeDir Directories="SyntaxCheck" />
+    <SteelRubyBuild RubyFile="@(Ruby)" ProjectDirectory="$(MSBuildProjectDirectory)" RubyInterpreter="$(RubyInterpreter)" RubyInterpreterFlags="$(RubyInterpreterFlags)" RubyLibraryFiles="$(RubyLibraryFiles)" RubyLibraryPaths="$(LibraryPath)" RubyTimeout="$(RubyTimeout)" />
+  </Target>
+  <Target Name="Clean">
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\SyntaxCheck" />
+  </Target>
+  <Target Name="Build" DependsOnTargets="$(BuildDependsOn)" Inputs="@(Ruby); @(EmbeddedRuby)" Outputs="$(MSBuildProjectDirectory)\SyntaxCheck\%(Identity)">
+  </Target>
+  <Target Name="Clean">
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\SyntaxCheck" />
+  </Target>
+  <PropertyGroup>
+    <RebuildDependsOn>
+      Clean;
+      Build;
+    </RebuildDependsOn>
+    <BuildDependsOn>
+      BeforeBuild;
+      BuildRuby; 
+      BuildRails;
+      AfterBuild;
+    </BuildDependsOn>
+  </PropertyGroup>
+  <Target Name="Rebuild" DependsOnTargets="$(RebuildDependsOn)" Inputs="@(Ruby)" Outputs="$(MSBuildProjectDirectory)\SyntaxCheck\%(Identity)">
+  </Target>
+  <Target Name="BeforeBuild" Condition="'$(PreBuildEvent)'!='' ">
+    <Exec Command="$(PreBuildEvent)" />
+  </Target>
+  <Target Name="AfterBuild" Condition="'$(PostBuildEvent)'!='' ">
+    <Exec Command="$(PostBuildEvent)" />
+  </Target>
+  <!--<Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />-->
+  <Target Name="ResolveAssemblyReferences" />
+</Project>

@@ -1,0 +1,124 @@
+south_carolina:
+  title: South Carolina
+  subgroups:
+  - south_carolina_aiken
+  - south_carolina_anderson
+  - south_carolina_charleston
+  - south_carolina_columbia
+  - south_carolina_easley
+  - south_carolina_florence
+  - south_carolina_goose_creek
+  - south_carolina_greenville
+  - south_carolina_greenwood
+  - south_carolina_greer
+  - south_carolina_hilton_head_island
+  - south_carolina_mauldin
+  - south_carolina_mount_pleasant
+  - south_carolina_myrtle_beach
+  - south_carolina_north_augusta
+  - south_carolina_north_charleston
+  - south_carolina_rock_hill
+  - south_carolina_spartanburg
+  - south_carolina_summerville
+  - south_carolina_sumter
+
+south_carolina_aiken:
+  title: Aiken
+  type: city
+  population: 26975
+
+south_carolina_anderson:
+  title: Anderson
+  type: city
+  population: 25760
+
+south_carolina_charleston:
+  title: Charleston
+  type: city
+  population: 105485
+
+south_carolina_columbia:
+  title: Columbia
+  type: city
+  population: 116931
+
+south_carolina_easley:
+  title: Easley
+  type: city
+  population: 18653
+
+south_carolina_florence:
+  title: Florence
+  type: city
+  population: 30944
+
+south_carolina_goose_creek:
+  title: Goose Creek
+  type: city
+  population: 31664
+
+south_carolina_greenville:
+  title: Greenville
+  type: city
+  population: 56263
+
+south_carolina_greenwood:
+  title: Greenwood
+  type: city
+  population: 22381
+
+south_carolina_greer:
+  title: Greer
+  type: city
+  population: 20486
+
+south_carolina_hilton_head_island:
+  title: Hilton Head Island
+  type: city
+  population: 34416
+
+south_carolina_mauldin:
+  title: Mauldin
+  type: city
+  population: 18684
+
+south_carolina_mount_pleasant:
+  title: Mount Pleasant
+  type: city
+  population: 56761
+
+south_carolina_myrtle_beach:
+  title: Myrtle Beach
+  type: city
+  population: 25459
+
+south_carolina_north_augusta:
+  title: North Augusta
+  type: city
+  population: 19113
+
+south_carolina_north_charleston:
+  title: North Charleston
+  type: city
+  population: 84333
+
+south_carolina_rock_hill:
+  title: Rock Hill
+  type: city
+  population: 57991
+
+south_carolina_spartanburg:
+  title: Spartanburg
+  type: city
+  population: 38610
+
+south_carolina_summerville:
+  title: Summerville
+  type: city
+  population: 34257
+
+south_carolina_sumter:
+  title: Sumter
+  type: city
+  population: 39948
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:data="com.bigfix.dss.view.data.*" creationComplete="WidgetWizardFormLib_init()">
+	<mx:Script><![CDATA[
+		include 'WidgetWizardFormLib.as';
+		
+		private function init():void {
+			WidgetWizardFormLib_init()
+			formControlForRowLimit.value = model.currentWidget.visualization_type_options.row_limit;
+			coalesce(formatSliderDataTip(formControlForRowLimit.value), labelField);
+		}
+		
+		private function setValue():void {
+			hideForm();
+			if (formControlForRowLimit.value == formControlForRowLimit.maximum) {
+				model.currentWidget.visualization_type_options.row_limit = 0; // 0 is magic! yay!
+			} else {
+				model.currentWidget.visualization_type_options.row_limit = formControlForRowLimit.value;
+			}
+			coalesce(formatSliderDataTip(formControlForRowLimit.value), labelField);
+		}
+
+		// slider stuff
+		[Bindable]
+		private var sliderLabels:Array = [5, 10, 15, 20, 25, 'all'];
+
+		private function formatSliderDataTip(value:Number):String {
+			if (formControlForRowLimit.maximum == value) {
+				return "all";
+			}
+			return String(value);
+		}
+	]]></mx:Script>
+	<mx:HBox>
+		<mx:HBox id="labelBox" click="showForm()" useHandCursor="true"><mx:Label text="Row Limit:" styleName="textLink" useHandCursor="true" toolTip="Click this label to perform an action."/></mx:HBox>
+		<mx:Label id="labelField" creationComplete="coalesce(null, Label(event.currentTarget))"/>
+	</mx:HBox>
+
+	<mx:Panel id="form" title="Row Limit" styleName="wizardFormContainer" width="300" includeInLayout="false" visible="false">
+		<mx:HSlider id="formControlForRowLimit" labels="{sliderLabels}" minimum="5" maximum="30" snapInterval="5" dataTipFormatFunction="formatSliderDataTip" tickInterval="5"/>
+		<mx:ControlBar horizontalAlign="right">
+			<mx:Button label="Cancel" click="hideForm()"/>
+			<mx:Button label="Done" id="submitButton" click="setValue()"/>
+		</mx:ControlBar>
+	</mx:Panel>
+</mx:Canvas>

@@ -1,0 +1,295 @@
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:bfcontrols="com.bigfix.extensions.controls.*"
+	xmlns:dashboard="com.bigfix.dss.view.dashboard.*"
+	xmlns:bfstates="com.bigfix.extensions.states.*"
+	width="100%" height="100%"
+	verticalGap="0" paddingTop="10"
+	creationComplete="init()"
+	>
+	<mx:Script><![CDATA[
+		import com.bigfix.dss.util.ArrayCollectionUtils;
+		import mx.controls.TextInput;
+		import com.bigfix.extensions.controls.events.ClosedDashboardTabEvent;
+		import mx.collections.ArrayCollection;
+		import mx.controls.Alert;
+		import mx.binding.utils.ChangeWatcher;
+		import mx.binding.utils.BindingUtils;
+		import mx.events.PropertyChangeEvent;
+		import mx.events.FlexEvent;
+		import mx.events.PropertyChangeEvent;
+		import mx.events.IndexChangedEvent;
+		import mx.managers.PopUpManager;
+		import flexlib.controls.SuperTabBar;
+		import flexlib.controls.tabBarClasses.SuperTab;
+		import flexlib.events.TabReorderEvent;
+		
+
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.util.WatcherManager;
+		import com.bigfix.dss.command.GetDashboardsCommand;
+		import com.bigfix.dss.command.MoveDashboardCommand;
+		import com.bigfix.dss.command.SaveDashboardCommand;
+		import com.bigfix.dss.command.RenameDashboardCommand;
+		import com.bigfix.dss.command.GetDashboardLayoutsCommand;
+		import com.bigfix.dss.view.dashboard.Dashboard;
+		import com.bigfix.dss.view.dashboard.WidgetCreation;
+		import com.bigfix.dss.view.general.PopUpTextPrompt;
+		import com.bigfix.dss.vo.DashboardVO;
+		import com.bigfix.extensions.core.DeferredInstance;
+		
+		import com.bigfix.extensions.controls.DashboardSuperTabBar;
+		
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+		private var watcherManager:WatcherManager = new WatcherManager();
+
+		private var _dashboardNamePopUp:PopUpTextPrompt;
+		
+		private function init():void {
+			watcherManager.manage(BindingUtils.bindProperty(this, 'currentState', model, 'dashboardViewState'));
+			watcherManager.manage(ChangeWatcher.watch(model, 'dashboards', syncViewStackToModelDashboard));
+			dashboardTabBar.addEventListener(SuperTabBar.TABS_REORDERED, tabReorderHandler);
+			dashboardTabBar.addEventListener(SuperTab.RENAME_TAB_EVENT, onRenameTabClicked);
+			dashboardViewStack.addEventListener(IndexChangedEvent.CHANGE, syncModelCurrentDashboard);
+			this.addEventListener(FlexEvent.REMOVE, _destruct, false, 0, true);
+			new GetDashboardsCommand().execute(null);
+			new GetDashboardLayoutsCommand().execute(null);
+		}
+		
+		private function _destruct(event:FlexEvent):void {
+			watcherManager.removeAll();
+			this.model = null;
+			this.removeEventListener(FlexEvent.REMOVE, _destruct);
+		}
+		
+		private function syncViewStackToModelDashboard(event:Event):void{
+			for each (var dashboard:DashboardVO in model.dashboards){
+				var dashboardToAdd:Dashboard = new Dashboard();
+				dashboardToAdd.dashboardData=dashboard;
+				dashboardViewStack.addChild(dashboardToAdd);
+			}
+			dashboardTabBar.selectedIndex=dashboardViewStack.selectedIndex;
+			refreshDashboardButtonState();
+			syncModelCurrentDashboard();
+		}
+		
+		private function syncModelCurrentDashboard(event:Event=null):void{
+			if(dashboardViewStack.selectedChild != null){
+				model.currentDashboard = Dashboard(dashboardViewStack.selectedChild).dashboardData;
+				if(currentState=='EditLayout'){
+					dashboardLayoutSidebar.setSelection();
+				}
+			}
+		}
+		
+		private function onRenameTabClicked(event:Event):void {
+			event.stopImmediatePropagation();
+			
+			var TabBarToRenameIndex:int = dashboardTabBar.getChildIndex(DisplayObject(event.target));
+			
+			var popUp:PopUpTextPrompt = new PopUpTextPrompt;
+			popUp.prompt = "Enter Name:";
+			popUp.text = Dashboard(dashboardViewStack.getChildAt(TabBarToRenameIndex)).label
+			popUp.okHandler = function (newName:String):void {
+					var renameCommand:RenameDashboardCommand = new RenameDashboardCommand();
+					renameCommand.new_name= newName;
+					renameCommand.position = TabBarToRenameIndex+1;	//pos in database starts from 1
+					renameCommand.resultHandler = function (data:Object) :void{
+							if (data.success){
+								Dashboard(dashboardViewStack.getChildAt(TabBarToRenameIndex)).label = newName;
+							}
+							else{
+								Alert.show("Unable to Save your Dashboard! - rails side");
+							}
+						}
+					renameCommand.execute(null);
+			}
+			
+			PopUpManager.addPopUp(popUp, DisplayObject(event.target), false);
+			popUp.x = event.target.x;
+			popUp.y = event.target.y+popUp.height;
+		}
+		
+		private function onKeyUpTextPromptTextField(event:KeyboardEvent):void {
+			var textField:TextInput = TextInput(event.currentTarget);
+			var name:String = textField.text;
+
+			if (model.dashboards != null) {
+				var i:int = ArrayCollectionUtils.findIndexOfItem(model.dashboards, "name", name);
+				this._dashboardNamePopUp.TextField.errorString = ((i > -1) ? "The Dashboard Name must be unique." : "");
+				this._dashboardNamePopUp.refreshOkButtonState();
+			}
+		}
+		
+		private function onCreationCompletePopUpTextPrompt(event:FlexEvent):void {
+			this._dashboardNamePopUp = PopUpTextPrompt(event.currentTarget);
+			this._dashboardNamePopUp.TextField.addEventListener(KeyboardEvent.KEY_UP, onKeyUpTextPromptTextField);
+		}
+		
+		private function addDashboard():void {
+			
+			var popUp:PopUpTextPrompt = new PopUpTextPrompt;
+			popUp.prompt = "Enter Name:";
+			popUp.text = "Untitled";
+			popUp.okHandler = function (newName:String):void {
+				var dashboard_to_add:DashboardVO = new DashboardVO();
+				dashboard_to_add.user_id = model.user.id;
+/*###*/			dashboard_to_add.dashboard_layout_id = 1;		//this should be smarter
+				dashboard_to_add.name = newName;
+				dashboard_to_add.position = dashboardViewStack.numChildren+1;	//pos in database starts from 1
+				var saveCommand:SaveDashboardCommand = new SaveDashboardCommand();
+				saveCommand.dashboard=dashboard_to_add;
+				saveCommand.resultHandler = function (data:Object) :void{
+					if (data.success){
+						var dashboard_to_add:Dashboard = new Dashboard;
+						dashboard_to_add.dashboardData = data.dashboard_saved;
+						if (data.dashboard_saved.position-1 < dashboardViewStack.numChildren) {
+							dashboardViewStack.addChildAt(dashboard_to_add, data.dashboard_saved.position-1);
+						} else {
+							dashboardViewStack.addChild(dashboard_to_add);
+						}
+						 //pos in database starts from 1
+						trace(dashboardViewStack.getChildIndex(dashboard_to_add));
+						dashboardViewStack.selectedIndex = dashboardViewStack.getChildIndex(dashboard_to_add);
+						if (dashboardTabBar.selectedIndex != dashboardViewStack.selectedIndex) {
+							trace("syncing dashboardTabBar.selectedIndex to dashboardViewStack.selectedIndex");
+							dashboardTabBar.selectedIndex = dashboardViewStack.selectedIndex;
+						}
+						refreshDashboardButtonState();
+					}
+					else{
+						Alert.show("Unable to Add Dashboard: " + data.errors);
+					}
+				}
+				saveCommand.execute(null);
+			}
+			PopUpManager.addPopUp(popUp, addDashboardLink, false);
+			popUp.x = addDashboardLink.x;
+			popUp.y = addDashboardLink.y+popUp.height;
+			popUp.addEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompletePopUpTextPrompt);
+		}
+		
+		private function tabReorderHandler(event:TabReorderEvent):void {
+			var moveCommand:MoveDashboardCommand = new MoveDashboardCommand();
+    		//bug fix, see tabsReordered in flexlib.containers.SuperTabNavigator
+    		if(event.oldIndex < event.newIndex) {
+    			event.newIndex--;
+    		}
+			moveCommand.old_position = event.oldIndex+1	//pos in database starts from 1
+			moveCommand.new_position = event.newIndex+1	//pos in database starts from 1
+			moveCommand.resultHandler = function (data:Object) :void{
+				if (data.success){
+					var dashboardToMove:Dashboard = Dashboard(dashboardViewStack.getChildAt(data.old_pos-1)); //pos in database starts from 1
+					dashboardToMove.dashboardData.position=data.new_pos;
+					dashboardViewStack.setChildIndex(dashboardToMove, data.new_pos-1);					//pos in database starts from 1
+					dashboardViewStack.selectedIndex = data.new_pos-1;									//pos in database starts from 1
+					dashboardViewStack.getChildren().forEach( function(dashboard:Dashboard, index:int, array:Array):void {
+																//we update the position field of the dashboards manually
+																dashboard.dashboardData.position=index+1;
+																//sometimes the tab labels won't autoupdate so we update it manually
+					 											SuperTab(dashboardTabBar.getChildAt(index)).label = dashboard.label;
+					 	});
+					if (dashboardTabBar.selectedIndex != dashboardViewStack.selectedIndex) {
+						trace("syncing dashboardTabBar.selectedIndex to dashboardViewStack.selectedIndex");
+						dashboardTabBar.selectedIndex = dashboardViewStack.selectedIndex;
+					}
+				}
+				else{
+					Alert.show("Unable to move your Dashboard! - rails side");
+				}
+			}
+			moveCommand.execute(null)
+		}
+		private function toggleWidgetLibrarySidebar(event:Event):void {
+			if (event.target.selected) {
+				if(dashboardViewStack.selectedChild != null){
+					layoutButton.selected=false;
+					model.dashboardViewState = 'AddWidgets';
+				} else {
+					widgetButton.selected=false;
+					Alert.show("You must first select a Dashboard.");
+				}
+			} else {
+				model.dashboardViewState = 'Main';
+			}
+		}
+		
+		private function toggleLayout(event:Event):void {
+			if (event.target.selected) {
+				if(dashboardViewStack.selectedChild != null){
+					widgetButton.selected=false;
+					model.dashboardViewState = 'EditLayout';
+					dashboardLayoutSidebar.setSelection();
+				} else {
+					layoutButton.selected=false;
+					Alert.show("You must first select a Dashboard.");
+				}
+			} else {
+				model.dashboardViewState = 'Main';
+			}
+		}
+
+		private function refreshDashboardButtonState():void {
+			this.layoutButton.enabled = (dashboardViewStack.selectedChild != null);
+			this.widgetButton.enabled = (dashboardViewStack.selectedChild != null);
+		}
+		
+		private function onClosedDashboardTab(event:ClosedDashboardTabEvent):void {
+			this.refreshDashboardButtonState();
+		}
+		
+		private function onCreationCompleteDashboardSuperTabBar():void {
+			this.dashboardTabBar.addEventListener(ClosedDashboardTabEvent.TYPE_CLOSED_DASHBOARD_TAB, onClosedDashboardTab);
+		}
+		
+		private function onCreationCompleteDashboardViewStack():void {
+			this.refreshDashboardButtonState();
+		}
+	]]></mx:Script>
+	<mx:states>
+		<mx:State name="Main">
+			<mx:AddChild>
+				<mx:Canvas width="100%">
+					<mx:HRule width="100%" y="{dashboardTabBarStrip.height - 2}"/>
+					<mx:HBox styleName="dashboardTabs" id="dashboardTabBarStrip" width="100%" verticalAlign="middle" minHeight="22">
+						<bfcontrols:DashboardSuperTabBar id="dashboardTabBar" backgroundColor="white" dataProvider="{dashboardViewStack}" dragEnabled="true" dropEnabled="true" creationComplete="onCreationCompleteDashboardSuperTabBar()"/>
+						<mx:Label id="addDashboardLink" text="Add Dashboard" selectable="false" buttonMode="true" useHandCursor="true" styleName="textLink" click="addDashboard()"/>
+						<mx:Spacer width="100%"/>
+						<mx:Button id="layoutButton" label="Change Layout"  toggle="true" enabled="false" fontWeight="normal" change="toggleLayout(event)" paddingBottom="2"/>
+						<mx:Button id="widgetButton" label="Widget Library" toggle="true" enabled="false" fontWeight="normal" change="toggleWidgetLibrarySidebar(event)" paddingBottom="2"/>
+					</mx:HBox>
+				</mx:Canvas>
+			</mx:AddChild>
+			<mx:AddChild>
+				<mx:HBox width="100%" height="100%" horizontalGap="0" id="dashboardContainer" backgroundColor="white">
+					<mx:ViewStack id="dashboardViewStack" width="100%" height="100%" creationComplete="onCreationCompleteDashboardViewStack()"/>
+				</mx:HBox>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="AddWidgets" basedOn="Main">
+			<mx:AddChild relativeTo="{dashboardContainer}" position="lastChild">
+				<mx:target>
+					<dashboard:WidgetLibrarySidebar width="200" height="100%" removedEffect="{wipeOut}" addedEffect="{wipeIn}"/>
+				</mx:target>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="EditLayout" basedOn="Main">
+			<mx:AddChild relativeTo="{dashboardContainer}" position="lastChild">
+				<mx:target>
+					<dashboard:DashboardLayoutSidebar id="dashboardLayoutSidebar" width="200" height="100%" removedEffect="{wipeOut}" addedEffect="{wipeIn}"/>
+				</mx:target>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="ManageWidgets">
+			<mx:AddChild targetFactory="{new DeferredInstance(WidgetLibraryManager)}"/>
+		</mx:State>
+		<bfstates:StateDestroy name="CreateWidget">
+			<mx:AddChild targetFactory="{new DeferredInstance(WidgetCreation)}"/>
+		</bfstates:StateDestroy>
+		<bfstates:StateDestroy name="EditWidget">
+			<mx:AddChild targetFactory="{new DeferredInstance(WidgetEdit)}"/>
+		</bfstates:StateDestroy>
+	</mx:states>
+	<mx:WipeLeft id="wipeIn" duration="500"/>
+	<mx:WipeRight id="wipeOut" duration="500"/>
+</mx:Box>

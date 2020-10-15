@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.view.ReportManager.widgets.events.BeginSaveAsEvent;
+			import com.bigfix.dss.view.ReportManager.widgets.events.BeginPrintJobEvent;
+
+			[Event(name="beginPrintJob", type="com.bigfix.dss.view.ReportManager.widgets.events.BeginPrintJobEvent")]
+			[Event(name="saveAs", type="com.bigfix.dss.view.ReportManager.widgets.events.saveAs")]
+			
+			private function onClickPrintJobButton():void {
+				this.dispatchEvent(new BeginPrintJobEvent(BeginPrintJobEvent.TYPE_BEGIN_PRINT_JOB, BeginPrintJobEvent.const_source_reportBuilder, BeginPrintJobEvent.const_dest_printer));
+			}
+
+			private function onClickSaveImageButton():void {
+				this.dispatchEvent(new BeginSaveAsEvent(BeginSaveAsEvent.TYPE_SAVE_AS, BeginSaveAsEvent.const_source_reportBuilder, BeginSaveAsEvent.const_dest_image));
+			}
+
+			private function onClickSavePDFButton():void {
+				this.dispatchEvent(new BeginSaveAsEvent(BeginSaveAsEvent.TYPE_SAVE_AS, BeginSaveAsEvent.const_source_reportBuilder, BeginSaveAsEvent.const_dest_pdf));
+			}
+		]]>
+	</mx:Script>
+	<mx:HBox width="100%" horizontalAlign="left">
+		<mx:Button id="btn_PrintJob" label="Print" toolTip="Print the report." click="onClickPrintJobButton()"/>
+		<mx:Button id="btn_SaveAsImage" label="Export Image..." toolTip="Save the report as Image." click="onClickSaveImageButton()"/>
+		<mx:Button id="btn_SaveAsPDF" label="Export PDF..." toolTip="Save the report as PDF." click="onClickSavePDFButton()"/>
+	</mx:HBox>
+</mx:Canvas>

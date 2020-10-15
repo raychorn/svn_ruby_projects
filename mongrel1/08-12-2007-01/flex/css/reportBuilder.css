@@ -1,0 +1,58 @@
+/* CSS file */
+@font-face {
+	src: url("/assets/fonts/NeoSansIntel.ttf");
+	fontFamily: NeoSansIntel;
+}
+
+TextField {
+	fontFamily: NeoSansIntel;
+	fontSize: 12pt;
+}
+
+.ErrorAlert {
+	fontFamily: NeoSansIntel;
+	fontSize: 11pt;
+	backgroundAlpha: .5;
+	shadowDistance: 7;
+	backgroundColor: #ff0000;
+	borderColor: #ff0000;
+	cornerRadius: 10;
+}	
+
+Combobox {
+	dropShadowEnabled: true;
+	fontFamily: NeoSansIntel;
+	fontSize: 11pt;
+}
+
+ImageWidget {
+	dropShadowEnabled: true;
+	borderColor: #0000ff;
+	borderStyle: solid;
+}
+
+.FileUploader {
+   borderColor: #e0f56d;
+   borderAlpha: 0.7;
+   borderThicknessLeft: 10;
+   borderThicknessTop: 3;
+   borderThicknessBottom: 2;
+   borderThicknessRight: 10;
+   roundedBottomCorners: true;
+   cornerRadius: 10;
+   backgroundAlpha: 1;
+   backgroundColor: #e0f56d;
+   shadowDistance: 7;
+   shadowDirection: right;
+   titleStyleName: "mypanelTitle";
+}
+
+.mypanelTitle {
+	fontFamily:NeoSansIntel;
+	font-size: 14;	
+	font-weight :bold;
+}
+
+.ReportBuilderCanvasStyle {
+   backgroundColor: #ffffff;
+}

@@ -1,0 +1,468 @@
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+
+
+Processing UsersController#create (for 127.0.0.1 at 2008-04-07 16:39:40) [POST]
+  Session ID: d51259cb4cc5e11b45338f00dc2c0618
+  Parameters: {"user"=>{"password_confirmation"=>"peekab00", "first_name"=>"Ray", "login"=>"raychorn", "last_name"=>"Horn", "password"=>"peekab00", "email"=>"raychorn@hotmail.com"}, "format"=>"xml", "action"=>"create", "controller"=>"users"}
+Completed in 0.17200 (5 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.17400 (101%) | 200 OK [http://localhost/users.xml]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:39:41) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Sending data 
+Completed in 0.01500 (66 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:39:41) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing NotesController#show (for 127.0.0.1 at 2008-04-07 16:39:41) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"show", "controller"=>"notes"}
+Completed in 0.01600 (62 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostnotes/show]
+
+
+Processing ProjectsController#index (for 127.0.0.1 at 2008-04-07 16:39:41) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"projects"}
+Completed in 0.03100 (32 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostprojects/index]
+
+
+Processing LocationsController#index (for 127.0.0.1 at 2008-04-07 16:39:42) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"locations"}
+Completed in 0.03200 (31 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostlocations/index]
+Sending data 
+Completed in 0.22000 (4 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhostlocations/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:39:42) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing TasksController#index (for 127.0.0.1 at 2008-04-07 16:39:42) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"tasks"}
+Completed in 0.09400 (10 reqs/sec) | DB: 0.00000 (0%) |  [http://localhosttasks/index]
+Sending data 
+Completed in 0.25100 (3 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhosttasks/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:40:35) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing ProjectsController#create (for 127.0.0.1 at 2008-04-07 16:40:35) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {0=>#<Project id: nil, user_id: nil, name: "myProject", notes: nil, completed: false, created_at: nil, updated_at: nil>, "action"=>"create", "controller"=>"projects"}
+Completed in 0.12600 (7 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostprojects/create]
+Sending data 
+Completed in 0.12600 (7 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhostprojects/create]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:40:35) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing ProjectsController#index (for 127.0.0.1 at 2008-04-07 16:40:35) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"projects"}
+Completed in 0.03100 (32 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostprojects/index]
+Sending data 
+Completed in 0.04700 (21 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhostprojects/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:40:35) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing TasksController#index (for 127.0.0.1 at 2008-04-07 16:40:35) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"tasks"}
+Completed in 0.09400 (10 reqs/sec) | DB: 0.00000 (0%) |  [http://localhosttasks/index]
+Sending data 
+Completed in 0.09400 (10 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhosttasks/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:40:47) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing LocationsController#create (for 127.0.0.1 at 2008-04-07 16:40:47) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {0=>#<Location id: nil, user_id: nil, name: "myLocation", notes: nil, created_at: nil, updated_at: nil>, "action"=>"create", "controller"=>"locations"}
+Completed in 0.07800 (12 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostlocations/create]
+Sending data 
+Completed in 0.09400 (10 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhostlocations/create]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:40:47) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing LocationsController#index (for 127.0.0.1 at 2008-04-07 16:40:47) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"locations"}
+Completed in 0.03100 (32 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostlocations/index]
+Sending data 
+Completed in 0.04700 (21 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhostlocations/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:40:47) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing TasksController#index (for 127.0.0.1 at 2008-04-07 16:40:47) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"tasks"}
+Completed in 0.03100 (32 reqs/sec) | DB: 0.00000 (0%) |  [http://localhosttasks/index]
+Sending data 
+Completed in 0.03100 (32 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhosttasks/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:41:00) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing TasksController#create (for 127.0.0.1 at 2008-04-07 16:41:00) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {0=>#<Task id: nil, user_id: nil, project_id: 5, location_id: 5, name: "myTask", notes: nil, next_action: false, completed: false, created_at: nil, updated_at: nil>, "action"=>"create", "controller"=>"tasks"}
+Completed in 0.07900 (12 reqs/sec) | DB: 0.00000 (0%) |  [http://localhosttasks/create]
+Sending data 
+Completed in 0.09400 (10 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhosttasks/create]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:41:01) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing TasksController#index (for 127.0.0.1 at 2008-04-07 16:41:01) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"tasks"}
+Completed in 0.01600 (62 reqs/sec) | DB: 0.00000 (0%) |  [http://localhosttasks/index]
+Sending data 
+Completed in 0.04700 (21 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.01600 (34%) | 200 OK [http://localhosttasks/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:41:31) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing ProjectsController#create (for 127.0.0.1 at 2008-04-07 16:41:31) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {0=>#<Project id: nil, user_id: nil, name: "myProject2", notes: nil, completed: false, created_at: nil, updated_at: nil>, "action"=>"create", "controller"=>"projects"}
+Completed in 0.11000 (9 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostprojects/create]
+Sending data 
+Completed in 0.12600 (7 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhostprojects/create]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:41:31) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing ProjectsController#index (for 127.0.0.1 at 2008-04-07 16:41:31) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"projects"}
+Completed in 0.03100 (32 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostprojects/index]
+Sending data 
+Completed in 0.04700 (21 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhostprojects/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:41:31) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing TasksController#index (for 127.0.0.1 at 2008-04-07 16:41:31) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"tasks"}
+Completed in 0.03100 (32 reqs/sec) | DB: 0.00000 (0%) |  [http://localhosttasks/index]
+Sending data 
+Completed in 0.06300 (15 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhosttasks/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:41:37) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing TasksController#update (for 127.0.0.1 at 2008-04-07 16:41:37) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {0=>#<Task id: 8, project_id: 6, location_id: 5, name: "myTask", notes: nil, next_action: false, completed: false>, "action"=>"update", "controller"=>"tasks"}
+Completed in 0.14100 (7 reqs/sec) | DB: 0.00000 (0%) |  [http://localhosttasks/update]
+Sending data 
+Completed in 0.15700 (6 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhosttasks/update]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:41:38) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing ProjectsController#index (for 127.0.0.1 at 2008-04-07 16:41:38) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"projects"}
+Completed in 0.03100 (32 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostprojects/index]
+Sending data 
+Completed in 0.04700 (21 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhostprojects/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:41:38) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing TasksController#index (for 127.0.0.1 at 2008-04-07 16:41:38) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"tasks"}
+Completed in 0.03200 (31 reqs/sec) | DB: 0.00000 (0%) |  [http://localhosttasks/index]
+Sending data 
+Completed in 0.04700 (21 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhosttasks/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:41:43) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing LocationsController#create (for 127.0.0.1 at 2008-04-07 16:41:43) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {0=>#<Location id: nil, user_id: nil, name: "myLocation2", notes: nil, created_at: nil, updated_at: nil>, "action"=>"create", "controller"=>"locations"}
+Completed in 0.09400 (10 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostlocations/create]
+Sending data 
+Completed in 0.12500 (8 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhostlocations/create]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:41:43) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing LocationsController#index (for 127.0.0.1 at 2008-04-07 16:41:43) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"locations"}
+Completed in 0.03100 (32 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostlocations/index]
+Sending data 
+Completed in 0.04700 (21 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhostlocations/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:41:43) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing TasksController#index (for 127.0.0.1 at 2008-04-07 16:41:43) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"tasks"}
+Completed in 0.03100 (32 reqs/sec) | DB: 0.00000 (0%) |  [http://localhosttasks/index]
+Sending data 
+Completed in 0.04700 (21 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhosttasks/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:41:46) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing TasksController#update (for 127.0.0.1 at 2008-04-07 16:41:46) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {0=>#<Task id: 8, project_id: 6, location_id: 6, name: "myTask", notes: nil, next_action: false, completed: false>, "action"=>"update", "controller"=>"tasks"}
+Completed in 0.14100 (7 reqs/sec) | DB: 0.00000 (0%) |  [http://localhosttasks/update]
+Sending data 
+Completed in 0.14100 (7 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhosttasks/update]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:41:46) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing ProjectsController#index (for 127.0.0.1 at 2008-04-07 16:41:46) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"projects"}
+Completed in 0.03100 (32 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostprojects/index]
+Sending data 
+Completed in 0.04700 (21 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhostprojects/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 16:41:46) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing TasksController#index (for 127.0.0.1 at 2008-04-07 16:41:46) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"tasks"}
+Completed in 0.01500 (66 reqs/sec) | DB: 0.00000 (0%) |  [http://localhosttasks/index]
+Sending data 
+Completed in 0.04700 (21 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.01600 (34%) | 200 OK [http://localhosttasks/index]
+WARNING: You're using the Ruby-based MySQL library that ships with Rails. This library is not suited for production. Please install the C-based MySQL library instead (gem install mysql).
+
+
+Processing UsersController#create (for 127.0.0.1 at 2008-04-07 21:42:45) [POST]
+  Session ID: e4e942a7bcf455448fd772866da26c61
+  Parameters: {"user"=>{"password_confirmation"=>"peekaboo", "first_name"=>"Ray", "login"=>"raychorn", "last_name"=>"Horn", "password"=>"peekaboo", "email"=>"raychorn@hotmail.com"}, "format"=>"xml", "action"=>"create", "controller"=>"users"}
+Completed in 0.09400 (10 reqs/sec) | Rendering: 0.00100 (1%) | DB: 0.08500 (90%) | 200 OK [http://localhost/users.xml]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 21:42:47) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+Sending data 
+Completed in 0.00700 (142 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhost/rubyamf/gateway]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 21:42:48) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing NotesController#show (for 127.0.0.1 at 2008-04-07 21:42:48) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"show", "controller"=>"notes"}
+Completed in 0.02700 (37 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostnotes/show]
+
+
+Processing ProjectsController#index (for 127.0.0.1 at 2008-04-07 21:42:48) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"projects"}
+Completed in 0.01400 (71 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostprojects/index]
+
+
+Processing LocationsController#index (for 127.0.0.1 at 2008-04-07 21:42:48) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"locations"}
+Completed in 0.01300 (76 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostlocations/index]
+Sending data 
+Completed in 0.15200 (6 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00200 (1%) | 200 OK [http://localhostlocations/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 21:42:49) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing TasksController#index (for 127.0.0.1 at 2008-04-07 21:42:49) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"tasks"}
+Completed in 0.01500 (66 reqs/sec) | DB: 0.00000 (0%) |  [http://localhosttasks/index]
+Sending data 
+Completed in 0.11300 (8 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.07900 (69%) | 200 OK [http://localhosttasks/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 21:42:57) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing ProjectsController#create (for 127.0.0.1 at 2008-04-07 21:42:57) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {0=>#<Project id: nil, user_id: nil, name: "p1", notes: nil, completed: false, created_at: nil, updated_at: nil>, "action"=>"create", "controller"=>"projects"}
+Completed in 0.03700 (27 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostprojects/create]
+Sending data 
+Completed in 0.04400 (22 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhostprojects/create]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 21:42:58) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing ProjectsController#index (for 127.0.0.1 at 2008-04-07 21:42:58) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"projects"}
+Completed in 0.01000 (100 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostprojects/index]
+Sending data 
+Completed in 0.01800 (55 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00200 (11%) | 200 OK [http://localhostprojects/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 21:42:59) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing TasksController#index (for 127.0.0.1 at 2008-04-07 21:42:59) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"tasks"}
+Completed in 0.00900 (111 reqs/sec) | DB: 0.00000 (0%) |  [http://localhosttasks/index]
+Sending data 
+Completed in 0.01600 (62 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00100 (6%) | 200 OK [http://localhosttasks/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 21:43:03) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing LocationsController#create (for 127.0.0.1 at 2008-04-07 21:43:03) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {0=>#<Location id: nil, user_id: nil, name: "L1", notes: nil, created_at: nil, updated_at: nil>, "action"=>"create", "controller"=>"locations"}
+Completed in 0.01500 (66 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostlocations/create]
+Sending data 
+Completed in 0.02100 (47 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhostlocations/create]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 21:43:04) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing LocationsController#index (for 127.0.0.1 at 2008-04-07 21:43:04) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"locations"}
+Completed in 0.00900 (111 reqs/sec) | DB: 0.00000 (0%) |  [http://localhostlocations/index]
+Sending data 
+Completed in 0.01900 (52 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00200 (10%) | 200 OK [http://localhostlocations/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 21:43:05) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing TasksController#index (for 127.0.0.1 at 2008-04-07 21:43:05) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"tasks"}
+Completed in 0.00800 (125 reqs/sec) | DB: 0.00000 (0%) |  [http://localhosttasks/index]
+Sending data 
+Completed in 0.01400 (71 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00100 (7%) | 200 OK [http://localhosttasks/index]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 21:43:17) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing TasksController#create (for 127.0.0.1 at 2008-04-07 21:43:17) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {0=>#<Task id: nil, user_id: nil, project_id: 5, location_id: 5, name: "t1", notes: nil, next_action: false, completed: false, created_at: nil, updated_at: nil>, "action"=>"create", "controller"=>"tasks"}
+Completed in 0.01800 (55 reqs/sec) | DB: 0.00000 (0%) |  [http://localhosttasks/create]
+Sending data 
+Completed in 0.02500 (39 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00000 (0%) | 200 OK [http://localhosttasks/create]
+
+
+Processing RubyamfController#gateway (for 127.0.0.1 at 2008-04-07 21:43:18) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"gateway", "controller"=>"rubyamf"}
+
+
+Processing TasksController#index (for 127.0.0.1 at 2008-04-07 21:43:18) [POST]
+  Session ID: BAh7BzoJdXNlcmkKIgpmbGFzaElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFz%0AaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA--ee99d090e2ce958e9d62d4f83014b488ff462c1c
+  Parameters: {"action"=>"index", "controller"=>"tasks"}
+Completed in 0.00800 (124 reqs/sec) | DB: 0.00000 (0%) |  [http://localhosttasks/index]
+Sending data 
+Completed in 0.01600 (62 reqs/sec) | Rendering: 0.00000 (0%) | DB: 0.00100 (6%) | 200 OK [http://localhosttasks/index]

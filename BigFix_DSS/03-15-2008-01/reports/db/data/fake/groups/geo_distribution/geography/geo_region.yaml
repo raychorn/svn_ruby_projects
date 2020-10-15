@@ -1,0 +1,118 @@
+noram:
+  title: North America
+  subgroups:
+  - usa
+  - canada
+  - mexico
+  - greenland
+latam:
+  title: Latin America
+  includes:
+  - central_america
+  - south_america
+emea:
+  title: EMEA
+  subgroups:
+  - russia
+  - georgia_republic
+  - azerbaijan
+  - turkey
+  includes:
+  - europe
+  - middle_east
+  - central_asia
+  - south_asia
+  - africa
+apac:
+  title: Asia Pacific
+  includes:
+  - east_asia
+  - southeast_asia
+  - oceania
+central_america:
+  title: Central America
+  subgroups:
+  - antigua_and_barbuda
+  - bahamas
+  - barbados
+  - belize
+  - costa_rica
+  - cuba
+  - dominica
+  - dominican_republic
+  - el_salvador
+  - grenada
+  - guatemala
+  - haiti
+  - honduras
+  - jamaica
+  - nicaragua
+  - panama
+  - saint_kitts_and_nevis
+  - saint_lucia
+  - saint_vincent_and_the_grenadines
+  - trinidad_and_tobago
+east_asia:
+  title: East Asia
+  subgroups:
+  - china
+  - hong_kong
+  - japan
+  - macau
+  - taiwan
+  - north_korea
+  - south_korea
+  - mongolia
+south_asia:
+  title: South Asia
+  subgroups:
+  - bangladesh
+  - india
+  - bhutan
+  - maldives
+  - nepal
+  - pakistan
+  - sri_lanka
+southeast_asia:
+  title: Southeast Asia
+  subgroups:
+  - brunei
+  - myanmar
+  - cambodia
+  - east_timor
+  - indonesia
+  - laos
+  - malaysia
+  - philippines
+  - singapore
+  - thailand
+  - vietnam
+middle_east:
+  title: Middle East
+  subgroups:
+  - armenia
+  - bahrain
+  - cyprus
+  - palestinian_territories
+  - iran
+  - iraq
+  - israel
+  - jordan
+  - kuwait
+  - lebanon
+  - oman
+  - qatar
+  - saudi_arabia
+  - united_arab_emirates
+  - yemen
+  - syria
+central_asia:
+  title: Central Asia
+  subgroups:
+  - afghanistan
+  - kazakhstan
+  - kyrgystan
+  - mongolia
+  - tajikistan
+  - turkmenistan
+  - uzbekistan

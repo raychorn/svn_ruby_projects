@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:dashboard="com.bigfix.dss.view.dashboard.*"
+	width="100%"
+	minWidth="0"
+	verticalScrollPolicy="off"
+	creationComplete="init()"
+	paddingLeft="5" paddingRight="5" paddingTop="5" paddingBottom="5"
+	>
+	<mx:Metadata>
+		[Event(name="subjectAdded", type="com.bigfix.dss.event.ListBuilderEvent")]
+		[Event(name="subjectRemoved", type="com.bigfix.dss.event.ListBuilderEvent")]
+		[Event(name="collectSubjects", type="com.bigfix.dss.event.ListBuilderEvent")]
+	</mx:Metadata>
+	<mx:Script><![CDATA[
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.vo.SubjectVO;
+		import com.bigfix.dss.vo.ListSubjectVO;
+		import com.bigfix.dss.event.ListBuilderEvent;
+		import com.bigfix.dss.view.dashboard.ListBuilderSelectedSubject;
+
+		import mx.managers.DragManager;
+		import mx.core.DragSource;
+		import mx.core.IUIComponent;
+		import mx.controls.Alert;
+		import mx.events.DragEvent;
+		import mx.events.FlexEvent;
+
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+
+		[Bindable]
+		private var subjectDropPanelInfoText:String = "Drag a subject here";
+
+		private function init():void {
+			this.addEventListener(FlexEvent.REMOVE, _destruct, false, 0, true);
+		}
+
+		private function _destruct(event:FlexEvent):void {
+			trace("ListBuilderWorkspace._destruct()");
+			this.model = null;
+			this.removeEventListener(FlexEvent.REMOVE, _destruct);
+		}
+
+		// dragging methods for dealing with Subject Drop Panel
+		private function handleDragEnter(event:DragEvent):void {
+			if (event.dragSource.hasFormat('Subject')) {
+				var draggedSubject:SubjectVO = SubjectVO(event.dragSource.dataForFormat('Subject'));
+				DragManager.acceptDragDrop(IUIComponent(event.currentTarget));
+				DragManager.showFeedback(DragManager.MOVE);
+				subjectDropPanelInfoText = "Drop Here!";
+			}
+		}
+
+		private function handleDragExit(event:DragEvent):void {
+			subjectDropPanelInfoText = "Drag a subject here";
+		}
+
+		private function handleDragDrop(event:DragEvent):void {
+			var newSelectedSubject:ListBuilderSelectedSubject = new ListBuilderSelectedSubject();
+			newSelectedSubject.list_subject.subject = SubjectVO(event.dragSource.dataForFormat('Subject'));
+			this.addChildAt(newSelectedSubject, this.getChildIndex(subjectDropPanel));
+			newSelectedSubject.addEventListener(FlexEvent.REMOVE, handleSubjectRemove);
+			this.dispatchEvent(new ListBuilderEvent(ListBuilderEvent.SUBJECT_ADDED, newSelectedSubject.list_subject));
+			subjectDropPanelInfoText = "Drag a subject here";
+		}
+
+		private function handleSubjectRemove(event:FlexEvent):void {
+			this.dispatchEvent(new ListBuilderEvent(ListBuilderEvent.SUBJECT_REMOVED, event.currentTarget.list_subject));
+		}
+
+		public function collectListSubjects():Array {
+			var list_subjects:Array = [];
+			for (var i:int = 0; i < this.numChildren; i++) {
+				if (this.getChildAt(i) is ListBuilderSelectedSubject) {
+					list_subjects.push(ListBuilderSelectedSubject(this.getChildAt(i)).list_subject);
+				}
+			}
+			return list_subjects;
+		}
+
+	]]></mx:Script>
+	<mx:Panel id="subjectDropPanel"
+		width="100" height="100"
+		styleName="infoPanel"
+		headerHeight="0"
+		horizontalAlign="center" verticalAlign="middle" textAlign="center"
+		dragEnter="handleDragEnter(event)"
+		dragExit="handleDragExit(event)"
+		dragDrop="handleDragDrop(event)">
+		<mx:Text width="100%" text="{subjectDropPanelInfoText}"/>
+	</mx:Panel>
+	<mx:Spacer width="100%"/>
+</mx:HBox>

@@ -1,0 +1,59 @@
+cve_2007_0031:
+  title: Heap-based buffer overflow in Microsoft Excel
+  cvss_score: 8.0
+
+cve_2006_1311:
+  title: RichEdit malformatted OLE object in RTF file memory corruption vulnerability
+  cvss_score: 8.0
+
+cve_2007_0515:
+  title: nspecified vulnerability in Microsoft Word allows user-assisted remote attackers to execute arbitrary code on Word 2000, and cause a denial of service (crash) on Word 2003, via unknown attack vectors, as exploited by Trojan.Mdropper.W.
+  cvss_score: 8.0
+
+cve_2007_0028:
+  title: Microsoft Excel 2000, 2002, 2003, Viewer 2003, Office 2004 for Mac, and Office v.X for Mac does not properly handle certain opcodes, which allows user-assisted remote attackers to execute arbitrary code via a crafted XLS file, which results in an "Improper Memory Access Vulnerability."
+  cvss_score: 8.0
+
+cve_2006_6561:
+  title: nspecified vulnerability in Microsoft Word 2000, 2002, and Word Viewer 2003 allows user-assisted remote attackers to execute arbitrary code via a crafted DOC file that triggers memory corruption, as demonstrated via the 12122006-djtest.doc file, a different issue than CVE-2006-5994 and CVE-2006-6456.
+  cvss_score: 8.0
+
+cve_2006_2492:
+  title: Buffer overflow in Microsoft Word
+  cvss_score: 8.0
+
+cve_2006_4868:
+  title: Stack-based buffer overflow in the Vector Graphics Rendering engine
+  cvss_score: 8.0
+  
+cve_2006_4777:
+  title: Heap-based buffer overflow in the DirectAnimation Path Control
+  cvss_score: 8.0
+
+cve_2006_1388:
+  title: Unspecified vulnerability in Microsoft Internet Explorer 6.0 allows remote attackers to execute HTA files via unknown vectors.
+  cvss_score: 7.0
+
+cve_2006_1245:
+  title: Buffer overflow in mshtml.dll in Microsoft Internet Explorer 6.0.2900.2180
+  cvss_score: 7.0
+
+cve_2005_1990:
+  title: IE denial of service
+  cvss_score: 4.5
+
+cve_2005_1989:
+  title: IE 5.0, 5.5, 6.0 Web Folder Behaviors Cross-Domain Vulnerability
+  cvss_score: 8.0
+
+cve_2005_1988:
+  title: IE 5.0, 5.5, 6.0 JPEG Image Rendering Memory Corruption Vulnerability
+  cvss_score: 3.9
+
+cve_2006_0525:
+  title: Multiple Adbove products install world-writable .EXE and .DLL files
+  cvss_score: 4.9
+  
+cve_2006_5857:
+  title: User-assisted remote code execution via specially crafted PDF file
+  cvss_score: 8.0

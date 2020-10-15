@@ -1,0 +1,33 @@
+<p>
+  <b>Name:</b>
+  <%=h @employee.name %>
+</p>
+
+<p>
+  <b>Hiredate:</b>
+  <%=h @employee.hiredate %>
+</p>
+
+<p>
+  <b>Salary:</b>
+  <%=h @employee.salary %>
+</p>
+
+<p>
+  <b>Fulltime:</b>
+  <%=h @employee.fulltime %>
+</p>
+
+<p>
+  <b>Vacationdays:</b>
+  <%=h @employee.vacationdays %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%=h @employee.comments %>
+</p>
+
+
+<%= link_to 'Edit', edit_employee_path(@employee) %> |
+<%= link_to 'Back', employees_path %>

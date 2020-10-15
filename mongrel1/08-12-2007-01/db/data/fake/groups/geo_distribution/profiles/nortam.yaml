@@ -1,0 +1,42 @@
+nortam:
+  title: NORTAM (North America) Cities
+  pick: city
+  weight_by: population
+  proportions:
+    TOP:
+      usa: 0.85
+      canada: 0.10
+      mexico: 0.05
+    usa:
+      usa_pacific: 0.35
+      usa_northeast: 0.18
+      usa_midwest: 0.21
+      usa_south: 0.20
+      usa_mountain: 0.04
+      usa_territories: 0.02
+    usa_northeast:
+      new_york: 0.75
+      OTHER: 0.25
+    usa_midwest:
+      chicago: 0.60
+      milwaukee: 0.20
+      columbus: 0.10
+      OTHER: 0.10
+    usa_pacific:
+      california: 0.80
+      oregon: 0.05
+      washington: 0.15
+    usa_territories:
+      puerto_rico: 0.8
+      us_virgin_islands: 0.2
+    canada:
+      canada_ontario: 1.0
+    california:
+      california_san_francisco: 0.20
+      california_los_angeles: 0.22
+  group_by:
+    - world_by_na_business_groupings
+  fuzz: 0.05
+  min_cluster_size: 20
+  max_cluster_size: 2500
+  

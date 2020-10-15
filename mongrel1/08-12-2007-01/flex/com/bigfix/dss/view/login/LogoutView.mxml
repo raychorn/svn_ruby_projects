@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" title="Logout">
+	<mx:Script><![CDATA[
+		import com.bigfix.dss.model.DSSModelLocator;
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+	]]></mx:Script>
+	<mx:Label text="You're done!"/>
+	<mx:Label text="Login" selectable="false" buttonMode="true" useHandCursor="true" styleName="textLink" click="model.viewState = 'Login'"/>
+</mx:Panel>

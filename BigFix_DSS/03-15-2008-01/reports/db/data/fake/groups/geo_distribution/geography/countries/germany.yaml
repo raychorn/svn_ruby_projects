@@ -1,0 +1,45 @@
+germany:
+  title: Germany
+  subgroups:
+  - de_stuttgart
+  - de_munich
+  - de_berin
+  - de_potsdam
+  - de_bremen
+  - de_hamburg
+  - de_dresden
+
+de_stuttgart:
+  title: Stuttgart
+  type: city
+  population: 592569
+
+de_munich:
+  title: Munich
+  type: city
+  population: 1326206
+
+de_berlin:
+  title: Berlin
+  type: city
+  population: 3402312
+
+de_potsdam:
+  title: Potsdam
+  type: city
+  population: 146635
+
+de_bremen:
+  title: Bremen
+  type: city
+  population: 547162
+
+de_hamburg:
+  title: Hamburg
+  type: city
+  population: 1750194
+
+de_dresden:
+  title: Dresden
+  type: city
+  population: 500068

@@ -1,0 +1,9 @@
+ipaddr:
+  id: 1
+  name: IP Address
+dnsname:
+  id: 2
+  name: DNS Name
+nbnsname:
+  id: 3
+  name: NetBIOS Name

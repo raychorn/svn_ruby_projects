@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:data="com.bigfix.dss.view.data.*"
+	xmlns:dashboard="com.bigfix.dss.view.dashboard.*"
+	xmlns:bfstates="com.bigfix.extensions.states.*"
+	backgroundAlpha="0" width="500" height="500"
+	>
+
+	<mx:Script><![CDATA[
+		import mx.controls.Alert;
+		import mx.managers.PopUpManager;
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.command.SaveDashboardCommand;
+		import com.bigfix.dss.vo.DashboardLayoutVO;
+		
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+		
+		private function cancelClick():void {
+			if(this.isPopUp){
+				PopUpManager.removePopUp(this);
+			}
+		}
+		private function saveDashboardLayout():void {
+			var saveCommand:SaveDashboardCommand = new SaveDashboardCommand();
+			model.currentDashboard.dashboard_layout=DashboardLayoutVO(tileList.selectedItem);
+			model.currentDashboard.dashboard_layout_id=DashboardLayoutVO(tileList.selectedItem).id;
+			saveCommand.dashboard=model.currentDashboard;
+			saveCommand.resultHandler = function (data:Object) :void{
+				if (data.success){
+					com.bigfix.dss.view.dashboard.Dashboard(model.currentDashboard.parent).refresh();
+				}
+				else{
+					Alert.show("Unable to Save Dashboard! - rails side");
+				}
+			}
+			saveCommand.execute(null);
+			if(this.isPopUp){
+				PopUpManager.removePopUp(this);
+			}
+		}
+	]]></mx:Script>
+	
+	
+	<mx:VBox width="100%" height="100%" paddingRight="10" paddingLeft="10">
+		<mx:VBox width="100%">
+			<mx:Text text="Edit Dashboard" styleName="bigFormHeading"/>
+		</mx:VBox>
+		<mx:VBox width="100%" height="100%" minHeight="0">
+			<mx:TileList id="tileList" dataProvider="{model.dashboard_layouts}" itemRenderer="com.bigfix.dss.view.dashboard.DashboardLayoutTemplate"
+     		 height="100%" width="100%"/>
+		</mx:VBox>
+		<mx:HBox horizontalAlign="right" width="100%">
+			<mx:Button label="Cancel" click="cancelClick()"/>
+			<mx:Button label="Save" id="saveButton" click="saveDashboardLayout()" enabled="true"/>
+		</mx:HBox>
+	</mx:VBox>
+	
+</mx:Canvas>
+

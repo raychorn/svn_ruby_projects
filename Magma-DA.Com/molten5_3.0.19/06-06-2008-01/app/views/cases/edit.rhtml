@@ -1,0 +1,26 @@
+<div>
+<%= link_to 'Back to Case', :action => 'show', :id => @case %>
+</div>
+<br/>
+<h1><%= @title = "Edit a Support Case"%></h1>
+
+<%= form_tag :action => 'update', :id => @case %>
+	<%= render :partial => 'form' %>
+</form>
+
+<% content_for "sidebar" do %>
+	<div id="suggested_solutions_container">
+		
+	</div>	
+	
+	<div id="suggested_cases_container">
+		
+	</div>	
+
+	<%= render :partial => 'sidebar' %>			
+
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+ new Ajax.Request('/cases/suggested_solutions_and_cases', {asynchronous:true, evalScripts:true, parameters:'subject=<%= @case.subject %>;case_id=<%= @case.id %>'});
+</script>

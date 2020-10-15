@@ -1,0 +1,8 @@
+france:
+  title: France
+  subgroups:
+  - fr_paris
+
+fr_paris:
+  title: Paris
+  type: city

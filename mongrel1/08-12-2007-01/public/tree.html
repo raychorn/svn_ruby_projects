@@ -1,0 +1,37 @@
+<html>
+<head>
+	<title>Trend Graph Sample</title>
+	<script src="javascripts/swfobject.js"></script>
+	<style type="text/css">
+		#flashcontent {
+			height: 100%;
+		}
+	</style>
+</head>
+<body style="background-color:white">
+	<div id="flashcontent">
+		<strong>You need to upgrade your Flash Player</strong>
+	</div>
+	<script>
+		var so = new SWFObject("swfs/TrendChart.swf", "chart", "100%", "100%", "9");
+		// URLS
+		so.addVariable("urlMetrics", "http://reports.mluu/trend_chart/metrics_by_subject");
+		so.addVariable("urlComputerGroups", "http://reports.mluu/computer_groups.xml");
+		so.addVariable("urlMacroTrendData", "http://reports.mluu/trend_chart/trend_data_single");
+		so.addVariable("urlDetailTrendData", "http://reports.mluu/trend_chart/trend_data_children");
+		so.addVariable("urlDeltaEventsData", "http://reports.mluu/trend_chart/delta_events");
+
+		so.addVariable("defaultTreeID", "10"); // for <mx:GroupTree>, if not set, selects the first tree node
+		so.addVariable("defaultMetricID", "3"); // for <mx:DataFilter>, if not set, selects the first metric
+
+
+		// so.addVariable("selectedIDs", [x, y, z] ); // for <mx:POI>, set this if you want to pass a predefined set of selected POI types, otherwise, all are selected for the metricID
+		so.addVariable("startDate", "1172792055000"); // for <mx:MacroTrend>
+		so.addVariable("endDate", "1173396880000"); // for <mx:MacroTrend>
+		so.addParam("quality", "best");
+		so.write("flashcontent");
+	</script>
+
+</body>
+</html>
+</html>

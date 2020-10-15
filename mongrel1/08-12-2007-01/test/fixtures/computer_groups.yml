@@ -1,0 +1,25 @@
+office1:
+  id: 1
+  name: Office 1
+  parent_id: 3
+office2:
+  id: 2
+  name: Office 2
+  parent_id: 3
+na:
+  id: 3
+  name: North America
+emea:
+  id: 4
+  name: EMEA
+apac:
+  id: 5
+  name: APAC
+office6:
+  id: 6
+  name: Office 6
+  parent_id: 4
+office7:
+  id: 7
+  name: Office 7
+  parent_id: 5

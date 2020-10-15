@@ -1,0 +1,298 @@
+wisconsin:
+  title: Wisconsin
+  subgroups:
+  - wisconsin_allouez
+  - wisconsin_appleton
+  - wisconsin_ashwaubenon
+  - wisconsin_beaver_dam
+  - wisconsin_beloit
+  - wisconsin_brookfield
+  - wisconsin_cudahy
+  - wisconsin_de_pere
+  - wisconsin_eau_claire
+  - wisconsin_fitchburg
+  - wisconsin_fond_du_lac
+  - wisconsin_franklin
+  - wisconsin_germantown
+  - wisconsin_green_bay
+  - wisconsin_greenfield
+  - wisconsin_howard
+  - wisconsin_janesville
+  - wisconsin_kenosha
+  - wisconsin_la_crosse
+  - wisconsin_madison
+  - wisconsin_manitowoc
+  - wisconsin_marshfield
+  - wisconsin_menasha
+  - wisconsin_menomonee_falls
+  - wisconsin_menomonie
+  - wisconsin_mequon
+  - wisconsin_middleton
+  - wisconsin_milwaukee
+  - wisconsin_mount_pleasant
+  - wisconsin_muskego
+  - wisconsin_neenah
+  - wisconsin_new_berlin
+  - wisconsin_oak_creek
+  - wisconsin_onalaska
+  - wisconsin_oshkosh
+  - wisconsin_pleasant_prairie
+  - wisconsin_racine
+  - wisconsin_sheboygan
+  - wisconsin_south_milwaukee
+  - wisconsin_stevens_point
+  - wisconsin_sun_prairie
+  - wisconsin_superior
+  - wisconsin_watertown
+  - wisconsin_waukesha
+  - wisconsin_wausau
+  - wisconsin_wauwatosa
+  - wisconsin_west_allis
+  - wisconsin_west_bend
+  - wisconsin_wisconsin_rapids
+
+wisconsin_allouez:
+  title: Allouez
+  type: city
+  population: 15030
+
+wisconsin_appleton:
+  title: Appleton
+  type: city
+  population: 70311
+
+wisconsin_ashwaubenon:
+  title: Ashwaubenon
+  type: city
+  population: 17027
+
+wisconsin_beaver_dam:
+  title: Beaver Dam
+  type: city
+  population: 15090
+
+wisconsin_beloit:
+  title: Beloit
+  type: city
+  population: 35742
+
+wisconsin_brookfield:
+  title: Brookfield
+  type: city
+  population: 39827
+
+wisconsin_cudahy:
+  title: Cudahy
+  type: city
+  population: 18097
+
+wisconsin_de_pere:
+  title: De Pere
+  type: city
+  population: 22822
+
+wisconsin_eau_claire:
+  title: Eau Claire
+  type: city
+  population: 62593
+
+wisconsin_fitchburg:
+  title: Fitchburg
+  type: city
+  population: 21799
+
+wisconsin_fond_du_lac:
+  title: Fond du Lac
+  type: city
+  population: 42407
+
+wisconsin_franklin:
+  title: Franklin
+  type: city
+  population: 32357
+
+wisconsin_germantown:
+  title: Germantown
+  type: city
+  population: 19106
+
+wisconsin_green_bay:
+  title: Green Bay
+  type: city
+  population: 100999
+
+wisconsin_greenfield:
+  title: Greenfield
+  type: city
+  population: 35837
+
+wisconsin_howard:
+  title: Howard
+  type: city
+  population: 15753
+
+wisconsin_janesville:
+  title: Janesville
+  type: city
+  population: 61481
+
+wisconsin_kenosha:
+  title: Kenosha
+  type: city
+  population: 94225
+
+wisconsin_la_crosse:
+  title: La Crosse
+  type: city
+  population: 50594
+
+wisconsin_madison:
+  title: Madison
+  type: city
+  population: 220149
+
+wisconsin_manitowoc:
+  title: Manitowoc
+  type: city
+  population: 33901
+
+wisconsin_marshfield:
+  title: Marshfield
+  type: city
+  population: 18643
+
+wisconsin_menasha:
+  title: Menasha
+  type: city
+  population: 16311
+
+wisconsin_menomonee_falls:
+  title: Menomonee Falls
+  type: city
+  population: 33805
+
+wisconsin_menomonie:
+  title: Menomonie
+  type: city
+  population: 15180
+
+wisconsin_mequon:
+  title: Mequon
+  type: city
+  population: 23697
+
+wisconsin_middleton:
+  title: Middleton
+  type: city
+  population: 15953
+
+wisconsin_milwaukee:
+  title: Milwaukee
+  type: city
+  population: 583144
+
+wisconsin_mount_pleasant:
+  title: Mount Pleasant
+  type: city
+  population: 25330
+
+wisconsin_muskego:
+  title: Muskego
+  type: city
+  population: 22563
+
+wisconsin_neenah:
+  title: Neenah
+  type: city
+  population: 24533
+
+wisconsin_new_berlin:
+  title: New Berlin
+  type: city
+  population: 38650
+
+wisconsin_oak_creek:
+  title: Oak Creek
+  type: city
+  population: 32127
+
+wisconsin_onalaska:
+  title: Onalaska
+  type: city
+  population: 15600
+
+wisconsin_oshkosh:
+  title: Oshkosh
+  type: city
+  population: 63488
+
+wisconsin_pleasant_prairie:
+  title: Pleasant Prairie
+  type: city
+  population: 18204
+
+wisconsin_racine:
+  title: Racine
+  type: city
+  population: 79875
+
+wisconsin_sheboygan:
+  title: Sheboygan
+  type: city
+  population: 48991
+
+wisconsin_south_milwaukee:
+  title: South Milwaukee
+  type: city
+  population: 21039
+
+wisconsin_stevens_point:
+  title: Stevens Point
+  type: city
+  population: 24334
+
+wisconsin_sun_prairie:
+  title: Sun Prairie
+  type: city
+  population: 24447
+
+wisconsin_superior:
+  title: Superior
+  type: city
+  population: 26941
+
+wisconsin_watertown:
+  title: Watertown
+  type: city
+  population: 22786
+
+wisconsin_waukesha:
+  title: Waukesha
+  type: city
+  population: 67130
+
+wisconsin_wausau:
+  title: Wausau
+  type: city
+  population: 37214
+
+wisconsin_wauwatosa:
+  title: Wauwatosa
+  type: city
+  population: 45518
+
+wisconsin_west_allis:
+  title: West Allis
+  type: city
+  population: 59419
+
+wisconsin_west_bend:
+  title: West Bend
+  type: city
+  population: 29263
+
+wisconsin_wisconsin_rapids:
+  title: Wisconsin Rapids
+  type: city
+  population: 17871
+

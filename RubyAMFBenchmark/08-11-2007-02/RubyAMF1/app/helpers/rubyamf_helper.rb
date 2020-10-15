@@ -1,0 +1,4 @@
+class RubyAMFHelper
+
+
+end

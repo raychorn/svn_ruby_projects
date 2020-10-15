@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml"
+         width="100%" height="100%"
+         paddingLeft="5" paddingRight="5"
+         creationComplete="onCreationComplete()">
+  <mx:Script>
+  	<![CDATA[
+  	  import mx.collections.ArrayCollection;
+  	  import mx.binding.utils.BindingUtils;
+      import mx.events.ItemClickEvent;
+  		import com.bigfix.dss.model.DSSModelLocator;
+  		import com.bigfix.dss.util.DSS;
+  		import com.bigfix.dss.event.EditorEvent;
+  		import com.bigfix.dss.view.general.SaveConfirm;
+  		import com.bigfix.dss.vo.ContactVO;
+  		import com.bigfix.dss.vo.IEditableObject;
+  		import com.bigfix.dss.util.UndoStack;
+  		
+  		import mx.core.mx_internal;
+  		import flash.events.Event;
+  		import flash.events.TextEvent;
+  		
+  		private var undoStack:UndoStack = new UndoStack();
+  		
+  		[Bindable]
+  		private var model:DSSModelLocator = DSS.model;
+  		
+  		[Bindable]
+  		private var editedItem:ContactVO;
+  		
+  		private var nextAction:Function;
+  		private var lastFormState:Object;
+  		private var saveConfirmDialog:SaveConfirm;
+
+  		private function onCreationComplete():void {
+  		  new EditorEvent(EditorEvent.EDITOR_LIST, 'Contact').dispatch();
+  		  deleteButton.enabled = false;
+  		  
+  		  saveConfirmDialog = new SaveConfirm();
+  		  saveConfirmDialog.addEventListener('save', function(event:*):void { applyChanges(nextAction); });
+  		  saveConfirmDialog.addEventListener('dontsave', function(event:*):void { revertChanges(); nextAction(); });
+  		  
+  		  addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+  		  addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
+  		  nameInput.addEventListener(TextEvent.TEXT_INPUT, onTextInput);
+  		  nameInput.addEventListener(Event.CHANGE, onChange);
+  		  phoneInput.addEventListener(TextEvent.TEXT_INPUT, onTextInput);
+  		  phoneInput.addEventListener(Event.CHANGE, onChange);
+  		  emailInput.addEventListener(TextEvent.TEXT_INPUT, onTextInput);
+  		  emailInput.addEventListener(Event.CHANGE, onChange);
+      }
+      
+      private var preventTextInput:Boolean = false;
+      private var savedTextInput:TextInput;
+      private var savedText:String;
+      private var savedCaretIndex:int;
+      
+      private function onKeyDown(event:KeyboardEvent):void
+      {
+        if (event.keyCode == 90 && event.ctrlKey && !event.shiftKey && !event.altKey) // Ctrl-Z or Command-Z
+          undoStack.undo();
+        else if (event.keyCode == 89 && event.ctrlKey &&
+                 !event.shiftKey && !event.altKey || // Ctrl-Y or Command-Y
+                 event.keyCode == 90 && event.ctrlKey &&
+                 event.shiftKey && !event.altKey) // Shift-Cmd-Z or Shift-Ctrl-Z
+          undoStack.redo();
+        else
+          return;
+
+        preventTextInput = true;
+      }
+      
+      private function onKeyUp(event:KeyboardEvent):void
+      {
+        preventTextInput = false;
+      }
+      
+      private function onTextInput(event:TextEvent):void
+      {
+        savedTextInput = TextInput(event.target);
+        savedText = savedTextInput.text;
+        savedCaretIndex = savedTextInput.mx_internal::getTextField().caretIndex;
+      }
+      
+      private function onChange(event:Event):void
+      {
+        if (event.target == savedTextInput && preventTextInput) {
+          savedTextInput.text = savedText;
+          savedTextInput.setSelection(savedCaretIndex, savedCaretIndex);
+          savedTextInput = null;
+        }
+      }
+  		
+  		private function changesPending():Boolean
+  		{
+  		  return applyButton.enabled;
+  		}
+  		
+  		private function changeSelection(newSelection:ContactVO):void
+  		{
+  		  if (newSelection != null && newSelection.busy)
+  		    newSelection = null;
+  		  
+  		  if (itemList.selectedItem != newSelection) {
+	        itemList.selectedItem =
+	          (newSelection != null && newSelection.id != 0 ? newSelection : null);
+  		  }
+  		  
+  		  if (editedItem != newSelection) {
+  		    editedItem = newSelection;
+
+  		    // Enable the apply button iff we have an unsaved item selected.
+  		    applyButton.enabled = (editedItem != null && editedItem.id == 0);
+  		    
+  		    // Reset the form.
+          nameInput.horizontalScrollPosition = 0;
+          
+          // Reset the undo-redo stack.
+          undoStack.clear();
+          lastFormState = getFormState();
+		    }
+  		  
+  		  // Enable the delete button iff we have any selected items.
+  		  deleteButton.enabled = (itemList.selectedItems.length != 0);
+  		  
+        // Enable the form iff we have a selected item.
+  		  form.enabled = (editedItem != null);
+  		  
+  		  // Change the text of the apply button as appropriate.
+  		  applyButton.label = (editedItem != null && editedItem.id == 0 ? 'Create' : 'Apply');
+  		}
+  		
+  		private function selectionChanged():void
+  		{
+  		  var newSelection:ContactVO;
+  		  
+  		  if (itemList.selectedItems.length != 1)
+  		    newSelection = null;
+  		  else
+  		    newSelection = itemList.selectedItem as ContactVO;
+
+  		  // Stop the user from throwing away changes.  Instead, show a confirmation
+  		  // dialog and revert the selection state.
+	      if (changesPending()) {
+	        saveConfirm(function():void { changeSelection(newSelection); });
+	        itemList.selectedItem = editedItem;
+	        return;
+	      }
+        
+        changeSelection(newSelection);
+  		}
+  		
+  		private function formDataChanged():void
+  		{
+  		  if (editedItem != null)
+  		    applyButton.enabled = true;
+  		}
+  		
+  		private function updateFormUndoState():void
+  		{
+  		  var currentState:Object = getFormState();
+  		  var lastState:Object = lastFormState;
+  		  
+  		  undoStack.addSimple(function():void { setFormState(currentState); },
+  		                      function():void { setFormState(lastState); });
+  		  lastFormState = currentState;
+  		}
+  		
+  		private function revertChanges():void
+  		{
+  		  changeSelection(null);
+  		}
+  		
+  		private function getFormState():Object
+  		{
+  		  return { 'name': nameInput.text, 'phone': phoneInput.text,
+  		           'email': emailInput.text, 'changed': applyButton.enabled }
+  		}
+  		
+  		private function setFormState(formState:Object):void
+  		{
+  		  nameInput.text = formState['name'];
+  		  phoneInput.text = formState['phone'];
+  		  emailInput.text = formState['email'];
+  		  applyButton.enabled = formState['changed'];
+  		}
+  		
+  		private function applyChanges(nextAction:Function=null):void
+  		{
+  		  editedItem.name = nameInput.text;
+  		  editedItem.phone = phoneInput.text;
+  		  editedItem.email = emailInput.text;
+  		  applyButton.enabled = false;
+  		  
+  		  var editEvent:EditorEvent;
+
+  		  // Mark the item "busy", so it can't be edited while we're saving it.
+  		  editedItem.busy = true;
+  		  
+		    editEvent = new EditorEvent(editedItem.id == 0 ? EditorEvent.EDITOR_CREATE
+		                                                   : EditorEvent.EDITOR_UPDATE,
+		                                'Contact', editedItem);
+  		  
+  		  if (nextAction != null)
+  		    editEvent.followup = function(contact:ContactVO):void { updateComplete(contact); nextAction(); }
+  		  else
+  		    editEvent.followup = this.updateComplete;
+  		  
+  		  editEvent.dispatch();
+  		  changeSelection(null);
+  		}
+  		
+  		private function updateComplete(contact:ContactVO):void
+  		{
+  		  if (itemList.selectedItems.length == 0) {
+  		    changeSelection(contact);
+  		    nameInput.setFocus();
+		    }
+  		}
+  		
+  		private function deleteItems():void
+  		{
+  		  if (itemList.selectedItems.length == 0)
+  		    return;
+  		  
+  		  var deleteEvent:EditorEvent;
+  		  var itemIDs:Array;
+
+  		  // Mark the items "busy" so they can't be changed while we're deleting them.
+  		  itemList.selectedItems.forEach(function (item:IEditableObject, index:int, array:Array):void { item.busy = true; });
+
+  		  itemIDs = itemList.selectedItems.map(function (item:IEditableObject, index:int, array:Array):int { return item.id; });
+  		  deleteEvent = new EditorEvent(EditorEvent.EDITOR_DELETE, 'Contact', itemIDs);
+  		  deleteEvent.dispatch();
+
+        // We have to do this last, because this will change selectedItems.
+  		  if (editedItem != null &&
+  		      itemList.selectedItems.indexOf(editedItem) != -1) {
+  		    revertChanges();
+  		  }
+    	}
+  		
+  		private function createItem():void
+  		{
+  		  if (changesPending()) {
+	        saveConfirm(function():void { createItem(); });
+	        return;
+	      }
+	      
+  		  var contact:ContactVO = new ContactVO();
+  		  
+  		  contact.name = 'New Contact';
+  		  changeSelection(contact);
+  		  nameInput.setFocus();
+  		  nameInput.setSelection(0, nameInput.text.length);
+  		  formDataChanged(); // Activate the Create/Revert buttons
+  		}
+  		
+  		private function saveConfirm(nextAction:Function):void
+  		{
+				this.nextAction = nextAction;
+				saveConfirmDialog.show(this);
+			}
+
+			private function get addButton():Button
+      {
+        return addDeleteButtons.getChildAt(0) as Button;
+      }
+      
+      private function get deleteButton():Button
+      {
+        return addDeleteButtons.getChildAt(1) as Button;
+      }
+      
+      private function buttonClicked(event:ItemClickEvent):void
+      {
+        switch (event.item.name) {
+          case 'add':
+            createItem();
+            break;
+          case 'delete':
+            deleteItems();
+            break;
+        }
+      }
+  	]]>
+  </mx:Script>
+
+  <mx:VBox width="400" minHeight="500" height="100%" paddingBottom="10">
+    <mx:List id="itemList" width="100%" height="100%"
+             dataProvider="{model.contacts}" labelField="name"
+             allowMultipleSelection="true"
+             change="selectionChanged()" />
+    <mx:ButtonBar id="addDeleteButtons" toolTipField="toolTip" labelField="label" itemClick="buttonClicked(event)">
+      <mx:dataProvider>
+        <mx:Array>
+          <mx:Object label="+" toolTip="Add a new contact" name="add"/>
+          <mx:Object label="-" toolTip="Delete selected contact(s)" name="delete"/>
+        </mx:Array>
+      </mx:dataProvider>
+    </mx:ButtonBar>
+  </mx:VBox>
+  <mx:VBox id="form" enabled="false" minWidth="450" minHeight="500"
+           height="100%" borderStyle="solid"
+           defaultButton="{applyButton}"
+           paddingLeft="10" paddingRight="10" paddingTop="10" paddingBottom="10"
+           keyDown="if (event.keyCode == Keyboard.ESCAPE) revertChanges();">
+    <mx:Grid width="100%" height="100%">
+      <mx:GridRow>
+        <mx:GridItem>
+          <mx:Label text="Name:" />
+        </mx:GridItem>
+        <mx:GridItem width="250">
+          <mx:TextInput width="100%" id="nameInput" text="{editedItem.name}" change="formDataChanged()" focusOut="updateFormUndoState()" />
+        </mx:GridItem>
+      </mx:GridRow>
+      <mx:GridRow>
+        <mx:GridItem>
+          <mx:Label text="Phone number:" />
+        </mx:GridItem>
+        <mx:GridItem>
+          <mx:TextInput width="100%" id="phoneInput" text="{editedItem.phone}" change="formDataChanged()" focusOut="updateFormUndoState()" />
+        </mx:GridItem>
+      </mx:GridRow>
+      <mx:GridRow>
+        <mx:GridItem>
+          <mx:Label text="Email address:" />
+        </mx:GridItem>
+        <mx:GridItem>
+          <mx:TextInput width="100%" id="emailInput" text="{editedItem.email}" change="formDataChanged()" focusOut="updateFormUndoState()" />
+        </mx:GridItem>
+      </mx:GridRow>
+    </mx:Grid>
+    <mx:Spacer height="15" />
+    <mx:HBox>
+      <mx:Button id="applyButton" label="Apply" enabled="false" click="applyChanges()" />
+      <mx:Button id="revertButton" label="Revert" enabled="{applyButton.enabled}" click="revertChanges()" />
+    </mx:HBox>
+  </mx:VBox>
+</mx:HBox>

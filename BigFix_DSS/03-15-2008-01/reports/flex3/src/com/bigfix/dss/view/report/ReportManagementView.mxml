@@ -1,0 +1,1114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Box 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:report="com.bigfix.dss.view.report.*"
+	xmlns:busy="com.bigfix.dss.view.general.Busy.*"
+	xmlns:grids="com.bigfix.dss.view.general.grid.*"
+	xmlns:palette="com.bigfix.dss.view.general.palette.*"
+	xmlns:widgets="com.bigfix.dss.view.ReportManager.widgets.*"
+	xmlns:canvas="com.bigfix.dss.view.graphics.canvas.*"
+	width="100%" height="100%" 
+	creationComplete="init()" 
+	>
+	<mx:Script><![CDATA[
+		import mx.binding.utils.ChangeWatcher;
+		import com.bigfix.dss.view.report.events.SignalUpdateReportsEvent;
+		import com.bigfix.dss.event.SetReportScheduleEvent;
+		import com.bigfix.dss.objects.ICalendar.CalendarNode;
+		import mx.core.Application;
+		import com.bigfix.dss.view.ReportManager.events.ResizedReportElementEvent;
+		import com.bigfix.dss.util.ArrayUtils;
+		import mx.controls.dataGridClasses.DataGridColumn;
+		import mx.controls.Image;
+		import com.bigfix.dss.view.ReportManager.events.EditReportElementEvent;
+		import com.bigfix.dss.view.ReportManager.events.MovedReportElementEvent;
+		import com.bigfix.dss.view.ReportManager.events.DeleteReportElementEvent;
+		import com.bigfix.dss.view.fileio.view.MissingImageCanvas;
+		import mx.utils.URLUtil;
+		import com.bigfix.dss.view.graphics.canvas.events.EndAddingElementsToReportEvent;
+		import com.bigfix.dss.view.graphics.canvas.events.BeginAddingElementsToReportEvent;
+		import mx.utils.ObjectUtil;
+		import com.adobe.images.PNGEncoder;
+		import com.adobe.images.JPGEncoder;
+		import com.bigfix.dss.view.fileio.events.FileDownloadDialogClosedEvent;
+		import com.bigfix.dss.view.fileio.events.FileDownloadDialogClosedEvent;
+		import com.bigfix.dss.view.fileio.view.PopUpProgressBar;
+		import com.bigfix.dss.event.FileDownloadCompleteEvent;
+		import com.bigfix.dss.view.fileio.FileDownload;
+		import com.bigfix.dss.util.URLUtils;
+		import com.bigfix.dss.util.BitmapUtils;
+		import com.bigfix.dss.view.ReportManager.widgets.events.BeginSaveAsEvent;
+		import com.bigfix.dss.view.ReportManager.widgets.events.BeginPrintJobEvent;
+		import mx.events.DataGridEvent;
+		import com.bigfix.dss.vo.WidgetVO;
+		import com.bigfix.dss.command.GetWidgetsCommand;
+		import com.bigfix.dss.view.dashboard.WidgetInstance;
+		import com.bigfix.dss.view.graphics.sprites.TextSprite;
+		import com.bigfix.dss.util.ArrayUtils;
+		import com.bigfix.dss.util.ArrayCollectionUtils;
+		import mx.controls.TextInput;
+		import mx.events.FlexEvent;
+		import mx.events.CollectionEvent;
+		import mx.rpc.remoting.mxml.RemoteObject;
+		import com.bigfix.dss.command.GetReportsCommand;
+		import com.bigfix.dss.util.ServiceProxy;
+		import mx.rpc.remoting.mxml.RemoteObject;
+		import com.adobe.cairngorm.business.ServiceLocator;
+		import com.bigfix.dss.util.DSS;
+		import com.bigfix.dss.vo.ReportVO;
+		import com.bigfix.dss.vo.ReportBuilderVO;
+		import com.bigfix.dss.view.general.PopUpTextPrompt;
+		import com.bigfix.dss.view.editors.ReportBuilderNameLabel;
+		import com.bigfix.dss.util.ArrayUtils;
+		import com.bigfix.dss.view.report.events.SignalCurrentReportEvent;
+		import mx.core.IFlexDisplayObject;
+		import mx.events.CloseEvent;
+		import mx.managers.PopUpManager;
+		import mx.controls.Alert;
+		import mx.printing.FlexPrintJobScaleType;
+		import mx.printing.FlexPrintJob;
+		import mx.events.ListEvent;
+		import mx.collections.ArrayCollection;
+		import com.bigfix.dss.view.ReportManager.canvas.WidgetCanvas;
+		import com.bigfix.dss.view.general.widgets.ImageWidget;
+		import com.bigfix.dss.view.graphics.sprites.GeometricSprite;
+		import com.bigfix.dss.view.general.widgets.WidgetWrapper;
+		import com.bigfix.dss.view.graphics.canvas.events.AddElementToReportCompletedEvent;
+		import com.bigfix.dss.view.graphics.canvas.events.SelectedReportElementEvent;
+		import com.bigfix.dss.view.graphics.canvas.events.AddElementToReportEvent;
+		import com.bigfix.dss.view.general.Alert.AlertPopUp;
+		import com.bigfix.dss.vo.WebOrbResultVO;
+		import mx.rpc.events.ResultEvent;
+		import mx.rpc.events.FaultEvent;
+		import com.bigfix.dss.view.fileio.events.FileUploadCompletedEvent;
+		import com.bigfix.dss.view.graphics.canvas.events.InitializeReportBuilderButtonsEvent;
+		import com.bigfix.dss.weborb.RemoteWebOrbObject;
+		import com.bigfix.dss.view.general.widgets.events.RemovedImageElementEvent;
+		import com.bigfix.dss.view.general.palette.events.ChangeReportModeEvent;
+		import com.bigfix.dss.event.GetReportsEvent;
+		import com.bigfix.dss.model.DSSModelLocator;
+		
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+
+		private var _weborbObj:RemoteWebOrbObject;
+			
+		private var _timer:Timer;
+		
+		private var _reportNamePopUp:PopUpTextPrompt;
+		
+		private var _reportName:String = "";
+		
+		private var _clickedNewReport:Boolean = false;
+		private var _clickedEditReport:Boolean = false;
+		
+		private var _imageQueue:Array = [];
+		private var _imageWidgetQueue:Array = [];
+			
+		private var _isLoadingExistingReport:Boolean = false;
+
+		private var _fDown:FileDownload;
+		private var _popUpProgressBar:PopUpProgressBar;
+		
+		private var _watcher:ChangeWatcher;
+		
+		private var _toggleButtonTooltipCache:Object = {};
+
+		private var _selectionOptions:Array = [ 
+												{label: "Click Normal", data: ReportBuilderCanvas.const_CLICK_NORMAL_OPTION},
+												{label: "Click Forward", data: ReportBuilderCanvas.const_CLICK_FORWARD_OPTION}
+											   ];
+
+		[Event(name="signalCurrentReport", type="com.bigfix.dss.view.report.events.SignalCurrentReportEvent")]
+		[Event(name="deleteReportElement", type="com.bigfix.dss.view.ReportManager.events.DeleteReportElementEvent")]
+		[Event(name="editReportElement", type="com.bigfix.dss.view.ReportManager.events.EditReportElementEvent")]
+
+		private function onDataFromGetReportsEvent():void {
+			this.refreshReportsButtons();
+		}
+		
+		private function init():void {
+			new GetReportsEvent(onDataFromGetReportsEvent).dispatch();
+			currentState="Main";
+			this.addEventListener(ListEvent.ITEM_DOUBLE_CLICK, onDoubleClickReportsGrid);
+		}
+
+		private function epochToDate(item:Object, column:DataGridColumn):String {
+			var datum:* = item[column.dataField];
+			if (datum == null) {
+				return "UNDEFINED";
+			} else {
+				var calNode:CalendarNode = new CalendarNode();
+				calNode.fromCalendarSpec(datum);
+				return calNode.asString();
+			}
+		}
+		
+		private function toolTipForLabel(label:String):String {
+			if (label.indexOf("Close ") > -1) {
+				return "Click this button to Close the Report Builder.";
+			} else if (label.indexOf("Edit ") > -1) {
+				return "Click this button to Edit the currently selected Report.";
+			} else if (label.indexOf("New ") > -1) {
+				return "Click this button to begin creating a new report.";
+			} else if (label.indexOf("Save ") > -1) {
+				return "Click this button to save the current report as a named report.";
+			}
+			return "";
+		}
+		
+		private function onWatchOpenReportBuilder(event:Event):void {
+			var btn:Button = Button(event.currentTarget);
+			btn.toolTip = this.toolTipForLabel(btn.label);
+		}
+		
+		private function onCreationCompleteOpenReportBuilder():void {
+			this._watcher = ChangeWatcher.watch(this.btn_openReportBuilder,['label'], onWatchOpenReportBuilder);
+		}
+
+		private function refreshReportsButtons():void {
+			if (this._clickedNewReport == false) {
+				this.btn_newReportBuilder.visible = ( (this.reportsGrid.selectedItems.length == 0) || (this.viewstack.selectedIndex == 0) );
+				this.btn_openReportBuilder.visible = (this.reportsGrid.selectedItems.length > 0);
+			} else {
+				this.btn_newReportBuilder.visible = ( (this.reportsGrid.selectedItems.length > 0) && (this.viewstack.selectedIndex == 0) );
+				this.btn_openReportBuilder.visible = ( (this.reportsGrid.selectedItems.length == 0) || (this.viewstack.selectedIndex > 0) );
+			}
+			this.btn_openReportBuilder.label = (((this.reportsGrid.selectedItems.length == 0) || (this.viewstack.selectedIndex == 1)) ? "Close Report Builder" : "Edit Report");
+			this.btn_openReportBuilder.styleName = (((this.reportsGrid.selectedItems.length == 0) || (this.viewstack.selectedIndex == 1)) ? "btnCloseReportBuilder" : "btnEditReport");
+			this.btn_deleteReports.enabled = ( (this.reportsGrid.selectedItems.length > 0) && (this.viewstack.selectedIndex == 0) );
+			this.btn_setSchedule.enabled = ( (this.reportsGrid.selectedItems.length == 1) && (this.viewstack.selectedIndex == 0) );
+			this.btn_setDistribution.enabled = ( (this.reportsGrid.selectedItems.length == 1) && (this.viewstack.selectedIndex == 0) );
+			this.btn_closeReport.visible = false;
+		}
+		
+		private function relabelOpenReportBuilderButton():void {
+			if (this.viewstack.selectedIndex == 0) {
+				if (this.reportsGrid.selectedItems.length == 1) {
+					this.btn_openReportBuilder.label = "Edit Report";
+					this.btn_openReportBuilder.styleName = "btnEditReport";
+					this.btn_newReportBuilder.visible = true;
+				} else {
+					this.btn_newReportBuilder.visible = false;
+					this.btn_openReportBuilder.label = "New Report";
+					this.btn_openReportBuilder.styleName = "btnNewReport";
+				}
+			} else {
+				this.btn_newReportBuilder.visible = false;
+				this.btn_openReportBuilder.label = "Close Report Builder";
+				this.btn_openReportBuilder.styleName = "btnCloseReportBuilder";
+				this.btn_closeReport.visible = false;
+			}
+		}
+
+		private function refreshOpenReportBuilderButton(forceSaveButtonFace:Boolean = false):void {
+			if ( (this._clickedEditReport == false) || (forceSaveButtonFace) ) {
+				var bool:Boolean = ( ( (this.btn_openReportBuilder.label.indexOf("Close ") > -1) || (this.btn_openReportBuilder.label.indexOf("Save ") > -1) ) && (ReportBuilderCanvas.elementArray.length > 0) );
+				if ( (bool) || (forceSaveButtonFace) ) {
+					this.btn_openReportBuilder.label = "Save Current Report";
+					this.btn_openReportBuilder.styleName = "btnSaveCurrentReport";
+					this.btn_closeReport.visible = true;
+					this.dispatchEvent(new SignalCurrentReportEvent(SignalCurrentReportEvent.TYPE_SIGNAL_CURRENT_REPORT, false));
+				} else {
+					this.relabelOpenReportBuilderButton();
+				}
+			}
+		}
+
+		private function processOpenReportBuilderButtonClick():void {
+			this.viewstack.selectedIndex = (((this.btn_openReportBuilder.label.indexOf("Close ") > -1) && (this.btn_openReportBuilder.visible == true)) ? 0 : 1);
+			this.btn_openReportBuilder.label = this.btn_openReportBuilder.label.replace(((this.btn_openReportBuilder.label.indexOf("Close ") > -1) ? "Close " : "Open "), ((this.btn_openReportBuilder.label.indexOf("Close ") > -1) ? "Open " : "Close "));
+			this.btn_openReportBuilder.styleName = ((this.btn_openReportBuilder.label.indexOf("Open ") > -1) ? "btnOpenReport" : "btnCloseReportBuilder");
+			this.hbox_reportBuilderOptions.visible = ((this.viewstack.selectedIndex == 0) ? false : true);
+			var dc:ReportBuilderCanvas = this.currentReportBuilderCanvas();
+			if (this.viewstack.selectedIndex == 0) {
+				this.refreshReportsButtons();
+			} else if (this._clickedNewReport == true) {
+				this.refreshReportsButtons();
+				dc.init();
+			} else { // edit an existing report here...
+				var reportVO:ReportVO = ReportVO(this.reportsGrid.selectedItem);
+				this.refreshReportsButtons();
+				if (reportVO != null) {
+					dc.init();
+
+					_weborbObj = new RemoteWebOrbObject("ReportWriter", "getReportElementsForReportById", busy, onResultWebOrb, onFaultWebOrb);
+					var svc:RemoteObject = GetReportsCommand.svc.svc;
+					_weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+					_weborbObj.doWebOrbServiceCall(reportVO.id);
+				}
+			}
+		}
+		
+		private function onKeyUpTextPromptTextField(event:KeyboardEvent):void {
+			var textField:TextInput = TextInput(event.currentTarget);
+			var name:String = textField.text;
+			
+			if (model.reports != null) {
+				var i:int = ArrayCollectionUtils.findIndexOfItem(model.reports, "name", name);
+				this._reportNamePopUp.TextField.errorString = ((i > -1) ? "The Report Name must be unique." : "");
+				this._reportNamePopUp.refreshOkButtonState();
+			}
+		}
+		
+		private function onCreationCompletePopUpTextPrompt(event:FlexEvent):void {
+			this._reportNamePopUp = PopUpTextPrompt(event.currentTarget);
+			this._reportNamePopUp.TextField.addEventListener(KeyboardEvent.KEY_UP, onKeyUpTextPromptTextField);
+		}
+		
+		private function onCancelReportEditConfirmation(event:CloseEvent):void {
+			if (event.detail == 1) {
+				var dc:ReportBuilderCanvas = this.currentReportBuilderCanvas();
+				dc.init();
+				this.viewstack.selectedIndex = 0;
+				this._clickedNewReport = false;
+				this.hbox_reportBuilderOptions.visible = ((this.viewstack.selectedIndex == 0) ? false : true);
+				this.refreshReportsButtons();
+			}
+		}
+		
+		private function onCancelPopUpTextPrompt(popUp:PopUpTextPrompt):void {
+			if (popUp.hasBeenEdited) {
+				AlertPopUp.confirm("Do you want to stop editing this Report and go back to the Reports List ?", "Confirmation", onCancelReportEditConfirmation);
+			}
+		}
+		
+		private function promptForReportNameAndSaveReport():void {
+			var popUp:PopUpTextPrompt = new PopUpTextPrompt;
+			popUp.prompt = "Enter Report Name:";
+			popUp.text = ((_reportName.length == 0) ? PopUpTextPrompt.const_Untitled_symbol : _reportName);
+			popUp.filterOnlyAlphaNumeric = true;
+			popUp.okHandler = function (newName:String):void {
+				var vo:ReportVO = ReportVO(reportsGrid.selectedItem);
+				if (vo.destination == null) {
+					vo.destination = ReportVO.DESTINATION_PRINTER;
+				}
+
+				_weborbObj = new RemoteWebOrbObject("ReportWriter", "saveReport", busy, onResultWebOrb, onFaultWebOrb);
+				var svc:RemoteObject = GetReportsCommand.svc.svc;
+				_weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+				_weborbObj.doWebOrbServiceCall(newName,model.user.id,((vo != null) ? vo : null),ArrayUtils.serializeAllForRuby(ReportBuilderCanvas.elementArray));
+
+				dispatchEvent(new SignalCurrentReportEvent(SignalCurrentReportEvent.TYPE_SIGNAL_CURRENT_REPORT, true));
+				relabelOpenReportBuilderButton();
+			}
+			popUp.cancelHandler = onCancelPopUpTextPrompt;
+			PopUpManager.addPopUp(popUp, this, false);
+			popUp.x = this.width - 300;
+			popUp.y = 120;
+			popUp.addEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompletePopUpTextPrompt);
+		}
+
+		private function onClickNewReport():void {
+			this.reportsGrid.selectedIndices = [];
+			if (this.viewstack.selectedIndex == 0) {
+				this._clickedNewReport = true;
+				this._clickedEditReport = false;
+			}
+			this.processOpenReportBuilderButtonClick();
+		}
+		
+		private function onClickCloseReportBuilder():void {
+			AlertPopUp.confirm("Are you sure you want to close the current report and lose any changes ?", "Confirmation", onCancelReportEditConfirmation);
+		}
+		
+		private function onClickOpenReportBuilder():void {
+			if ( (this.viewstack.selectedIndex == 0) || (this.btn_openReportBuilder.label.indexOf("Close ") > -1) ) {
+				this._clickedNewReport = false;
+			}
+			if ( (this.viewstack.selectedIndex == 0) || (this.btn_openReportBuilder.label.indexOf("Edit ") > -1) ) {
+				this._clickedEditReport = true;
+			}
+			var bool:Boolean = ( (this.btn_openReportBuilder.label.indexOf("Save ") > -1) && (ReportBuilderCanvas.elementArray.length > 0) );
+			if (bool) {
+				this._reportName = "";
+				if (this.reportsGrid.selectedItem != null) {
+					var vo:ReportVO = ReportVO(this.reportsGrid.selectedItem);
+					this._reportName = vo.name;
+				}
+				this.promptForReportNameAndSaveReport();
+			} else {
+				this.processOpenReportBuilderButtonClick();
+			}
+		}
+
+		private function currentReportBuilderCanvas():ReportBuilderCanvas {
+        	return this.reportBuilderCanvas;
+		}
+			
+		private function onChangeReportMode(event:ChangeReportModeEvent):void {
+			var dc:ReportBuilderCanvas = this.currentReportBuilderCanvas();
+			switch (event.elementType) {
+				case ReportBuilderCanvas.const_SELECT_ELEMENTS:
+					dc.clearMode();
+				break;
+
+				case ReportBuilderCanvas.const_TEXT_REPORT_ELEMENT:
+					dc.setTextMode();
+				break;
+
+				case ReportBuilderCanvas.const_LIST_ELEMENTS:
+					dc.setListMode();
+				break;
+				
+				case ReportBuilderCanvas.const_IMAGE_ELEMENTS:
+					dc.setImageMode();
+				break;
+			}
+		}
+			
+		private function onCreationCompleteIconCanvas():void {
+			this.iconCanvas.initializeButtons();
+			this.iconCanvas.addEventListener(ChangeReportModeEvent.TYPE_CHANGE_REPORT_MODE, onChangeReportMode);
+		}
+		
+		private function removePopUpProgressBar():void {
+        	PopUpManager.removePopUp(this._popUpProgressBar);
+		}
+		
+        private function onDownloadComplete(event:Event):void {
+        	this.removePopUpProgressBar();
+        }
+        
+		private function onClickCancelDownloadButton():void {
+			this._fDown.cancelDownload();
+        	this.removePopUpProgressBar();
+		}
+
+        private function onFileDownloadComplete(event:FileDownloadCompleteEvent):void {
+        	this.removePopUpProgressBar();
+        	navigateToURL(new URLRequest(event.sourceFileName), '_blank');
+        }
+
+		private function onFileDownloadDialogClosed(event:FileDownloadDialogClosedEvent):void {
+        	this.removePopUpProgressBar();
+		}
+		
+		private function popUpProgressBar():PopUpProgressBar {
+			var popUp:PopUpProgressBar = new PopUpProgressBar();
+			PopUpManager.addPopUp(popUp, this, false);
+			popUp.x = this.btn_PrintJob.x + (this.btn_PrintJob.width / 2);
+			popUp.y = 120;
+			popUp.title = "Calling for Download Dialog...";
+			return popUp;
+		}
+
+		private function drawMissingImageGraphicOn(image:ImageWidget):void {
+			var graphic:MissingImageCanvas = new MissingImageCanvas();
+			graphic.x = image.image.x;
+			graphic.y = image.image.y;
+			graphic.width = image.image.width;
+			graphic.height = image.image.height;
+	//		image.addChild(graphic);
+			image.toolTip = "Missing Image - PLS upload a replacement image to continue.";
+		}
+		
+		private function onResultWebOrb(event:ResultEvent, _vo:*):void {
+			function matches(val:*, i:int, source:Array, selector:String, value:*):Boolean {
+				if ( (val != null) && (value != null) ) {
+					if ( (val is String) && (value is String) ) {
+						return (val == value);
+					} else if ( (val is Object) && (value is String) && (selector != null) && (selector is String) && (selector.length > 0) ) {
+						var theValue:String = "";
+						try { theValue = val[selector]; } catch (err:Error) { }
+						return (theValue == String(value))
+					}
+				}
+				return false;
+			}
+
+			function removes(i:int, source:Array):void {
+				if ( (source != null) && (source is Array) && (i > 0) && (i < source.length) ) {
+					source.splice(i,1);
+				}
+			}
+
+			var ar:Array;
+			if (_vo != null) {
+				var vo:WebOrbResultVO = WebOrbResultVO(_vo);
+				if ( (vo.info == "ReportWriter::deleteReport") || (vo.info == "ReportWriter::saveReport") || (vo.info == "ReportWriter::renameReport") ) {
+					new GetReportsEvent(onDataFromGetReportsEvent).dispatch();
+				} else if (vo.info.indexOf("ReportWriter::saveReport") > -1) {
+					relabelOpenReportBuilderButton();
+				} else if (vo.info == "ReportService::getReportsForUser") {
+					var nameSelected:String = ReportVO(this.reportsGrid.selectedItem).name;
+					ArrayCollectionUtils.replaceAll(this.model.reports, vo.data);
+				} else if (vo.info == "ReportService::cloneReport") {
+					// nothing need be done by this facet of this function...
+				} else if (vo.info == "ReportWriter::checkReportName") {
+					this._reportNamePopUp.TextField.errorString = ((vo.status == 1) ? "The Report Name must be unique." : "");
+					this._reportNamePopUp.refreshOkButtonState();
+				} else if (vo.info == "ReportWriter::getReportElementsForReportById") {
+					var dc:ReportBuilderCanvas = this.currentReportBuilderCanvas();
+					dc.populateFrom(vo);
+				} else if (vo.info == "ReportWriter::validateImage") {
+					ar = vo.data as Array;
+					var id:String = ar[1];
+					var image:ImageWidget = ArrayUtils.findIf(this._imageWidgetQueue, matches, "id", id, removes);
+					if (image != null) {
+						if (vo.status == 1) {
+							if (ar.length == 2) {
+								var source:String = ar[0];
+								image.image.source = (( (image.id == id) && (URLUtils.isValidReportBuilderURL(source)) ) ? source : "");
+							}
+						} else {
+							image.image.source = "";
+						}
+						if (image.image.source.length == 0) {
+							this.drawMissingImageGraphicOn(image);
+						}
+					}
+				} else if ( (vo.info.indexOf("ReportWriter::saveImage") > -1) || (vo.info.indexOf("ReportWriter::imageToPDF") > -1) ) {
+					ar = vo.info.split("|");
+					var serverFileName:String = ar[ar.length - 2];
+					var option:String = ar[ar.length - 1];
+					var urlDomain:String = URLUtil.getServerNameWithPort(this.parentApplication.url);
+					var url:String = URLUtils.getURLFrom(serverFileName, urlDomain);
+					
+					if (option == BeginSaveAsEvent.const_dest_pdf) {
+						_weborbObj = new RemoteWebOrbObject("ReportWriter", "imageToPDF", busy, onResultWebOrb, onFaultWebOrb);
+						var svc:RemoteObject = GetReportsCommand.svc.svc;
+						_weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+						_weborbObj.doWebOrbServiceCall(serverFileName, model.user.username);
+					} else {
+						this._popUpProgressBar = this.popUpProgressBar();
+						this._fDown = new FileDownload();
+						this._fDown.init(this._popUpProgressBar.progressBar, this._popUpProgressBar.btn_cancelDownload);
+						this._fDown.fileReference.addEventListener(Event.COMPLETE, onDownloadComplete);
+						this._fDown.addEventListener(FileDownloadCompleteEvent.FILE_DOWNLOAD_COMPLETE, onFileDownloadComplete);
+						this._fDown.addEventListener(FileDownloadDialogClosedEvent.type_FILE_DOWNLOAD_DIALOG_CLOSED, onFileDownloadDialogClosed);
+						this._fDown.startDownload(url);
+					}
+				}
+			}
+		}
+		
+		private function onFaultWebOrb(event:FaultEvent):void {
+			this.refreshReportsButtons();
+			AlertPopUp.error(event.fault.toString(),"WebOrb Fault");
+		}
+			
+		private function onRemovedImageElement(event:RemovedImageElementEvent):void {
+			return;		// this function is being performed by the save to database function...
+			/*
+			if (event.url.length > 0) {
+				var ar:Array = event.url.split("/");
+				var first:String;
+				ar.splice(0,1);
+				while (ar.length > 0) {
+					first = ar[0];
+					if (first.indexOf(":") > -1) {
+						ar.splice(0,1);
+						break;
+					}
+					ar.splice(0,1);
+				}
+				this._weborbObj = new RemoteWebOrbObject("ReportWriter", "deleteImage", this.busy, onResultWebOrb, onFaultWebOrb);
+				var svc:RemoteObject = GetReportsCommand.svc.svc;
+				this._weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+				this._weborbObj.doWebOrbServiceCall(ar.join("/"));
+			}
+			*/
+		}
+			
+		private function onInitializeReportBuilderButtons(event:InitializeReportBuilderButtonsEvent):void {
+			this.iconCanvas.initializeButtons();
+		}
+
+		private function selectOptionFrom(cmbo:ComboBox):void {
+			if (cmbo != null) {
+				var item:* = cmbo.selectedItem;
+				var dc:ReportBuilderCanvas = this.currentReportBuilderCanvas();
+				if (dc != null) {
+					dc.selectOption = item.data;
+				}
+			}
+		}
+			
+		private function onChangeSelectOptionsComboBox(event:ListEvent):void {
+			this.selectOptionFrom(ComboBox(event.currentTarget));
+		}
+			
+		private function getNumElements():Number {
+			return ReportBuilderCanvas.elementArray.length;
+		}
+
+		private function refreshPrintJobButton():void {
+			this.btn_PrintJob.enabled = (this.getNumElements() > 0);
+		}
+			
+		private function onFileUploadCompleted(event:FileUploadCompletedEvent):void {
+			this.refreshPrintJobButton();
+		}
+		
+		private function onCreationCompleteImageWidget(event:FlexEvent):void {
+			var image:ImageWidget = ImageWidget(event.currentTarget);
+			if (this._imageQueue.length > 0) {
+				var source:String = ArrayUtils.popFromFront(this._imageQueue);
+				
+				var validateImages:Boolean = false;
+
+				var wc:WidgetCanvas;
+				if (image.parent is WidgetCanvas) {
+					wc = WidgetCanvas(image.parent);
+				}
+
+				if (validateImages) {
+					this._imageWidgetQueue.push(image);
+
+					_weborbObj = new RemoteWebOrbObject("ReportWriter", "validateImage", busy, onResultWebOrb, onFaultWebOrb);
+					var svc:RemoteObject = GetReportsCommand.svc.svc;
+					_weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+					_weborbObj.doWebOrbServiceCall(model.user.username,source,image.id);
+				} else if (URLUtils.isValidReportBuilderURL(source)) {
+					image.image.source = source;
+					image.image.scaleContent = ((wc != null) ? wc.vo.scaleImage : false);
+				} else {
+					if (URLUtils.isValidURL(source)) {
+						image.image.source = source;
+						image.image.scaleContent = ((wc != null) ? wc.vo.scaleImage : false);
+					}
+					this.drawMissingImageGraphicOn(image);
+				}
+
+				image.removeEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompleteImageWidget);
+			}
+		}
+		
+		private function onCreationCompleteWidgetInstance(event:FlexEvent):void {
+			var w:Number = -1;
+			var h:Number = -1;
+			try {
+				w = event.currentTarget["width"];
+				h = event.currentTarget["height"];
+			} catch (err:Error) { }
+			if ( (w > -1) && (h > -1) ) {
+				if (this.width < w) {
+					this.width = 300;
+					this.parent.width = this.width;
+				}
+				if (this.height < h) {
+					this.height = 150;
+					this.parent.height = this.height;
+				}
+			}
+		}
+		
+		private function onResultGetWidgetsCommand(... args):void {
+			if (args != null) {
+				var argsAR:Array = args as Array;
+				if (argsAR.length > 0) {
+					var widget:WidgetWrapper = WidgetWrapper(argsAR[0][0]);
+					var vo:ReportBuilderVO = ReportBuilderVO(widget.vo);
+					if (model.widgets != null) {
+						var i:int = ArrayCollectionUtils.findIndexOfItem(model.widgets, "id", vo.widget_id.toString());
+						
+						if (i > -1) {
+							var widgetData:WidgetVO = WidgetVO(model.widgets.getItemAt(i));
+							
+							var newWidgetInstance:WidgetInstance = new WidgetInstance();
+							newWidgetInstance.name = vo.widget_name;
+							newWidgetInstance.widgetData = widgetData;
+							newWidgetInstance.removeHeaderElements();
+							newWidgetInstance.addEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompleteWidgetInstance);
+							widget.addChild(newWidgetInstance);
+						}
+					}
+				}
+			}
+
+		}
+		
+		private function onCreationCompleteListWidget(event:FlexEvent):void {
+			var widget:WidgetWrapper = WidgetWrapper(event.currentTarget);
+			new GetWidgetsCommand()._execute(null, onResultGetWidgetsCommand, widget);
+			widget.removeEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompleteListWidget);
+		}
+
+		private function onContextMenuEditContent(event:ContextMenuEvent):void {
+			var dc:ReportBuilderCanvas;
+			if (event.contextMenuOwner is WidgetCanvas) {
+				var wc:WidgetCanvas = WidgetCanvas(event.contextMenuOwner);
+				dc = ReportBuilderCanvas(wc.parent);
+				wc.dispatchEvent(new EditReportElementEvent(EditReportElementEvent.TYPE_EDIT_REPORT_ELEMENT, wc));
+			} else if (event.contextMenuOwner is TextSprite) {
+				var ts:TextSprite = TextSprite(event.contextMenuOwner);
+				dc = ReportBuilderCanvas(ts.parent);
+				ts.dispatchEvent(new EditReportElementEvent(EditReportElementEvent.TYPE_EDIT_REPORT_ELEMENT, ts));
+			}
+		}
+		
+		private function onContextMenuDeleteContent(event:ContextMenuEvent):void {
+			var dc:ReportBuilderCanvas;
+			if (event.contextMenuOwner is WidgetCanvas) {
+				var wc:WidgetCanvas = WidgetCanvas(event.contextMenuOwner);
+				dc = ReportBuilderCanvas(wc.parent);
+				wc.dispatchEvent(new DeleteReportElementEvent(DeleteReportElementEvent.TYPE_DELETE_REPORT_ELEMENT, wc));
+			} else if (event.contextMenuOwner is TextSprite) {
+				var ts:TextSprite = TextSprite(event.contextMenuOwner);
+				dc = ReportBuilderCanvas(ts.parent);
+				ts.dispatchEvent(new DeleteReportElementEvent(DeleteReportElementEvent.TYPE_DELETE_REPORT_ELEMENT, ts));
+			}
+		}
+		
+		private function getContextMenu(elementType:String):ContextMenu {
+			var item:ContextMenuItem;
+
+			var menu:ContextMenu = new ContextMenu();
+			
+			menu.customItems = [];
+
+			if (elementType != ReportBuilderCanvas.const_LIST_ELEMENTS) {
+				item = new ContextMenuItem("Edit Content");
+				item.addEventListener( ContextMenuEvent.MENU_ITEM_SELECT, onContextMenuEditContent);
+				menu.customItems.push( item);
+			}
+			
+			item = new ContextMenuItem("Delete Content");
+			item.separatorBefore = true;
+			item.addEventListener( ContextMenuEvent.MENU_ITEM_SELECT, onContextMenuDeleteContent);				
+			menu.customItems.push( item);
+
+			menu.hideBuiltInItems();
+
+			return menu;
+		}
+		
+		private function onAddElementToReport(event:AddElementToReportEvent):void {
+			var dc:ReportBuilderCanvas = this.currentReportBuilderCanvas();
+			var vo:ReportBuilderVO = ReportBuilderVO(event.data);
+			var sprite:GeometricSprite;
+			switch (event.elementType) {
+				case ReportBuilderCanvas.const_TEXT_REPORT_ELEMENT:
+					sprite = dc.addShape(event.elementType, 0);
+					sprite.id = "GeometricSprite_" + GeometricSprite.count;
+					sprite.x = event.x;
+					sprite.y = event.y;
+					try { sprite["myWidth"] = event.width; } catch (err:Error) { sprite.width = event.width; }
+					try { sprite["myHeight"] = event.height; } catch (err:Error) { sprite.height = event.height; }
+					if ( (vo != null) && (vo.text != null) && (vo.text.length > 0) ) {
+						TextSprite(sprite).htmlText = vo.text;
+					}
+					sprite.vo = vo;
+					sprite.drawShape();
+					sprite.refreshResizeShape();
+					sprite.contextMenu = this.getContextMenu(event.elementType);
+				break;
+
+				case ReportBuilderCanvas.const_IMAGE_ELEMENTS:
+				case ReportBuilderCanvas.const_LIST_ELEMENTS:
+				case ReportBuilderCanvas.const_WIDGET_ELEMENTS:	// this happens when reading elements from the database...
+					if ( (event.elementType == ReportBuilderCanvas.const_WIDGET_ELEMENTS) && (vo != null) ) {
+						if ( (vo.isImage) || (vo.isMissingImage) ) {
+							event.elementType = ReportBuilderCanvas.const_IMAGE_ELEMENTS;	// map the saved widget type back to an editable widget type...
+						} else if (vo.isWidget) {
+							event.elementType = ReportBuilderCanvas.const_LIST_ELEMENTS;	// map the saved widget type back to an editable widget type...
+						}
+					}
+					var canvas:WidgetCanvas = new WidgetCanvas();
+					canvas.id = "WidgetCanvas_" + WidgetCanvas.count;
+					canvas.x = event.x;
+					canvas.y = event.y;
+					canvas.width = event.width;
+					canvas.height = event.height;
+					canvas.vo = vo;
+					canvas.contextMenu = this.getContextMenu(event.elementType);
+
+					switch (event.elementType) {
+						case ReportBuilderCanvas.const_LIST_ELEMENTS:
+							var list:WidgetWrapper = new WidgetWrapper();
+							list.id = "ListWidget_" + WidgetWrapper.count;
+							list.x = 0;
+							list.y = 0;
+							list.width = canvas.width;
+							list.height = canvas.height;
+							if ( (vo != null) && (vo.widget_id > 0) && (vo.widget_name != null) && (vo.widget_name.length > 0) ) {
+								list.vo = vo;
+								list.addEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompleteListWidget);
+							}
+							canvas.addChild(list);
+						break;
+
+						case ReportBuilderCanvas.const_IMAGE_ELEMENTS:
+							var image:ImageWidget = new ImageWidget();
+							image.id = "ImageWidget_" + ImageWidget.count;
+							image.x = 0;
+							image.y = 0;
+							image.width = canvas.width;
+							image.height = canvas.height;
+							if (vo != null) {
+								if ( (vo.isImage) || (vo.isMissingImage) ) {
+									if (vo.isMissingImage) {
+										canvas.appURL = Application(this.parentApplication).url;
+									}
+									this._imageQueue.push((vo.isMissingImage) ? canvas.missingImage_image : vo.source);
+									image.addEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompleteImageWidget);
+								}
+							} else {
+								canvas.appURL = Application(this.parentApplication).url;
+							}
+							try { canvas.addChild(image); } catch (err:Error) { }
+						break;
+					}
+					try { dc.addWidget(canvas); } catch (err:Error) { }
+				break;
+			}
+			this.refreshOpenReportBuilderButton();
+			this.refreshPrintJobButton();
+		}
+
+		private function onSelectedReportElement(event:SelectedReportElementEvent):void {
+		}
+			
+		private function onAddElementToReportCompleted(event:AddElementToReportCompletedEvent):void {
+			this.refreshPrintJobButton();
+			this.refreshOpenReportBuilderButton(this._isLoadingExistingReport == false);
+		}
+
+		private function onClickDeleteSelectedButton(widget:*):void {
+			var dc:ReportBuilderCanvas = this.currentReportBuilderCanvas();
+			dc.deleteSelectedElement(widget);
+			this.refreshPrintJobButton();
+			this.refreshOpenReportBuilderButton(true);
+		}
+			
+		private function onClickPrintJobButton(event:BeginPrintJobEvent):void {
+			var printJob:FlexPrintJob = new FlexPrintJob();
+			var dc:ReportBuilderCanvas = this.currentReportBuilderCanvas();
+			if (printJob.start()) {
+				printJob.printAsBitmap = false;
+				printJob.addObject(dc, FlexPrintJobScaleType.FILL_PAGE);
+				printJob.send();
+			}
+		}
+			
+		private function onCreationCompleteComboBox():void {
+			this.selectOptionFrom(this.cmbo_selectOptions);
+		}
+		
+		private function onResizedReportElement(event:ResizedReportElementEvent):void {
+			this.refreshOpenReportBuilderButton(true);
+		}
+		
+		private function onMovedReportElement(event:MovedReportElementEvent):void {
+			this.refreshOpenReportBuilderButton(true);
+		}
+		
+		private function onBeginAddingElementsToReport(event:BeginAddingElementsToReportEvent):void {
+			this._isLoadingExistingReport = true;
+		}
+		
+		private function onEndAddingElementsToReport(event:EndAddingElementsToReportEvent):void {
+			this._isLoadingExistingReport = false;
+		}
+		
+		private function onDeleteReportElement(event:DeleteReportElementEvent):void {
+			this.onClickDeleteSelectedButton(event.widget);
+		}
+		
+		private function onCreationCompleteReportBuilderCanvas():void {
+			var dc:ReportBuilderCanvas = this.currentReportBuilderCanvas();
+			dc.initCanvas(0xFFFFFF, 0xCCCCCC);
+			dc.addEventListener(AddElementToReportEvent.TYPE_ADD_ELEMENT_TO_REPORT, onAddElementToReport);
+			dc.addEventListener(BeginAddingElementsToReportEvent.TYPE_BEGIN_ADDING_ELEMENTS_TO_REPORT, onBeginAddingElementsToReport);
+			dc.addEventListener(EndAddingElementsToReportEvent.TYPE_END_ADDING_ELEMENTS_TO_REPORT, onEndAddingElementsToReport);
+			dc.addEventListener(SelectedReportElementEvent.TYPE_SELECTED_REPORT_ELEMENT, onSelectedReportElement);
+			dc.addEventListener(AddElementToReportCompletedEvent.TYPE_ADD_ELEMENT_TO_REPORT_COMPLETED, onAddElementToReportCompleted);
+			dc.addEventListener(RemovedImageElementEvent.TYPE_REMOVED_IMAGE_ELEMENT, onRemovedImageElement);
+			dc.addEventListener(InitializeReportBuilderButtonsEvent.TYPE_INITIALIZE_REPORT_BUILDER_BUTTONS, onInitializeReportBuilderButtons);
+			dc.addEventListener(FileUploadCompletedEvent.TYPE_FILE_UPLOAD_COMPLETE, onFileUploadCompleted);
+			dc.addEventListener(MovedReportElementEvent.TYPE_MOVED_REPORT_ELEMENT, onMovedReportElement);
+			dc.addEventListener(DeleteReportElementEvent.TYPE_DELETE_REPORT_ELEMENT, onDeleteReportElement);
+			dc.addEventListener(ResizedReportElementEvent.TYPE_RESIZED_REPORT_ELEMENT, onResizedReportElement);
+		}
+		
+		private function onCloseDeleteReportConfirmation(event:CloseEvent):void {
+			if (event.detail == 1) {
+				var report:ReportVO;
+		        for (var i:int = 0; i < reportsGrid.selectedItems.length; i++) {
+		        	report = ReportVO(reportsGrid.selectedItems[i]);
+		        	report.removeSelf(this.busy, this.onResultWebOrb, this.onFaultWebOrb);
+		        	this.btn_deleteReports.enabled = false;
+		        }
+			}
+			this.currentState = "Main";
+		}
+		
+		private function deleteReports():void {
+			AlertPopUp.confirm("Are you sure you want to delete the selected Report ?", "Confirmation", onCloseDeleteReportConfirmation);
+        }
+        
+        private function cloneReport():void {
+			_weborbObj = new RemoteWebOrbObject("ReportWriter", "cloneReport", busy, onResultWebOrb, onFaultWebOrb);
+			var svc:RemoteObject = GetReportsCommand.svc.svc;
+			_weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+			_weborbObj.doWebOrbServiceCall(ReportVO(this.reportsGrid.selectedItem));
+        }
+
+		private function toggleSetDistribution(event:Event):void {
+			var btn:Button = Button(event.target);
+			if (btn.selected) {
+				btn_setSchedule.selected = false;
+				btn_setSchedule.toolTip = ((this._toggleButtonTooltipCache["SetSchedule"] != null) ? this._toggleButtonTooltipCache["SetSchedule"] : btn_setSchedule.toolTip);
+				if ( (reportsGrid.selectedItems != null) && (reportsGrid.selectedItems.length == 1) ) {
+					currentState = "SetDistribution"
+					this._toggleButtonTooltipCache[this.currentState] = btn.toolTip;
+					btn.toolTip += " Click this button again to remove the Report Distribution panel.";
+					var reportVO:ReportVO = ReportVO(reportsGrid.selectedItems[0]);
+					this.reportsDistributionSetter.reportVO = reportVO;
+				} else if (reportsGrid.selectedItems == null) {
+					btn_setDistribution.selected = false;
+					AlertPopUp.error("Set distribution button should not be clickable when no reports are selected.", "Programming Error");
+				} else if (reportsGrid.selectedItems.length > 1) {
+					btn_setDistribution.selected = false;
+					AlertPopUp.error("Set distribution button should not be clickable when more than one report is selected.", "Programming Error");
+				}
+			} else {
+				btn.toolTip = this._toggleButtonTooltipCache[this.currentState];
+				currentState = 'Main';
+			}
+		}
+		
+		private function toggleSetSchedule(event:Event):void {
+			var btn:Button = Button(event.target);
+			if (btn.selected) {
+				btn_setDistribution.selected = false;
+				btn_setDistribution.toolTip = ((this._toggleButtonTooltipCache["SetDistribution"] != null) ? this._toggleButtonTooltipCache["SetDistribution"] : btn_setDistribution.toolTip);
+				if ( (reportsGrid.selectedItems != null) && (reportsGrid.selectedItems.length == 1) ) {
+					currentState = "SetSchedule"
+					this._toggleButtonTooltipCache[this.currentState] = btn.toolTip;
+					btn.toolTip += " Click this button again to remove the Report Scheduler panel.";
+					var reportVO:ReportVO = ReportVO(reportsGrid.selectedItems[0]);
+					reportsScheduleSetter.populateFields(reportVO);
+				} else if (reportsGrid.selectedItems == null) {
+					btn_setSchedule.selected = false;
+					AlertPopUp.error("Set schedule button should not be clickable when no reports are selected.", "Programming Error");
+				} else if (reportsGrid.selectedItems.length > 1) {
+					btn_setSchedule.selected = false;
+					AlertPopUp.error("Set schedule button should not be clickable when more than one report is selected.", "Programming Error");
+				}
+			} else {
+				btn.toolTip = this._toggleButtonTooltipCache[this.currentState];
+				currentState = 'Main';
+			}
+		}
+		
+		private function onReportsSelection(event:ListEvent):void{
+			syncModelCurrentReports();
+			this.relabelOpenReportBuilderButton();
+			this.refreshReportsButtons();
+		}
+		
+		private function syncModelCurrentReports():void{
+			if (reportsGrid.selectedItems != null) {
+				model.currentReports = reportsGrid.selectedItems;
+				if ( (currentState == 'SetSchedule') && ( (reportsGrid.selectedItems != null) && (reportsGrid.selectedItems.length == 1) ) ) {
+					var reportVO:ReportVO = ReportVO(reportsGrid.selectedItems[0]);
+					reportsScheduleSetter.populateFields(reportVO);
+				}
+			}
+		}
+
+		private function onItemEditEndReportsGrid(event:DataGridEvent):void {
+			var myEditor:TextInput = TextInput(event.currentTarget.itemEditorInstance);
+			var newVal:String = myEditor.text;
+			
+			var oldVal:String = event.currentTarget.editedItemRenderer.data[event.dataField]; 
+			
+			if ( (oldVal != newVal) && (newVal != null) && (newVal.length > 0) ) {
+				var vo:ReportVO = ReportVO(this.reportsGrid.selectedItem);
+
+				_weborbObj = new RemoteWebOrbObject("ReportWriter", "renameReport", busy, onResultWebOrb, onFaultWebOrb);
+				var svc:RemoteObject = GetReportsCommand.svc.svc;
+				_weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+				_weborbObj.doWebOrbServiceCall(newVal,vo);
+			}
+		}                               
+		
+		private function saveAsImageNamed(imageType:String, fileName:String = "", option:String = ""):void {
+			if ( (fileName.length > 0) && (imageType != null) && 
+				( (imageType == BitmapUtils.const_JPG_image_type) || (imageType == BitmapUtils.const_PNG_image_type) ) ) {
+				var ar:Array = fileName.split(".");
+				ar = ar[0].toString().split("/");
+				fileName = ar[ar.length - 1];
+				
+				var dc:ReportBuilderCanvas = this.currentReportBuilderCanvas();
+				var bitmapData:BitmapData = BitmapUtils.getBitmapFrom(dc);
+				
+				var bytes:ByteArray;
+				switch (imageType) {
+					case BitmapUtils.const_JPG_image_type:
+						var jpgEncoder:JPGEncoder = new JPGEncoder(90);
+						bytes = jpgEncoder.encode(bitmapData);
+					break;
+
+					case BitmapUtils.const_PNG_image_type:
+						bytes = PNGEncoder.encode(bitmapData);
+					break;
+				}
+	
+				_weborbObj = new RemoteWebOrbObject("ReportWriter", "saveImage", busy, onResultWebOrb, onFaultWebOrb);
+				var svc:RemoteObject = GetReportsCommand.svc.svc;
+				_weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+				_weborbObj.doWebOrbServiceCall(fileName + "." + imageType, model.user.username, bytes, option);
+			} else {
+				var errHeader:String = "Programming Error in " + ObjectUtil.getClassInfo(this).name + "::saveAsImageNamed()";
+				if (fileName.length <= 0) {
+					AlertPopUp.error("Variable fileName cannot be left as a blank string.", errHeader);
+				} else if (imageType == null) {
+					AlertPopUp.error("Variable imageType cannot be null.", errHeader);
+				} else if ( (imageType != BitmapUtils.const_JPG_image_type) && (imageType != BitmapUtils.const_PNG_image_type) ) {
+					AlertPopUp.error("Variable imageType must have either the value (" + BitmapUtils.const_JPG_image_type + ") or (" + BitmapUtils.const_PNG_image_type + ").", errHeader);
+				}
+			}
+		}
+		
+		private function getReportImageName(option:String = ""):void {
+			var popUp:PopUpTextPrompt = new PopUpTextPrompt;
+			popUp.prompt = "Enter " + ((option.length > 0) ? 'PDF' : 'Image') + " Name:";
+			popUp.text = "Untitled";
+			popUp.filterOnlyAlphaNumeric = true;
+			popUp.currentState = ((option.length > 0) ? '' : 'ImageTypeState');
+			popUp.okHandler = function (newName:String):void {
+				var isJPG:Boolean = true;
+				var isPNG:Boolean = false;
+				try {
+					isJPG = popUp.radio_JPG.selected;
+					isPNG = popUp.radio_PNG.selected;
+				} catch (err:Error) { }
+				var type:String = ((isJPG) ? BitmapUtils.const_JPG_image_type : ((isPNG) ? BitmapUtils.const_PNG_image_type : BitmapUtils.const_UNDEFINED_image_type));
+				var sType:String = ((option.length == 0) ? type : BitmapUtils.const_JPG_image_type);
+				saveAsImageNamed(sType, newName, option);
+			}
+			PopUpManager.addPopUp(popUp, this, false);
+			popUp.x = this.btn_PrintJob.x + 50;
+			popUp.y = 120;
+		}
+
+		private function onClickSaveAsButton(event:BeginSaveAsEvent):void {
+			var dc:ReportBuilderCanvas = this.currentReportBuilderCanvas();
+			dc.deselectAllButThisChildById("");
+			switch (event.destType) {
+				case BeginSaveAsEvent.const_dest_image:
+					this.getReportImageName();
+				break;
+
+				case BeginSaveAsEvent.const_dest_pdf:
+					this.getReportImageName(event.destType);
+				break;
+			}
+		}
+		
+		private function onCreationCompletePrintButtons():void {
+			this.btn_PrintJob.addEventListener(BeginPrintJobEvent.TYPE_BEGIN_PRINT_JOB, onClickPrintJobButton);
+			this.btn_PrintJob.addEventListener(BeginSaveAsEvent.TYPE_SAVE_AS, onClickSaveAsButton);
+		}
+		
+		private function onDoubleClickReportsGrid(event:ListEvent):void {
+			this.onClickOpenReportBuilder();
+		}
+		
+		private function onClickReportsGrid():void {
+			var n:int;
+			if (this.errorString.length > 0) {
+				n = 1;
+			} else {
+				n = int(this.errorString.substr(1,1)) + 1;
+			}
+		}
+		
+		private function onCreationCompleteReportsGrid():void {
+			var cols:Array = [];
+
+			var col:DataGridColumn = new DataGridColumn("name");
+			col.dataField = "name";
+			col.headerText = "Name";
+			col.editable = true;
+			cols.push(col);
+			
+			col = new DataGridColumn("next_scheduled_run");
+			col.dataField = "next_scheduled_run";
+			col.headerText = "Next scheduled run time";
+			col.editable = false;
+			col.labelFunction = this.epochToDate;
+			cols.push(col);
+
+			this.reportsGrid.columns = cols;
+			this.reportsGrid.doubleClickableDataField = col.dataField;
+		}
+		
+		private function onSignalUpdateReports(event:SignalUpdateReportsEvent):void {
+			var i:int = this.reportsGrid.selectedIndex;
+			var reportVO:ReportVO = ReportVO(ArrayCollection(this.reportsGrid.dataProvider).getItemAt(i));
+			reportVO.next_scheduled_run = event.schedule;
+			reportVO.destination = String(event.destination).toLowerCase();
+        	reportVO.updateSelf(this.busy, this.onResultWebOrb, this.onFaultWebOrb);
+		}
+		
+		private function onCreationCompleteReportScheduleSidebar():void {
+			this.reportsScheduleSetter.addEventListener(SignalUpdateReportsEvent.TYPE_SIGNAL_UPDATE_REPORTS, onSignalUpdateReports);
+		}
+		
+		private function onCreationCompleteReportDistributionSidebar():void {
+			
+		}
+	]]></mx:Script>
+	<mx:states>
+		<mx:State name="Main">
+			<mx:AddChild>
+				<mx:VBox width="100%" height="100%">
+					<mx:HBox width="100%">
+						<mx:HBox>
+							<mx:Label text="Report Management" styleName="ReportManagementTitle"/>
+						</mx:HBox>
+						<mx:HBox id="hbox_reportBuilderOptions" visible="false">
+							<mx:Spacer width="10"/>
+							<mx:ComboBox id="cmbo_selectOptions" toolTip="Click Normal places report elements on top of other elements as new elements are added to the report canvas.  Click Forward allows elements to be brought forward when they are clicked after being placed on the report canvas." dataProvider="{new ArrayCollection(this._selectionOptions)}" change="onChangeSelectOptionsComboBox(event)" creationComplete="onCreationCompleteComboBox()"/>
+							<mx:Spacer width="10"/>
+							<widgets:PrintButtons id="btn_PrintJob" toolTip="Print or Export as PDF or Export as Image." enabled="false" creationComplete="onCreationCompletePrintButtons()"/>
+						</mx:HBox>
+						<mx:HBox width="10%">
+							<mx:Button id="btn_newReportBuilder" label="New Report" styleName="btnNewReportBuilder" icon="@Embed(source='/assets/add-window_16x16.gif')" labelPlacement="left" toolTip="Click this button to create a new report." click="onClickNewReport()"/>
+							<mx:Button id="btn_openReportBuilder" label="Open Report Builder" styleName="btnOpenReportBuilder" visible="false" labelPlacement="left" click="onClickOpenReportBuilder()" creationComplete="onCreationCompleteOpenReportBuilder()"/>
+							<mx:Button id="btn_cloneReport" label="Clone Report" styleName="btnCloneReport" icon="@Embed(source='/assets/clone-report_16x16.png')" labelPlacement="left" toolTip="Click this button to clone the currently selected report." enabled="{this.reportsGrid.selectedItems.length == 1}" click="cloneReport()"/>
+							<mx:Button id="btn_deleteReports" label="Delete Report(s)" styleName="btnDeleteReports" icon="@Embed(source='/assets/delete-window_16x16.gif')" labelPlacement="left" toolTip="Click this button to delete one or more reports." enabled="{this.reportsGrid.selectedItems.length > 0}" click="deleteReports()"/>
+							<mx:Button id="btn_closeReport" label="Close Report" styleName="btnCloseReport" icon="@Embed(source='/assets/undo_16x16.gif')" labelPlacement="left" toolTip="Close current report and lose changes." visible="false" click="onClickCloseReportBuilder()"/>
+							<mx:VRule height="20"/>
+							<mx:Button id="btn_setSchedule" label="Set Schedule" styleName="btnSetSchedule" icon="@Embed(source='/assets/alarm_16x16.gif')" labelPlacement="left" toolTip="Click this button to toggle the Report Scheduler for the selected report.  The Report Scheduler allows you to schedule a report to print at a preselected date/time." enabled="false" toggle="true" click="toggleSetSchedule(event)"/>
+							<mx:Button id="btn_setDistribution" label="Set Distribution" styleName="btnSetDistribution" icon="@Embed(source='/assets/outlook_16x16.png')" labelPlacement="left" toolTip="Click this button to toggle the Report Distribution for the selected report.  The Report Distribution panel allows you to email the selected report to one or more recipients via their email addresses." enabled="false" toggle="true" click="toggleSetDistribution(event)"/>
+							<mx:VRule height="20"/>
+
+							<mx:Spacer width="5"/>
+							<busy:Busy id="busy"/>
+						</mx:HBox>
+					</mx:HBox>
+						<mx:ViewStack id="viewstack" width="100%" height="100%" selectedIndex="0">
+							<mx:HBox id="reportsContainer" width="100%" height="100%">
+									<mx:Canvas id="canvas1" label="Report Management" width="100%" height="100%" click="onClickReportsGrid()">
+										<grids:DoubleClickDataGrid id='reportsGrid' dataProvider="{model.reports}" editable="true" allowMultipleSelection="true" change="onReportsSelection(event)" itemEditEnd="onItemEditEndReportsGrid(event)" width="100%" height="100%" toolTip="Double click the report name to edit the report name or save as a different name to change the report name." creationComplete="onCreationCompleteReportsGrid()"/>
+									</mx:Canvas>
+							</mx:HBox>
+							<mx:Canvas id="canvas2" label="Report Builder" width="100%" height="100%">
+								<mx:HBox width="100%" height="100%">
+									<palette:IconCanvas id="iconCanvas" width="100" height="100%" minWidth="100" creationComplete="onCreationCompleteIconCanvas()"/>
+									<canvas:ReportBuilderCanvas id="reportBuilderCanvas" width="100%" height="100%" styleName="ReportBuilderCanvasStyle" busy="{this.busy}" creationComplete="onCreationCompleteReportBuilderCanvas()"/>
+								</mx:HBox>
+							</mx:Canvas>
+						</mx:ViewStack>
+				</mx:VBox>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="SetSchedule" basedOn="Main">
+			<mx:AddChild relativeTo="{reportsContainer}" position="lastChild">
+				<report:ReportScheduleSidebar id="reportsScheduleSetter" width="300" height="100%" creationComplete="onCreationCompleteReportScheduleSidebar()"/> <!--  removedEffect="{wipeOut}" addedEffect="{wipeIn}" -->
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="SetDistribution" basedOn="Main">
+			<mx:AddChild relativeTo="{reportsContainer}" position="lastChild">
+				<report:ReportDistributionSidebar id="reportsDistributionSetter" width="300" height="100%" creationComplete="onCreationCompleteReportDistributionSidebar()"/>  <!--  removedEffect="{wipeOut}" addedEffect="{wipeIn}" -->
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+	<mx:WipeLeft id="wipeIn" duration="500"/>
+	<mx:WipeRight id="wipeOut" duration="500"/>
+</mx:Box>

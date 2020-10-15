@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel title="DLP Details"
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	width="100%" height="100%"
+	verticalAlign="top" horizontalAlign="left"
+	verticalScrollPolicy="off" horizontalScrollPolicy="off"
+	creationComplete="init()"
+	>
+	<mx:Script><![CDATA[
+		import com.bigfix.dss.view.general.Alert.AlertPopUp;
+		import mx.controls.Alert;
+		import mx.rpc.events.ResultEvent;
+		import mx.rpc.events.FaultEvent;
+
+		import com.bigfix.dss.util.DSS;
+		import com.bigfix.dss.vo.SubjectDetailsVO;
+		
+
+		[Bindable]
+		public var options:SubjectDetailsVO;
+
+		private function init():void {
+			DSS.svc("EditorService").get({ 'class': this.options.className, 'id': this.options.id }).onResult(this.resultHandler).onFault(this.faultHandler);
+		}
+
+		private function faultHandler(event:FaultEvent):void {
+			AlertPopUp.error(event.message.toString(), "Service Fault");
+		}
+
+		private function resultHandler(event:ResultEvent):void {
+			title=event.result.name;
+		}
+	]]></mx:Script>
+	<mx:Panel title="Description" styleName="detailsContainer" width="100%">
+		<mx:Text text="Text goes in here"/>
+	</mx:Panel>
+</mx:Panel>

@@ -1,0 +1,184 @@
+arizona:
+  title: Arizona
+  subgroups:
+  - arizona_apache_junction
+  - arizona_avondale
+  - arizona_bullhead_city
+  - arizona_casa_grande
+  - arizona_chandler
+  - arizona_douglas
+  - arizona_el_mirage
+  - arizona_flagstaff
+  - arizona_florence
+  - arizona_fountain_hills
+  - arizona_gilbert
+  - arizona_glendale
+  - arizona_goodyear
+  - arizona_kingman
+  - arizona_lake_havasu_city
+  - arizona_marana
+  - arizona_mesa
+  - arizona_nogales
+  - arizona_oro_valley
+  - arizona_peoria
+  - arizona_phoenix
+  - arizona_prescott
+  - arizona_prescott_valley
+  - arizona_san_luis
+  - arizona_scottsdale
+  - arizona_sierra_vista
+  - arizona_surprise
+  - arizona_tempe
+  - arizona_tucson
+  - arizona_yuma
+
+arizona_apache_junction:
+  title: Apache Junction
+  type: city
+  population: 33288
+
+arizona_avondale:
+  title: Avondale
+  type: city
+  population: 59139
+
+arizona_bullhead_city:
+  title: Bullhead City
+  type: city
+  population: 37480
+
+arizona_casa_grande:
+  title: Casa Grande
+  type: city
+  population: 31288
+
+arizona_chandler:
+  title: Chandler
+  type: city
+  population: 223895
+
+arizona_douglas:
+  title: Douglas
+  type: city
+  population: 16688
+
+arizona_el_mirage:
+  title: El Mirage
+  type: city
+  population: 20899
+
+arizona_flagstaff:
+  title: Flagstaff
+  type: city
+  population: 56990
+
+arizona_florence:
+  title: Florence
+  type: city
+  population: 17221
+
+arizona_fountain_hills:
+  title: Fountain Hills
+  type: city
+  population: 22541
+
+arizona_gilbert:
+  title: Gilbert
+  type: city
+  population: 156816
+
+arizona_glendale:
+  title: Glendale
+  type: city
+  population: 235351
+
+arizona_goodyear:
+  title: Goodyear
+  type: city
+  population: 37251
+
+arizona_kingman:
+  title: Kingman
+  type: city
+  population: 24119
+
+arizona_lake_havasu_city:
+  title: Lake Havasu City
+  type: city
+  population: 53080
+
+arizona_marana:
+  title: Marana
+  type: city
+  population: 23097
+
+arizona_mesa:
+  title: Mesa
+  type: city
+  population: 437142
+
+arizona_nogales:
+  title: Nogales
+  type: city
+  population: 20616
+
+arizona_oro_valley:
+  title: Oro Valley
+  type: city
+  population: 37638
+
+arizona_peoria:
+  title: Peoria
+  type: city
+  population: 132355
+
+arizona_phoenix:
+  title: Phoenix
+  type: city
+  population: 1417119
+
+arizona_prescott:
+  title: Prescott
+  type: city
+  population: 38988
+
+arizona_prescott_valley:
+  title: Prescott Valley
+  type: city
+  population: 30417
+
+arizona_san_luis:
+  title: San Luis
+  type: city
+  population: 20530
+
+arizona_scottsdale:
+  title: Scottsdale
+  type: city
+  population: 221665
+
+arizona_sierra_vista:
+  title: Sierra Vista
+  type: city
+  population: 40772
+
+arizona_surprise:
+  title: Surprise
+  type: city
+  population: 60591
+
+arizona_tempe:
+  title: Tempe
+  type: city
+  population: 160566
+
+arizona_tucson:
+  title: Tucson
+  type: city
+  population: 511747
+
+arizona_yuma:
+  title: Yuma
+  type: city
+  population: 82866
+

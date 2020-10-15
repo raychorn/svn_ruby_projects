@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:flexlib="flexlib.controls.*"
+	xmlns:editors="com.bigfix.dss.view.editors.*"
+	width="100%" height="100%" 
+	showCloseButton="true" 
+	styleName="ManageWidgetsPanel" titleStyleName="ManageWidgetsTitle"
+	close="onClose()" 
+	title="Manage Widgets - Click the Back button to get back to the previous view."
+    creationComplete="init()">
+	<mx:Script>
+    <![CDATA[
+    	import mx.events.CloseEvent;
+    	import com.bigfix.dss.view.general.Alert.AlertPopUp;
+    	import com.bigfix.dss.view.editors.events.TextChangedEvent;
+		import mx.events.ListEvent;
+		import mx.controls.dataGridClasses.DataGridColumn;
+      	import mx.collections.ArrayCollection;
+		import com.bigfix.dss.command.GetWidgetsCommand;
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.vo.WidgetVO;
+		import com.bigfix.dss.command.DeleteWidgetCommand;
+		import com.bigfix.dss.event.RefreshWidgetsEvent;
+		import com.bigfix.dss.event.RefreshDashboardsEvent;
+		import com.bigfix.dss.event.LibraryWidgetRemoveEvent;
+      
+		include 'WidgetLibraryLib.as';
+		
+      	[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+		private var watcherManager:WatcherManager = new WatcherManager();
+	      
+		private function init():void {
+			var gridColumns:Array = new Array();
+	        for each (var coldef:Object in columns) {
+				var col:DataGridColumn = new DataGridColumn(coldef['title']);
+				col.dataField = coldef['name'];
+				gridColumns.push(col);
+	        }
+	        editorGrid.columns = gridColumns;
+	        
+	        
+			watcherManager.manage(BindingUtils.bindProperty(searchText, 'text', model, 'currentSearchText'));
+			watcherManager.manage(BindingUtils.bindProperty(model, 'currentSearchText', searchText, 'text'));
+	      }
+  
+		private function editItem(event:ListEvent):void {
+			model.previousDashboardViewState = model.dashboardViewState;
+			model.currentWidget=WidgetVO(model.widgets.getItemAt(event.rowIndex));
+			model.dashboardViewState = 'EditWidget';
+  		}
+      
+		private function deleteWidget():void {
+	        for each (var widget:WidgetVO in editorGrid.selectedItems) {
+				var deleteCommand:DeleteWidgetCommand = new DeleteWidgetCommand();
+				deleteCommand.widget = widget;
+				deleteCommand.resultHandler = function(data:Object):void {
+		  			new RefreshWidgetsEvent().dispatch();
+		  			dispatchEvent(new LibraryWidgetRemoveEvent(widget.id));
+				};
+				deleteCommand.execute(null);
+	        }
+		}
+		
+		private function onDeleteWidgetConfirmation(event:CloseEvent):void {
+			if (event.detail == 1) {
+				this.deleteWidget();
+			}
+		}
+		
+		private function deleteWidgetConfirmation():void {
+			var bool2:Boolean = (this.editorGrid.selectedItems.length > 1);
+			AlertPopUp.confirm("Are you sure you want to delete " + ((bool2) ? "the selected widgets" : "this widget") + " from your widget library ?", "Confirmation", onDeleteWidgetConfirmation);
+		}
+      
+		private function backToSideView():void {
+			this.currentState = '';
+			model.dashboardViewState = 'AddWidgets';
+		}
+
+		private function onClickCreateWidgetButton():void {
+			createWidget(this.model);
+		}
+
+		private function onTextChangedPromptingTextInputCanvas(event:TextChangedEvent):void {
+			filterWidgets(this.searchText.text, this.model);
+		}
+		
+		private function onCreationCompletePromptingTextInputCanvas():void {
+			this.searchText.addEventListener(TextChangedEvent.TYPE_TEXT_CHANGED, onTextChangedPromptingTextInputCanvas);
+		}
+		
+		private function onClose():void {
+			this.backToSideView();
+		}
+		
+		private function onChangeEditorGrid(event:ListEvent):void {
+			this.btnDeleteWidget.enabled = (this.editorGrid.selectedItems.length > 0);
+		}
+]]></mx:Script>
+
+
+	<mx:Array id="columns">
+	    <mx:Object name="name" title="Widget Name" />
+	    <mx:Object name="user_name" title="User" />
+	    <mx:Object name="visualization_type_name" title="Visualization Type" />
+	</mx:Array>
+  
+	<mx:HBox>
+		<mx:Button id="btnCreateWidget" label="Create a Widget" styleName="btnCreateAWidget" icon="@Embed(source='/assets/add-script_16x16.gif')" labelPlacement="left" toolTip="Click this button to create a Widget in your widget library." click="onClickCreateWidgetButton()"/>
+		<mx:Button id="btnDeleteWidget" label="Delete Selected Widget" styleName="btnDeleteWidget" icon="@Embed(source='/assets/delete-script_16x16.gif')" labelPlacement="left" enabled="false" toolTip="Click this button to delete the selected Widget from your widget library." click="deleteWidgetConfirmation()"/>
+		<editors:PromptingTextInputCanvas id="searchText" prompt="Search" width="150" creationComplete="onCreationCompletePromptingTextInputCanvas()"/>
+		<mx:Button id="btnBackButton" label="Back" styleName="btnBackButton" icon="@Embed(source='/assets/undo_16x16.gif')" labelPlacement="left" toolTip="Click this button to get back to the previous view." click="backToSideView()"/>
+	</mx:HBox>
+	<mx:DataGrid id="editorGrid" dataProvider="{model.widgets}" width="100%"
+               itemDoubleClick="editItem(event)" doubleClickEnabled="true" change="onChangeEditorGrid(event)"
+               allowMultipleSelection="true" editable="false" />
+</mx:TitleWindow>

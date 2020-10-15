@@ -1,0 +1,208 @@
+alabama:
+  title: Alabama
+  subgroups:
+  - alabama_alabaster
+  - alabama_albertville
+  - alabama_anniston
+  - alabama_athens
+  - alabama_auburn
+  - alabama_bessemer
+  - alabama_birmingham
+  - alabama_center_point
+  - alabama_daphne
+  - alabama_decatur
+  - alabama_dothan
+  - alabama_enterprise
+  - alabama_florence
+  - alabama_gadsden
+  - alabama_homewood
+  - alabama_hoover
+  - alabama_hueytown
+  - alabama_huntsville
+  - alabama_madison
+  - alabama_mobile
+  - alabama_montgomery
+  - alabama_mountain_brook
+  - alabama_northport
+  - alabama_opelika
+  - alabama_oxford
+  - alabama_pelham
+  - alabama_phenix_city
+  - alabama_prattville
+  - alabama_prichard
+  - alabama_selma
+  - alabama_talladega
+  - alabama_trussville
+  - alabama_tuscaloosa
+  - alabama_vestavia_hills
+
+alabama_alabaster:
+  title: Alabaster
+  type: city
+  population: 26815
+
+alabama_albertville:
+  title: Albertville
+  type: city
+  population: 18252
+
+alabama_anniston:
+  title: Anniston
+  type: city
+  population: 23748
+
+alabama_athens:
+  title: Athens
+  type: city
+  population: 20423
+
+alabama_auburn:
+  title: Auburn
+  type: city
+  population: 48401
+
+alabama_bessemer:
+  title: Bessemer
+  type: city
+  population: 28888
+
+alabama_birmingham:
+  title: Birmingham
+  type: city
+  population: 233143
+
+alabama_center_point:
+  title: Center Point
+  type: city
+  population: 15451
+
+alabama_daphne:
+  title: Daphne
+  type: city
+  population: 18116
+
+alabama_decatur:
+  title: Decatur
+  type: city
+  population: 54402
+
+alabama_dothan:
+  title: Dothan
+  type: city
+  population: 61395
+
+alabama_enterprise:
+  title: Enterprise
+  type: city
+  population: 22254
+
+alabama_florence:
+  title: Florence
+  type: city
+  population: 36238
+
+alabama_gadsden:
+  title: Gadsden
+  type: city
+  population: 37589
+
+alabama_homewood:
+  title: Homewood
+  type: city
+  population: 24261
+
+alabama_hoover:
+  title: Hoover
+  type: city
+  population: 66351
+
+alabama_hueytown:
+  title: Hueytown
+  type: city
+  population: 15320
+
+alabama_huntsville:
+  title: Huntsville
+  type: city
+  population: 164570
+
+alabama_madison:
+  title: Madison
+  type: city
+  population: 35079
+
+alabama_mobile:
+  title: Mobile
+  type: city
+  population: 192557
+
+alabama_montgomery:
+  title: Montgomery
+  type: city
+  population: 200223
+
+alabama_mountain_brook:
+  title: Mountain Brook
+  type: city
+  population: 20747
+
+alabama_northport:
+  title: Northport
+  type: city
+  population: 20506
+
+alabama_opelika:
+  title: Opelika
+  type: city
+  population: 23468
+
+alabama_oxford:
+  title: Oxford
+  type: city
+  population: 19820
+
+alabama_pelham:
+  title: Pelham
+  type: city
+  population: 18119
+
+alabama_phenix_city:
+  title: Phenix City
+  type: city
+  population: 29011
+
+alabama_prattville:
+  title: Prattville
+  type: city
+  population: 28918
+
+alabama_prichard:
+  title: Prichard
+  type: city
+  population: 27593
+
+alabama_selma:
+  title: Selma
+  type: city
+  population: 19546
+
+alabama_talladega:
+  title: Talladega
+  type: city
+  population: 17069
+
+alabama_trussville:
+  title: Trussville
+  type: city
+  population: 16020
+
+alabama_tuscaloosa:
+  title: Tuscaloosa
+  type: city
+  population: 80217
+
+alabama_vestavia_hills:
+  title: Vestavia Hills
+  type: city
+  population: 31032
+

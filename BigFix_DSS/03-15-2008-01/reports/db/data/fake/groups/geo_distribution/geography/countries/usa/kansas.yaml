@@ -1,0 +1,148 @@
+kansas:
+  title: Kansas
+  subgroups:
+  - kansas_derby
+  - kansas_dodge_city
+  - kansas_emporia
+  - kansas_garden_city
+  - kansas_great_bend
+  - kansas_hays
+  - kansas_hutchinson
+  - kansas_junction_city
+  - kansas_kansas_city
+  - kansas_lawrence
+  - kansas_leavenworth
+  - kansas_leawood
+  - kansas_lenexa
+  - kansas_liberal
+  - kansas_manhattan
+  - kansas_newton
+  - kansas_olathe
+  - kansas_overland_park
+  - kansas_pittsburg
+  - kansas_prairie_village
+  - kansas_salina
+  - kansas_shawnee
+  - kansas_topeka
+  - kansas_wichita
+
+kansas_derby:
+  title: Derby
+  type: city
+  population: 20309
+
+kansas_dodge_city:
+  title: Dodge City
+  type: city
+  population: 25901
+
+kansas_emporia:
+  title: Emporia
+  type: city
+  population: 26735
+
+kansas_garden_city:
+  title: Garden City
+  type: city
+  population: 27242
+
+kansas_great_bend:
+  title: Great Bend
+  type: city
+  population: 15441
+
+kansas_hays:
+  title: Hays
+  type: city
+  population: 19827
+
+kansas_hutchinson:
+  title: Hutchinson
+  type: city
+  population: 40974
+
+kansas_junction_city:
+  title: Junction City
+  type: city
+  population: 16828
+
+kansas_kansas_city:
+  title: Kansas City
+  type: city
+  population: 144536
+
+kansas_lawrence:
+  title: Lawrence
+  type: city
+  population: 81842
+
+kansas_leavenworth:
+  title: Leavenworth
+  type: city
+  population: 35285
+
+kansas_leawood:
+  title: Leawood
+  type: city
+  population: 29516
+
+kansas_lenexa:
+  title: Lenexa
+  type: city
+  population: 42632
+
+kansas_liberal:
+  title: Liberal
+  type: city
+  population: 20236
+
+kansas_manhattan:
+  title: Manhattan
+  type: city
+  population: 47915
+
+kansas_newton:
+  title: Newton
+  type: city
+  population: 18140
+
+kansas_olathe:
+  title: Olathe
+  type: city
+  population: 108440
+
+kansas_overland_park:
+  title: Overland Park
+  type: city
+  population: 162795
+
+kansas_pittsburg:
+  title: Pittsburg
+  type: city
+  population: 19215
+
+kansas_prairie_village:
+  title: Prairie Village
+  type: city
+  population: 21520
+
+kansas_salina:
+  title: Salina
+  type: city
+  population: 45964
+
+kansas_shawnee:
+  title: Shawnee
+  type: city
+  population: 56201
+
+kansas_topeka:
+  title: Topeka
+  type: city
+  population: 121691
+
+kansas_wichita:
+  title: Wichita
+  type: city
+  population: 353562
+

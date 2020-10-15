@@ -1,0 +1,94 @@
+maryland:
+  title: Maryland
+  subgroups:
+  - maryland_annapolis
+  - maryland_baltimore
+  - maryland_bowie
+  - maryland_college_park
+  - maryland_cumberland
+  - maryland_frederick
+  - maryland_gaithersburg
+  - maryland_greenbelt
+  - maryland_hagerstown
+  - maryland_hyattsville
+  - maryland_laurel
+  - maryland_rockville
+  - maryland_salisbury
+  - maryland_takoma_park
+  - maryland_westminster
+
+maryland_annapolis:
+  title: Annapolis
+  type: city
+  population: 36276
+
+maryland_baltimore:
+  title: Baltimore
+  type: city
+  population: 641943
+
+maryland_bowie:
+  title: Bowie
+  type: city
+  population: 53632
+
+maryland_college_park:
+  title: College Park
+  type: city
+  population: 25112
+
+maryland_cumberland:
+  title: Cumberland
+  type: city
+  population: 21104
+
+maryland_frederick:
+  title: Frederick
+  type: city
+  population: 57028
+
+maryland_gaithersburg:
+  title: Gaithersburg
+  type: city
+  population: 57903
+
+maryland_greenbelt:
+  title: Greenbelt
+  type: city
+  population: 22167
+
+maryland_hagerstown:
+  title: Hagerstown
+  type: city
+  population: 37554
+
+maryland_hyattsville:
+  title: Hyattsville
+  type: city
+  population: 16642
+
+maryland_laurel:
+  title: Laurel
+  type: city
+  population: 22062
+
+maryland_rockville:
+  title: Rockville
+  type: city
+  population: 57041
+
+maryland_salisbury:
+  title: Salisbury
+  type: city
+  population: 25484
+
+maryland_takoma_park:
+  title: Takoma Park
+  type: city
+  population: 18511
+
+maryland_westminster:
+  title: Westminster
+  type: city
+  population: 17680
+

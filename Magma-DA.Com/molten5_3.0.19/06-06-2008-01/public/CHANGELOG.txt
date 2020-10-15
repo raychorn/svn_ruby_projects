@@ -1,0 +1,74 @@
+CHANGELOG
+=========
+
+Version 2.2.0, 10/1/2007
+------------------------
+- Improved functionality to case sharing: added ability for "User Manager" to subscribe other people to cases.
+- case search: enabled highlighting
+- bug fixes to case search
+
+Version 2.1.0, 9/1/2007
+------------------------
+- Maintenance release (backend improvements)
+
+
+Version 2.0.0, 8/17/2007
+------------------------
+
+- Enhancements to "Create New Case" functionality: improved user interface performs backend search for matching solutions and similar cases during new case creation.
+- Added "New Case - Beta" button
+- Bug fix: search solutions
+- Case search enhancements
+- Added updated date/time value to the export spreadsheet
+
+
+Version 1.9.0, 7/27/2007
+------------------------
+- New feature: MOLTEN full text search of Support Cases
+- New feature: added "Need By Date" and "CR Status" to the list of fields available as columns for the Support Case grid
+- New feature: Display timestamps on all case related pages
+- New feature: changed field sizes on "New Case" page
+- Bug fix: "Last Update" field must reflect any case change
+- Bug fix: Cases tab doesn't display all case statuses
+- Bug fix: Case owner changes in certain situations
+
+Version 1.8.0, 6/7/2007
+------------------------
+- Added "Account Specific" Solutions
+- Improved new user registration process
+
+Version 1.7.0, 5/22/2007
+------------------------
+- Finished search engine improvements: added wildcard search, Boolean search etc.
+- PRINT button works on solutions and cases
+- Added RSS feed for solutions
+- New solutions: added count of new solutions in last 30 days
+- New solutions: added "recently added solutions" view
+
+Version 1.6.0, 5/9/2007
+------------------------
+- improved search engine, more improvements to come in next release
+- re-ordered sections on the home page
+- display count on new solutions added in last 30 days
+
+Version 1.5.0, 4/19/2007
+------------------------
+- feature: added functionality to edit support case
+- feature: added functionality to navigate account hierarchy and see support cases belonging to different accounts
+- feature: added "maintenance announcement" functionality
+- feature: added functionality to customize "View Support Cases" tab in terms of visible columns.
+
+Version 1.4.0, 4/3/2007
+------------------------
+- feature: added functionality to rate how case was handled; rating goes from "Excellent" to "Poor"
+- feature: added CHANGELOG, linked from footer of any page to this document.
+- bug fix: some cases were not visible in MOLTEN, depending on status; fixed so that all cases, regardless of status are visible.
+- bug fix: solution count is not visible any more
+
+
+Version 1.3.0, 3/22/2007
+------------------------
+- feature: added functionality to close the case and leave comment on how case was handled;
+- feature: check user browser and alert if JavaScript is not enabled.
+- bug fix: case priority changes to "Medium" by itself;
+- bug fix: improved wording on automatic email sent as a result of user registration and password change;

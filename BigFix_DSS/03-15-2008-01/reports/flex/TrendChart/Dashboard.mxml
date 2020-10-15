@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:cc="customComponents.*" width="100%" height="100%" creationComplete="remoteService.getData.send()">
+	<mx:Style source="default.css"/>
+	<mx:Style source="Dashboard.css"/>
+	<mx:Script source="Dashboard.as"/>
+	<mx:Script source="dump.as"/>
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.view.general.Alert.AlertPopUp;
+		]]>
+	</mx:Script>
+
+	<mx:RemoteObject id="remoteService" destination="Dashboard" showBusyCursor="true" fault="AlertPopUp.error(event.fault.faultString, 'Error');">
+		<mx:method name="getData">
+			<mx:arguments>
+				<mx:arg1>{dashboardOptions.valueOf()}</mx:arg1>
+			</mx:arguments>
+		</mx:method>
+	</mx:RemoteObject>
+
+
+	<mx:ApplicationControlBar width="100%">
+		<mx:Text text="Risk Dashboard"/>
+		<mx:Spacer width="100%"/>
+		<mx:ButtonBar toolTipField="toolTip" labelField="label" itemClick="showPopUp(event.item)">
+			<mx:dataProvider>
+				<mx:Array>
+					<mx:Object label="Print" layer="printOptions" toolTip="Click here to Print current Dashboard"/>
+					<mx:Object label="Help" layer="help" toolTip="Click here for instructions on using the Dashboard"/>
+				</mx:Array>
+			</mx:dataProvider>
+		</mx:ButtonBar>
+	</mx:ApplicationControlBar>
+
+	<mx:VBox width="100%" height="100%">
+		<mx:Panel headerHeight="0" width="100%" height="100%">
+			<mx:Grid>
+				<mx:GridRow fontSize="18" fontStyle="bold">
+					<mx:GridItem><mx:Text text="Region"/></mx:GridItem>
+					<mx:GridItem><mx:Text text="Risk Level"/></mx:GridItem>
+					<mx:GridItem horizontalAlign="center"><mx:Text text="Trend"/></mx:GridItem>
+					<mx:GridItem horizontalAlign="right"><mx:Text text="Current"/></mx:GridItem>
+					<mx:GridItem horizontalAlign="right"><mx:Text text="Change"/></mx:GridItem>
+				</mx:GridRow>
+				<mx:GridRow>
+					<mx:GridItem colSpan="5"><mx:HRule strokeWidth="1" strokeColor="0x4f4f47" width="100%"/></mx:GridItem>
+				</mx:GridRow>
+				<mx:Repeater id="rows" dataProvider="{remoteService.getData.lastResult}">
+					<mx:GridRow fontSize="{calculateFontSize(rows.currentItem.depth)}" paddingTop="{calculatePadding(rows.currentItem.depth)}" paddingBottom="{calculatePadding(rows.currentItem.depth)}">
+						<mx:GridItem>
+							<mx:Text text="{calculateIndent(rows.currentItem.depth)}{rows.currentItem.name}"/>
+							<mx:Spacer width="15"/>
+						</mx:GridItem>
+						<mx:GridItem>
+							<mx:Text text="{calculateIndent(rows.currentItem.depth)}{rows.currentItem.risk}" color="{calculateRiskColor(rows.currentItem.risk)}"/>
+							<mx:Spacer width="15"/>
+						</mx:GridItem>
+						<mx:GridItem><cc:Sparkline trendData="{rows.currentItem.trendData}" width="150" yField="yValue"/></mx:GridItem>
+						<mx:GridItem horizontalAlign="right"><mx:Text text="{rows.currentItem.current}"/></mx:GridItem>
+						<mx:GridItem horizontalAlign="right" color="{calculateColor(rows.currentItem.change_absolute)}" fontSize="{calculateFontSizeData(rows.currentItem.depth)}">
+							<!--
+							<mx:Text text="{formatChangeAbsolute(rows.currentItem.change_absolute)} ({rows.currentItem.change_percentage}%)"/>
+							-->
+							<mx:Text text="{rows.currentItem.change_absolute} ({rows.currentItem.change_percentage}%)"/>
+						</mx:GridItem>
+					</mx:GridRow>
+				</mx:Repeater>
+			</mx:Grid>
+		</mx:Panel>
+	</mx:VBox>
+	<mx:Box id="hiddenOptionsContent" visible="false" height="0">
+
+	</mx:Box>
+</mx:Application>

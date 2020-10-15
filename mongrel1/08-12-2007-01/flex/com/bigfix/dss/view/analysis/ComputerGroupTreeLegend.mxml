@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bfcontrols:Tree xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:bfcontrols="com.bigfix.extensions.controls.*"
+	width="100%" height="100%"
+	showRoot="false"
+	dataProvider="{model.computer_group_tree}" labelField="name"
+	defaultLeafIcon="{null}" folderClosedIcon="{null}" folderOpenIcon="{null}"
+	itemRenderer="com.bigfix.extensions.controls.treeClasses.TreeItemRenderer"
+	creationComplete="init()"
+	change="removeAllLegendMarkers(event)">
+	<mx:Script><![CDATA[
+		import mx.charts.LineChart;
+		import mx.events.FlexEvent;
+		import mx.events.PropertyChangeEvent;
+		import mx.events.ListEvent;
+		import mx.binding.utils.ChangeWatcher;
+		import mx.charts.series.LineSeries;
+
+		import com.bigfix.extensions.controls.treeClasses.TreeItemRenderer;
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.vo.ComputerGroupVO;
+
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+		public var initialSelectedID:int;
+		public var chart:LineChart;
+
+		private function init():void {
+			if (initialSelectedID) {
+				this.expandTo('id',initialSelectedID);
+			}
+		}
+
+		/* this method is called from TrendAnalysis.resultHandler after it's finished all it's series nonsense */
+		public function updateLegends():void {
+			for each (var series:* in chart.series) {
+				if (series is LineSeries) {
+					// find the tree item for this computer group. we cheat here by looking at the selectedItem and children of selectedItem
+					if (ComputerGroupVO(this.selectedItem).id == series.name) {
+						ComputerGroupVO(this.selectedItem).legendMarker = series.legendData[0].marker;
+					} else {
+						for each (var child:ComputerGroupVO in this.selectedItem.children) {
+							if (child.id == series.name) { // series.name is actually Computer Group ID!
+								// we found a match, set the legendMarker property of the ComputerGroup and our custom TreeItemRenderer handles the rest
+								child.legendMarker = series.legendData[0].marker;
+							}
+						}
+					}
+				}
+			}
+			this.refreshIcons();
+		}
+
+		/* handle changing computer groups */
+		private function removeAllLegendMarkers(event:*):void {
+			for (var i:int = 0; i < model.computer_group_tree.length; i++) {
+				removeLegendMarker(model.computer_group_tree[i]);
+			}
+		}
+
+		private function removeLegendMarker(node:ComputerGroupVO):void {
+			node.legendMarker = null;
+			if (node.children) {
+				for (var i:int = 0; i < node.children.length; i++) {
+					removeLegendMarker(node.children[i]);
+				}
+			}
+		}
+
+	]]></mx:Script>
+</bfcontrols:Tree>

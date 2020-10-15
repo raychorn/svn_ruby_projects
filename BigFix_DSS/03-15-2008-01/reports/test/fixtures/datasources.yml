@@ -1,0 +1,10 @@
+one:
+  id: 1
+  name: qabes
+  datasource_type_id: 2
+  connection_params: blah
+two:
+  id: 2
+  name: pollo
+  datasource_type_id: 2
+  connection_params: blah

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Box 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:flexlib="flexlib.controls.*"
+	width="100%" 
+	styleName="applicationControlBar">
+	<mx:Script><![CDATA[
+		import mx.binding.utils.ChangeWatcher;
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.util.ArrayCollectionUtils;
+		import mx.collections.ArrayCollection;
+		import mx.controls.Button;
+		import mx.events.ItemClickEvent;
+		import com.bigfix.dss.event.LogoutEvent;
+		import com.bigfix.dss.util.DSS;
+		
+		[Bindable]
+		private var model:DSSModelLocator = DSS.model;
+		
+		private var _buttonBarButtons:ArrayCollection;
+		
+		private var _modelWatcher:ChangeWatcher;
+		
+		private var _ignoreChangeWatcher:Boolean = false;
+		
+		private function placeToolTipOnButtonBarButtonNamed(name:String, tooltip:String = ""):void {
+			var i:int = ArrayCollectionUtils.findIndexOfItem(this._buttonBarButtons, "name", name);
+			if (i > -1) {
+				var btn:Button = Button(this._buttonBarButtons[i]);
+				btn.toolTip = tooltip;
+			}
+		}
+		
+		private function clearButtonStyles(buttons:ArrayCollection, targetPropName:String = null, targetLabel:String = null):void {
+			var b:Button;
+			var btn:Button;
+			if (buttons != null) {
+				var i:int = ArrayCollectionUtils.findIndexOfItem( buttons, targetPropName, targetLabel);
+				if (i > -1) {
+					btn = Button(buttons.getItemAt(i));
+					if (btn != null) {
+						btn.styleName = ((btn.styleName == "mybuttonBarPressedButtonStyle") ? "mybuttonBarButtonStyle" : "mybuttonBarPressedButtonStyle");
+					}
+				}
+				for (var j:int = 0; j < buttons.length; j++) {
+					b = Button(buttons.getItemAt(j));
+					if ( (b != null) && (b != btn) ) {
+						b.styleName = "mybuttonBarButtonStyle";
+					}
+				}
+			}
+		}
+		
+		private function handleButtonClick(event:ItemClickEvent):void {
+			var buttons:ArrayCollection = new ArrayCollection(ButtonBar(event.currentTarget).getChildren());
+			this.clearButtonStyles( buttons, "label", event.item.label);
+			this._ignoreChangeWatcher = true;
+			switch (event.item.name) {
+				case "logout":
+					new LogoutEvent(model.sessionID).dispatch();
+					break;
+				case "help":
+					if (model.workspaceViewState == 'Help') {
+						model.workspaceViewState = 'Default';
+						this.placeToolTipOnButtonBarButtonNamed("help", "Instructions on using the system. (Not yet implemented.)");
+					} else {
+						model.workspaceViewState = 'Help';
+						this.placeToolTipOnButtonBarButtonNamed("help", "Click this button again to remove the help panel.");
+					}
+					break;
+				case "myAccount":
+					if (model.workspaceViewState == 'My Account') {
+						model.workspaceViewState = 'Default';
+						this.placeToolTipOnButtonBarButtonNamed("myAccount", "Change your password, etc.");
+					} else {
+						model.workspaceViewState = 'My Account';
+						this.placeToolTipOnButtonBarButtonNamed("myAccount", "Click this button again to remove the My Account panel.");
+					}
+				  break;
+			}
+		}
+
+		public function signalAbilityToLogout(bool:Boolean):void {
+			var btn:Button = Button(this.btnBar.getChildAt(1));
+			btn.enabled = bool;
+		}
+		
+		private function onChange_workspaceViewState(event:Event):void {
+			if (this._ignoreChangeWatcher == false) {
+				this.clearButtonStyles( this._buttonBarButtons);
+			}
+			this._ignoreChangeWatcher = false;
+		}
+		
+		private function onCreationCompleteButtonBar():void {
+			this._buttonBarButtons = new ArrayCollection(this.btnBar.getChildren());
+			this._modelWatcher = ChangeWatcher.watch( this.model, "workspaceViewState", onChange_workspaceViewState);
+		}
+	]]></mx:Script>
+	<mx:VBox width="100%">
+		<mx:HBox width="100%">
+			<mx:Text text="{model.applicationName}"/>
+			<mx:Spacer width="100%"/>
+			<flexlib:PromptingTextInput prompt="Search" fontSize="9"/>
+			<mx:ButtonBar id="btnBar" toolTipField="toolTip" labelField="label" itemClick="handleButtonClick(event)" creationComplete="onCreationCompleteButtonBar()">
+				<mx:dataProvider>
+					<mx:Array>
+						<mx:Object label="My Account" toolTip="Change your password, etc." name="myAccount"/>
+						<mx:Object label="Logout" toolTip="Log out" name="logout"/>
+						<mx:Object label="Help" toolTip="Instructions on using the system. (Not yet implemented.)" name="help"/>
+					</mx:Array>
+				</mx:dataProvider>
+			</mx:ButtonBar>
+		</mx:HBox>
+	</mx:VBox>
+</mx:Box>

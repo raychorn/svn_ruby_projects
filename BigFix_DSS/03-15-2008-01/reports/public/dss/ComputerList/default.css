@@ -1,0 +1,95 @@
+
+/*
+dark Grey: 4f4f47
+Green: b0b631
+Orange: e4b61b
+Blue: 7c94b7
+
+chart colors
+Dark Green: 5c8a8b
+Purple: 8f56a2
+Brown: b18467
+
+
+Light Grey: f8f7f5
+Deep Blue: 5970A4
+*/
+
+Application {
+	backgroundColor: #ffffff;
+	backgroundGradientColors: #ffffff, #ffffff;
+	color: #4f4f47;
+	themeColor: #b0b631;
+	paddingLeft: 0;
+	paddingRight: 0;
+	paddingTop: 0;
+	paddingBottom: 0;
+}
+
+ApplicationControlBar {
+	borderStyle: solid;
+	backgroundColor: #4f4f47;
+	borderThickness: 0;
+	cornerRadius: 7;
+	dropShadowEnabled: false;
+	color: #FFFFFF;
+	fontWeight: bold;
+	fontSize: 16;
+}
+
+ButtonBar {
+   buttonStyleName: "mybuttonBarButtonStyle";
+}
+
+.mybuttonBarButtonStyle {
+   fontSize: 9;
+   highlightAlphas: 0, 0;
+   fillAlphas: 0, 0, 1, 1;
+   fillColors: #000000, #000000, #b0b631, #b0b631;
+   textRollOverColor: #ffffff;
+   borderColor: #ffffff;
+}
+
+Panel, TitleWindow {
+   borderStyle: solid;
+   borderColor: #d2d2d2;
+   borderAlpha: 1;
+   borderThickness: 1;
+   roundedBottomCorners: true;
+   cornerRadius: 7;
+   backgroundColor: #f8f7f5;
+   dropShadowEnabled: false;
+   titleStyleName: "mypanelTitle";
+   modalTransparencyColor: #4f4f47;
+   modalTransparency: 0.75;
+}
+
+.mypanelTitle {
+   color: #5970a4;
+   fontSize: 12;
+   fontWeight: bold;
+}
+
+ToolTip {
+   backgroundColor: #e4b61b;
+   color: #4f4f47;
+}
+
+HScrollBar {
+   cornerRadius: 0;
+}
+
+VScrollBar {
+   cornerRadius: 0;
+}
+
+Tree {
+	useRollOver: false;
+	borderStyle: none;
+	/* selectionColor: #b0b631; */
+	backgroundAlpha: 0;
+}
+
+PieSeries {
+	fills: #8f56a2, #5970A4, #b18467, #b0b631, #e4b61b;
+}

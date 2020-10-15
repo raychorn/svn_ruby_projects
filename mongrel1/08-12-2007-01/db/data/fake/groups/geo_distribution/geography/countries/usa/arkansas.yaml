@@ -1,0 +1,142 @@
+arkansas:
+  title: Arkansas
+  subgroups:
+  - arkansas_benton
+  - arkansas_bentonville
+  - arkansas_blytheville
+  - arkansas_cabot
+  - arkansas_conway
+  - arkansas_el_dorado
+  - arkansas_fayetteville
+  - arkansas_fort_smith
+  - arkansas_hot_springs
+  - arkansas_jacksonville
+  - arkansas_jonesboro
+  - arkansas_little_rock
+  - arkansas_north_little_rock
+  - arkansas_paragould
+  - arkansas_pine_bluff
+  - arkansas_rogers
+  - arkansas_russellville
+  - arkansas_searcy
+  - arkansas_sherwood
+  - arkansas_springdale
+  - arkansas_texarkana
+  - arkansas_van_buren
+  - arkansas_west_memphis
+
+arkansas_benton:
+  title: Benton
+  type: city
+  population: 24787
+
+arkansas_bentonville:
+  title: Bentonville
+  type: city
+  population: 27799
+
+arkansas_blytheville:
+  title: Blytheville
+  type: city
+  population: 16834
+
+arkansas_cabot:
+  title: Cabot
+  type: city
+  population: 19590
+
+arkansas_conway:
+  title: Conway
+  type: city
+  population: 50416
+
+arkansas_el_dorado:
+  title: El Dorado
+  type: city
+  population: 20662
+
+arkansas_fayetteville:
+  title: Fayetteville
+  type: city
+  population: 64528
+
+arkansas_fort_smith:
+  title: Fort Smith
+  type: city
+  population: 81769
+
+arkansas_hot_springs:
+  title: Hot Springs
+  type: city
+  population: 37277
+
+arkansas_jacksonville:
+  title: Jacksonville
+  type: city
+  population: 30513
+
+arkansas_jonesboro:
+  title: Jonesboro
+  type: city
+  population: 58485
+
+arkansas_little_rock:
+  title: Little Rock
+  type: city
+  population: 183799
+
+arkansas_north_little_rock:
+  title: North Little Rock
+  type: city
+  population: 59183
+
+arkansas_paragould:
+  title: Paragould
+  type: city
+  population: 23330
+
+arkansas_pine_bluff:
+  title: Pine Bluff
+  type: city
+  population: 53067
+
+arkansas_rogers:
+  title: Rogers
+  type: city
+  population: 45655
+
+arkansas_russellville:
+  title: Russellville
+  type: city
+  population: 25274
+
+arkansas_searcy:
+  title: Searcy
+  type: city
+  population: 20345
+
+arkansas_sherwood:
+  title: Sherwood
+  type: city
+  population: 22528
+
+arkansas_springdale:
+  title: Springdale
+  type: city
+  population: 56714
+
+arkansas_texarkana:
+  title: Texarkana
+  type: city
+  population: 29531
+
+arkansas_van_buren:
+  title: Van Buren
+  type: city
+  population: 20688
+
+arkansas_west_memphis:
+  title: West Memphis
+  type: city
+  population: 28144
+

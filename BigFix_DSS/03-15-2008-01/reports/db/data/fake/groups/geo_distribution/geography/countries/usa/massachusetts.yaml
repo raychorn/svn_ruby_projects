@@ -1,0 +1,274 @@
+massachusetts:
+  title: Massachusetts
+  subgroups:
+  - massachusetts_agawam
+  - massachusetts_attleboro
+  - massachusetts_barnstable_town
+  - massachusetts_beverly
+  - massachusetts_boston
+  - massachusetts_brockton
+  - massachusetts_cambridge
+  - massachusetts_chelsea
+  - massachusetts_chicopee
+  - massachusetts_easthampton
+  - massachusetts_everett
+  - massachusetts_fall_river
+  - massachusetts_fitchburg
+  - massachusetts_franklin
+  - massachusetts_gardner
+  - massachusetts_gloucester
+  - massachusetts_haverhill
+  - massachusetts_holyoke
+  - massachusetts_lawrence
+  - massachusetts_leominster
+  - massachusetts_lowell
+  - massachusetts_lynn
+  - massachusetts_malden
+  - massachusetts_marlborough
+  - massachusetts_medford
+  - massachusetts_melrose
+  - massachusetts_methuen
+  - massachusetts_new_bedford
+  - massachusetts_newburyport
+  - massachusetts_newton
+  - massachusetts_northampton
+  - massachusetts_peabody
+  - massachusetts_pittsfield
+  - massachusetts_quincy
+  - massachusetts_revere
+  - massachusetts_salem
+  - massachusetts_somerville
+  - massachusetts_springfield
+  - massachusetts_taunton
+  - massachusetts_waltham
+  - massachusetts_watertown
+  - massachusetts_westfield
+  - massachusetts_west_springfield
+  - massachusetts_woburn
+  - massachusetts_worcester
+
+massachusetts_agawam:
+  title: Agawam
+  type: city
+  population: 28593
+
+massachusetts_attleboro:
+  title: Attleboro
+  type: city
+  population: 43429
+
+massachusetts_barnstable_town:
+  title: Barnstable Town
+  type: city
+  population: 48386
+
+massachusetts_beverly:
+  title: Beverly
+  type: city
+  population: 40086
+
+massachusetts_boston:
+  title: Boston
+  type: city
+  population: 567660
+
+massachusetts_brockton:
+  title: Brockton
+  type: city
+  population: 94877
+
+massachusetts_cambridge:
+  title: Cambridge
+  type: city
+  population: 100802
+
+massachusetts_chelsea:
+  title: Chelsea
+  type: city
+  population: 33140
+
+massachusetts_chicopee:
+  title: Chicopee
+  type: city
+  population: 54796
+
+massachusetts_easthampton:
+  title: Easthampton
+  type: city
+  population: 16054
+
+massachusetts_everett:
+  title: Everett
+  type: city
+  population: 37144
+
+massachusetts_fall_river:
+  title: Fall River
+  type: city
+  population: 92396
+
+massachusetts_fitchburg:
+  title: Fitchburg
+  type: city
+  population: 39865
+
+massachusetts_franklin:
+  title: Franklin
+  type: city
+  population: 30169
+
+massachusetts_gardner:
+  title: Gardner
+  type: city
+  population: 20943
+
+massachusetts_gloucester:
+  title: Gloucester
+  type: city
+  population: 30752
+
+massachusetts_haverhill:
+  title: Haverhill
+  type: city
+  population: 60357
+
+massachusetts_holyoke:
+  title: Holyoke
+  type: city
+  population: 40027
+
+massachusetts_lawrence:
+  title: Lawrence
+  type: city
+  population: 71707
+
+massachusetts_leominster:
+  title: Leominster
+  type: city
+  population: 41862
+
+massachusetts_lowell:
+  title: Lowell
+  type: city
+  population: 103518
+
+massachusetts_lynn:
+  title: Lynn
+  type: city
+  population: 89298
+
+massachusetts_malden:
+  title: Malden
+  type: city
+  population: 55265
+
+massachusetts_marlborough:
+  title: Marlborough
+  type: city
+  population: 37649
+
+massachusetts_medford:
+  title: Medford
+  type: city
+  population: 53998
+
+massachusetts_melrose:
+  title: Melrose
+  type: city
+  population: 26497
+
+massachusetts_methuen:
+  title: Methuen
+  type: city
+  population: 44751
+
+massachusetts_new_bedford:
+  title: New Bedford
+  type: city
+  population: 93822
+
+massachusetts_newburyport:
+  title: Newburyport
+  type: city
+  population: 17515
+
+massachusetts_newton:
+  title: Newton
+  type: city
+  population: 83695
+
+massachusetts_northampton:
+  title: Northampton
+  type: city
+  population: 28864
+
+massachusetts_peabody:
+  title: Peabody
+  type: city
+  population: 50264
+
+massachusetts_pittsfield:
+  title: Pittsfield
+  type: city
+  population: 44249
+
+massachusetts_quincy:
+  title: Quincy
+  type: city
+  population: 89813
+
+massachusetts_revere:
+  title: Revere
+  type: city
+  population: 46047
+
+massachusetts_salem:
+  title: Salem
+  type: city
+  population: 41825
+
+massachusetts_somerville:
+  title: Somerville
+  type: city
+  population: 75648
+
+massachusetts_springfield:
+  title: Springfield
+  type: city
+  population: 151975
+
+massachusetts_taunton:
+  title: Taunton
+  type: city
+  population: 56548
+
+massachusetts_waltham:
+  title: Waltham
+  type: city
+  population: 59159
+
+massachusetts_watertown:
+  title: Watertown
+  type: city
+  population: 32560
+
+massachusetts_westfield:
+  title: Westfield
+  type: city
+  population: 40529
+
+massachusetts_west_springfield:
+  title: West Springfield
+  type: city
+  population: 28027
+
+massachusetts_woburn:
+  title: Woburn
+  type: city
+  population: 37397
+
+massachusetts_worcester:
+  title: Worcester
+  type: city
+  population: 175770
+

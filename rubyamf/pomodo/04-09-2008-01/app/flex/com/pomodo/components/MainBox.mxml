@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:pom="com.pomodo.components.*"
+    minWidth="1000"
+    minHeight="680"
+    paddingLeft="5"
+    paddingRight="5"
+    paddingTop="5"
+    paddingBottom="5"
+    width="100%"
+    height="100%"
+    backgroundColor="#FFFFFF"
+    creationComplete="handleCreationComplete()">
+<mx:Script>
+<![CDATA[
+    import com.pomodo.control.EventNames;
+    import com.pomodo.util.CairngormUtils;
+    import com.pomodo.model.PomodoModelLocator;
+
+    [Bindable]
+    private var _model:PomodoModelLocator =
+        PomodoModelLocator.getInstance();
+    
+    private function logout():void {
+        CairngormUtils.dispatchEvent(EventNames.LOAD_URL, "/logout");
+    }
+    
+    private function handleCreationComplete():void {
+        CairngormUtils.dispatchEvent(EventNames.SHOW_NOTE);
+        CairngormUtils.dispatchEvent(EventNames.LIST_PROJECTS);
+        CairngormUtils.dispatchEvent(EventNames.LIST_LOCATIONS);
+    }
+]]>
+</mx:Script>
+    <mx:HBox width="100%" height="100%">
+        <mx:VBox width="300" height="100%">
+            <mx:Image source="com/pomodo/assets/logo_md.png"/>
+            <mx:Label text="{'Logged in as: ' +
+                _model.user.login +
+                ' (' + _model.user.email + ')'}"/>
+            <mx:Label text="{'Welcome back ' +
+                _model.user.firstName + '!'}"/>
+            <mx:Accordion width="100%" height="350">
+                <pom:TaskCreateBox id="taskCreateBox"/>
+                <pom:ProjectCreateBox id="projectCreateBox"/>
+                <pom:LocationCreateBox id="locationCreateBox"/>
+            </mx:Accordion>
+            <mx:DateChooser id="dateChooser" width="100%"/>
+            <mx:Button label="logout" width="100%"
+                click="logout()"/>
+        </mx:VBox>
+        <mx:VBox width="100%" height="100%">
+            <pom:CommandShell/>
+            <mx:TabNavigator width="100%" height="100%">
+                <pom:TasksListBox id="tasksTab"/>
+                <pom:ProjectsListBox id="projectsTab"/>
+                <pom:LocationsListBox id="locationsTab"/>
+                <pom:Notely id="notelyTab"/>
+                <pom:AccountBox id="accountTab"/>
+            </mx:TabNavigator>
+        </mx:VBox>
+    </mx:HBox>
+</mx:HBox>

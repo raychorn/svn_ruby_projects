@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:cpv="com.pomodo.validators.*"
+    width="100%" height="100%" label="Create Account">
+<mx:Script>
+<![CDATA[
+    import mx.controls.Alert;
+    import mx.events.ValidationResultEvent;
+    import mx.validators.Validator;
+    import com.pomodo.control.EventNames;
+    import com.pomodo.model.User;
+    import com.pomodo.model.PomodoModelLocator;
+    import com.pomodo.util.CairngormUtils;
+    import com.pomodo.validators.ServerErrors;
+
+    [Bindable]
+    private var _model:PomodoModelLocator =
+        PomodoModelLocator.getInstance();
+    
+    private function validateAndSubmit():void {
+        var results:Array = Validator.validateAll([
+            usernameValidator,
+            emailValidator,
+            passwordValidator,
+            passwordConfirmationValidator]);
+        if (results.length > 0) {
+            Alert.show("Please correct the validation errors " +
+                "highlighted on the form.",
+                "Account Not Created");
+            return;
+        }
+        var user:User = new User(
+            loginTI.text,
+            emailTI.text,
+            firstNameTI.text,
+            lastNameTI.text,
+            passwordTI.text);
+        CairngormUtils.dispatchEvent(
+            EventNames.CREATE_USER, user);
+    }
+    
+    private function showTOS():void {
+        Alert.show(
+            "The first rule of pomodo is: Don't talk about " +
+            "pomodo. The second rule of pomodo is: Don't " +
+            "talk about pomodo.", "Terms of Service");
+    }    
+]]>
+</mx:Script>
+    <mx:EmailValidator id="emailValidator" source="{emailTI}"
+        property="text"/>
+    <mx:StringValidator
+        id="usernameValidator"
+        source="{loginTI}"
+        property="text"
+        required="true"
+        maxLength="80"/>
+    <mx:StringValidator
+        id="passwordValidator"
+        source="{passwordTI}"
+        property="text"
+        required="true"
+        minLength="4"
+        maxLength="40"/>
+    <cpv:PasswordConfirmationValidator
+        id="passwordConfirmationValidator"
+        password="{passwordTI.text}"
+        source="{confirmPasswordTI}"
+        property="text"
+        required="true"/>
+    <cpv:ServerErrorValidator
+        id="loginSV"
+        field="login"
+        listener="{loginTI}"
+        serverErrors="{_model.accountCreateErrors}"/>
+    <cpv:ServerErrorValidator
+        id="emailSV"
+        field="email"
+        listener="{emailTI}"
+        serverErrors="{_model.accountCreateErrors}"/>
+    <cpv:ServerErrorValidator
+        id="passwordSV"
+        field="password"
+        listener="{passwordTI}"
+        serverErrors="{_model.accountCreateErrors}"/>
+    <cpv:ServerErrorValidator
+        id="passwordConfirmationSV"
+        field="password_confirmation"
+        listener="{confirmPasswordTI}"
+        serverErrors="{_model.accountCreateErrors}"/>
+    <mx:Form labelWidth="150">
+        <mx:FormItem required="true" label="Username">
+            <mx:TextInput id="loginTI"/>
+        </mx:FormItem>
+        <mx:FormItem required="true" label="Email Address">
+            <mx:TextInput id="emailTI"/>
+        </mx:FormItem>
+        <mx:FormItem label="First Name">
+            <mx:TextInput id="firstNameTI"/>
+        </mx:FormItem>
+        <mx:FormItem label="Last Name">
+            <mx:TextInput id="lastNameTI"/>
+        </mx:FormItem>
+        <mx:FormItem required="true" label="Password">
+            <mx:TextInput id="passwordTI"
+                displayAsPassword="true"/>
+        </mx:FormItem>
+        <mx:FormItem required="true" label="Confirm Password">
+            <mx:TextInput id="confirmPasswordTI"
+                displayAsPassword="true"/>
+        </mx:FormItem>
+        <mx:FormItem>
+            <mx:LinkButton label="Terms of Service"
+                click="showTOS()"/>
+        </mx:FormItem>
+        <mx:FormItem>
+            <mx:CheckBox id="tosCB"
+                label="I agree to the terms of service"/>
+        </mx:FormItem>
+        <mx:FormItem>
+            <mx:Button id="createAccountButton"
+                label="Create Account"
+                toolTip="{tosCB.selected ? '' : 'You must accept the terms of service.'}"
+                enabled="{tosCB.selected}"
+                click="validateAndSubmit()"/>
+        </mx:FormItem>
+    </mx:Form>
+</mx:VBox>

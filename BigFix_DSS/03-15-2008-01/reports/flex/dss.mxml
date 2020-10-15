@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:reflector="com.rictus.reflector.*"
+	xmlns:control="com.bigfix.dss.control.*"
+	xmlns:business="com.bigfix.dss.business.*"
+	xmlns:login="com.bigfix.dss.view.login.*"
+	xmlns:main="com.bigfix.dss.view.main.*"
+	xmlns:mxeffects="com.adobe.ac.mxeffects.*"
+	xmlns:bfcontainers="com.bigfix.extensions.containers.*"
+	xmlns:busy="com.bigfix.dss.view.general.Busy.*"
+	currentState="{model.viewState}"
+	creationComplete="checkLogin()" 
+	initialize="onInitialize()"
+	width="100%"
+	height="100%"
+	xmlns:canvas="com.bigfix.dss.view.graphics.canvas.*">
+
+	<mx:Style source="css/default.css"/>
+	<mx:Style source="css/reportBuilder.css"/>
+	<mx:Script><![CDATA[
+		import com.adobe.images.JPGEncoder;
+		import com.adobe.images.PNGEncoder;
+		import com.bigfix.dss.util.BitmapUtils;
+		import com.bigfix.dss.view.graphics.canvas.events.EndAddingElementsToReportEvent;
+		import com.bigfix.dss.view.graphics.sprites.TextSprite;
+		import com.bigfix.dss.command.GetWidgetsCommand;
+		import com.bigfix.dss.util.URLUtils;
+		import com.bigfix.dss.util.ArrayCollectionUtils;
+		import com.bigfix.dss.vo.WidgetVO;
+		import com.bigfix.dss.view.dashboard.WidgetInstance;
+		import com.bigfix.dss.view.general.widgets.WidgetWrapper;
+		import com.bigfix.dss.view.ReportManager.canvas.WidgetCanvas;
+		import com.bigfix.dss.view.general.widgets.ImageWidget;
+		import com.bigfix.dss.util.ArrayUtils;
+		import mx.events.FlexEvent;
+		import com.bigfix.dss.vo.ReportBuilderVO;
+		import com.bigfix.dss.view.graphics.sprites.GeometricSprite;
+		import com.bigfix.dss.view.graphics.canvas.events.AddElementToReportEvent;
+		import com.bigfix.dss.util.DSS;
+		import com.bigfix.dss.command.GetReportsCommand;
+		import com.bigfix.dss.vo.WebOrbResultVO;
+		import com.bigfix.dss.weborb.RemoteWebOrbObject;
+		import mx.rpc.remoting.mxml.RemoteObject;
+		import mx.rpc.events.ResultEvent;
+		import mx.rpc.events.FaultEvent;
+		import com.bigfix.dss.view.main.events.WorkspaceTabNavigatorDisplayedEvent;
+		import com.bigfix.dss.view.general.Alert.AlertPopUp;
+		import com.bigfix.dss.command.LoginCommand;
+		import mx.managers.ToolTipManager;
+		import com.bigfix.dss.view.general.ToolTips.HTMLToolTip;
+		import com.bigfix.dss.view.report.events.SignalCurrentReportEvent;
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.event.LoginEvent;
+
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+		
+		private var _weborbObj:RemoteWebOrbObject;
+			
+		private var _imageQueue:Array = [];
+		private var _imageWidgetQueue:Array = [];
+		
+		private var _timer:Timer;
+
+		private function onInitialize():void {
+			ToolTipManager.toolTipClass = HTMLToolTip;
+	//		this.addEventListener(WorkspaceTabNavigatorDisplayedEvent.type_WORKSPACE_TABNAVIGATOR_DISPLAYED, onWorkspaceTabNavigatorDisplayed);
+		}
+		
+		private function checkLogin():void {
+			var username:String = '';
+			var password:String = '';
+			var url:String = Application.application.url;
+			var toks:Array = url.split('?');
+			if (toks.length == 2) {
+				var _toks:Array = String(toks[toks.length - 1]).split(':');
+				if (_toks.length == 3) {
+					username = _toks[0];
+					password = _toks[1];
+					model.report_id = _toks[2];
+				}
+			}
+	//		username = 'rhorn';
+	//		password = 'foobar';
+	//		model.report_id = 34;
+			if ( (username.length > 0) && (password.length > 0) ) {
+				var loginCmd:LoginCommand = new LoginCommand();
+				loginCmd.execute(new LoginEvent(username,password));
+			} else {
+				new LoginEvent(null, null).dispatch();
+			}
+		}
+		
+		private function onSignalCurrentReport(event:SignalCurrentReportEvent):void {
+			this.mainControlBar.signalAbilityToLogout(event.canLogout);
+		}
+		
+		private function onCreationCompleteWorkspace():void {
+			this.mainWorkspace.addEventListener(SignalCurrentReportEvent.TYPE_SIGNAL_CURRENT_REPORT, onSignalCurrentReport);
+		}
+		
+		private function onResultWebOrb(event:ResultEvent, _vo:*):void {
+			if (_vo != null) {
+				var vo:WebOrbResultVO = WebOrbResultVO(_vo);
+				if (vo.info == "ReportWriter::getReportElementsForReportById") {
+					this.canvas_ReportBuilder.populateFrom(vo);
+				}
+			}
+		}
+		
+		private function onFaultWebOrb(event:FaultEvent):void {
+			AlertPopUp.error(event.fault.toString(),"WebOrb Fault");
+		}
+			
+		private function onCreationCompleteImageWidget(event:FlexEvent):void {
+			var image:ImageWidget = ImageWidget(event.currentTarget);
+			if (this._imageQueue.length > 0) {
+				var source:String = ArrayUtils.popFromFront(this._imageQueue);
+				
+				var validateImages:Boolean = false;
+
+				var wc:WidgetCanvas;
+				if (image.parent is WidgetCanvas) {
+					wc = WidgetCanvas(image.parent);
+				}
+
+				if (validateImages) {
+					this._imageWidgetQueue.push(image);
+
+					_weborbObj = new RemoteWebOrbObject("ReportWriter", "validateImage", busy, onResultWebOrb, onFaultWebOrb);
+					var svc:RemoteObject = GetReportsCommand.svc.svc;
+					_weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+					_weborbObj.doWebOrbServiceCall(model.user.username,source,image.id);
+				} else if (URLUtils.isValidReportBuilderURL(source)) {
+					image.image.source = source;
+					image.image.scaleContent = ((wc != null) ? wc.vo.scaleImage : false);
+				} else {
+					if (URLUtils.isValidURL(source)) {
+						image.image.source = source;
+						image.image.scaleContent = ((wc != null) ? wc.vo.scaleImage : false);
+					}
+				}
+
+				image.removeEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompleteImageWidget);
+			}
+		}
+		
+		private function onCreationCompleteWidgetInstance(event:FlexEvent):void {
+			var w:Number = -1;
+			var h:Number = -1;
+			try {
+				w = event.currentTarget["width"];
+				h = event.currentTarget["height"];
+			} catch (err:Error) { }
+			if ( (w > -1) && (h > -1) ) {
+				if (this.width < w) {
+					this.width = 300;
+					this.parent.width = this.width;
+				}
+				if (this.height < h) {
+					this.height = 150;
+					this.parent.height = this.height;
+				}
+			}
+		}
+		
+		private function onResultGetWidgetsCommand(... args):void {
+			if (args != null) {
+				var argsAR:Array = args as Array;
+				if (argsAR.length > 0) {
+					var widget:WidgetWrapper = WidgetWrapper(argsAR[0][0]);
+					var vo:ReportBuilderVO = ReportBuilderVO(widget.vo);
+					if (model.widgets != null) {
+						var i:int = ArrayCollectionUtils.findIndexOfItem(model.widgets, "id", vo.widget_id.toString());
+						
+						if (i > -1) {
+							var widgetData:WidgetVO = WidgetVO(model.widgets.getItemAt(i));
+							
+							var newWidgetInstance:WidgetInstance = new WidgetInstance();
+							newWidgetInstance.name = vo.widget_name;
+							newWidgetInstance.widgetData = widgetData;
+							newWidgetInstance.removeHeaderElements();
+							newWidgetInstance.addEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompleteWidgetInstance);
+							widget.addChild(newWidgetInstance);
+						}
+					}
+				}
+			}
+
+		}
+		
+		private function onCreationCompleteListWidget(event:FlexEvent):void {
+			var widget:WidgetWrapper = WidgetWrapper(event.currentTarget);
+			new GetWidgetsCommand()._execute(null, onResultGetWidgetsCommand, widget);
+			widget.removeEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompleteListWidget);
+		}
+
+		private function onAddElementToReport(event:AddElementToReportEvent):void {
+			var dc:ReportBuilderCanvas = this.canvas_ReportBuilder;
+			var vo:ReportBuilderVO = ReportBuilderVO(event.data);
+			var sprite:GeometricSprite;
+			switch (event.elementType) {
+				case ReportBuilderCanvas.const_TEXT_REPORT_ELEMENT:
+					sprite = dc.addShape(event.elementType, 0);
+					sprite.id = "GeometricSprite_" + GeometricSprite.count;
+					sprite.x = event.x;
+					sprite.y = event.y;
+					try { sprite["myWidth"] = event.width; } catch (err:Error) { sprite.width = event.width; }
+					try { sprite["myHeight"] = event.height; } catch (err:Error) { sprite.height = event.height; }
+					if ( (vo != null) && (vo.text != null) && (vo.text.length > 0) ) {
+						TextSprite(sprite).htmlText = vo.text;
+					}
+					sprite.vo = vo;
+					sprite.drawShape();
+					sprite.refreshResizeShape();
+					sprite.contextMenu = null;
+				break;
+
+				case ReportBuilderCanvas.const_IMAGE_ELEMENTS:
+				case ReportBuilderCanvas.const_LIST_ELEMENTS:
+				case ReportBuilderCanvas.const_WIDGET_ELEMENTS:	// this happens when reading elements from the database...
+					if ( (event.elementType == ReportBuilderCanvas.const_WIDGET_ELEMENTS) && (vo != null) ) {
+						if ( (vo.isImage) || (vo.isMissingImage) ) {
+							event.elementType = ReportBuilderCanvas.const_IMAGE_ELEMENTS;	// map the saved widget type back to an editable widget type...
+						} else if (vo.isWidget) {
+							event.elementType = ReportBuilderCanvas.const_LIST_ELEMENTS;	// map the saved widget type back to an editable widget type...
+						}
+					}
+					var canvas:WidgetCanvas = new WidgetCanvas();
+					canvas.id = "WidgetCanvas_" + WidgetCanvas.count;
+					canvas.x = event.x;
+					canvas.y = event.y;
+					canvas.width = event.width;
+					canvas.height = event.height;
+					canvas.vo = vo;
+					canvas.contextMenu = null;
+
+					switch (event.elementType) {
+						case ReportBuilderCanvas.const_LIST_ELEMENTS:
+							var list:WidgetWrapper = new WidgetWrapper();
+							list.id = "ListWidget_" + WidgetWrapper.count;
+							list.x = 0;
+							list.y = 0;
+							list.width = canvas.width;
+							list.height = canvas.height;
+							if ( (vo != null) && (vo.widget_id > 0) && (vo.widget_name != null) && (vo.widget_name.length > 0) ) {
+								list.vo = vo;
+								list.addEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompleteListWidget);
+							}
+							canvas.addChild(list);
+						break;
+
+						case ReportBuilderCanvas.const_IMAGE_ELEMENTS:
+							var image:ImageWidget = new ImageWidget();
+							image.id = "ImageWidget_" + ImageWidget.count;
+							image.x = 0;
+							image.y = 0;
+							image.width = canvas.width;
+							image.height = canvas.height;
+							if (vo != null) {
+								if ( (vo.isImage) || (vo.isMissingImage) ) {
+									if (vo.isMissingImage) {
+										canvas.appURL = Application(this.parentApplication).url;
+									}
+									this._imageQueue.push((vo.isMissingImage) ? canvas.missingImage_image : vo.source);
+									image.addEventListener(FlexEvent.CREATION_COMPLETE, onCreationCompleteImageWidget);
+								}
+							} else {
+								canvas.appURL = Application(this.parentApplication).url;
+							}
+							try { canvas.addChild(image); } catch (err:Error) { }
+						break;
+					}
+					try { dc.addWidget(canvas); } catch (err:Error) { }
+				break;
+			}
+		}
+
+		private function saveAsImageNamed(dc:ReportBuilderCanvas, imageType:String, fileName:String):void {
+			if ( (dc != null) && (fileName.length > 0) && (imageType != null) && 
+				( (imageType == BitmapUtils.const_JPG_image_type) || (imageType == BitmapUtils.const_PNG_image_type) ) ) {
+				var ar:Array = fileName.split(".");
+				ar = ar[0].toString().split("/");
+				fileName = ar[ar.length - 1];
+				
+				var bitmapData:BitmapData = BitmapUtils.getBitmapFrom(dc);
+				
+				var bytes:ByteArray;
+				switch (imageType) {
+					case BitmapUtils.const_JPG_image_type:
+						var jpgEncoder:JPGEncoder = new JPGEncoder(90);
+						bytes = jpgEncoder.encode(bitmapData);
+					break;
+
+					case BitmapUtils.const_PNG_image_type:
+						bytes = PNGEncoder.encode(bitmapData);
+					break;
+				}
+
+				this._weborbObj = new RemoteWebOrbObject("ReportWriter", "saveImage", busy, onResultWebOrb, onFaultWebOrb);
+				var svc:RemoteObject = DSS.svc("userService").svc;
+				this._weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+				this._weborbObj.doWebOrbServiceCall(fileName + "." + imageType, '__printjob__', bytes, "1");
+			}
+		}
+		
+		private function onTimerTick(event:TimerEvent):void {
+			this._timer.stop();
+			this._timer.removeEventListener(TimerEvent.TIMER, this.onTimerTick);
+			
+			var dc:ReportBuilderCanvas = this.canvas_ReportBuilder;
+			dc.deselectAllButThisChildById("");
+			var sType:String = BitmapUtils.const_JPG_image_type;
+			saveAsImageNamed(dc, sType, '__printjob__' + int(model.report_id).toString());
+			var bitmapData:BitmapData = BitmapUtils.getBitmapFrom(dc);
+		}
+		
+		private function onEndAddingElementsToReport(event:EndAddingElementsToReportEvent):void {
+			this._timer = new Timer(5000);
+			this._timer.addEventListener(TimerEvent.TIMER, onTimerTick);
+			this._timer.start();
+		}
+
+		private function onCreationCompleteReportBuilderCanvas():void {
+			this.canvas_ReportBuilder.addEventListener(AddElementToReportEvent.TYPE_ADD_ELEMENT_TO_REPORT, onAddElementToReport);
+			this.canvas_ReportBuilder.addEventListener(EndAddingElementsToReportEvent.TYPE_END_ADDING_ELEMENTS_TO_REPORT, onEndAddingElementsToReport);
+			this.canvas_ReportBuilder.init();
+
+			this._weborbObj = new RemoteWebOrbObject("ReportWriter", "getReportElementsForReportById", busy, onResultWebOrb, onFaultWebOrb);
+			var svc:RemoteObject = DSS.svc("userService").svc;
+			this._weborbObj.endpoint = svc.channelSet.currentChannel.endpoint;
+			this._weborbObj.doWebOrbServiceCall(model.report_id);
+		}
+	]]></mx:Script>
+
+	<mx:states>
+	  <mx:State name="Init">
+  	  <mx:AddChild>
+  	    <bfcontainers:GradientBox id="initView" width="100%" height="100%" gradientAngle="90" gradientColors="[0x4f4f47, 0x000000]" horizontalAlign="center" verticalAlign="middle">
+  	      <mx:Panel title="{model.applicationName}">
+  	        <mx:Label text="Please wait..." />
+  	      </mx:Panel>
+  	    </bfcontainers:GradientBox>
+	    </mx:AddChild>
+	  </mx:State>
+		<mx:State name="Login">
+			<mx:AddChild>
+				<bfcontainers:GradientBox id="loginView" width="100%" height="100%" gradientAngle="90" gradientColors="[0x4f4f47, 0x000000]" horizontalAlign="center" verticalAlign="middle">
+					<login:LoginView id="loginPanel" verticalCenter="0" horizontalCenter="0"/>
+					<reflector:Reflector target="{loginPanel}" alpha="0.6" falloff="0.7" blurAmount="0.4"/>
+				</bfcontainers:GradientBox>
+			</mx:AddChild>
+			<mx:SetProperty target="{this.loginPanel}" name="signalFormReset" value="true"/>
+		</mx:State>
+		<mx:State name="Main">
+			<mx:AddChild>
+				<main:ControlBar id="mainControlBar"/>
+			</mx:AddChild>
+			<mx:AddChild>
+				<main:Workspace id="mainWorkspace" creationComplete="onCreationCompleteWorkspace()"/>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="Logout">
+			<mx:AddChild>
+				<bfcontainers:GradientBox id="logoutView" width="100%" height="100%" gradientAngle="90" gradientColors="[0x4f4f47, 0x000000]" horizontalAlign="center" verticalAlign="middle">
+					<login:LogoutView id="logoutPanel" verticalCenter="0" horizontalCenter="0"/>
+					<reflector:Reflector target="{logoutPanel}" alpha="0.6" falloff="0.7" blurAmount="0.4"/>
+				</bfcontainers:GradientBox>
+			</mx:AddChild>
+			<mx:SetProperty target="{this.logoutPanel}" name="signalPanelReset" value="true"/>
+		</mx:State>
+		<mx:State name="ReportViewState">
+			<mx:AddChild>
+				<mx:VBox width="100%" height="100%">
+					<busy:Busy id="busy"/>
+					<canvas:ReportBuilderCanvas id="canvas_ReportBuilder" width="100%" height="100%" creationComplete="onCreationCompleteReportBuilderCanvas()"/>
+				</mx:VBox>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+
+	<business:Services id="services" />
+	<control:DSSController id="controller" />
+</mx:Application>

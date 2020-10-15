@@ -1,0 +1,10 @@
+iis_webserver_6:
+  title: IISv6 Webserver
+  applications:
+    - IIS 6.0
+
+iis_webserver_7:
+  title: IISv7 Webserver
+  applications:
+    - IIS 7.0
+

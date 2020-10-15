@@ -1,0 +1,364 @@
+new_york:
+  title: New York
+  subgroups:
+  - new_york_albany
+  - new_york_amsterdam
+  - new_york_auburn
+  - new_york_batavia
+  - new_york_binghamton
+  - new_york_buffalo
+  - new_york_cohoes
+  - new_york_cortland
+  - new_york_depew
+  - new_york_elmira
+  - new_york_floral_park
+  - new_york_freeport
+  - new_york_garden_city
+  - new_york_glen_cove
+  - new_york_gloversville
+  - new_york_harrison
+  - new_york_hempstead
+  - new_york_ithaca
+  - new_york_jamestown
+  - new_york_johnson_city
+  - new_york_kenmore
+  - new_york_kingston
+  - new_york_kiryas_joel
+  - new_york_lackawanna
+  - new_york_lindenhurst
+  - new_york_lockport
+  - new_york_long_beach
+  - new_york_lynbrook
+  - new_york_mamaroneck
+  - new_york_massapequa_park
+  - new_york_middletown
+  - new_york_mineola
+  - new_york_mount_vernon
+  - new_york_newburgh
+  - new_york_new_rochelle
+  - new_york_new_york
+  - new_york_niagara_falls
+  - new_york_north_tonawanda
+  - new_york_ossining
+  - new_york_oswego
+  - new_york_peekskill
+  - new_york_plattsburgh
+  - new_york_port_chester
+  - new_york_poughkeepsie
+  - new_york_rochester
+  - new_york_rockville_centre
+  - new_york_rome
+  - new_york_rye
+  - new_york_saratoga_springs
+  - new_york_scarsdale
+  - new_york_schenectady
+  - new_york_spring_valley
+  - new_york_syracuse
+  - new_york_tonawanda
+  - new_york_troy
+  - new_york_utica
+  - new_york_valley_stream
+  - new_york_watertown
+  - new_york_white_plains
+  - new_york_yonkers
+
+new_york_albany:
+  title: Albany
+  type: city
+  population: 94054
+
+new_york_amsterdam:
+  title: Amsterdam
+  type: city
+  population: 17872
+
+new_york_auburn:
+  title: Auburn
+  type: city
+  population: 28055
+
+new_york_batavia:
+  title: Batavia
+  type: city
+  population: 15813
+
+new_york_binghamton:
+  title: Binghamton
+  type: city
+  population: 45831
+
+new_york_buffalo:
+  title: Buffalo
+  type: city
+  population: 282740
+
+new_york_cohoes:
+  title: Cohoes
+  type: city
+  population: 15212
+
+new_york_cortland:
+  title: Cortland
+  type: city
+  population: 18709
+
+new_york_depew:
+  title: Depew
+  type: city
+  population: 15964
+
+new_york_elmira:
+  title: Elmira
+  type: city
+  population: 30133
+
+new_york_floral_park:
+  title: Floral Park
+  type: city
+  population: 15821
+
+new_york_freeport:
+  title: Freeport
+  type: city
+  population: 43647
+
+new_york_garden_city:
+  title: Garden City
+  type: city
+  population: 21795
+
+new_york_glen_cove:
+  title: Glen Cove
+  type: city
+  population: 26736
+
+new_york_gloversville:
+  title: Gloversville
+  type: city
+  population: 15261
+
+new_york_harrison:
+  title: Harrison
+  type: city
+  population: 25803
+
+new_york_hempstead:
+  title: Hempstead
+  type: city
+  population: 53050
+
+new_york_ithaca:
+  title: Ithaca
+  type: city
+  population: 29911
+
+new_york_jamestown:
+  title: Jamestown
+  type: city
+  population: 30658
+
+new_york_johnson_city:
+  title: Johnson City
+  type: city
+  population: 15051
+
+new_york_kenmore:
+  title: Kenmore
+  type: city
+  population: 15729
+
+new_york_kingston:
+  title: Kingston
+  type: city
+  population: 23157
+
+new_york_kiryas_joel:
+  title: Kiryas Joel
+  type: city
+  population: 17611
+
+new_york_lackawanna:
+  title: Lackawanna
+  type: city
+  population: 18371
+
+new_york_lindenhurst:
+  title: Lindenhurst
+  type: city
+  population: 28402
+
+new_york_lockport:
+  title: Lockport
+  type: city
+  population: 21480
+
+new_york_long_beach:
+  title: Long Beach
+  type: city
+  population: 35467
+
+new_york_lynbrook:
+  title: Lynbrook
+  type: city
+  population: 19759
+
+new_york_mamaroneck:
+  title: Mamaroneck
+  type: city
+  population: 18437
+
+new_york_massapequa_park:
+  title: Massapequa Park
+  type: city
+  population: 17368
+
+new_york_middletown:
+  title: Middletown
+  type: city
+  population: 26058
+
+new_york_mineola:
+  title: Mineola
+  type: city
+  population: 19094
+
+new_york_mount_vernon:
+  title: Mount Vernon
+  type: city
+  population: 68215
+
+new_york_newburgh:
+  title: Newburgh
+  type: city
+  population: 28675
+
+new_york_new_rochelle:
+  title: New Rochelle
+  type: city
+  population: 72983
+
+new_york_new_york:
+  title: New York
+  type: city
+  population: 8164706
+
+new_york_niagara_falls:
+  title: Niagara Falls
+  type: city
+  population: 53403
+
+new_york_north_tonawanda:
+  title: North Tonawanda
+  type: city
+  population: 32145
+
+new_york_ossining:
+  title: Ossining
+  type: city
+  population: 23617
+
+new_york_oswego:
+  title: Oswego
+  type: city
+  population: 17834
+
+new_york_peekskill:
+  title: Peekskill
+  type: city
+  population: 23748
+
+new_york_plattsburgh:
+  title: Plattsburgh
+  type: city
+  population: 19126
+
+new_york_port_chester:
+  title: Port Chester
+  type: city
+  population: 27850
+
+new_york_poughkeepsie:
+  title: Poughkeepsie
+  type: city
+  population: 30454
+
+new_york_rochester:
+  title: Rochester
+  type: city
+  population: 213086
+
+new_york_rockville_centre:
+  title: Rockville Centre
+  type: city
+  population: 24347
+
+new_york_rome:
+  title: Rome
+  type: city
+  population: 34506
+
+new_york_rye:
+  title: Rye
+  type: city
+  population: 15043
+
+new_york_saratoga_springs:
+  title: Saratoga Springs
+  type: city
+  population: 27744
+
+new_york_scarsdale:
+  title: Scarsdale
+  type: city
+  population: 17862
+
+new_york_schenectady:
+  title: Schenectady
+  type: city
+  population: 61233
+
+new_york_spring_valley:
+  title: Spring Valley
+  type: city
+  population: 25491
+
+new_york_syracuse:
+  title: Syracuse
+  type: city
+  population: 142771
+
+new_york_tonawanda:
+  title: Tonawanda
+  type: city
+  population: 15495
+
+new_york_troy:
+  title: Troy
+  type: city
+  population: 48392
+
+new_york_utica:
+  title: Utica
+  type: city
+  population: 59678
+
+new_york_valley_stream:
+  title: Valley Stream
+  type: city
+  population: 36017
+
+new_york_watertown:
+  title: Watertown
+  type: city
+  population: 26834
+
+new_york_white_plains:
+  title: White Plains
+  type: city
+  population: 56405
+
+new_york_yonkers:
+  title: Yonkers
+  type: city
+  population: 196942
+

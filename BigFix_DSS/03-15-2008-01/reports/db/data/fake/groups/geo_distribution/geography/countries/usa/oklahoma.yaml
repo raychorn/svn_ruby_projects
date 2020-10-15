@@ -1,0 +1,190 @@
+oklahoma:
+  title: Oklahoma
+  subgroups:
+  - oklahoma_ada
+  - oklahoma_altus
+  - oklahoma_ardmore
+  - oklahoma_bartlesville
+  - oklahoma_bethany
+  - oklahoma_bixby
+  - oklahoma_broken_arrow
+  - oklahoma_chickasha
+  - oklahoma_claremore
+  - oklahoma_del_city
+  - oklahoma_duncan
+  - oklahoma_edmond
+  - oklahoma_el_reno
+  - oklahoma_enid
+  - oklahoma_lawton
+  - oklahoma_mcalester
+  - oklahoma_midwest_city
+  - oklahoma_moore
+  - oklahoma_muskogee
+  - oklahoma_mustang
+  - oklahoma_norman
+  - oklahoma_oklahoma_city
+  - oklahoma_owasso
+  - oklahoma_ponca_city
+  - oklahoma_sand_springs
+  - oklahoma_sapulpa
+  - oklahoma_shawnee
+  - oklahoma_stillwater
+  - oklahoma_tahlequah
+  - oklahoma_tulsa
+  - oklahoma_yukon
+
+oklahoma_ada:
+  title: Ada
+  type: city
+  population: 15881
+
+oklahoma_altus:
+  title: Altus
+  type: city
+  population: 20336
+
+oklahoma_ardmore:
+  title: Ardmore
+  type: city
+  population: 24248
+
+oklahoma_bartlesville:
+  title: Bartlesville
+  type: city
+  population: 34665
+
+oklahoma_bethany:
+  title: Bethany
+  type: city
+  population: 19927
+
+oklahoma_bixby:
+  title: Bixby
+  type: city
+  population: 17714
+
+oklahoma_broken_arrow:
+  title: Broken Arrow
+  type: city
+  population: 84820
+
+oklahoma_chickasha:
+  title: Chickasha
+  type: city
+  population: 16571
+
+oklahoma_claremore:
+  title: Claremore
+  type: city
+  population: 16993
+
+oklahoma_del_city:
+  title: Del City
+  type: city
+  population: 22015
+
+oklahoma_duncan:
+  title: Duncan
+  type: city
+  population: 22208
+
+oklahoma_edmond:
+  title: Edmond
+  type: city
+  population: 73048
+
+oklahoma_el_reno:
+  title: El Reno
+  type: city
+  population: 16016
+
+oklahoma_enid:
+  title: Enid
+  type: city
+  population: 46663
+
+oklahoma_lawton:
+  title: Lawton
+  type: city
+  population: 90776
+
+oklahoma_mcalester:
+  title: McAlester
+  type: city
+  population: 17946
+
+oklahoma_midwest_city:
+  title: Midwest City
+  type: city
+  population: 54788
+
+oklahoma_moore:
+  title: Moore
+  type: city
+  population: 46121
+
+oklahoma_muskogee:
+  title: Muskogee
+  type: city
+  population: 39609
+
+oklahoma_mustang:
+  title: Mustang
+  type: city
+  population: 15170
+
+oklahoma_norman:
+  title: Norman
+  type: city
+  population: 100168
+
+oklahoma_oklahoma_city:
+  title: Oklahoma City
+  type: city
+  population: 526700
+
+oklahoma_owasso:
+  title: Owasso
+  type: city
+  population: 22566
+
+oklahoma_ponca_city:
+  title: Ponca City
+  type: city
+  population: 25273
+
+oklahoma_sand_springs:
+  title: Sand Springs
+  type: city
+  population: 17618
+
+oklahoma_sapulpa:
+  title: Sapulpa
+  type: city
+  population: 20614
+
+oklahoma_shawnee:
+  title: Shawnee
+  type: city
+  population: 29554
+
+oklahoma_stillwater:
+  title: Stillwater
+  type: city
+  population: 40495
+
+oklahoma_tahlequah:
+  title: Tahlequah
+  type: city
+  population: 15774
+
+oklahoma_tulsa:
+  title: Tulsa
+  type: city
+  population: 383380
+
+oklahoma_yukon:
+  title: Yukon
+  type: city
+  population: 21599
+

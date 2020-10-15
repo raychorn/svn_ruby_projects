@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  computer_id: 1
+  vuln_id: 1
+  valid_from: 1234
+two:
+  id: 2
+  computer_id: 1
+  vuln_id: 1
+  valid_from: 1234

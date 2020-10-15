@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel 
+	xmlns:mx="http://www.adobe.com/2006/mxml" title="Logout"
+	styleName="LogoutPanel" titleStyleName="LogoutTitle"
+	>
+	<mx:Script><![CDATA[
+		import com.bigfix.dss.model.DSSModelLocator;
+
+		private var _timer:Timer;
+		
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+		
+		[Bindable]
+		private var _signalPanelReset:Boolean = false;
+
+		private function onTimerComplete(event:TimerEvent):void {
+			this._timer.stop();
+			this.onClickLoginText();
+		}
+		
+		public function set signalPanelReset(bool:Boolean):void {
+			if (bool == true) {
+				this._timer = new Timer(2000);
+				this._timer.addEventListener(TimerEvent.TIMER, onTimerComplete);
+				this._timer.start();
+			}
+			this._signalPanelReset = bool;
+		}
+		
+		public function get signalPanelReset():Boolean {
+			return this._signalPanelReset;
+		}
+		
+		private function onClickLoginText():void {
+			model.viewState = 'Login';
+		}
+	]]></mx:Script>
+	<mx:Label text="Logout complete."/>
+</mx:Panel>

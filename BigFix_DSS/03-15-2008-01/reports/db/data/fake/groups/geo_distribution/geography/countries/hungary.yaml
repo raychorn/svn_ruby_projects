@@ -1,0 +1,8 @@
+hungary:
+  title: Hungary
+  subgroups:
+  - hu_budapest
+
+hu_budapest:
+  title: Budapest
+  type: city

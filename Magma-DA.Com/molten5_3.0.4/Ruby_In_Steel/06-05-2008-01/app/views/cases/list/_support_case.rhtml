@@ -1,0 +1,12 @@
+<tr class="<%= cycle('shaded','') %> case_line">
+	<td class="case_number"><%= support_case.stripped_case_number %></td>
+	<!-- <td><%= support_case.status %></td> -->
+	<td class="subject">
+		<%= link_to truncate((params[:term] ? highlight(support_case.subject,params[:term]) : support_case.subject),AppConstants::CASE_SUBJECT_LENGTH), 
+			:controller => 'cases', :action => 'show', :id => support_case %>
+	</td>
+	<% @cols.each do |col| %>
+	<td><%= eval "support_case.#{col[:meth]}" %></td>
+	<% end %>
+	
+</tr>

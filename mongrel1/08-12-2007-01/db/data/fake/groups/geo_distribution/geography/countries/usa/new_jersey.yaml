@@ -1,0 +1,376 @@
+new_jersey:
+  title: New Jersey
+  subgroups:
+  - new_jersey_asbury_park
+  - new_jersey_atlantic_city
+  - new_jersey_bayonne
+  - new_jersey_bergenfield
+  - new_jersey_bridgeton
+  - new_jersey_camden
+  - new_jersey_carteret
+  - new_jersey_cliffside_park
+  - new_jersey_clifton
+  - new_jersey_dover
+  - new_jersey_dumont
+  - new_jersey_east_orange
+  - new_jersey_elizabeth
+  - new_jersey_elmwood_park
+  - new_jersey_englewood
+  - new_jersey_fair_lawn
+  - new_jersey_fort_lee
+  - new_jersey_garfield
+  - new_jersey_glassboro
+  - new_jersey_hackensack
+  - new_jersey_hawthorne
+  - new_jersey_hoboken
+  - new_jersey_hopatcong
+  - new_jersey_jersey_city
+  - new_jersey_kearny
+  - new_jersey_linden
+  - new_jersey_lindenwold
+  - new_jersey_lodi
+  - new_jersey_long_branch
+  - new_jersey_madison
+  - new_jersey_millville
+  - new_jersey_morristown
+  - new_jersey_newark
+  - new_jersey_new_brunswick
+  - new_jersey_new_milford
+  - new_jersey_north_arlington
+  - new_jersey_north_plainfield
+  - new_jersey_ocean_city
+  - new_jersey_palisades_park
+  - new_jersey_paramus
+  - new_jersey_passaic
+  - new_jersey_paterson
+  - new_jersey_perth_amboy
+  - new_jersey_phillipsburg
+  - new_jersey_plainfield
+  - new_jersey_pleasantville
+  - new_jersey_point_pleasant
+  - new_jersey_rahway
+  - new_jersey_ridgewood
+  - new_jersey_roselle
+  - new_jersey_rutherford
+  - new_jersey_sayreville
+  - new_jersey_secaucus
+  - new_jersey_south_plainfield
+  - new_jersey_south_river
+  - new_jersey_summit
+  - new_jersey_tinton_falls
+  - new_jersey_trenton
+  - new_jersey_union_city
+  - new_jersey_vineland
+  - new_jersey_westfield
+  - new_jersey_west_new_york
+
+new_jersey_asbury_park:
+  title: Asbury Park
+  type: city
+  population: 16749
+
+new_jersey_atlantic_city:
+  title: Atlantic City
+  type: city
+  population: 40523
+
+new_jersey_bayonne:
+  title: Bayonne
+  type: city
+  population: 60658
+
+new_jersey_bergenfield:
+  title: Bergenfield
+  type: city
+  population: 26174
+
+new_jersey_bridgeton:
+  title: Bridgeton
+  type: city
+  population: 22705
+
+new_jersey_camden:
+  title: Camden
+  type: city
+  population: 79850
+
+new_jersey_carteret:
+  title: Carteret
+  type: city
+  population: 21481
+
+new_jersey_cliffside_park:
+  title: Cliffside Park
+  type: city
+  population: 22980
+
+new_jersey_clifton:
+  title: Clifton
+  type: city
+  population: 79703
+
+new_jersey_dover:
+  title: Dover
+  type: city
+  population: 18434
+
+new_jersey_dumont:
+  title: Dumont
+  type: city
+  population: 17546
+
+new_jersey_east_orange:
+  title: East Orange
+  type: city
+  population: 68782
+
+new_jersey_elizabeth:
+  title: Elizabeth
+  type: city
+  population: 124466
+
+new_jersey_elmwood_park:
+  title: Elmwood Park
+  type: city
+  population: 18979
+
+new_jersey_englewood:
+  title: Englewood
+  type: city
+  population: 26317
+
+new_jersey_fair_lawn:
+  title: Fair Lawn
+  type: city
+  population: 31569
+
+new_jersey_fort_lee:
+  title: Fort Lee
+  type: city
+  population: 37258
+
+new_jersey_garfield:
+  title: Garfield
+  type: city
+  population: 29792
+
+new_jersey_glassboro:
+  title: Glassboro
+  type: city
+  population: 19238
+
+new_jersey_hackensack:
+  title: Hackensack
+  type: city
+  population: 43623
+
+new_jersey_hawthorne:
+  title: Hawthorne
+  type: city
+  population: 18322
+
+new_jersey_hoboken:
+  title: Hoboken
+  type: city
+  population: 40117
+
+new_jersey_hopatcong:
+  title: Hopatcong
+  type: city
+  population: 16024
+
+new_jersey_jersey_city:
+  title: Jersey City
+  type: city
+  population: 238732
+
+new_jersey_kearny:
+  title: Kearny
+  type: city
+  population: 39442
+
+new_jersey_linden:
+  title: Linden
+  type: city
+  population: 39920
+
+new_jersey_lindenwold:
+  title: Lindenwold
+  type: city
+  population: 17275
+
+new_jersey_lodi:
+  title: Lodi
+  type: city
+  population: 24303
+
+new_jersey_long_branch:
+  title: Long Branch
+  type: city
+  population: 31701
+
+new_jersey_madison:
+  title: Madison
+  type: city
+  population: 15963
+
+new_jersey_millville:
+  title: Millville
+  type: city
+  population: 27579
+
+new_jersey_morristown:
+  title: Morristown
+  type: city
+  population: 18843
+
+new_jersey_newark:
+  title: Newark
+  type: city
+  population: 279865
+
+new_jersey_new_brunswick:
+  title: New Brunswick
+  type: city
+  population: 49576
+
+new_jersey_new_milford:
+  title: New Milford
+  type: city
+  population: 16375
+
+new_jersey_north_arlington:
+  title: North Arlington
+  type: city
+  population: 15233
+
+new_jersey_north_plainfield:
+  title: North Plainfield
+  type: city
+  population: 21564
+
+new_jersey_ocean_city:
+  title: Ocean City
+  type: city
+  population: 15460
+
+new_jersey_palisades_park:
+  title: Palisades Park
+  type: city
+  population: 18276
+
+new_jersey_paramus:
+  title: Paramus
+  type: city
+  population: 26576
+
+new_jersey_passaic:
+  title: Passaic
+  type: city
+  population: 68455
+
+new_jersey_paterson:
+  title: Paterson
+  type: city
+  population: 150418
+
+new_jersey_perth_amboy:
+  title: Perth Amboy
+  type: city
+  population: 48733
+
+new_jersey_phillipsburg:
+  title: Phillipsburg
+  type: city
+  population: 15039
+
+new_jersey_plainfield:
+  title: Plainfield
+  type: city
+  population: 47887
+
+new_jersey_pleasantville:
+  title: Pleasantville
+  type: city
+  population: 19086
+
+new_jersey_point_pleasant:
+  title: Point Pleasant
+  type: city
+  population: 19815
+
+new_jersey_rahway:
+  title: Rahway
+  type: city
+  population: 27520
+
+new_jersey_ridgewood:
+  title: Ridgewood
+  type: city
+  population: 24882
+
+new_jersey_roselle:
+  title: Roselle
+  type: city
+  population: 21369
+
+new_jersey_rutherford:
+  title: Rutherford
+  type: city
+  population: 18059
+
+new_jersey_sayreville:
+  title: Sayreville
+  type: city
+  population: 42584
+
+new_jersey_secaucus:
+  title: Secaucus
+  type: city
+  population: 15641
+
+new_jersey_south_plainfield:
+  title: South Plainfield
+  type: city
+  population: 22991
+
+new_jersey_south_river:
+  title: South River
+  type: city
+  population: 15995
+
+new_jersey_summit:
+  title: Summit
+  type: city
+  population: 21222
+
+new_jersey_tinton_falls:
+  title: Tinton Falls
+  type: city
+  population: 16504
+
+new_jersey_trenton:
+  title: Trenton
+  type: city
+  population: 85164
+
+new_jersey_union_city:
+  title: Union City
+  type: city
+  population: 66070
+
+new_jersey_vineland:
+  title: Vineland
+  type: city
+  population: 57944
+
+new_jersey_westfield:
+  title: Westfield
+  type: city
+  population: 29999
+
+new_jersey_west_new_york:
+  title: West New York
+  type: city
+  population: 46162
+

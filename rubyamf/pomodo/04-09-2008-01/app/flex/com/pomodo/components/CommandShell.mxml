@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%">
+<mx:Script>
+<![CDATA[
+    import com.pomodo.control.EventNames;
+    import com.pomodo.model.Task;
+    import com.pomodo.util.CairngormUtils;
+
+    private function parseCommand():void {
+        //for now, all commands are just new tasks in the form
+        //name:notes
+        var cmdArray:Array = cmdTI.text.split(":");
+        if (cmdArray.length < 1) return;
+        var newTask:Task = new Task(
+            cmdArray[0],
+            (cmdArray.length > 1 ? cmdArray[1] : ""));
+        CairngormUtils.dispatchEvent(EventNames.CREATE_TASK,
+            newTask);
+    }
+]]>
+</mx:Script>
+    <mx:Label text="pomodo:"/>
+    <mx:TextInput id="cmdTI" width="100%"
+        enter="parseCommand()"/>
+</mx:HBox>

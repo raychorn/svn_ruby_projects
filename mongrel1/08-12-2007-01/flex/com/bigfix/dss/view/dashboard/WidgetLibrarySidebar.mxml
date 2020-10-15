@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:dashboard="com.bigfix.dss.view.dashboard.*"
+	xmlns:flexlib="http://code.google.com/p/flexlib/"
+	width="200" height="100%"
+	horizontalAlign="center" borderStyle="solid" borderSides="left"
+	creationComplete="init()">
+	<mx:Script><![CDATA[
+		import flash.events.MouseEvent;
+		import mx.managers.DragManager;
+		import mx.core.DragSource;
+		import mx.events.DragEvent;
+		import mx.collections.ArrayCollection;
+
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.event.CreatePopUpEvent;
+		import com.bigfix.dss.view.dashboard.WidgetCreation;
+		import com.bigfix.dss.command.GetWidgetsCommand;
+		import com.bigfix.dss.vo.WidgetVO;
+		
+		include 'WidgetLibraryLib.as';
+		
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+
+		[Bindable]
+		private var watcherManager:WatcherManager = new WatcherManager();
+		
+		private function init():void {
+			new GetWidgetsCommand().execute(null);
+			watcherManager.manage(BindingUtils.bindProperty(searchText, 'text', model, 'currentSearchText'));
+			watcherManager.manage(BindingUtils.bindProperty(model, 'currentSearchText', searchText, 'text'));
+		}
+		
+		private function attachDragListeners(event:Event):void {
+			event.currentTarget.addEventListener(MouseEvent.MOUSE_DOWN, startWidgetTemplateDrag);
+		}
+
+		private function startWidgetTemplateDrag(event:MouseEvent):void {
+  			var ds:DragSource = new DragSource();
+  			ds.addData(event.currentTarget.widgetData, 'WidgetTemplate');
+  			DragManager.doDrag(WidgetTemplate(event.currentTarget), ds, event);
+		}
+		private function manageWidgets():void {
+			model.dashboardViewState = 'ManageWidgets';
+		}
+
+	]]></mx:Script>
+	<mx:Panel styleName="infoPanel" headerHeight="0" width="100%" textAlign="center" horizontalAlign="center" verticalAlign="middle">
+		<mx:Text selectable="false">
+<mx:text>
+<![CDATA[Add Widgets by
+dragging them into
+your dashboard
+or you can
+]]></mx:text>
+		</mx:Text>
+		<mx:Label text="Create a Widget" selectable="false" buttonMode="true" useHandCursor="true" 	color="white" textDecoration="underline" fontWeight="bold" click="createWidget()"/>
+		<mx:Label text="Manage Widgets" selectable="false" buttonMode="true" useHandCursor="true" 	color="white" textDecoration="underline" fontWeight="bold" click="manageWidgets()"/>
+		<flexlib:PromptingTextInput prompt="Search" change="filterWidgets()" id="searchText" width="100%" textAlign="left"/>
+	</mx:Panel>
+	<mx:VBox width="100%" height="100%" minHeight="0" horizontalAlign="center">
+		<mx:Repeater id="widgetRepeater" dataProvider="{model.widgets}">
+			<dashboard:WidgetTemplate creationComplete="attachDragListeners(event)" widgetData="{widgetRepeater.currentItem}"/>
+		</mx:Repeater>
+	</mx:VBox>
+</mx:VBox>

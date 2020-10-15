@@ -1,0 +1,191 @@
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:data="com.bigfix.dss.view.data.*"
+	creationComplete="init()">
+	
+	<mx:Metadata>
+	  [Event('change', 'flash.events.Event')]
+	</mx:Metadata>
+	
+	<mx:Script><![CDATA[
+  	import flash.events.Event;
+		import mx.controls.Alert;
+		import mx.controls.ComboBox;
+		import mx.core.UIComponent;
+		import mx.controls.TextInput;
+		import mx.controls.listClasses.ListBase;
+		import mx.collections.ArrayCollection;
+		import mx.events.FlexEvent;
+		import mx.events.ListEvent;
+		import mx.rpc.events.FaultEvent;
+		import mx.binding.utils.BindingUtils;
+
+		import sho.ui.CompletionInput;
+
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.vo.PropertyVO;
+		import com.bigfix.dss.vo.PropertyOperatorVO;
+		import com.bigfix.dss.vo.DataFilterVO;
+		import com.bigfix.dss.vo.PropertyType;
+		import com.bigfix.dss.util.DSS;
+
+		[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+		private var service:Object = DSS.svc("searchService");
+		private var completionInput:CompletionInput; // reference to auto complete component if there is one, needed for async calls
+
+		[Bindable]
+		private var operators:ArrayCollection = new ArrayCollection();
+
+		private function init():void {
+			comboBoxProperties.addEventListener(ListEvent.CHANGE, handlePropertyChange, false, 0, true);
+			comboBoxOperators.addEventListener(ListEvent.CHANGE, formChanged, false, 0, true);
+			this.addEventListener(FlexEvent.REMOVE, _destruct, false, 0, true);
+		}
+
+		private function _destruct(event:FlexEvent):void {
+			trace("Criterion._destruct()");
+			comboBoxProperties.removeEventListener(ListEvent.CHANGE, handlePropertyChange);
+			comboBoxOperators.removeEventListener(ListEvent.CHANGE, formChanged);
+			this.properties = null;
+			this.operators = null;
+			this.removeEventListener(FlexEvent.REMOVE, _destruct);
+		}
+		
+		private function formChanged(event:*):void
+		{
+		  dispatchEvent(new Event(Event.CHANGE));
+		}
+
+		private var _properties:ArrayCollection = new ArrayCollection();
+		[Bindable]
+		public function set properties(value:ArrayCollection):void {
+			for each (var property:* in value) {
+				if (!(property is PropertyVO)) {
+					throw new Error("Criterion.properties collection contains a non-property entry: ",property);
+				}
+			}
+			_properties.source = [{id: null, name: 'Select a Property'}].concat(value.source);
+		}
+		public function get properties():ArrayCollection {
+			return _properties;
+		}
+
+		private function handlePropertyChange(event:ListEvent):void {
+		  formChanged(event);
+		  
+		  updateControls();
+		}
+		
+		private function updateControls():void {
+			// bail if this isn't a valid property
+			if (!comboBoxProperties.selectedItem.id) {
+				comboBoxOperators.visible = false;
+				valueInputContainer.visible = false;
+				return;
+			}
+
+			// build up 'availableOperators' based on the type of the selected property
+			operators.source = model.property_operators.source.filter(function (item:*, index:int, array:Array):Boolean {
+				return (item.property_type_id == comboBoxProperties.selectedItem.property_type_id)
+			}, null);
+
+			// clear the child of the valueInputContainer
+			while (valueInputContainer.numChildren) {
+				valueInputContainer.removeChildAt(0);
+			}
+			// now show the appropiate value input
+			var child:UIComponent;
+			switch (comboBoxProperties.selectedItem.property_type_id) {
+				case PropertyType.ID: // ID, use auto-completer
+					child = this.completionInput = new CompletionInput();
+					this.completionInput.completionFunction = requestAutoComplete;
+					this.completionInput.labelField = 'name';
+					this.completionInput.keepSorted = true;
+					this.completionInput.typedTextChangeEventDelay = 500;
+    			child.addEventListener(Event.CHANGE, formChanged, false, 0, true);
+					break;
+				case PropertyType.BOOLEAN: // Boolean, use picker value
+					child = new ComboBox();
+					ComboBox(child).dataProvider= [comboBoxProperties.selectedItem.picker.true_label, comboBoxProperties.selectedItem.picker.false_label];
+    			child.addEventListener(ListEvent.CHANGE, formChanged, false, 0, true);
+					break;
+				default: // use a text input
+					child = new TextInput();
+    			child.addEventListener(Event.CHANGE, formChanged, false, 0, true);
+			}
+			
+			// Propagate change events from the child.
+			valueInputContainer.addChild(child);
+			comboBoxOperators.visible = true;
+			valueInputContainer.visible = true;
+		}
+
+		// Auto-complete methods
+		private function requestAutoComplete(control:CompletionInput, prefix:String):int {
+			service.autoComplete({property: comboBoxProperties.selectedItem, search_string: prefix}).onResult(this.handleAutoCompleteResult).onFault(this.handleAutoCompleteFault);
+			return CompletionInput.COMPLETION_ASYNC;
+		}
+
+		private function handleAutoCompleteResult(data:Object):void {
+			this.completionInput.completions = data.result.matching_records;
+			this.completionInput.displayCompletions();
+		}
+
+		private function handleAutoCompleteFault(info:Object):void {
+			this.completionInput.completions = [];
+			var faultEvent:FaultEvent = FaultEvent(info);
+			Alert.show(info.message, "Unable to perform Auto Complete search");
+		}
+		
+		private function get valueInput():DisplayObject {
+		  return valueInputContainer.getChildAt(0);
+		}
+
+		public function collectDataFilter():DataFilterVO {
+			var dataFilter:DataFilterVO = new DataFilterVO();
+			dataFilter.property = PropertyVO(comboBoxProperties.selectedItem);
+			dataFilter.property_operator = PropertyOperatorVO(comboBoxOperators.selectedItem);
+
+			if (valueInput is ListBase)
+			  dataFilter.value = ListBase(valueInput).selectedItem.id;
+			else // Assume it's a text input.
+			  dataFilter.value = TextInput(valueInput).text;
+			
+			return dataFilter;
+		}
+		
+		public function setDataFilter(dataFilter:DataFilterVO):void {
+		  var dummyEvent:ListEvent = null;
+		  
+		  comboBoxProperties.selectedItem =
+		    findByID(properties, dataFilter.property.id);
+		  updateControls();
+		  if (!comboBoxProperties.visible)
+		    return;
+
+	    comboBoxOperators.selectedItem =
+	      findByID(operators, dataFilter.property_operator.id);
+		  updateControls();
+		  if (valueInput == null)
+		    return;
+		    
+		  if (valueInput is ListBase)
+		    ListBase(valueInput).selectedItem = findByID(ArrayCollection(ListBase(valueInput).dataProvider), int(dataFilter.value))
+		  else // Assume it's a text input.
+		    TextInput(valueInput).text = dataFilter.value;
+		}
+		
+		private function findByID(a:ArrayCollection, id:int):*
+		{
+		  for each (var item:* in a.source) {
+		    if (item.id == id)
+		      return item;
+		  }
+		  
+		  return null;
+		}
+	]]></mx:Script>
+	<mx:ComboBox id="comboBoxProperties" itemRenderer="com.bigfix.extensions.renderers.DisabledListItemRenderer" dataProvider="{properties}" labelField="name"/>
+	<mx:ComboBox id="comboBoxOperators" dataProvider="{operators}" labelField="name" visible="false"/>
+	<mx:Box id="valueInputContainer"/>
+</mx:HBox>

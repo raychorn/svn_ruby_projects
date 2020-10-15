@@ -1,0 +1,125 @@
+<%= render(:partial => 'cases/list/account_filter') if account_filter_viewable? %>
+
+<h1 class="small_margin">
+	<span id="subscribe_container" title="Click to subscribe / unsubscribe to the case watcher for your account cases.">
+		<%= link_to_subscribe_to_cases %>
+		<div style="display:none" id='indicator'>
+			<%= image_tag('indicator_arrows_circle.gif', :style => "margin-left:42px;margin-right:42px;padding-top:5px") %>
+		</div>
+	</span>
+	<%= link_to image_tag('buttons/export.gif', :alt => "Export Cases to Excel", :align => 'center'),
+							:action => 'export_beta', :report_id => params[:id], :all => params[:all], :sort => params[:sort], :order => params[:order] %>
+	<%= link_to image_tag('buttons/new_case.gif', :alt => "New Case", :width => 81, :height => 22, :align => 'center'),
+				:action => 'new' %>
+	<%= link_to image_tag('buttons/classic_view.gif'), :action => 'list'%>
+	<% if @case_report %>
+    <%= link_to_function image_tag('buttons/save_report.gif', :id => "save_report_button", :alt => "Save Report"), "toggleSaveReportOverlay();", :id => 'save_report_link' %>
+	<% else %>
+    <%= link_to_function image_tag('buttons/save_report_as.gif', :id => "save_report_button", :alt => "Save Report As"), "toggleSaveReportOverlay();", :id => 'save_report_link' %>
+	<% end %>
+	<% if params[:all] == 'true' %>
+		<%= @title = "Viewing #{(@case_report and @case_report.name) || "All Support Cases"} at #{truncate current_contact.company.name, 20}" %> 
+		<div class="small" style="font-size:16px">
+		(<%= link_to "View Just My Cases", :all => 'false' %>)
+		(<%= link_to 'Modify Columns Display', :action => 'modify_column_display', :case_report_id => @case_report, :from => request.request_uri.gsub(/columns/,'') %>)
+		</div>
+	<% else %>
+		<%= @title = "Viewing #{(@case_report and @case_report.name) || "My Support Cases"}" %> 
+			<div class="small" style="font-size:16px">
+			<% if current_contact.privilege?(AppConstants::PRIVILEGE[:super_user]) %>
+			(<%= link_to "View All Cases at #{current_contact.company.name}", :all => true %>)
+			<% end %>
+			(<%= link_to 'Modify Columns Display', :action => 'modify_column_display', :case_report_id => @case_report, :from => request.request_uri.gsub(/columns/,'')
+       %>)
+			</div>
+	<% end %>
+
+</h1>
+<br/>
+<%= render :partial => 'search_box' %>
+
+<%= render :partial => 'save_report_as'%>
+
+<%= render :partial => 'cases/list/status_filter'%>
+
+
+<table class="listing">
+	<tr>
+		<th><%= link_to_sort 'Case #', 'case_number' %></th>
+		<th id="status_col">
+			<%= link_to_sort 'Status', 'status' %>
+			<%= link_to_function '[filters]', "toggleStatusOverlay();", :id => 'status_link' %>
+		</th>
+		<th><%= link_to_sort 'Subject', 'subject' %></th>
+		<% @cols.each do |col| %>
+		<th>
+		  <%= link_to_sort col[:desc], col[:sort] %>
+		  <% if col[:desc] == 'Account' and account_filter_viewable? %>
+		  <%# accounts can be filtered %>
+		  <br/>
+		  <%= link_to_function '[filters]', "toggleAccountOverlay();", :id => 'account_link' %>
+		  <% end %>
+		</th>
+		<% end %>
+	</tr>
+	<%= render :partial => 'cases/list/support_case', :collection => @cases %>
+</table>
+
+<!-- status & account filters -->
+<%= render :partial => 'shared/overlay'%>
+<script type="text/javascript" charset="utf-8">
+	var statusOverlay = new YAHOO.widget.Overlay("status_filter", {visible:false});  
+	statusOverlay.render();
+	function toggleStatusOverlay() {
+		if ($('status_filter').style["visibility"] != 'visible') {
+		  statusLink = $('status_link');
+		  offset = statusLink.cumulativeOffset();
+		  statusOverlay.cfg.setProperty('xy',[offset.left,offset.top + statusLink.getHeight()+3]);
+			statusOverlay.show();
+			$('status_link').addClassName('status_shown');
+		}
+		else {
+			statusOverlay.hide();
+			$('status_link').removeClassName('status_shown');
+		}
+		return false;
+	}
+	<% if account_filter_viewable? %>
+	var accountOverlay = new YAHOO.widget.Overlay("account_filter", {visible:false});
+	accountOverlay.render();
+	function toggleAccountOverlay() {
+		if ($('account_filter').style["visibility"] != 'visible') {
+		  accountLink = $('account_link');
+		  offset = accountLink.cumulativeOffset();
+		  accountOverlay.cfg.setProperty('xy',[offset.left,offset.top + accountLink.getHeight()+3]); 
+			accountOverlay.show();
+			$('account_link').addClassName('status_shown');
+		}
+		else {
+			accountOverlay.hide();
+			$('account_link').removeClassName('status_shown');
+		}
+		return false;
+	}
+	<% end %>
+	var saveReportOverlay = new YAHOO.widget.Overlay("save_report", {visible:false}); 
+	function toggleSaveReportOverlay() {
+  	saveReportOverlay.cfg.setProperty("context", ["save_report_button", "tl", "bl"]); 
+  	saveReportOverlay.render();
+		if ($('save_report').style["visibility"] != 'visible') {
+			saveReportOverlay.show();
+			$('save_report_link').addClassName('save_report_shown');
+		}
+		else {
+			saveReportOverlay.hide();
+			$('save_report_link').removeClassName('save_report_shown');
+		}
+		return false;
+	}
+</script>
+
+<%= will_paginate(@cases) %>
+
+<% content_for "sidebar" do %>
+	<%= render :partial => 'sidebar' %>
+<% end %>

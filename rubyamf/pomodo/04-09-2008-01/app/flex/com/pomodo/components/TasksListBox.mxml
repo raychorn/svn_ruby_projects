@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VDividedBox xmlns:mx="http://www.adobe.com/2006/mxml"
+    width="100%" height="100%" label="Tasks">
+<mx:Script>
+<![CDATA[
+    import mx.collections.ListCollectionView;
+    import mx.controls.Alert;
+    import com.pomodo.components.MainBox;
+    import com.pomodo.control.EventNames;
+    import com.pomodo.model.Location;
+    import com.pomodo.model.PomodoModelLocator;
+    import com.pomodo.model.Project;
+    import com.pomodo.model.Task;
+    import com.pomodo.util.CairngormUtils;
+    
+    public static const ALL_TASKS:int = 0;
+    public static const INCOMPLETE_TASKS:int = 1;
+    public static const NEXT_ACTIONS:int = 2;
+    public static const TASKS_IN_PROJECT:int = 3;
+    public static const TASKS_AT_LOCATION:int = 4;
+    
+    [Bindable]
+    public var model:PomodoModelLocator =
+        PomodoModelLocator.getInstance();
+
+    private const SHOW_CHOICES:Array = [
+        {label:"All Tasks", data:ALL_TASKS,
+            hasSubChoice:false},
+        {label:"Incomplete Tasks", data:INCOMPLETE_TASKS,
+            hasSubChoice: false},
+        {label:"Next Actions", data:NEXT_ACTIONS,
+            hasSubChoice:false},
+        {label:"Tasks in Project:", data:TASKS_IN_PROJECT,
+            hasSubChoice:true},
+        {label:"Tasks at Location:", data:TASKS_AT_LOCATION,
+            hasSubChoice:true}];
+    
+    [Bindable]
+    private var _subChoices:ListCollectionView;
+    
+    public function updateSelectedTaskFromSummaryPanel():void {
+        var task:Task = Task(tasksGrid.selectedItem);
+        task.name = nameTI.text;
+        task.completed = completedCheckBox.selected;
+        task.project = Project(projectComboBox.selectedItem);
+        task.location = Location(locationComboBox.selectedItem);
+        task.notes = notesTI.text;
+        task.nextAction = nextActionCheckBox.selected;
+        updateTask(task);
+    }
+
+    public function updateTask(task:Task):void {
+        CairngormUtils.dispatchEvent(
+            EventNames.UPDATE_TASK, task);
+    }
+
+    public function deleteTask(task:Task):void {
+        CairngormUtils.dispatchEvent(EventNames.DESTROY_TASK,
+            task);
+    }
+    
+    public function incompleteTasksFilterFunc(item:Object):
+    Boolean {
+        return !item.completed;
+    }
+
+    public function nextActionsFilterFunc(item:Object):Boolean {
+        return item.nextAction;
+    }
+
+    public function tasksAtLocationFilterFunc(item:Object):
+    Boolean {
+        return item.location == subChoiceComboBox.selectedItem;
+    }
+
+    public function tasksInProjectFilterFunc(item:Object):
+    Boolean {
+        return item.project == subChoiceComboBox.selectedItem;
+    }
+    
+    private function updateMainChoice():void {
+        switch (mainChoiceComboBox.selectedItem.data) {
+            case TasksListBox.TASKS_AT_LOCATION:
+                _subChoices = model.locationsAndNone;
+                break;
+            case TasksListBox.TASKS_IN_PROJECT:
+                _subChoices = model.projectsAndNone;
+                break;
+            default:
+                break;
+        }
+        updateTasksFilter();
+    }
+    
+    private function updateTasksFilter():void {
+        switch (mainChoiceComboBox.selectedItem.data) {
+            case TasksListBox.ALL_TASKS:
+                model.tasks.filterFunction = null;
+                break;
+            case TasksListBox.INCOMPLETE_TASKS:
+                model.tasks.filterFunction =
+                    incompleteTasksFilterFunc;
+                break;
+            case TasksListBox.NEXT_ACTIONS:
+                model.tasks.filterFunction =
+                    nextActionsFilterFunc;
+                break;
+            case TasksListBox.TASKS_AT_LOCATION:
+                model.tasks.filterFunction =
+                    tasksAtLocationFilterFunc;
+                break;
+            case TasksListBox.TASKS_IN_PROJECT:
+                model.tasks.filterFunction =
+                    tasksInProjectFilterFunc;
+                break;
+            default:
+                Pomodo.debug("Unrecognized choice:" +
+                    mainChoiceComboBox.selectedItem.data);
+                break;
+        }
+        model.tasks.refresh();
+    }
+    
+    private function handleNextActionCheckBoxClicked():void {
+        if (nextActionCheckBox.selected) {
+            completedCheckBox.selected = false;
+        }
+    }
+
+    private function handleCompletedCheckBoxClicked():void {
+        if (completedCheckBox.selected) {
+            nextActionCheckBox.selected = false;
+        }
+    }
+]]>
+</mx:Script>
+    <mx:VBox width="100%" height="60%">
+        <mx:HBox width="100%" paddingLeft="5" paddingRight="5">
+            <mx:Label text="Show:"/>
+            <mx:ComboBox id="mainChoiceComboBox"
+                dataProvider="{SHOW_CHOICES}"
+                change="updateMainChoice()"/>
+            <mx:ComboBox id="subChoiceComboBox" width="200"
+                dataProvider="{_subChoices}"
+        visible="{mainChoiceComboBox.selectedItem.hasSubChoice}"
+                change="updateTasksFilter()"
+                labelField="name"/>
+        </mx:HBox>
+        <mx:DataGrid id="tasksGrid" width="100%" height="100%"
+            dataProvider="{model.tasks}">
+            <mx:columns>
+                <mx:DataGridColumn
+                    headerText=""
+                    width="25"
+                    dataField="completed"
+                    editable="false">
+                    <mx:itemRenderer>
+                        <mx:Component>
+<mx:HBox width="25" paddingLeft="5">
+    <mx:Script>
+        <![CDATA[
+            import com.pomodo.model.Task;
+            
+            private function updateCompleted():void {
+                var task:Task = Task(data);
+                task.completed = !task.completed;
+                outerDocument.updateTask(task);
+            }
+        ]]>
+    </mx:Script>
+    <mx:CheckBox selected="{data.completed}"
+        click="updateCompleted()"/>
+</mx:HBox>
+                        </mx:Component>
+                    </mx:itemRenderer>
+                </mx:DataGridColumn>
+                <mx:DataGridColumn headerText="Name" width="300"
+                    dataField="name"/>
+                <mx:DataGridColumn
+                    headerText="Project"
+                    dataField="project"
+                    width="150"
+                    editable="false"
+                    sortable="false">
+                    <mx:itemRenderer>
+                        <mx:Component>
+<mx:ComboBox
+    width="150"
+    labelField="name"
+    dataProvider="{outerDocument.model.projectsAndNone}"
+    selectedItem="{data.project}"
+    dataChange="handleDataChange(Task(data))"
+    change="updateProject()">
+    <mx:Script>
+    <![CDATA[
+        import com.pomodo.model.Task;
+        import com.pomodo.model.Project;
+
+        private function updateProject():void {
+            var task:Task = Task(data);
+            var project:Project = Project(selectedItem);
+            if (task.project != project) {
+                task.project = project;
+                outerDocument.updateTask(task);
+            }
+        }
+
+        private function handleDataChange(task:Task):void {
+            if (task != null) {
+                selectedItem = task.project;
+            } else {
+                selectedItem = Project.NONE;
+            }
+        }
+    ]]>
+    </mx:Script>    
+</mx:ComboBox>
+                        </mx:Component>
+                    </mx:itemRenderer>
+                </mx:DataGridColumn>
+                <mx:DataGridColumn
+                    headerText="Location"
+                    dataField="location"
+                    width="150"
+                    editable="false"
+                    sortable="false">
+                    <mx:itemRenderer>
+                        <mx:Component>
+<mx:ComboBox
+    width="150"
+    labelField="name"
+    dataProvider="{outerDocument.model.locationsAndNone}"
+    selectedItem="{data.location}"
+    dataChange="handleDataChange(Task(data))"
+    change="updateLocation()">
+    <mx:Script>
+    <![CDATA[
+        import com.pomodo.model.Task;
+        import com.pomodo.model.Location; 
+
+        private function updateLocation():void {
+            var task:Task = Task(data);
+            var location:Location = Location(selectedItem);
+            if (task.location != location) {
+                task.location = location;
+                outerDocument.updateTask(task);
+            }
+        }
+
+        private function handleDataChange(task:Task):void {
+            if (task != null) {
+               selectedItem = task.location;
+            } else {
+                selectedItem = Location.NONE;
+            }
+        }
+    ]]>
+    </mx:Script>    
+</mx:ComboBox>
+                        </mx:Component>
+                    </mx:itemRenderer>
+                </mx:DataGridColumn>
+                <mx:DataGridColumn headerText="Notes"
+                    dataField="notes"/>
+                <mx:DataGridColumn headerText="" width="70"
+                    editable="false" dataField="name">
+                    <!-- arbitrary dataField -->
+                    <mx:itemRenderer>
+                        <mx:Component>
+                            <mx:Button label="delete"
+                   click="outerDocument.deleteTask(Task(data))">
+                                <mx:Script>
+                                <![CDATA[
+                                   import com.pomodo.model.Task;
+                                ]]>
+                                </mx:Script>
+                            </mx:Button>
+                        </mx:Component>
+                    </mx:itemRenderer>
+                </mx:DataGridColumn>
+            </mx:columns>
+        </mx:DataGrid>
+    </mx:VBox>
+    <mx:Panel id="summaryPanel" title="Task" width="100%"
+        height="40%" paddingLeft="5" paddingRight="5"
+        paddingTop="5" paddingBottom="5">
+        <mx:HBox width="100%">
+            <mx:Label text="Name" width="50"/>
+            <mx:TextInput id="nameTI" width="100%"
+                text="{tasksGrid.selectedItem.name}"/>
+            <mx:CheckBox id="completedCheckBox"
+                label="Completed"
+                selected="{tasksGrid.selectedItem.completed}"
+                click="handleCompletedCheckBoxClicked()"/>
+        </mx:HBox>
+        <mx:HBox width="100%" verticalAlign="middle">
+            <mx:Label text="Project" width="50"/>
+            <mx:ComboBox id="projectComboBox" width="200"
+                labelField="name"
+                dataProvider="{model.projectsAndNone}"
+                selectedItem="{tasksGrid.selectedItem.project}"
+            />
+            <mx:CheckBox id="nextActionCheckBox"
+                label="This is the Next Action"
+                selected="{tasksGrid.selectedItem.nextAction}"
+                click="handleNextActionCheckBoxClicked()"/>
+            <mx:Spacer width="100%"/>
+            <mx:Label text="Location"/>
+            <mx:ComboBox id="locationComboBox" width="200"
+                labelField="name"
+                dataProvider="{model.locationsAndNone}"
+                selectedItem="{tasksGrid.selectedItem.location}"
+            />
+        </mx:HBox>
+        <mx:HBox width="100%" height="100%">
+            <mx:Label text="Notes" width="50"/>
+            <mx:TextArea id="notesTI" width="100%" height="100%"
+                text="{tasksGrid.selectedItem.notes}"/>
+        </mx:HBox>
+        <mx:ControlBar width="100%" horizontalAlign="center">
+            <mx:Button id="updateButton" label="Update"
+                width="100%" height="30"
+                click="updateSelectedTaskFromSummaryPanel()"
+                enabled="{tasksGrid.selectedItem != null}"/>
+            <mx:Button id="deleteButton" label="Delete"
+                height="30"
+                click="deleteTask(Task(tasksGrid.selectedItem))"
+                enabled="{tasksGrid.selectedItem != null}"/>
+        </mx:ControlBar>
+    </mx:Panel>
+</mx:VDividedBox>

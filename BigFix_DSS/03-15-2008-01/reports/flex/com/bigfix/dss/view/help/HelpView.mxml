@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" height="100%" 
+	showCloseButton="true" 
+	styleName="HelpViewPanel" titleStyleName="HelpViewTitle"
+	title="Online Help - Click the Help Button on the Button Bar to close and return back to the application."
+	close="onClose()">
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.util.DSS;
+			
+			private var model:* = DSS.model;
+
+			private function onClose():void {
+				model.workspaceViewState = 'Default';
+			}
+		]]>
+	</mx:Script>
+	<mx:Label text="Help text should go here."/>
+</mx:TitleWindow>

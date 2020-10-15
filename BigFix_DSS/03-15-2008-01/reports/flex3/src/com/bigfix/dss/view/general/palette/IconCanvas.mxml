@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:buttons="com.bigfix.dss.view.general.buttons.*"
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" height="100%" 
+	>
+	<mx:Metadata>
+		[Event(name="changeReportMode", type="com.bigfix.dss.view.general.palette.events.ChangeReportModeEvent")]
+	</mx:Metadata>
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import com.bigfix.dss.view.graphics.canvas.ReportBuilderCanvas;
+			import com.bigfix.dss.view.general.palette.events.ChangeReportModeEvent;
+			
+			private var _siblings:Array = [];
+			
+	//		[Bindable]
+	//		[ Embed(source="/assets/notes_16x16.gif", mimeType="application/octet-stream") ]
+	//		public var textButtonIcon:Class;
+
+			public function initializeButtons():void {
+				ToggleButton(this._siblings[0]).clickButtonWithoutEvent();
+			}
+			
+			private function onClickTextButton(event:MouseEvent):void {
+				this.dispatchEvent(new ChangeReportModeEvent(ChangeReportModeEvent.TYPE_CHANGE_REPORT_MODE, ReportBuilderCanvas.const_TEXT_REPORT_ELEMENT));
+			}
+			
+			private function onClickSelectButton(event:MouseEvent):void {
+				this.dispatchEvent(new ChangeReportModeEvent(ChangeReportModeEvent.TYPE_CHANGE_REPORT_MODE, ReportBuilderCanvas.const_SELECT_ELEMENTS));
+			}
+			
+			private function onClickListButton(event:MouseEvent):void {
+				this.dispatchEvent(new ChangeReportModeEvent(ChangeReportModeEvent.TYPE_CHANGE_REPORT_MODE, ReportBuilderCanvas.const_LIST_ELEMENTS));
+			}
+			
+			private function onClickImageButton(event:MouseEvent):void {
+				this.dispatchEvent(new ChangeReportModeEvent(ChangeReportModeEvent.TYPE_CHANGE_REPORT_MODE, ReportBuilderCanvas.const_IMAGE_ELEMENTS));
+			}
+			
+			private function initSiblings():void {
+				var i:int;
+				var j:int;
+				var aBtn:ToggleButton;
+				var aSibling:ToggleButton;
+				for (i = 0; i < this._siblings.length; i++) {
+					aBtn = ToggleButton(this._siblings[i]);
+					aBtn.initSiblings();
+					for (j = 0; j < this._siblings.length; j++) {
+						aSibling = ToggleButton(this._siblings[j]);
+						aBtn.sibling = aSibling;
+					}
+				}
+			}
+			
+			private function onCreationCompleteToggleButton(event:FlexEvent):void {
+				this._siblings.push(event.currentTarget);
+				this.initSiblings();
+			}
+		]]>
+	</mx:Script>
+	<mx:VBox x="0" y="0" width="100%" height="100%" horizontalAlign="center">
+		<mx:HBox width="100%" horizontalAlign="center" visible="false">
+			<buttons:ToggleButton label="Select" id="btn_select" styleName="IconCanvasButton" click="onClickSelectButton(event)" creationComplete="onCreationCompleteToggleButton(event)"/>
+		</mx:HBox>
+		<mx:HBox width="100%" horizontalAlign="center">
+			<buttons:ToggleButton label="Text" id="btn_text" styleName="IconCanvasButton" icon="@Embed(source='/assets/notes_32x32.gif')" labelPlacement="bottom" toolTip="Click on the Report Canvas to create some text." click="onClickTextButton(event)" creationComplete="onCreationCompleteToggleButton(event)"/>
+		</mx:HBox>
+		<mx:HBox width="100%" horizontalAlign="center">
+			<buttons:ToggleButton label="Widget" id="btn_list" styleName="IconCanvasButton" icon="@Embed(source='/assets/large-icons_32x32.gif')" labelPlacement="bottom" toolTip="Click this button and then drag mouse on the Report Canvas to create a widget for the desired size." click="onClickListButton(event)" creationComplete="onCreationCompleteToggleButton(event)"/>
+		</mx:HBox>
+		<mx:HBox width="100%" horizontalAlign="center">
+			<buttons:ToggleButton label="Image" id="btn_image" styleName="IconCanvasButton" icon="@Embed(source='/assets/images_32x32.gif')" labelPlacement="bottom" toolTip="Click on the Report Canvas to create an uploaded image." click="onClickImageButton(event)" creationComplete="onCreationCompleteToggleButton(event)"/>
+		</mx:HBox>
+	</mx:VBox>
+</mx:Canvas>

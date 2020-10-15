@@ -1,0 +1,118 @@
+connecticut:
+  title: Connecticut
+  subgroups:
+  - connecticut_ansonia
+  - connecticut_bridgeport
+  - connecticut_bristol
+  - connecticut_danbury
+  - connecticut_hartford
+  - connecticut_meriden
+  - connecticut_middletown
+  - connecticut_milford_city
+  - connecticut_naugatuck
+  - connecticut_new_britain
+  - connecticut_new_haven
+  - connecticut_new_london
+  - connecticut_norwalk
+  - connecticut_norwich
+  - connecticut_shelton
+  - connecticut_stamford
+  - connecticut_torrington
+  - connecticut_waterbury
+  - connecticut_west_haven
+
+connecticut_ansonia:
+  title: Ansonia
+  type: city
+  population: 18806
+
+connecticut_bridgeport:
+  title: Bridgeport
+  type: city
+  population: 139554
+
+connecticut_bristol:
+  title: Bristol
+  type: city
+  population: 60908
+
+connecticut_danbury:
+  title: Danbury
+  type: city
+  population: 78083
+
+connecticut_hartford:
+  title: Hartford
+  type: city
+  population: 124564
+
+connecticut_meriden:
+  title: Meriden
+  type: city
+  population: 59171
+
+connecticut_middletown:
+  title: Middletown
+  type: city
+  population: 47260
+
+connecticut_milford_city:
+  title: Milford city
+  type: city
+  population: 52615
+
+connecticut_naugatuck:
+  title: Naugatuck
+  type: city
+  population: 31744
+
+connecticut_new_britain:
+  title: New Britain
+  type: city
+  population: 71394
+
+connecticut_new_haven:
+  title: New Haven
+  type: city
+  population: 124798
+
+connecticut_new_london:
+  title: New London
+  type: city
+  population: 26245
+
+connecticut_norwalk:
+  title: Norwalk
+  type: city
+  population: 84240
+
+connecticut_norwich:
+  title: Norwich
+  type: city
+  population: 36479
+
+connecticut_shelton:
+  title: Shelton
+  type: city
+  population: 39365
+
+connecticut_stamford:
+  title: Stamford
+  type: city
+  population: 120051
+
+connecticut_torrington:
+  title: Torrington
+  type: city
+  population: 35963
+
+connecticut_waterbury:
+  title: Waterbury
+  type: city
+  population: 108229
+
+connecticut_west_haven:
+  title: West Haven
+  type: city
+  population: 53105
+

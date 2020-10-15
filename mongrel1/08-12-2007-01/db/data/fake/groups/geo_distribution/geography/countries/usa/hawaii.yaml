@@ -1,0 +1,10 @@
+hawaii:
+  title: Hawaii
+  subgroups:
+  - hawaii_honolulu
+
+hawaii_honolulu:
+  title: Honolulu
+  type: city
+  population: 376708
+

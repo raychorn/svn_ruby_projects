@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" height="100%" 
+	creationComplete="onCreationComplete()">
+	<mx:Script>
+		<![CDATA[
+			import com.bigfix.dss.view.graphics.sprites.events.MovedSpriteEvent;
+			import com.bigfix.dss.vo.ReportBuilderVO;
+			import com.bigfix.dss.view.dashboard.WidgetInstance;
+			import mx.events.ResizeEvent;
+			import com.bigfix.dss.view.graphics.sprites.events.ResizeSpriteEvent;
+			import com.bigfix.dss.util.CursorUtils;
+			import com.bigfix.dss.view.graphics.canvas.ReportBuilderCanvas;
+			import com.bigfix.dss.view.graphics.sprites.events.MouseOutSpriteEvent;
+			import com.bigfix.dss.view.graphics.sprites.events.MouseOverSpriteEvent;
+			import com.bigfix.dss.view.graphics.canvas.events.SelectedReportElementEvent;
+			
+			[Event(name="selectedReportElement", type="com.bigfix.dss.view.graphics.canvas.events.SelectedReportElementEvent")]
+			[Event(name="movedSprite", type="com.bigfix.dss.view.graphics.sprites.events.MovedSpriteEvent")]
+
+			private static var _count:Number = 0;
+			
+			private var _isSelectionShown:Boolean = false;
+			
+			private var _canResizeNow:Boolean = false;
+
+			private var _currentCursorID:int;
+
+			private var isMouseOver:Boolean = false;
+			private var isMouseDown:Boolean = false;
+
+			private const dragThreshold:int = 5 * 4;
+
+			public var shapeType:String;
+
+			[Embed(source="/assets/cursors/sizeNWSE.gif")]
+			public static var sizeNWSECursorSymbol:Class;
+								
+			protected var initX:Number;
+			protected var initY:Number;
+		
+			public function get isSelectionShown():Boolean {
+				return this._isSelectionShown;
+			}
+			
+			public static function get count():Number {
+				_count++;
+				return (_count - 1);
+			}
+			
+			private function onCreationComplete():void {
+				this.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+				this.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+				this.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+				this.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+				this.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+				this.addEventListener(ResizeEvent.RESIZE, onResize);
+
+				this.shapeType = ReportBuilderCanvas.const_WIDGET_ELEMENTS;
+			}
+
+			private function resetCursorToParentSetting():void {
+				var dc:ReportBuilderCanvas = ReportBuilderCanvas(this.parent);
+	//			this._currentCursorID = CursorUtils.changeCursor(dc.currentCursorClass);
+				this._canResizeNow = false;
+			}
+		
+			private function showSelected():void {
+			    if (this.isSelectionShown == false) {
+			        // draws a red rectangle around the selected shape
+			        this.graphics.lineStyle(1.0, 0xFF0000, 1.0);
+				    this.graphics.drawRect(-1, -1, this.width + 1, this.height + 1);
+				    this._isSelectionShown = true;
+				    this.dispatchEvent(new SelectedReportElementEvent(SelectedReportElementEvent.TYPE_SELECTED_REPORT_ELEMENT, this));
+			    }
+			}
+		
+			public function hideSelected():void {
+			    if (this.isSelectionShown) {		    
+			        this.graphics.lineStyle(1.0, 0xFFFFFF, 1.0);
+				    this.graphics.drawRect(-1, -1, this.width + 1, this.height + 1);
+				    this._isSelectionShown = false;
+			    }
+			}
+			
+			private function onResize(event:ResizeEvent):void {
+				var children:Array = this.getChildren();
+				var aChild:DisplayObjectContainer;
+				for (var i:int = 0; i < children.length; i++) {
+					aChild = DisplayObjectContainer(children[i]);
+					aChild.dispatchEvent(event.clone());
+				}
+			}
+		
+			private function onMouseDown(evt:MouseEvent):void {
+				if (this._canResizeNow == false) {
+					this.showSelected();
+					
+					// limits dragging to the area inside the canvas
+					var boundsRect:Rectangle = this.parent.getRect(this.parent);
+					boundsRect.width -= this.width;
+					boundsRect.height -= this.height;
+					this.startDrag(false, boundsRect);
+				}
+				this.isMouseDown = true;
+			}
+
+			public function onMouseUp(evt:MouseEvent):void {
+				if (this._canResizeNow == false) {
+					this.stopDrag();
+					this.dispatchEvent(new MovedSpriteEvent(MovedSpriteEvent.TYPE_MOVED_SPRITE, this.x, this.y));
+				}
+				this.isMouseDown = false;
+			}
+		
+			private function onMouseOut(event:MouseEvent):void {
+				this.resetCursorToParentSetting();
+				if (this.isMouseOver == true) {
+					this.dispatchEvent(new MouseOutSpriteEvent(MouseOutSpriteEvent.TYPE_MOUSE_OUT_SPRITE));
+				}
+				this.isMouseOver = false;
+			}
+
+			private function onMouseOver(event:MouseEvent):void {
+				if (this.isMouseOver == false) {
+					this.dispatchEvent(new MouseOverSpriteEvent(MouseOverSpriteEvent.TYPE_MOUSE_OVER_SPRITE));
+				}
+				this.isMouseOver = true;
+			}
+		
+			private function onMouseMove(event:MouseEvent):void {
+				var ptM:Point = new Point(this.mouseX, this.mouseY);
+				var ptR:Point = new Point(this.width, this.height);
+				var dist:Number = Point.distance(ptM, ptR);
+				if ( (dist < this.dragThreshold) && (this.isMouseOver) ) {
+					if (this._canResizeNow == false) {
+						initX = event.stageX;
+						initY = event.stageY;						
+					}
+					this._canResizeNow = true;
+				} else {
+					this.resetCursorToParentSetting();
+				}
+				if ( (this._canResizeNow) && (this.isMouseDown) ) {
+					var y:Number = (event.stageY - initY);
+					var x:Number = (event.stageX - initX);
+					
+					initX = event.stageX;
+					initY = event.stageY;
+					
+					this.dispatchEvent(new ResizeSpriteEvent(ResizeSpriteEvent.TYPE_RESIZE_SPRITE, x, y));
+				}
+			}
+
+			public function get serializeForRuby():ReportBuilderVO {
+				var vo:ReportBuilderVO = new ReportBuilderVO(this);
+				return vo;
+			}
+		]]>
+	</mx:Script>
+</mx:Canvas>

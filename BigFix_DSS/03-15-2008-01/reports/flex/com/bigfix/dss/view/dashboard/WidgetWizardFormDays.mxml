@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:data="com.bigfix.dss.view.data.*" creationComplete="init()">
+	<mx:Script><![CDATA[
+		include 'WidgetWizardFormLib.as';
+		
+		private function init():void {
+			WidgetWizardFormLib_init();
+			formControlForDays.value = model.currentWidget.visualization_type_options.days;
+			coalesce(model.currentWidget.visualization_type_options.days, labelField);
+		}
+		
+		private function setValue(event:ValidationResultEvent):void {
+			hideForm();
+			model.currentWidget.visualization_type_options.days = formControlForDays.value;
+			coalesce(model.currentWidget.visualization_type_options.days, labelField);
+		}
+	]]></mx:Script>
+	<mx:NumberValidator
+		source="{formControlForDays}" property="value"
+		required="true" allowNegative="false"
+		trigger="{submitButton}" triggerEvent="click"
+		valid="setValue(event)"/>
+
+	<mx:HBox>
+		<mx:HBox id="labelBox" click="showForm()" useHandCursor="true"><mx:Label text="Days:" styleName="textLink" useHandCursor="true" toolTip="Click this label to perform an action."/></mx:HBox>
+		<mx:Label id="labelField" creationComplete="coalesce(null, Label(event.currentTarget))"/>
+	</mx:HBox>
+
+	<mx:Panel id="form" title="Days" styleName="wizardFormContainer" width="300" includeInLayout="false" visible="false">
+		<mx:HSlider width="100%" id="formControlForDays" minimum="3" maximum="365" value="7" snapInterval="1" liveDragging="true" showDataTip="true" labels="[3,365]" dataTipPrecision="0" showTrackHighlight="true"/>
+		<mx:ControlBar horizontalAlign="right">
+			<mx:Button label="Cancel" click="hideForm()"/>
+			<mx:Button label="Done" id="submitButton"/>
+		</mx:ControlBar>
+	</mx:Panel>
+</mx:Canvas>

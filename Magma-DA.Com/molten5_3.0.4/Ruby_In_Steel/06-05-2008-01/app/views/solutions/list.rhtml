@@ -1,0 +1,20 @@
+<% cache(:action => 'index', :part => 'search') do %>
+
+<h1><%= @title = "Solutions" %></h1>
+	
+<%= render :partial => 'search' %>
+
+<% end %> <%# cache %>
+
+<% cache(:action => 'index', :part => 'categories') do %>
+
+<%= render :partial => 'solutions/list/browse',
+ 		   :locals => {:title => "Browse Solution Categories",
+					   :categories => @categories} %>
+					
+<% end %> <%# cache %>
+
+<% content_for("sidebar") do %>
+	<%= render :partial => 'sidebar' %>
+<% end %>
+

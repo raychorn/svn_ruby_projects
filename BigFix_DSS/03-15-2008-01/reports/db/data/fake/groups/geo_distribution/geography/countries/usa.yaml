@@ -1,0 +1,120 @@
+usa:
+  title: United States
+  views:
+  - usa_by_state
+  - usa_by_region
+
+usa_by_state:
+  title: USA (by State)
+  includes:
+  - usa_south
+  - usa_pacific
+  - usa_northeast
+  - usa_territories
+  - usa_midwest
+  - usa_mountain
+
+usa_by_region:
+  title: USA (by region)
+  subgroups:
+  - usa_territories
+  - usa_pacific
+  - usa_northeast
+  - usa_south
+  - usa_midwest
+  - usa_mountain
+
+usa_territories:
+  title: Territories
+  subgroups:
+  - american_samoa
+  - guam
+  - northern_mariana_islands
+  - puerto_rico
+  - us_virgin_islands
+
+usa_pacific:
+  title: Pacific Coast
+  subgroups:
+  - washington
+  - oregon
+  - california
+  - alaska
+  - hawaii
+
+usa_midwest:
+  title: Midwest
+  subgroups:
+  - illinois
+  - indiana
+  - michigan
+  - minnesota
+  - missouri
+  - nebraska
+  - ohio
+
+usa_mountain:
+  title: Mountain
+  subgroups:
+  - arizona
+  - colorado
+  - idaho
+  - montana
+  - nevada
+  - north_dakota
+  - south_dakota
+  - new_mexico
+  - utah
+  - wyoming
+
+usa_northeast:
+  title: Northeast
+  subgroups:
+  - connecticut
+  - new_hampshire
+  - new_jersey
+  - new_york
+  - maine
+  - massachusetts
+  - pennsylvania
+  - rhode_island
+  - vermont
+  - wisconsin
+
+usa_south:
+  title: South
+  subgroups:
+  - alabama
+  - arkansas
+  - delaware
+  - maryland
+  - kansas
+  - kentucky
+  - florida
+  - georgia
+  - louisiana
+  - mississippi
+  - north_carolina
+  - south_carolina
+  - oklahoma
+  - tennessee
+  - texas
+  - virginia
+  - district_of_columbia
+  - west_virginia
+
+guam:
+  title: Guam
+
+american_samoa:
+  title: American Samoa
+
+puerto_rico:
+  title: Puetro Rico
+
+us_virgin_islands:
+  title: U.S. Virgin Islands
+
+northern_mariana_islands:
+  title: Northern Mariana Islands
+  

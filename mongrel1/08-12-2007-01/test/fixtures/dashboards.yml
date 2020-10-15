@@ -1,0 +1,18 @@
+usa:
+  id: 1
+  user_id: 1
+  name: USA Security
+  position: 1
+  dashboard_layout_id: 6
+sf:
+  id: 2
+  user_id: 1
+  name: San Francisco SOX Compliance
+  position: 2
+  dashboard_layout_id: 6
+security:
+  id: 3
+  user_id: 1
+  name: Security Alerts
+  position: 3
+  dashboard_layout_id: 6

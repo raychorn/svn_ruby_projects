@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application
+    xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:pom="com.pomodo.components.*"
+    xmlns:business="com.pomodo.business.*"
+    xmlns:control="com.pomodo.control.*"
+    layout="vertical"
+    backgroundGradientColors="[#ffffff, #c0c0c0]"
+    horizontalAlign="center"
+    verticalAlign="top"
+    paddingLeft="0"
+    paddingRight="0"
+    paddingTop="0"
+    paddingBottom="0"
+    width="100%"
+    height="100%"
+    creationCompleteEffect="fadeIn" creationComplete="onCreationComplete()">
+    <mx:Style source="styles.css"/>
+<mx:Script>
+<![CDATA[
+	import HAL.controls.HtmlToolTip;
+	import mx.managers.ToolTipManager;
+    import mx.core.Container;
+    import com.pomodo.components.DebugPanel;
+    import com.pomodo.control.EventNames;
+    import com.pomodo.util.CairngormUtils;
+    import com.pomodo.util.DebugMessage;
+    import com.pomodo.model.PomodoModelLocator;
+    
+    private static const COPYRIGHT:String =
+        "Original Copyright (c) 2007, Peter Armstrong.";
+
+    private static const COPYRIGHT2:String =
+        "(Modifications and enhancements Copyright (c) 2008, Ray C Horn)";
+
+    private static const MARKETING:String =
+        "To buy your Domain Names and Web Hosting for Cheap " + 
+        "to http://ezCheapSites.com.";
+    
+    private static const DISCLAIMER:String =
+        "This RIA App was modified by Ray C. Horn (http://raychorn.com) " + 
+        "because I could... (PLS make this my epitaph !) " + 
+        "Also, you know what ?  I took a little creative license with the source code " +
+        "but then I am also giving credit where credit is due.";
+
+    [Bindable]
+    private var _model : PomodoModelLocator = PomodoModelLocator.getInstance();
+    
+    private function onCreationComplete():void {
+		ToolTipManager.toolTipClass = HtmlToolTip;
+    	CairngormUtils.parentApp = Application.application;
+    }
+
+    public static function debug(str:String):void {
+        application.debugPanel.addMessage(
+            new DebugMessage(str));
+    }
+
+    private function controlViewToShow(workflowState:int):
+    Container {
+        if (workflowState ==
+            PomodoModelLocator.VIEWING_SPLASH_SCREEN) {
+            return splashBox;
+        } else if (workflowState ==
+            PomodoModelLocator.VIEWING_MAIN_APP) {
+            return mainBox;
+        } else {
+            return splashBox;//error
+        }
+    }
+    
+    private function loadSponsorSite():void {
+        CairngormUtils.dispatchEvent(EventNames.LOAD_URL, "http://ezCheapSites.com");
+    }
+
+    private function loadParentSite():void {
+        CairngormUtils.dispatchEvent(EventNames.LOAD_URL, "http://raychorn.com");
+    }
+]]>
+</mx:Script>
+    <mx:Fade id="fadeIn" duration="500"/>
+    <mx:WipeUp id="wipeUp" duration="500"/>
+
+    <!--
+    the ServiceLocator where we specify the remote services
+    -->
+    <business:Services id="services"/>
+
+    <!--
+    the FrontController, containing Commands specific to this app
+    -->
+    <control:PomodoController id="controller"/>
+    
+    <mx:HBox backgroundColor="#000000" width="100%" height="30" horizontalAlign="center" verticalAlign="middle">
+        <mx:LinkButton color="#FFFFFF" click="loadSponsorSite()" label="{MARKETING}"/>
+    </mx:HBox>
+    <mx:Spacer height="10"/>
+
+    <mx:VDividedBox width="100%" height="100%">
+       <mx:ViewStack id="mainStack" width="100%" height="100%" selectedChild="{controlViewToShow(_model.workflowState)}">
+            <pom:SplashBox id="splashBox"/>
+            <pom:MainBox id="mainBox" showEffect="wipeUp"/>
+        </mx:ViewStack>
+        <pom:DebugPanel id="debugPanel" width="100%" height="0%"/>
+    </mx:VDividedBox>
+    <mx:HBox backgroundColor="#000000" width="100%" height="30" horizontalAlign="center" verticalAlign="middle">
+        <mx:Label color="#FFFFFF" text="{COPYRIGHT}"/>
+        <mx:Spacer width="5"/>
+        <mx:LinkButton color="#FFFFFF" click="loadParentSite()" label="{COPYRIGHT2}" toolTip="{DISCLAIMER}"/>
+    </mx:HBox>
+</mx:Application>

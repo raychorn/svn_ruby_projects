@@ -1,0 +1,8 @@
+china:
+  title: China
+  subgroups:
+    - cn_beijing
+
+cn_beijing:
+  title: Beijing
+  type: city

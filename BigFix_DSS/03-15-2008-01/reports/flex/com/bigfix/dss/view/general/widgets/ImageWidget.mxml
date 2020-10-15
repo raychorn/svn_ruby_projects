@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" height="100%" 
+	styleName="ImageWidget" 
+	resize="onResize(event)" removedFromStage="onRemove()"
+	>
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import com.bigfix.dss.view.general.widgets.events.RemovedImageElementEvent;
+			import com.bigfix.dss.view.general.Alert.AlertPopUp;
+			import mx.events.ResizeEvent;
+			
+			[Event(name="removedImageElement", type="com.bigfix.dss.view.general.widgets.events.RemovedImageElementEvent")]
+
+			private var _lastPt:Point;
+			
+			[Bindable]
+			private var _isBeingResized:Boolean = false;
+			
+			private static var _count:Number = 0;
+			
+			public static function get count():Number {
+				_count++;
+				return (_count - 1);
+			}
+			
+			private function onResize(event:ResizeEvent):void {
+				if ( (event.oldHeight != 0) && (event.oldWidth != 0) ) {
+					this._isBeingResized = true;
+					this.width = this.parent.width;
+					this.height = this.parent.height;
+				}
+			}
+			
+			private function onRemove():void {
+				this.dispatchEvent(new RemovedImageElementEvent(RemovedImageElementEvent.TYPE_REMOVED_IMAGE_ELEMENT, ((this.image.source != null) ? this.image.source.toString() : "")));
+			}
+		]]>
+	</mx:Script>
+	<mx:Image id="image" x="0" y="0" width="{this.width - 2}" height="{this.height - 2}" scaleContent="{this._isBeingResized}" autoLoad="true"/>
+</mx:Canvas>

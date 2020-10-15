@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:flexlib="http://code.google.com/p/flexlib/"
+	width="100%" height="100%"
+    creationComplete="init()">
+	<mx:Script>
+    <![CDATA[
+		import mx.events.ListEvent;
+		import mx.controls.dataGridClasses.DataGridColumn;
+      	import mx.collections.ArrayCollection;
+		import com.bigfix.dss.command.GetWidgetsCommand;
+		import com.bigfix.dss.model.DSSModelLocator;
+		import com.bigfix.dss.vo.WidgetVO;
+		import com.bigfix.dss.command.DeleteWidgetCommand;
+		import com.bigfix.dss.event.RefreshWidgetsEvent;
+		import com.bigfix.dss.event.RefreshDashboardsEvent;
+		import com.bigfix.dss.event.LibraryWidgetRemoveEvent;
+      
+		include 'WidgetLibraryLib.as';
+		
+      	[Bindable]
+		private var model:DSSModelLocator = DSSModelLocator.getInstance();
+		private var watcherManager:WatcherManager = new WatcherManager();
+	      
+		private function init():void {
+			var gridColumns:Array = new Array();
+	        for each (var coldef:Object in columns) {
+				var col:DataGridColumn = new DataGridColumn(coldef['title']);
+				col.dataField = coldef['name'];
+				gridColumns.push(col);
+	        }
+	        editorGrid.columns = gridColumns;
+	        
+	        
+      		// model.widgets should already be populated
+			//new GetWidgetsCommand().execute(null);
+	        
+			watcherManager.manage(BindingUtils.bindProperty(searchText, 'text', model, 'currentSearchText'));
+			watcherManager.manage(BindingUtils.bindProperty(model, 'currentSearchText', searchText, 'text'));
+	      }
+  
+		private function editItem(event:ListEvent):void {
+			model.previousDashboardViewState = model.dashboardViewState;
+			model.currentWidget=WidgetVO(model.widgets.getItemAt(event.rowIndex-1));
+			model.dashboardViewState = 'EditWidget';
+  		}
+      
+		private function deleteWidget():void {
+	        for each (var widget:WidgetVO in editorGrid.selectedItems) {
+				var deleteCommand:DeleteWidgetCommand = new DeleteWidgetCommand();
+				deleteCommand.widget = widget;
+				deleteCommand.resultHandler = function(data:Object):void {
+		  			new RefreshWidgetsEvent().dispatch();
+		  			//new RefreshDashboardsEvent().dispatch();
+		  			dispatchEvent(new LibraryWidgetRemoveEvent(widget.id));
+				};
+				deleteCommand.execute(null);
+	        }
+		}
+      
+		private function backToSideView():void {
+			this.currentState = '';
+			model.dashboardViewState = 'AddWidgets';
+		}
+]]></mx:Script>
+
+
+	<mx:Array id="columns">
+	    <mx:Object name="name" title="Widget Name" />
+	    <mx:Object name="user_name" title="User" />
+	    <mx:Object name="visualization_type_name" title="Visualization Type" />
+	</mx:Array>
+  
+	<mx:HBox>
+    	<mx:Button label="Create" click="createWidget()" />
+    	<mx:Button label="Delete" click="deleteWidget()" />
+    	<flexlib:PromptingTextInput prompt="Search" change="filterWidgets()" id="searchText" width="100%" textAlign="left"/>
+	</mx:HBox>
+	<mx:DataGrid id="editorGrid" dataProvider="{model.widgets}" width="100%"
+               itemDoubleClick="editItem(event)" doubleClickEnabled="true"
+               allowMultipleSelection="true" editable="false" />
+	<mx:HBox horizontalAlign="right" width="100%">
+		<mx:Button label="Back" click="backToSideView()" enabled="true"/>
+	</mx:HBox>
+</mx:VBox>
